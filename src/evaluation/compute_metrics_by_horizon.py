@@ -101,25 +101,30 @@ def main():
     
     pred_persist_ro = pd.read_parquet(pred_dir / "persistence_rolling_origin.parquet")
     pred_lgbm_ro = pd.read_parquet(pred_dir / "lgbm_rolling_origin.parquet")
-    
+
     try:
         pred_lstm_ro = pd.read_parquet(pred_dir / "lstm_rolling_origin.parquet")
-    except:
+    except Exception:
         pred_lstm_ro = None
-    
+
+    try:
+        pred_sarima_ro = pd.read_parquet(pred_dir / "sarima_rolling_origin.parquet")
+    except Exception:
+        pred_sarima_ro = None
+
     metrics_ro = []
     for h in horizons:
         # Filter predictions for this horizon
         y_persist = pred_persist_ro[pred_persist_ro['horizon'] == h]['y_pred'].values
         y_lgbm = pred_lgbm_ro[pred_lgbm_ro['horizon'] == h]['y_pred'].values
-        
+
         # Get indices
         indices = pred_persist_ro[pred_persist_ro['horizon'] == h]['sample_idx'].values
         y_true = observations[indices]
-        
+
         # Compute metrics
         metrics_lgbm = compute_metrics(y_true, y_lgbm, y_persist)
-        
+
         metrics_ro.append({
             'model': 'lgbm',
             'h': h,
@@ -131,7 +136,7 @@ def main():
             'var_pct': metrics_lgbm['var_pct'],
             'skill_vp': metrics_lgbm['skill_vp']
         })
-        
+
         # LSTM
         if pred_lstm_ro is not None:
             y_lstm = pred_lstm_ro[pred_lstm_ro['horizon'] == h]['y_pred'].values
@@ -148,6 +153,23 @@ def main():
                     'var_pct': metrics_lstm['var_pct'],
                     'skill_vp': metrics_lstm['skill_vp']
                 })
+
+        # SARIMA
+        if pred_sarima_ro is not None:
+            y_sarima = pred_sarima_ro[pred_sarima_ro['horizon'] == h]['y_pred'].values
+            if len(y_sarima) == len(y_true):
+                metrics_sarima = compute_metrics(y_true, y_sarima, y_persist)
+                metrics_ro.append({
+                    'model': 'sarima',
+                    'h': h,
+                    'rmse': metrics_sarima['rmse_model'],
+                    'rmse_persistence': metrics_sarima['rmse_persist'],
+                    'skill': metrics_sarima['skill'],
+                    'var_obs': metrics_sarima['var_obs'],
+                    'var_pred': metrics_sarima['var_pred'],
+                    'var_pct': metrics_sarima['var_pct'],
+                    'skill_vp': metrics_sarima['skill_vp']
+                })
     
     df_metrics_ro = pd.DataFrame(metrics_ro)
     ro_path = metrics_dir / "metrics_rolling_origin_by_horizon.csv"
@@ -162,22 +184,27 @@ def main():
     
     pred_persist_ho = pd.read_parquet(pred_dir / "persistence_holdout.parquet")
     pred_lgbm_ho = pd.read_parquet(pred_dir / "lgbm_holdout.parquet")
-    
+
     try:
         pred_lstm_ho = pd.read_parquet(pred_dir / "lstm_holdout.parquet")
-    except:
+    except Exception:
         pred_lstm_ho = None
-    
+
+    try:
+        pred_sarima_ho = pd.read_parquet(pred_dir / "sarima_holdout.parquet")
+    except Exception:
+        pred_sarima_ho = None
+
     metrics_ho = []
     for h in horizons:
         y_persist = pred_persist_ho[pred_persist_ho['horizon'] == h]['y_pred'].values
         y_lgbm = pred_lgbm_ho[pred_lgbm_ho['horizon'] == h]['y_pred'].values
-        
+
         indices = pred_persist_ho[pred_persist_ho['horizon'] == h]['sample_idx'].values
         y_true = observations[indices]
-        
+
         metrics_lgbm = compute_metrics(y_true, y_lgbm, y_persist)
-        
+
         metrics_ho.append({
             'model': 'lgbm',
             'h': h,
@@ -189,7 +216,7 @@ def main():
             'var_pct': metrics_lgbm['var_pct'],
             'skill_vp': metrics_lgbm['skill_vp']
         })
-        
+
         if pred_lstm_ho is not None:
             y_lstm = pred_lstm_ho[pred_lstm_ho['horizon'] == h]['y_pred'].values
             if len(y_lstm) == len(y_true):
@@ -204,6 +231,22 @@ def main():
                     'var_pred': metrics_lstm['var_pred'],
                     'var_pct': metrics_lstm['var_pct'],
                     'skill_vp': metrics_lstm['skill_vp']
+                })
+
+        if pred_sarima_ho is not None:
+            y_sarima = pred_sarima_ho[pred_sarima_ho['horizon'] == h]['y_pred'].values
+            if len(y_sarima) == len(y_true):
+                metrics_sarima = compute_metrics(y_true, y_sarima, y_persist)
+                metrics_ho.append({
+                    'model': 'sarima',
+                    'h': h,
+                    'rmse': metrics_sarima['rmse_model'],
+                    'rmse_persistence': metrics_sarima['rmse_persist'],
+                    'skill': metrics_sarima['skill'],
+                    'var_obs': metrics_sarima['var_obs'],
+                    'var_pred': metrics_sarima['var_pred'],
+                    'var_pct': metrics_sarima['var_pct'],
+                    'skill_vp': metrics_sarima['skill_vp']
                 })
     
     df_metrics_ho = pd.DataFrame(metrics_ho)

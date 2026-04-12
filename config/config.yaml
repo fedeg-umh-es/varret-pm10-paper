@@ -86,6 +86,14 @@ models:
     random_state: 42
     verbose: -1
     
+  # SARIMA (statistical baseline, fixed order, trained per rolling-origin fold)
+  sarima:
+    order: [1, 0, 1]            # (p, d, q)
+    seasonal_order: [1, 0, 1, 7]  # (P, D, Q, s) — s=7 for daily seasonality (hourly series, weekly period)
+    trend: null
+    enforce_stationarity: false
+    enforce_invertibility: false
+
   # LSTM (single model outputs all horizons)
   lstm:
     lstm_units: 64

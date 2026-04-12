@@ -35,25 +35,28 @@ python src/training/train_persistence.py --config "$CONFIG"
 echo "[7/12] Training LightGBM..."
 python src/training/train_lgbm.py --config "$CONFIG"
 
-echo "[8/12] Training LSTM..."
+echo "[8/13] Training LSTM..."
 python src/training/train_lstm.py --config "$CONFIG"
 
+echo "[9/13] Training SARIMA baseline..."
+python src/training/train_sarima.py --config "$CONFIG"
+
 # Phase 3: Metrics computation
-echo "[9/12] Computing metrics by horizon..."
+echo "[10/13] Computing metrics by horizon..."
 python src/evaluation/compute_metrics_by_horizon.py --config "$CONFIG"
 
-echo "[10/12] Computing event metrics..."
+echo "[11/13] Computing event metrics..."
 python src/evaluation/compute_event_metrics.py --config "$CONFIG"
 
 # Phase 4: Analysis
-echo "[11/12] Comparing protocols..."
+echo "[12/13] Comparing protocols..."
 python src/evaluation/compare_protocols.py --config "$CONFIG"
 
-echo "[Building canonical table..."
+echo "[12/13] Building canonical table..."
 python src/evaluation/build_canonical_table.py --config "$CONFIG"
 
 # Phase 5: Visualization
-echo "[12/12] Plotting master figure..."
+echo "[13/13] Plotting master figure..."
 python src/plotting/plot_master_figure.py --config "$CONFIG"
 
 echo ""
