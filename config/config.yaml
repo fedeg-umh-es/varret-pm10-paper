@@ -1,0 +1,137 @@
+# ============================================================================
+# Configuration for Paper A: Ghost Skill & Variance Collapse in PM10
+# ============================================================================
+# This config defines data paths, model hyperparameters, and evaluation settings.
+# Do NOT modify horizons here; use config/horizons.yaml instead.
+# Do NOT modify thresholds here; use config/thresholds.yaml instead.
+
+# ============================================================================
+# Data Paths (relative to repo root)
+# ============================================================================
+paths:
+  raw: "data/raw/pm10_measurements.csv"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  predictions_dir: "outputs/predictions"
+  metrics_dir: "outputs/metrics"
+  tables_dir: "outputs/tables"
+  figures_dir: "outputs/figures"
+  models_dir: "outputs/models"
+
+# ============================================================================
+# Preprocessing
+# ============================================================================
+preprocessing:
+  # Imputation strategy for missing values
+  imputation_method: "forward_fill"  # "forward_fill" | "interpolate"
+  
+  # Remove first N hours due to lag features NaN
+  remove_initial_nans: true
+  
+  # Whether to detrend (if false, work with raw normalized series)
+  detrending: false
+  
+  # Normalization per train fold (z-score, fitted on train only)
+  normalization: "zscore"  # "zscore" | "minmax"
+
+# ============================================================================
+# Feature Engineering (LightGBM)
+# ============================================================================
+features_lgbm:
+  # Lag features (in hours)
+  lags: [1, 6, 24, 48]
+  
+  # Rolling window statistics (in hours)
+  rolling_windows: [6, 24, 48]
+  rolling_stats: ["mean", "std", "min", "max"]
+  
+  # Include temporal features (hour, day of week, month)
+  temporal_features: true
+
+# ============================================================================
+# Sequences for LSTM
+# ============================================================================
+sequences_lstm:
+  context_length: 168  # 7 days at 1h frequency
+  stride: 1  # No overlap between consecutive samples
+
+# ============================================================================
+# Train/Test Splits
+# ============================================================================
+splits:
+  random_state: 42
+  
+  # Rolling-origin (expanding window)
+  rolling_origin:
+    n_folds: 5
+    initial_train_size_pct: 0.50  # First fold uses 50% for train
+    test_size_pct: 0.10           # Each fold has 10% test
+    
+  # Holdout (blocked chronological split)
+  holdout:
+    train_size_pct: 0.80
+
+# ============================================================================
+# Model Hyperparameters
+# ============================================================================
+models:
+  # LightGBM (trained per horizon)
+  lgbm:
+    n_estimators: 200
+    max_depth: 8
+    learning_rate: 0.05
+    num_leaves: 31
+    subsample: 0.9
+    colsample_bytree: 0.9
+    random_state: 42
+    verbose: -1
+    
+  # LSTM (single model outputs all horizons)
+  lstm:
+    lstm_units: 64
+    dropout_rate: 0.2
+    dense_units: 32
+    learning_rate: 0.001
+    epochs: 50
+    batch_size: 32
+    validation_split: 0.15
+    early_stopping_patience: 5
+    random_state: 42
+
+# ============================================================================
+# Evaluation Metrics
+# ============================================================================
+evaluation:
+  # RMSE, Skill, Variance metrics are always computed
+  # Event metrics (recall) use thresholds from config/thresholds.yaml
+  
+  # Number of decimals for rounding in tables
+  round_decimals:
+    rmse: 2
+    skill: 3
+    var_pct: 2
+    skill_vp: 3
+    recall: 3
+
+# ============================================================================
+# Plotting
+# ============================================================================
+plotting:
+  figsize: [16, 10]
+  dpi: 300
+  style: "seaborn-v0_8-whitegrid"
+  
+  colors:
+    lgbm: "#1f77b4"   # blue
+    lstm: "#ff7f0e"   # orange
+    baseline: "#888888"  # gray
+  
+  markers:
+    skill: "o"
+    var_pct: "s"
+    skill_vp: "^"
+    recall: "D"
+  
+  fonts:
+    family: "sans-serif"
+    size: 11

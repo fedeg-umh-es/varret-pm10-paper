@@ -1,0 +1,64 @@
+# Configuración Default para Paper A
+# Parámetros globales, modelos, evaluación
+
+data:
+  # Rutas (relativas a directorio raíz)
+  raw_path: "data/raw/pm10_measurements.csv"
+  interim_path: "data/interim/"
+  processed_path: "data/processed/"
+  
+  # Preprocesamiento
+  imputation_method: "forward_fill"  # forward_fill | interpolate
+  detrending: false  # true=primera diferencia, false=sin detrending
+  normalization: "zscore"  # zscore | minmax
+
+models:
+  # Horizonte común a todos los modelos
+  horizons: [1, 6, 24, 48]
+  
+  # LightGBM
+  lgbm:
+    n_estimators: 100
+    max_depth: 7
+    learning_rate: 0.1
+    num_leaves: 31
+    random_state: 42
+    
+  # LSTM
+  lstm:
+    context_len: 168  # 7 días @ 1h
+    lstm_units: 64
+    dropout: 0.2
+    epochs: 50
+    batch_size: 32
+    validation_split: 0.1
+    early_stopping_patience: 5
+    random_state: 42
+
+evaluation:
+  # Rolling-Origin
+  rolling_origin:
+    n_folds: 5
+    initial_train_pct: 0.5  # Fold 0 train size
+    test_pct: 0.1
+    
+  # Holdout
+  holdout:
+    train_pct: 0.8
+    
+  # Métricas de eventos
+  event_thresholds: [0.75, 0.90]  # Percentiles de observaciones
+
+plotting:
+  figsize: [15, 12]
+  dpi: 300
+  style: "seaborn-v0_8-darkgrid"
+  colors:
+    persistence: "#808080"  # gray
+    lgbm: "#1f77b4"         # blue
+    lstm: "#ff7f0e"         # orange
+  markers:
+    h1: "o"
+    h6: "s"
+    h24: "^"
+    h48: "D"

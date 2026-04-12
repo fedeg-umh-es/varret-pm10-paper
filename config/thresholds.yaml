@@ -1,0 +1,18 @@
+# Event detection thresholds for Paper A
+# Used in compute_event_metrics.py to evaluate exceedance recall
+
+# PM10 concentration thresholds
+# These are applied to observed data (not normalized)
+# thresholds are computed as percentiles of training observations
+
+event_detection:
+  # Method for computing thresholds
+  method: "percentile"  # "percentile" | "fixed_value"
+  
+  # Percentile-based thresholds (if method="percentile")
+  percentiles: [75, 90]  # P75 (high pollution), P90 (very high pollution)
+  
+  # Fixed value thresholds (if method="fixed_value")
+  # fixed_values: [100, 150]  # µg/m³ (PM10 standards vary by region)
+  
+  # For now, we use percentiles fitted on training data

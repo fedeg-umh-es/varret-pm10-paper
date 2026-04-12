@@ -1,0 +1,9 @@
+# Prediction horizons (steps ahead) for Paper A
+# These are in hours (assuming 1h frequency data)
+# Do not modify without updating all downstream evaluation code
+
+horizons:
+  - 1     # Very short-term
+  - 6     # Short-term
+  - 24    # Medium-term (1 day)
+  - 48    # Long-term (2 days)
