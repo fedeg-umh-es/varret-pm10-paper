@@ -206,6 +206,14 @@ time.
 
 \subsection{Rolling-origin evaluation}
 
+The empirical analysis was conducted on an hourly PM$_{10}$ series from the
+Casa de Campo monitoring station in Madrid, Spain, covering the full calendar
+year 2023 (2023-01-01 00:00 to 2023-12-31 23:00; 8,760 observations).
+The data were obtained from the European Environment Agency (EEA) Air Quality
+Download Service.
+Table~\ref{tab:data_protocol} summarises the study site, data coverage, and
+evaluation protocol.
+
 We adopt a rolling-origin (walk-forward) evaluation protocol to approximate
 sequential operational use.
 For each origin $t$ in an evaluation window, the model is trained using only
@@ -225,10 +233,11 @@ conditions across origins \citep{tashman2000}.
 \toprule
 Item & Value \\
 \midrule
-Study site / station       & TBD \\
-Period                     & TBD \\
-Temporal resolution        & TBD \\
-Number of observations     & TBD \\
+Study site / station       & Casa de Campo (Madrid, Spain) \\
+Period                     & 2023-01-01 00:00 to 2023-12-31 23:00 \\
+Temporal resolution        & 1 hour \\
+Number of observations     & 8,760 \\
+Data source                & EEA Air Quality Download Service \\
 Forecast horizons ($h$)    & 1, 6, 24, 48 h \\
 Rolling-origin folds       & 5 (expanding window, initial 50\%) \\
 Holdout split              & 80/20 chronological \\
