@@ -1,0 +1,5 @@
+rolling_origin:
+  max_horizon: 7
+  min_train_size: 60
+  step_size: 1
+  n_splits: null

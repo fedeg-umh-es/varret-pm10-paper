@@ -1,0 +1,5 @@
+variance_diagnostics:
+  collapse_alpha_threshold: 0.5
+  inflation_alpha_threshold: 1.5
+  near_ideal_alpha_lower: 0.8
+  near_ideal_alpha_upper: 1.2

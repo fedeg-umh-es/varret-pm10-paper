@@ -1,0 +1,11 @@
+experiment:
+  name: exp_p33_main
+  datasets:
+    - pm10_daily
+  models:
+    - persistence
+    - seasonal_persistence
+    - linear_ar
+    - boosting_tabular
+  baseline_model: persistence
+  max_horizon: 7

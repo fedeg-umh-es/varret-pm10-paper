@@ -1,48 +1,32 @@
-# Datos
-data/raw/**
-data/interim/**
-data/processed/**
-airquality_datasets/**
-
-# Outputs
-outputs/predictions/**
-outputs/metrics/**
-outputs/tables/**
-outputs/figures/**
-
-# Modelos entrenados
-*.pkl
-*.h5
-*.joblib
-
-# Pycache & compilados
 __pycache__/
+.pytest_cache/
+.venv/
 *.py[cod]
-*$py.class
-*.so
-.Python
-
-# Virtual environments
-venv/
-env/
-ENV/
-.venv
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
 .DS_Store
-Thumbs.db
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb
+outputs/*
+!outputs/.gitkeep
+!outputs/predictions/
+!outputs/metrics/
+!outputs/tables/
+!outputs/logs/
+!outputs/reports/
+outputs/predictions/*
+!outputs/predictions/.gitkeep
+outputs/metrics/*
+!outputs/metrics/.gitkeep
+outputs/tables/*
+!outputs/tables/.gitkeep
+outputs/logs/*
+!outputs/logs/.gitkeep
+outputs/reports/*
+!outputs/reports/.gitkeep
 
-# Logs
-*.log
-*.log.*
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+airquality_datasets/**

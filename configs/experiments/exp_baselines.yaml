@@ -1,0 +1,6 @@
+experiment:
+  name: exp_baselines
+  models:
+    - persistence
+    - seasonal_persistence
+  baseline_model: persistence

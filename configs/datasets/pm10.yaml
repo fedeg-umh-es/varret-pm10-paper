@@ -1,0 +1,7 @@
+dataset:
+  name: pm10_daily
+  target_column: y
+  date_column: date
+  frequency: D
+  raw_path: data/raw/pm10_daily.csv
+  processed_path: data/processed/pm10_daily.parquet

@@ -1,0 +1,27 @@
+paths:
+  meteorology_candidate_sources:
+    - "data/processed/meteorology_features.parquet"
+    - "../P1_PM10_Meteorology_Hstar/data_processed/madrid_pm10_meteorology_experiment_base.csv"
+
+analysis:
+  default_protocol: "rolling_origin"
+  station_default: "default_station"
+  horizons: [1, 6, 24, 48]
+  primary_event_percentile: 75
+  clustered_k_values: [3, 4]
+  clustered_primary_k: 3
+  min_samples_per_group: 40
+  min_events_per_group: 5
+
+physical_regimes:
+  ventilation_quantile: 0.5
+  humidity_quantile: 0.5
+  warm_months: [4, 5, 6, 7, 8, 9]
+
+clustering:
+  random_state: 42
+  n_init: 20
+  max_iter: 300
+
+figures:
+  max_models: 4

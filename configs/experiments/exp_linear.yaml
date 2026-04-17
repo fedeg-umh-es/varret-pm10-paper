@@ -1,0 +1,5 @@
+experiment:
+  name: exp_linear
+  models:
+    - linear_ar
+  baseline_model: persistence
