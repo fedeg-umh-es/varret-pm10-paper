@@ -2,6 +2,7 @@
 data/raw/**
 data/interim/**
 data/processed/**
+airquality_datasets/**
 
 # Outputs
 outputs/predictions/**
