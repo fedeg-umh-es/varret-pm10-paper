@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the paper."
+title: "varret-pm10-paper: Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting"
+authors:
+  - family-names: "García Crespi"
+    given-names: "Federico"
+    orcid: "https://orcid.org/0000-0002-7129-7791"
+    affiliation: "Universidad Miguel Hernández de Elche"
+version: 1.0.0
+date-released: 2026-05-14
+license: MIT
+repository-code: "https://github.com/fedeg-umh-es/varret-pm10-paper"
+keywords:
+  - PM10 forecasting
+  - rolling-origin evaluation
+  - variance retention
+  - operational predictability
+  - air quality
