@@ -1,4 +1,5 @@
 # P33 — Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting Under Rolling-Origin Evaluation
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20185328.svg)](https://doi.org/10.5281/zenodo.20185328)
 
 This repository is a paper-first research codebase for P33. It is designed to support a reproducible analysis of whether positive multi-horizon forecasting skill for daily PM10 under rolling-origin evaluation reflects credible operational value or instead coincides with variance collapse and plausible ghost skill.
 
