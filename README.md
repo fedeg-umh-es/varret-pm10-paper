@@ -128,3 +128,8 @@ pytest
 ## Notes
 
 This repository is oriented to the P33 paper workflow rather than a general-purpose forecasting package. The implementation is intentionally restrained, explicit, and auditable.
+## Citation
+
+If you use this software, please cite:
+
+> García Crespi, F. (2026). varret-pm10-paper: Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.20185328
