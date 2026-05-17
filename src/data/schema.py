@@ -8,7 +8,7 @@ VARIANCE_SUMMARY_COLUMNS = [
     "model",
     "horizon",
     "skill",
-    "alpha",
+    "vr",
     "skill_vp",
     "collapse_flag",
     "inflation_flag",

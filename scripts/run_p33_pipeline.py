@@ -14,6 +14,7 @@ SCRIPT_ORDER = [
     "scripts/06_build_skill_tables.py",
     "scripts/07_build_variance_retention_table.py",
     "scripts/08_build_run_summary.py",
+    "scripts/10_plot_figures.py",
 ]
 
 
