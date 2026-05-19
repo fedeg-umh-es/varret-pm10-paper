@@ -3,6 +3,14 @@
 
 This repository is a paper-first research codebase for P33. It is designed to support a reproducible analysis of whether positive multi-horizon forecasting skill for daily PM10 under rolling-origin evaluation reflects credible operational value or instead coincides with variance collapse and plausible ghost skill.
 
+## Current Work Package
+
+The active scope is restricted to the post-evaluation of E1-RR outputs through variance retention, `alpha`, and `skill_vp` diagnostics.
+
+Do not mix this work package with E2-MET, E3-PROB, meteorological ablations, probabilistic extensions, or new model-family exploration.
+
+See `docs/e1_rr_post_evaluation_contract.md` before running or modifying the pipeline.
+
 ## Scientific Question
 
 P33 evaluates whether a model can outperform a persistence baseline across horizons up to 7 days while still preserving enough dynamic variability to remain operationally interpretable. The central diagnostic is the joint reading of:
