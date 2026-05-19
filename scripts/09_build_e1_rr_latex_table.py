@@ -20,7 +20,18 @@ def _fmt(value: float) -> str:
     return f"{value:.3f}"
 
 
-def _build_summary_table(summary_df: pd.DataFrame) -> pd.DataFrame:
+def _latex_escape(value: str) -> str:
+    """Escape a small subset of LaTeX-sensitive characters used in table text."""
+    return (
+        value.replace("\\", r"\textbackslash{}")
+        .replace("_", r"\_")
+        .replace("%", r"\%")
+        .replace("&", r"\&")
+        .replace("#", r"\#")
+    )
+
+
+def _build_summary_table(summary_df: pd.DataFrame) -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     for model, group in summary_df.groupby("model", sort=True):
         total = len(group)
@@ -36,19 +47,55 @@ def _build_summary_table(summary_df: pd.DataFrame) -> pd.DataFrame:
                 "Low-sample horizons": f"{int(group['low_sample_flag'].sum())}/{total}",
             }
         )
-    return pd.DataFrame(rows)
+    return rows
 
 
-def _to_latex(table_df: pd.DataFrame) -> str:
-    latex = table_df.to_latex(index=False, escape=True, column_format="lrrrrrrr")
-    return (
-        "\\begin{table}[htbp]\n"
-        "\\centering\n"
-        f"\\caption{{{CAPTION}}}\n"
-        f"\\label{{{LABEL}}}\n"
-        f"{latex}"
-        "\\end{table}\n"
+def _to_latex(rows: list[dict[str, str]]) -> str:
+    headers = [
+        "Model",
+        "Mean skill",
+        "Mean alpha",
+        r"Mean Skill\_VP",
+        "Collapse horizons",
+        "Inflation horizons",
+        "Near-ideal horizons",
+        "Low-sample horizons",
+    ]
+    keys = [
+        "Model",
+        "Mean skill",
+        "Mean alpha",
+        "Mean Skill_VP",
+        "Collapse horizons",
+        "Inflation horizons",
+        "Near-ideal horizons",
+        "Low-sample horizons",
+    ]
+
+    lines = [
+        r"\begin{table}[htbp]",
+        r"\centering",
+        f"\\caption{{{CAPTION}}}",
+        f"\\label{{{LABEL}}}",
+        r"\begin{tabular}{lrrrrrrr}",
+        r"\toprule",
+        " & ".join(headers) + r" \",
+        r"\midrule",
+    ]
+
+    for row in rows:
+        values = [_latex_escape(row[key]) if key == "Model" else row[key] for key in keys]
+        lines.append(" & ".join(values) + r" \")
+
+    lines.extend(
+        [
+            r"\bottomrule",
+            r"\end{tabular}",
+            r"\end{table}",
+            "",
+        ]
     )
+    return "\n".join(lines)
 
 
 def main() -> None:
@@ -70,8 +117,8 @@ def main() -> None:
     if missing:
         raise ValueError(f"Missing required columns in {SUMMARY_PATH}: {missing}")
 
-    table_df = _build_summary_table(summary_df)
-    latex = _to_latex(table_df)
+    rows = _build_summary_table(summary_df)
+    latex = _to_latex(rows)
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(latex, encoding="utf-8")
