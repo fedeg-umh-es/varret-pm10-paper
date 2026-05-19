@@ -8,6 +8,8 @@ import pandas as pd
 from src.data.schema import VARIANCE_SUMMARY_COLUMNS
 from src.data.validation import require_columns
 
+MIN_N_PER_GROUP = 30
+
 
 def build_variance_retention_summary(predictions_df: pd.DataFrame, skill_df: pd.DataFrame) -> pd.DataFrame:
     """Build the final diagnostic table with alpha, skill_vp, and diagnostic flags."""
@@ -25,6 +27,7 @@ def build_variance_retention_summary(predictions_df: pd.DataFrame, skill_df: pd.
                 "dataset": dataset,
                 "model": model,
                 "horizon": horizon,
+                "n": int(len(group)),
                 "alpha": _compute_alpha(group),
             }
         )
@@ -35,6 +38,7 @@ def build_variance_retention_summary(predictions_df: pd.DataFrame, skill_df: pd.
     merged["collapse_flag"] = merged["alpha"] < 0.5
     merged["inflation_flag"] = merged["alpha"] > 1.5
     merged["near_ideal_flag"] = (merged["skill"] > 0.0) & merged["alpha"].between(0.8, 1.2, inclusive="both")
+    merged["low_sample_flag"] = merged["n"] < MIN_N_PER_GROUP
 
     return merged[VARIANCE_SUMMARY_COLUMNS].sort_values(["dataset", "model", "horizon"]).reset_index(drop=True)
 
