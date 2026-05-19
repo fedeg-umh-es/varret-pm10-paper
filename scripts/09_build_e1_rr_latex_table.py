@@ -14,6 +14,7 @@ CAPTION = (
     "for the E1-RR daily lags-only post-evaluation."
 )
 LABEL = "tab:e1_rr_variance_retention_summary"
+LATEX_ROW_END = r"\\"
 
 
 def _fmt(value: float) -> str:
@@ -79,13 +80,13 @@ def _to_latex(rows: list[dict[str, str]]) -> str:
         f"\\label{{{LABEL}}}",
         r"\begin{tabular}{lrrrrrrr}",
         r"\toprule",
-        " & ".join(headers) + r" \",
+        " & ".join(headers) + " " + LATEX_ROW_END,
         r"\midrule",
     ]
 
     for row in rows:
         values = [_latex_escape(row[key]) if key == "Model" else row[key] for key in keys]
-        lines.append(" & ".join(values) + r" \")
+        lines.append(" & ".join(values) + " " + LATEX_ROW_END)
 
     lines.extend(
         [
