@@ -7,10 +7,12 @@ VARIANCE_SUMMARY_COLUMNS = [
     "dataset",
     "model",
     "horizon",
+    "n",
     "skill",
     "alpha",
     "skill_vp",
     "collapse_flag",
     "inflation_flag",
     "near_ideal_flag",
+    "low_sample_flag",
 ]
