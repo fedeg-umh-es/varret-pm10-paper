@@ -1,0 +1,6 @@
+dimension,count,denominator,percent,interpretation
+Persistence or naive baseline,18,486,3.7,Minimum operational comparator
+Horizon-wise reporting,11,486,2.3,Multi-step interpretability
+Temporally appropriate validation,24,486,4.9,Deployment-like temporal credibility
+Explicit leakage-safe safeguards,3,486,0.6,Protection against information bleed
+Operational-usefulness framing,51,486,10.5,Decision relevance
