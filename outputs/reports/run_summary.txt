@@ -1,0 +1,4 @@
+P33 run summary
+==============
+Primary diagnostic table: outputs/tables/variance_retention_summary.csv
+Review skill, alpha, and skill_vp jointly to assess variance retention.

@@ -1,0 +1,15 @@
+dataset,model,horizon,skill
+e1_rr_daily,hgb_direct,1,0.14111248559910472
+e1_rr_daily,hgb_direct,2,0.17527067294743826
+e1_rr_daily,hgb_direct,3,0.21744822537608277
+e1_rr_daily,hgb_direct,4,0.2176213845494488
+e1_rr_daily,hgb_direct,5,0.23782474767903894
+e1_rr_daily,hgb_direct,6,0.24641045518911675
+e1_rr_daily,hgb_direct,7,0.25108615308492643
+e1_rr_daily,ridge_direct,1,0.09195600273056437
+e1_rr_daily,ridge_direct,2,0.1451590673514952
+e1_rr_daily,ridge_direct,3,0.19422959362155
+e1_rr_daily,ridge_direct,4,0.21010168624188763
+e1_rr_daily,ridge_direct,5,0.22412737835833818
+e1_rr_daily,ridge_direct,6,0.23888998484684165
+e1_rr_daily,ridge_direct,7,0.24562157915821559
