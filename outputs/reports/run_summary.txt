@@ -1,4 +1,15 @@
 P33 run summary
 ==============
+Raw dataset: data/raw/pm10_daily.csv
+Raw rows: 2350
+Raw date range: 2017-01-01 to 2024-12-31
+Predictions: outputs/metrics/predictions.csv (26001 rows)
+Prediction date range: 2020-01-23 to 2024-12-31
 Primary diagnostic table: outputs/tables/variance_retention_summary.csv
+
+Model summary
+-------------
+- hgb_direct: mean_skill=0.212, mean_alpha=0.145, mean_skill_vp=0.027, collapse=7/7, min_n=1215
+- ridge_direct: mean_skill=0.242, mean_alpha=0.072, mean_skill_vp=0.013, collapse=7/7, min_n=1215
+
 Review skill, alpha, and skill_vp jointly to assess variance retention.

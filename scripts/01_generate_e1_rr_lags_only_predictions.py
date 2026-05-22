@@ -24,13 +24,14 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from joblib import Parallel, delayed
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.linear_model import Ridge
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 
-DEFAULT_INPUT = Path.home() / "Descargas" / "pm10_clean.csv"
+DEFAULT_INPUT = Path("data/raw/pm10_daily.csv")
 DEFAULT_PREDICTIONS_OUTPUT = Path("outputs/metrics/predictions.csv")
 DEFAULT_SKILL_OUTPUT = Path("outputs/metrics/skill_summary.csv")
 
@@ -94,56 +95,84 @@ def _fit_predict_models(train: pd.DataFrame, test_row: pd.DataFrame, feature_col
     }
 
 
-def _generate_predictions(daily: pd.DataFrame, dataset: str, start_year: int, end_year: int) -> pd.DataFrame:
+def _generate_predictions_for_horizon(
+    daily: pd.DataFrame,
+    dataset: str,
+    horizon: int,
+    origins: pd.Series,
+    origin_step: int,
+) -> pd.DataFrame:
     rows: list[dict] = []
     feature_cols = [f"lag_{lag}" for lag in LAGS]
-    origins = _iter_origins(daily, start_year=start_year, end_year=end_year)
+    supervised = _make_supervised(daily, horizon=horizon)
+    complete = supervised.dropna(subset=feature_cols + ["target", "target_date"])
+    selected_origins = origins.iloc[::origin_step].reset_index(drop=True)
 
-    for horizon in HORIZONS:
-        supervised = _make_supervised(daily, horizon=horizon)
-        complete = supervised.dropna(subset=feature_cols + ["target", "target_date"])
+    for origin in selected_origins:
+        test = complete[complete["date"] == origin]
+        if test.empty:
+            continue
+        train = complete[complete["target_date"] <= origin].copy()
+        if len(train) < MIN_TRAIN_ROWS:
+            continue
 
-        for origin in origins:
-            test = complete[complete["date"] == origin]
-            if test.empty:
-                continue
-            train = complete[complete["target_date"] <= origin].copy()
-            if len(train) < MIN_TRAIN_ROWS:
-                continue
+        y_origin = float(test.iloc[0]["lag_0"])
+        y_true = float(test.iloc[0]["target"])
+        target_date = pd.Timestamp(test.iloc[0]["target_date"])
 
-            y_origin = float(test.iloc[0]["lag_0"])
-            y_true = float(test.iloc[0]["target"])
-            target_date = pd.Timestamp(test.iloc[0]["target_date"])
+        rows.append(
+            {
+                "dataset": dataset,
+                "model": "persistence",
+                "fold": origin.strftime("%Y-%m-%d"),
+                "origin_date": origin.strftime("%Y-%m-%d"),
+                "horizon": horizon,
+                "date": target_date.strftime("%Y-%m-%d"),
+                "y_true": y_true,
+                "y_pred": y_origin,
+            }
+        )
 
+        preds = _fit_predict_models(train, test, feature_cols)
+        for model, y_pred in preds.items():
             rows.append(
                 {
                     "dataset": dataset,
-                    "model": "persistence",
+                    "model": model,
                     "fold": origin.strftime("%Y-%m-%d"),
                     "origin_date": origin.strftime("%Y-%m-%d"),
                     "horizon": horizon,
                     "date": target_date.strftime("%Y-%m-%d"),
                     "y_true": y_true,
-                    "y_pred": y_origin,
+                    "y_pred": y_pred,
                 }
             )
 
-            preds = _fit_predict_models(train, test, feature_cols)
-            for model, y_pred in preds.items():
-                rows.append(
-                    {
-                        "dataset": dataset,
-                        "model": model,
-                        "fold": origin.strftime("%Y-%m-%d"),
-                        "origin_date": origin.strftime("%Y-%m-%d"),
-                        "horizon": horizon,
-                        "date": target_date.strftime("%Y-%m-%d"),
-                        "y_true": y_true,
-                        "y_pred": y_pred,
-                    }
-                )
+    print(f"h={horizon}: wrote {len(rows)} prediction rows from {len(selected_origins)} candidate origins")
+    return pd.DataFrame(rows)
 
-    predictions = pd.DataFrame(rows)
+
+def _generate_predictions(
+    daily: pd.DataFrame,
+    dataset: str,
+    start_year: int,
+    end_year: int,
+    origin_step: int,
+    n_jobs: int,
+) -> pd.DataFrame:
+    if origin_step < 1:
+        raise ValueError("origin_step must be >= 1")
+
+    origins = _iter_origins(daily, start_year=start_year, end_year=end_year)
+    if origins.empty:
+        raise ValueError("No observed origins found in the requested evaluation window.")
+
+    horizon_frames = Parallel(n_jobs=n_jobs, prefer="processes")(
+        delayed(_generate_predictions_for_horizon)(daily, dataset, horizon, origins, origin_step)
+        for horizon in HORIZONS
+    )
+
+    predictions = pd.concat(horizon_frames, ignore_index=True)
     if predictions.empty:
         raise ValueError("No predictions were generated. Check date range, missing data, and MIN_TRAIN_ROWS.")
     return predictions.sort_values(["dataset", "model", "horizon", "origin_date"]).reset_index(drop=True)
@@ -184,13 +213,27 @@ def main() -> None:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT, help="CSV with date and pm10 columns")
     parser.add_argument("--dataset", default="e1_rr_daily", help="Dataset identifier")
     parser.add_argument("--start-year", type=int, default=2020, help="First origin year")
-    parser.add_argument("--end-year", type=int, default=2023, help="Last origin year")
+    parser.add_argument("--end-year", type=int, default=2024, help="Last origin year")
+    parser.add_argument(
+        "--origin-step",
+        type=int,
+        default=1,
+        help="Evaluate every kth observed origin. Keep 1 for the full rolling-origin run.",
+    )
+    parser.add_argument("--n-jobs", type=int, default=1, help="Parallel jobs across horizons")
     parser.add_argument("--predictions-output", type=Path, default=DEFAULT_PREDICTIONS_OUTPUT)
     parser.add_argument("--skill-output", type=Path, default=DEFAULT_SKILL_OUTPUT)
     args = parser.parse_args()
 
     daily = _load_daily_pm10(args.input)
-    predictions = _generate_predictions(daily, dataset=args.dataset, start_year=args.start_year, end_year=args.end_year)
+    predictions = _generate_predictions(
+        daily,
+        dataset=args.dataset,
+        start_year=args.start_year,
+        end_year=args.end_year,
+        origin_step=args.origin_step,
+        n_jobs=args.n_jobs,
+    )
     skill = _build_skill_summary(predictions)
 
     args.predictions_output.parent.mkdir(parents=True, exist_ok=True)
