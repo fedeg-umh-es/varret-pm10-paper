@@ -1,0 +1,15 @@
+dataset,model,horizon,skill
+e1_rr_zarra_emep,hgb_direct,1,0.05767453566311054
+e1_rr_zarra_emep,hgb_direct,2,0.19440101982002223
+e1_rr_zarra_emep,hgb_direct,3,0.2313148450813498
+e1_rr_zarra_emep,hgb_direct,4,0.2350524348857933
+e1_rr_zarra_emep,hgb_direct,5,0.21583802945620845
+e1_rr_zarra_emep,hgb_direct,6,0.21229870113513594
+e1_rr_zarra_emep,hgb_direct,7,0.20478460462716586
+e1_rr_zarra_emep,ridge_direct,1,0.08521530861537485
+e1_rr_zarra_emep,ridge_direct,2,0.18002841014931537
+e1_rr_zarra_emep,ridge_direct,3,0.21898691725352093
+e1_rr_zarra_emep,ridge_direct,4,0.22464627710834983
+e1_rr_zarra_emep,ridge_direct,5,0.20777749994575123
+e1_rr_zarra_emep,ridge_direct,6,0.20816015156662893
+e1_rr_zarra_emep,ridge_direct,7,0.20646136954212657

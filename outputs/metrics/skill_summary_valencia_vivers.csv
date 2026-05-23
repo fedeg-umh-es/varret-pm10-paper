@@ -1,0 +1,15 @@
+dataset,model,horizon,skill
+e1_rr_valencia_vivers,hgb_direct,1,0.07370285621769912
+e1_rr_valencia_vivers,hgb_direct,2,0.1774493329506257
+e1_rr_valencia_vivers,hgb_direct,3,0.19363653105650447
+e1_rr_valencia_vivers,hgb_direct,4,0.2098397119173544
+e1_rr_valencia_vivers,hgb_direct,5,0.22727145880004085
+e1_rr_valencia_vivers,hgb_direct,6,0.22711962890109816
+e1_rr_valencia_vivers,hgb_direct,7,0.2324995866841183
+e1_rr_valencia_vivers,ridge_direct,1,0.09546158091873247
+e1_rr_valencia_vivers,ridge_direct,2,0.1751919655401376
+e1_rr_valencia_vivers,ridge_direct,3,0.20362719280391617
+e1_rr_valencia_vivers,ridge_direct,4,0.22428104670026705
+e1_rr_valencia_vivers,ridge_direct,5,0.2415127594814469
+e1_rr_valencia_vivers,ridge_direct,6,0.24380820046832907
+e1_rr_valencia_vivers,ridge_direct,7,0.2528761794349226

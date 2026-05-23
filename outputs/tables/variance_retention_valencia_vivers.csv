@@ -1,0 +1,15 @@
+dataset,model,horizon,n,skill,alpha,skill_vp,collapse_flag,inflation_flag,near_ideal_flag,low_sample_flag
+e1_rr_valencia_vivers,hgb_direct,1,1479,0.0737028562176991,0.3983085699378004,0.02935647926040305,True,False,False,False
+e1_rr_valencia_vivers,hgb_direct,2,1470,0.1774493329506257,0.22765651809984544,0.04039749727867962,True,False,False,False
+e1_rr_valencia_vivers,hgb_direct,3,1461,0.1936365310565044,0.17430309329252233,0.033751446337582286,True,False,False,False
+e1_rr_valencia_vivers,hgb_direct,4,1454,0.2098397119173544,0.16603026955912104,0.03483974393384665,True,False,False,False
+e1_rr_valencia_vivers,hgb_direct,5,1446,0.2272714588000408,0.14167063301202507,0.032197691433768154,True,False,False,False
+e1_rr_valencia_vivers,hgb_direct,6,1442,0.2271196289010981,0.13763831752544586,0.03126036359895077,True,False,False,False
+e1_rr_valencia_vivers,hgb_direct,7,1434,0.2324995866841183,0.13772913482564228,0.03202196692132303,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,1,1479,0.0954615809187324,0.4094559265345034,0.039087310063528044,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,2,1470,0.1751919655401376,0.2039809647315114,0.03573582614408697,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,3,1461,0.2036271928039161,0.13907123746357722,0.02831868568447504,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,4,1454,0.224281046700267,0.1065038690738099,0.02388679923350228,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,5,1446,0.2415127594814469,0.08519070299177882,0.020574641761708857,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,6,1442,0.243808200468329,0.08324353463072749,0.020295456378940695,True,False,False,False
+e1_rr_valencia_vivers,ridge_direct,7,1434,0.2528761794349226,0.07889814388488615,0.01995146119011681,True,False,False,False
