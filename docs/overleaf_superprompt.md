@@ -50,7 +50,8 @@ Scopus and the Web of Science Core Collection (peer-reviewed journal
 articles in English, 2015--2025) using the Boolean query:
 
 \begin{verbatim}
-%%BOOLEAN_QUERY_PLACEHOLDER%%
+TITLE-ABS-KEY(("PM10" OR "PM2.5") AND (forecasting OR forecast)
+AND ("air quality") AND ("time series" OR temporal OR horizon))
 \end{verbatim}
 
 After deduplication ($n = 807$), title/abstract screening, and full-text
@@ -67,10 +68,7 @@ Reproducible materials are archived at Zenodo
 release: \href{https://doi.org/10.5281/zenodo.19125915}{10.5281/zenodo.19125915}).
 ```
 
-> **NOTA**: Reemplaza `%%BOOLEAN_QUERY_PLACEHOLDER%%` con la cadena
-> booleana real de Scopus v6 (ver `search_export/` en el repositorio SLR).
-> Ejemplo de estructura esperada:
-> `TITLE-ABS-KEY ( ( "PM10" OR "PM 10" OR "particulate matter" ) AND ( "forecast*" OR "predict*" ) ) AND PUBYEAR > 2014 AND PUBYEAR < 2026 AND LANGUAGE ( english ) AND DOCTYPE ( ar )`
+> Query v6\_final extraída de `scopus_pm_forecasting_2015_2025_20250322.csv`.
 
 ---
 
