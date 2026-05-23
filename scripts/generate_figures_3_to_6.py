@@ -107,33 +107,74 @@ for ext in ("pdf", "png"):
 plt.close()
 print(f"[OK] figure4_alpha_profiles  →  {OUTDIR}/")
 
-# ── Figure 5 — Scatter skill–alpha (all 42 points) ────────────────────────────
-fig, ax = plt.subplots(figsize=(6, 5))
-ax.fill_between([0, 0.32], [0, 0], [0.5, 0.5],
-                alpha=0.07, color="gray", label="Collapse region ($\\alpha < 0.5$)")
-ax.axhline(0.5, color="gray", linewidth=0.8, linestyle="--")
-ax.axvline(0,   color="gray", linewidth=0.8, linestyle=":")
+# ── Figure 5 — Skill–alpha trajectories (2 panels, one per model) ─────────────
+# Each trajectory connects h=1→7 for one station; h=1 labelled at start,
+# h=7 marked with arrowhead. All points stay inside the collapse zone.
+fig, axes = plt.subplots(1, 2, figsize=(10, 4.5), sharey=True, sharex=True)
 
-for name, meta in STATIONS.items():
-    for model in ("hgb_direct", "ridge_direct"):
+for ax, model in zip(axes, ["hgb_direct", "ridge_direct"]):
+    # Collapse region
+    ax.fill_between([0, 0.32], [0, 0], [0.5, 0.5],
+                    alpha=0.08, color="gray")
+    ax.axhline(0.5, color="black", linewidth=0.9, linestyle="--", alpha=0.6,
+               label="Collapse threshold ($\\alpha=0.5$)")
+
+    for name, meta in STATIONS.items():
         d = dfs[name][dfs[name]["model"] == model].sort_values("horizon")
-        ax.scatter(d["skill"], d["alpha"],
-                   c=meta["color"], marker=MODEL_MARKER[model],
-                   s=42, alpha=0.88, zorder=3,
-                   label=f"{name} / {model}")
-        for _, row in d.iterrows():
-            ax.annotate(str(int(row["horizon"])),
-                        (row["skill"], row["alpha"]),
-                        textcoords="offset points", xytext=(3, 2),
-                        fontsize=5.5, color=meta["color"], alpha=0.65)
+        xs, ys = d["skill"].values, d["alpha"].values
 
-ax.set_xlabel("Persistence-relative skill")
-ax.set_ylabel("Variance-retention ratio $\\alpha$")
-ax.set_xlim(-0.01, 0.31)
-ax.set_ylim(0, 0.58)
-ax.legend(fontsize=6.5, loc="upper left", ncol=1,
-          framealpha=0.9, edgecolor="lightgray")
-ax.set_title("Skill–variance retention: all 42 model/station/horizon cells", fontsize=9)
+        # Trajectory line
+        ax.plot(xs, ys, color=meta["color"], linewidth=1.4,
+                linestyle="-", alpha=0.6, zorder=2)
+
+        # Bubble size encodes horizon: small=h1, large=h7
+        sizes = [28 + 14 * h for h in d["horizon"]]
+        ax.scatter(xs, ys, c=meta["color"], s=sizes,
+                   alpha=0.92, zorder=3, edgecolors="white", linewidths=0.4)
+
+        # Arrow from second-to-last to last point (shows direction)
+        ax.annotate("", xy=(xs[-1], ys[-1]), xytext=(xs[-2], ys[-2]),
+                    arrowprops=dict(arrowstyle="-|>", color=meta["color"],
+                                   lw=1.3, mutation_scale=10))
+
+        # Label h=1 (start) and h=7 (end)
+        ax.annotate("$h{=}1$", (xs[0], ys[0]),
+                    textcoords="offset points", xytext=(-22, 2),
+                    fontsize=6.5, color=meta["color"], fontweight="bold")
+        ax.annotate("$h{=}7$", (xs[-1], ys[-1]),
+                    textcoords="offset points", xytext=(4, -8),
+                    fontsize=6.5, color=meta["color"])
+
+        # Station label near midpoint
+        mid = len(xs) // 2
+        ax.annotate(name, (xs[mid], ys[mid]),
+                    textcoords="offset points", xytext=(6, 5),
+                    fontsize=7, color=meta["color"],
+                    bbox=dict(boxstyle="round,pad=0.15", fc="white",
+                              alpha=0.75, ec="none"))
+
+    ax.set_xlabel("Persistence-relative skill")
+    ax.set_title(f"model: {model}", fontsize=9)
+    ax.set_xlim(0.02, 0.30)
+    ax.set_ylim(0, 0.56)
+    ax.grid(True, alpha=0.18)
+    ax.text(0.24, 0.47, "COLLAPSE\nZONE", fontsize=7, color="gray",
+            ha="center", va="top", alpha=0.6)
+
+axes[0].set_ylabel("Variance-retention ratio $\\alpha$")
+# Bubble-size legend
+for h, lab in [(1, "$h=1$"), (4, "$h=4$"), (7, "$h=7$")]:
+    axes[1].scatter([], [], c="gray", s=28 + 14 * h,
+                    label=lab, edgecolors="white", linewidths=0.4)
+axes[1].legend(title="Horizon", fontsize=7.5, title_fontsize=7.5,
+               loc="lower right", framealpha=0.9)
+axes[0].axhline(0.5, color="black", linewidth=0.9, linestyle="--",
+                alpha=0.6, label="Collapse threshold")
+axes[0].legend(fontsize=7.5, loc="lower right", framealpha=0.9)
+
+fig.suptitle(
+    "Skill–variance-retention trajectories ($h=1\\!\\to\\!7$) — all stations collapse",
+    fontsize=9, y=1.01)
 fig.tight_layout()
 for ext in ("pdf", "png"):
     fig.savefig(OUTDIR / f"figure5_scatter_skill_alpha.{ext}", dpi=300, bbox_inches="tight")
