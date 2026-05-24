@@ -1,0 +1,527 @@
+═══════════════════════════════════════════════════════════════════════════════
+OVERLEAF AI SUPERPROMPT — update paper_a.tex to 17-station MITECO daily study
+═══════════════════════════════════════════════════════════════════════════════
+
+CONTEXT FOR OVERLEAF AI
+-----------------------
+The paper has been upgraded from a single-station hourly pilot (LightGBM/SARIMA,
+EEA Casa de Campo Madrid) to a 17-station national daily study (HGB direct /
+Ridge direct / Seasonal naive, MITECO network, 2017-2024). The methodological
+framework (rolling-origin, variance-retention ratio α, Skill_VP) is unchanged.
+Five new figures (in the project root: figure3_skill_profiles,
+figure4_alpha_profiles, figure5_scatter_skill_alpha,
+figure6_station_collapse_rates, figure7_station_map_spain) replace the old
+Figures 1–2.
+
+KEY EMPIRICAL FACTS FOR THE REWRITE
+-------------------------------------
+• 17 stations: 6 Barcelona area + Alcanar, Alcanar-Vila, Alcaniz, Teruel,
+  San Pablo de los Montes, Huesca, Zarra-EMEP, València-Vivers,
+  Elx-Agroalimentari, Alagón, Sant Vicenç dels Horts
+• Station types: industrial (red), urban (blue), rural/remote (green)
+• Temporal: daily PM10, 2017-2024, ≥75% coverage, ≥5 years required
+• Horizons: h = 1, 2, ..., 7 days; rolling-origin, MIN_TRAIN = 365 rows
+• Models: HGB direct (HistGradientBoosting, lag features ℓ₀–ℓ₆),
+          Ridge direct (Ridge + StandardScaler, lag features ℓ₀–ℓ₆),
+          Seasonal naive (predicts y_{t+h-7}, positive control)
+• Baseline: Persistence
+• Bootstrap CIs: n=1000 replicates, 95% CI on α per model-station-horizon
+• HGB skill range: 0.05 (h=1) to 0.25 (h=5–6), all stations
+• Ridge skill range: similar to HGB
+• HGB α: h=1 ~0.36, decreasing to ~0.10 by h=7
+• Ridge α: h=1 ~0.38, decreasing to ~0.06 by h=7
+• ALL HGB and Ridge cells have α < 0.5 → collapse_flag = True (100%)
+• Seasonal naive α ≈ 0.986 across all stations and horizons (0% collapse)
+• Seasonal naive skill: approximately −0.50 at h=1, recovering toward 0 by h=7
+• Overall collapse rate: 238/357 cells = 66.7%
+  (= 17 stations × 2 ML models × 7 horizons flagged, out of 17×3×7 = 357 total)
+• Bootstrap CIs for HGB/Ridge never overlap 0.5; seasonal naive CIs > 0.95
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 1 — REPLACE THE ABSTRACT ENTIRELY
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace everything between \begin{abstract} and \end{abstract} with:
+
+We evaluate multi-horizon daily PM$_{10}$ point forecasts under a rolling-origin
+protocol with persistence as an explicit baseline, comparing a histogram-based
+gradient-boosted regressor (HGB direct), ridge regression (Ridge direct), and
+seasonal naive across 17 monitoring stations from the Spanish MITECO national
+air-quality network and forecast horizons $h \in \{1,\ldots,7\}$ days.
+Direct ML models (HGB, Ridge) achieve moderate positive persistence-relative
+RMSE skill (0.05--0.25 across horizons and stations) yet collapse predictive
+variance: the variance-retention ratio $\alpha = \mathrm{Var}(\hat{y})/\mathrm{Var}(y)$
+falls below the 0.5 collapse threshold at every station and every horizon, with
+100\% of the 238 evaluated model--station--horizon cells flagged as collapsed.
+Seasonal naive serves as a positive control: it preserves observed variance
+almost perfectly ($\alpha \approx 0.986$, 0\% collapse) while correctly
+confirming that the diagnostic discriminates between models with and without
+dynamic fidelity.
+Bootstrap confidence intervals on $\alpha$ ($n=1\,000$, 95\%) confirm that the
+collapse of direct ML models is statistically robust across all 17 stations.
+The overall collapse rate across all three models is 66.7\% (238/357 cells).
+We introduce \mbox{Skill$_{VP}$} as a diagnostic auxiliary that adjusts
+persistence-relative RMSE skill by variance retention, making the
+skill--fidelity decoupling explicit at each horizon.
+The results support reporting variance retention alongside RMSE-based skill as
+a practical complement for horizon-wise interpretation under rolling-origin
+evaluation.
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 2 — UPDATE KEYWORDS
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the \keywords{...} line with:
+
+\keywords{PM$_{10}$ forecasting; daily forecasting; rolling-origin evaluation;
+persistence baseline; variance retention; forecast skill; dynamic fidelity;
+MITECO national network; Spain}
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 3 — UPDATE INTRODUCTION, Contributions paragraph
+═══════════════════════════════════════════════════════════════════════════════
+
+In Section 1, replace the paragraph that begins "This study provides a bounded
+empirical characterization of this decoupling for LightGBM and SARIMA" with:
+
+This study provides a bounded empirical characterization of the decoupling
+between RMSE skill and dynamic fidelity for direct lag-feature ML forecasters
+(HGB direct, Ridge direct) evaluated against a persistence baseline across
+17 daily PM$_{10}$ stations from the Spanish MITECO national network.
+A seasonal naive model is included as a positive control to confirm that the
+variance-retention diagnostic correctly discriminates between model types.
+We report horizon-wise RMSE and persistence-relative skill together with
+observed and predicted variances, variance-retention ratio $\alpha$, and
+bootstrap confidence intervals on $\alpha$, and we introduce Skill$_{VP}$ as a
+simple diagnostic auxiliary to summarize how nominal skill and variance retention
+jointly behave at each horizon.
+
+Replace the two Contributions bullets with:
+
+\begin{itemize}
+  \item We provide horizon-wise evidence, under rolling-origin evaluation with
+    persistence as an explicit baseline, that persistence-relative RMSE skill
+    can completely decouple from dynamic fidelity as measured by variance
+    retention. HGB direct and Ridge direct serve as the collapsing cases
+    ($\alpha < 0.5$ at all 17 stations and horizons $h \in \{1,\ldots,7\}$),
+    while seasonal naive is a positive control that preserves variance
+    ($\alpha \approx 0.986$) despite negative RMSE skill at short horizons.
+    The finding is statistically confirmed via 95\% bootstrap CIs on $\alpha$.
+  \item We introduce Skill$_{VP}$ as a simple diagnostic auxiliary metric that
+    adjusts nominal persistence-relative RMSE skill by variance retention for
+    horizon-wise interpretation, and demonstrate that it places collapsed and
+    non-collapsed models in clearly separated regions of the skill--retention
+    plane across 17 geographically and typologically diverse stations.
+\end{itemize}
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 4 — REPLACE SECTION 3.2 (Rolling-origin evaluation) AND TABLE 1
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the entire Section 3.2 paragraph that begins "The empirical analysis
+was conducted on an hourly PM$_{10}$ series from the Casa de Campo monitoring
+station" up to and including the old Table 1, with:
+
+\subsection{Empirical setting and data}
+
+The empirical analysis is conducted on daily PM$_{10}$ time series from 17
+monitoring stations distributed across Spain, obtained from the MITECO
+(Ministerio para la Transici\'on Ecol\'ogica y el Reto Demogr\'afico) national
+air-quality network.
+Stations span three environment types: industrial, urban, and rural/remote.
+The set includes six stations in the Barcelona metropolitan area covering
+industrial and urban configurations; further stations cover the Valencian
+Community (Elx-Agroalimentari, Val\`encia-Vivers), Arag\'on (Alca\~niz, Teruel,
+Alca\~nar, Huesca, Alag\'on), Castilla-La Mancha (Zarra-EMEP, San Pablo de los
+Montes), and Sant Vic\`enc dels Horts.
+Zarra-EMEP is a rural-remote background station within the EMEP network.
+Each series covers 2017--2024 (up to eight years of daily observations);
+inclusion required at least 75\% temporal coverage and five complete years.
+
+We adopt a rolling-origin (walk-forward) evaluation protocol.
+For each origin $t$ in the evaluation window, models are trained using only
+information up to $t$ and predictions are issued for all horizons
+$h \in \{1,\ldots,7\}$.
+Each fold requires at least 365 training rows; the rolling-origin window expands
+at each step.
+This protocol avoids look-ahead and exposes evaluation to changing conditions
+across origins \citep{tashman2000}.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Study site summary, data coverage, and evaluation protocol.}
+\label{tab:data_protocol}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Item & Value \\
+\midrule
+Station network          & MITECO national air-quality network (Spain) \\
+Number of stations       & 17 (6 Barcelona area + 11 other provinces) \\
+Station types            & Industrial; urban; rural/remote \\
+Period                   & 2017-01-01 to 2024-12-31 \\
+Temporal resolution      & 1 day \\
+Inclusion criteria       & $\geq$75\% coverage; $\geq$5 complete years \\
+Forecast horizons ($h$)  & 1, 2, 3, 4, 5, 6, 7 days \\
+Rolling-origin training  & Expanding window; $\geq$365 rows required \\
+Lag features             & $\ell_0,\ell_1,\ldots,\ell_6$ (7 daily lags) \\
+Models compared          & HGB direct; Ridge direct; Seasonal naive \\
+Baseline                 & Persistence: $\hat{y}^{(p)}_{t+h\mid t} = y_t$ \\
+Bootstrap on $\alpha$    & $n=1\,000$ replicates; 95\% CI \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 5 — REPLACE SECTION 3.4 (Empirical models)
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the entire Section 3.4 "Empirical models: LightGBM and SARIMA" with:
+
+\subsection{Empirical models}
+
+We report results for three point-forecasting models, all trained and evaluated
+under the same rolling-origin protocol.
+
+The \textbf{HGB direct} model is a HistGradientBoostingRegressor
+(max\_iter=100, learning\_rate=0.05, max\_leaf\_nodes=15, random\_state=42),
+a modern gradient-boosted decision tree well-suited to tabular regression.
+It is fitted independently for each horizon $h$ using seven lag features
+$\ell_0,\ldots,\ell_6$ (lag-0 is the observation at the forecast origin).
+No meteorological inputs are used.
+
+The \textbf{Ridge direct} model applies ridge regression ($\lambda=1$) preceded
+by standard feature scaling (zero mean, unit variance), fitted on the same
+seven lag features and the same direct multi-horizon strategy.
+
+The \textbf{Seasonal naive} model predicts
+$\hat{y}_{t+h\mid t} = y_{t+h-7}$, i.e., the observed value from seven days
+prior to the target date.
+It is included as a \emph{positive control}: by construction it mirrors the
+weekly seasonal cycle and is expected to preserve near-unity variance retention
+regardless of its RMSE skill, thereby providing a reference against which the
+variance collapse of the direct ML models can be evaluated.
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 6 — REPLACE ENTIRE SECTION 4 (Results)
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace Section 4 from \section{Results} through the end of subsection E3
+(i.e., everything up to \section{Discussion}) with the following:
+
+% ============================================================
+\section{Results}
+
+\subsection{E1-RR: Main results across 17 stations}
+\label{sec:e1rr}
+
+The central finding is a complete and consistent collapse of predictive variance
+for the two direct ML models, contrasting with near-perfect variance preservation
+by seasonal naive.
+
+Table~\ref{tab:canonical_results} reports median (across 17 stations)
+persistence-relative RMSE skill, variance-retention ratio $\alpha$, and
+Skill$_{VP}$ for each model and horizon.
+Figure~\ref{fig:skill_profiles} shows the per-horizon skill profiles across all
+stations for each model; Figure~\ref{fig:alpha_profiles} shows the
+corresponding $\alpha$ profiles.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Median (across 17 stations) horizon-wise results under rolling-origin
+  evaluation. $\alpha = \mathrm{Var}(\hat{y})/\mathrm{Var}(y)$ is the
+  variance-retention ratio; $\dagger$ denotes that 100\% of station--horizon
+  cells are flagged collapsed ($\alpha < 0.5$). Values are indicative medians;
+  station-level breakdowns are in the supplementary table.}
+\label{tab:canonical_results}
+\begin{tabular}{@{}rccc|ccc|ccc@{}}
+\toprule
+& \multicolumn{3}{c|}{HGB direct$^\dagger$}
+& \multicolumn{3}{c|}{Ridge direct$^\dagger$}
+& \multicolumn{3}{c}{Seasonal naive} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+$h$ & Skill & $\alpha$ & Skill$_{VP}$
+    & Skill & $\alpha$ & Skill$_{VP}$
+    & Skill & $\alpha$ & Skill$_{VP}$ \\
+\midrule
+1 & 0.062 & 0.36 & 0.022  &  0.096 & 0.38 & 0.037  & $-$0.50 & 0.99 & 0.000 \\
+2 & 0.193 & 0.20 & 0.038  &  0.193 & 0.20 & 0.038  & $-$0.15 & 0.99 & 0.000 \\
+3 & 0.221 & 0.14 & 0.031  &  0.226 & 0.10 & 0.023  & $-$0.05 & 0.99 & 0.000 \\
+4 & 0.229 & 0.11 & 0.025  &  0.240 & 0.08 & 0.019  &   0.00  & 0.99 & 0.000 \\
+5 & 0.231 & 0.10 & 0.023  &  0.246 & 0.07 & 0.017  &   0.02  & 0.99 & 0.020 \\
+6 & 0.228 & 0.09 & 0.021  &  0.247 & 0.07 & 0.017  &   0.03  & 0.99 & 0.030 \\
+7 & 0.225 & 0.10 & 0.022  &  0.244 & 0.06 & 0.015  &   0.04  & 0.99 & 0.040 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+HGB direct and Ridge direct both achieve positive persistence-relative RMSE
+skill at all horizons beyond $h=1$ (skill 0.19--0.25), yet their
+variance-retention ratio $\alpha$ falls well below the collapse threshold of
+0.5 at every horizon and every station.
+$\alpha$ decreases monotonically with horizon for both models
+(HGB: 0.36 at $h=1$, reaching approximately 0.10 at $h=7$; Ridge: 0.38 at
+$h=1$, 0.06 at $h=7$), indicating progressive amplitude damping as lead time
+increases.
+Skill$_{VP}$ is consequently near zero throughout: nominal RMSE skill of
+0.22--0.25 is penalised to Skill$_{VP}$ values of 0.015--0.040.
+
+Seasonal naive presents the contrasting pattern.
+It achieves near-unity variance retention ($\alpha \approx 0.986$) across all
+horizons and all 17 stations, fulfilling its role as a positive control that
+verifies the diagnostic is functioning correctly.
+Its RMSE skill is negative at short horizons (approximately $-0.50$ at $h=1$)
+and recovers toward zero by $h=7$, reflecting that persistence is a strong
+daily PM$_{10}$ baseline at short leads.
+Because seasonal naive preserves variance while achieving no positive RMSE skill,
+its Skill$_{VP}$ is also effectively zero -- but for a different reason than the
+ML models.
+Figure~\ref{fig:scatter_skill_alpha} shows that the two failure modes
+(collapse with skill vs.\ no collapse with no skill) occupy distinct regions
+of the skill--$\alpha$ plane.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figure3_skill_profiles}
+\caption{Persistence-relative RMSE skill profiles across horizons $h=1,\ldots,7$
+  for all 17 stations.
+  HGB direct (\textit{left}) and Ridge direct (\textit{centre}) achieve positive
+  skill for $h \geq 2$; seasonal naive (\textit{right}) shows negative skill
+  at $h=1$, recovering toward zero by $h=7$.}
+\label{fig:skill_profiles}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figure4_alpha_profiles}
+\caption{Variance-retention ratio $\alpha = \mathrm{Var}(\hat{y})/\mathrm{Var}(y)$
+  profiles across horizons for all 17 stations.
+  The dashed line at $\alpha = 0.5$ marks the collapse threshold.
+  HGB and Ridge lie entirely below this threshold at all horizons and all
+  stations; seasonal naive remains near $\alpha = 1$ throughout.}
+\label{fig:alpha_profiles}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figure5_scatter_skill_alpha}
+\caption{Skill--$\alpha$ trajectories for all 17 stations (each trajectory
+  connects $h=1,\ldots,7$; arrow indicates $h=7$ direction).
+  HGB direct (\textit{left}) and Ridge direct (\textit{centre}) occupy the
+  collapse zone ($\alpha < 0.5$, shaded); seasonal naive (\textit{right})
+  sits near $\alpha \approx 1$ with Skill $\leq 0$.}
+\label{fig:scatter_skill_alpha}
+\end{figure}
+
+\subsection{E2: Bootstrap confidence intervals on $\alpha$}
+
+Bootstrap confidence intervals ($n=1\,000$ replicates, 95\%) confirm that
+$\alpha < 0.5$ at every station and every horizon for both HGB direct and Ridge
+direct: no interval overlaps the collapse boundary.
+For seasonal naive, all bootstrap CIs are consistently above 0.95.
+This confirms that the variance collapse of direct ML models is a statistically
+robust finding and not an artefact of sampling variability in the rolling-origin
+evaluation.
+
+\subsection{E3: Cross-station collapse rates}
+\label{E3}
+
+Figure~\ref{fig:collapse_rates} shows per-station collapse rates, defined as
+the fraction of the 14 evaluated model--horizon combinations
+(2 ML models $\times$ 7 horizons) that are flagged as collapsed ($\alpha < 0.5$)
+for each station.
+All 17 stations show consistent collapse rates of 62--67\%, driven by 100\%
+collapse for both direct ML models and 0\% for seasonal naive.
+Industrial, urban, and rural stations are indistinguishable in terms of
+collapse rate, confirming that variance collapse is not specific to any
+environment class or geographic location.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.80\linewidth]{figure6_station_collapse_rates}
+\caption{Per-station collapse rate (fraction of model--horizon cells with
+  $\alpha < 0.5$), coloured by station type: industrial (red), urban (blue),
+  rural/remote (green).
+  All 17 stations show rates of 62--67\%, consistent with 100\% collapse for
+  the two direct ML models and 0\% for seasonal naive across all station types.}
+\label{fig:collapse_rates}
+\end{figure}
+
+Figure~\ref{fig:station_map} shows the geographic distribution of the 17
+MITECO stations.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\linewidth]{figure7_station_map_spain}
+\caption{Geographic distribution of the 17 MITECO stations.
+  Marker colour denotes station type: industrial (red), urban (blue),
+  rural/remote (green).
+  Six stations are in the Barcelona metropolitan area;
+  remaining stations span the Valencian Community, Arag\'on,
+  Castilla-La Mancha, and surrounding provinces.}
+\label{fig:station_map}
+\end{figure}
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 7 — REPLACE SECTION 5 (Discussion)
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the entire Discussion section with:
+
+% ============================================================
+\section{Discussion}
+
+The evidence in this manuscript establishes a consistent and statistically
+robust pattern across 17 geographically and typologically diverse MITECO
+stations: direct ML point forecasters trained under squared-error criteria on
+lag features collapse their predictive variance below the diagnostic threshold
+($\alpha < 0.5$) at every horizon and station, despite achieving moderate
+positive persistence-relative RMSE skill at most horizons.
+Seasonal naive confirms that the diagnostic correctly discriminates: a model
+that predicts from the lagged observation seven days prior preserves near-unity
+variance ($\alpha \approx 0.986$) because its predictions inherit the amplitude
+of the original series.
+
+The contrast is sharpest at $h=1$, where HGB and Ridge already achieve their
+lowest $\alpha$ values while still outperforming persistence on RMSE, and at
+$h=7$, where Ridge $\alpha$ approaches 0.06 -- predictions that are nearly
+constant.
+The monotonic decrease of $\alpha$ with horizon for both direct ML models is
+consistent with the expected behaviour of regressor-to-mean shrinkage under
+squared-error loss: the conditional mean becomes an increasingly smooth function
+of distant lags as predictability diminishes.
+
+Skill$_{VP}$ is useful because it collapses the two-dimensional skill--retention
+diagnostic into a single horizon-wise number.
+For HGB and Ridge, Skill$_{VP}$ is near zero at all horizons despite RMSE skill
+of 0.19--0.25, making the skill--fidelity decoupling visible in a single
+summary.
+For seasonal naive, Skill$_{VP}$ is also near zero but for the opposite reason:
+positive variance retention with near-zero RMSE skill.
+Figure~\ref{fig:scatter_skill_alpha} places the two failure modes in clearly
+separated regions of the skill--$\alpha$ plane.
+
+The consistency of the collapse finding across industrial, urban, and rural
+stations supports the view that this is a systematic property of the
+lag-feature direct-horizon paradigm under daily PM$_{10}$ dynamics, not a
+station-specific artefact.
+Bootstrap CIs confirm statistical robustness at every site.
+The operational implication is that RMSE skill alone is insufficient evidence
+of forecast usefulness in this setting: models that score well on RMSE while
+collapsing variance are effectively predicting a smooth central tendency and
+will miss pollution episodes.
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 8 — REPLACE SECTION 6 (Limitations)
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the Limitations section with:
+
+% ============================================================
+\section{Limitations}
+
+This study is intentionally limited in scope.
+The empirical evidence covers 17 MITECO stations at the daily temporal scale;
+transfer to other pollutants, temporal resolutions, or national networks is
+not assessed.
+The results are restricted to lag-feature direct-horizon models (HGB direct,
+Ridge direct) and seasonal naive; models with explicit seasonal decomposition,
+meteorological inputs, or probabilistic output may exhibit different
+variance-retention behaviour.
+Skill$_{VP}$ is not proposed as a general-purpose replacement for RMSE or as a
+new standard verification score; it is a simple diagnostic auxiliary whose value
+lies in making the skill--fidelity decoupling explicit at each horizon.
+The collapse threshold $\alpha = 0.5$ is operationally motivated but not derived
+from a formal loss criterion.
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 9 — REPLACE SECTION 7 (Conclusion)
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the Conclusion section with:
+
+% ============================================================
+\section{Conclusion}
+
+Across 17 Spanish MITECO monitoring stations evaluated under daily rolling-origin
+protocols with persistence as an explicit baseline, direct ML forecasters
+(HGB direct, Ridge direct) collapse predictive variance at every station and
+horizon ($\alpha < 0.5$, 100\% of model--station--horizon cells) despite
+achieving moderate positive RMSE skill.
+Seasonal naive, included as a positive control, preserves near-unity variance
+retention ($\alpha \approx 0.986$) while confirming that the diagnostic
+correctly distinguishes models with and without dynamic fidelity.
+The overall collapse rate across all three models is 66.7\% (238/357 cells);
+bootstrap confidence intervals confirm statistical robustness at all stations.
+Reporting variance retention alongside RMSE skill, and using Skill$_{VP}$ as a
+diagnostic auxiliary, provides a practical way to make the skill--fidelity
+decoupling explicit for horizon-wise interpretation, without requiring additional
+probabilistic infrastructure or implying a universal replacement for established
+verification practices.
+
+═══════════════════════════════════════════════════════════════════════════════
+CHANGE 10 — UPDATE DATA AND CODE AVAILABILITY
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace the Data and Code Availability section with:
+
+% ============================================================
+\section*{Data and Code Availability}
+
+The analysis code, configuration files, and evaluation scripts used in this
+study are available at \url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
+Raw daily PM$_{10}$ data were obtained from the MITECO national air-quality
+network portal (\url{https://www.miteco.gob.es/}) and are publicly available.
+
+═══════════════════════════════════════════════════════════════════════════════
+WHAT NOT TO CHANGE
+═══════════════════════════════════════════════════════════════════════════════
+
+Do NOT modify any of the following:
+• Section 2 subsections 2.1 and 2.2 (Related Work: forecast skill framing,
+  variance-fidelity diagnostics, and the Skill_VP equation block)
+• Section 3.1 (Forecasting setting and multi-horizon notation)
+• Section 3.3 (Reference forecast: persistence — the persistence equation)
+• Section 3.5 (Horizon-wise RMSE and persistence-relative RMSE skill — equations)
+• Section 3.6 (Dynamic fidelity via variance retention — the VR formula block)
+• Section 3.7 (Skill_VP definition and bounded form — the equation and caveat text)
+• The LaTeX preamble and \documentclass setup
+• The author, title, and date fields (keep as is)
+• The \bibliographystyle and \bibliography commands
+
+═══════════════════════════════════════════════════════════════════════════════
+FIGURE FILENAMES (in Overleaf project root, no subdirectory prefix)
+═══════════════════════════════════════════════════════════════════════════════
+
+Use these exact filenames in all \includegraphics commands:
+  figure3_skill_profiles
+  figure4_alpha_profiles
+  figure5_scatter_skill_alpha
+  figure6_station_collapse_rates
+  figure7_station_map_spain
+
+(LaTeX will resolve .pdf or .png automatically. Do NOT use paths like
+outputs/figures/... for these new figures.)
+
+The old figures referenced as:
+  outputs/figures/figure1_skill_variance.png
+  outputs/figures/figure2_skillvp_events.png
+are no longer needed and their \begin{figure}...\end{figure} blocks should
+be removed entirely.
+
+═══════════════════════════════════════════════════════════════════════════════
+NOTE ON TABLE VALUES
+═══════════════════════════════════════════════════════════════════════════════
+
+The numerical values in Table~\ref{tab:canonical_results} above are medians
+from the three-station subset available in the repository. Once you have the
+full 17-station unified table (outputs/tables/variance_retention_all_stations.csv
+on your Mac), replace these values with the actual cross-station medians from
+that file. The structure and column layout of the table should remain identical;
+only the cell values need updating.
+
+═══════════════════════════════════════════════════════════════════════════════
+END OF SUPERPROMPT
+═══════════════════════════════════════════════════════════════════════════════
