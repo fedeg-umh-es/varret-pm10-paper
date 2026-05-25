@@ -84,32 +84,61 @@ def build_skill_variance_retention_figure() -> None:
     metric_labels = ["Skill", "Alpha", "Skill_VP"]
     metric_cols = ["skill", "alpha", "skill_vp"]
     models = grouped["model"].tolist()
+    
+    # Format model names for nicer display
+    model_display = [
+        m.replace("_direct", " direct").replace("sarima", "SARIMA").replace("seasonal_naive", "Seasonal naive").title()
+        for m in models
+    ]
 
     x = np.arange(len(models))
     width = 0.24
 
-    fig, ax = plt.subplots(figsize=(7.2, 4.0))
+    fig, ax = plt.subplots(figsize=(8.5, 4.8))
+    
+    # Add horizontal baseline at 0.0
+    ax.axhline(0, color="#333333", linewidth=1.0, linestyle="-", alpha=0.7, zorder=2)
+    
     offsets = [-width, 0.0, width]
-    for offset, col, label in zip(offsets, metric_cols, metric_labels):
+    colors = ["#1f77b4", "#2ca02c", "#d62728"]  # Distinct professional colors
+    
+    for offset, col, label, color in zip(offsets, metric_cols, metric_labels, colors):
         values = grouped[col].to_numpy(dtype=float)
-        bars = ax.bar(x + offset, values, width, label=label)
+        bars = ax.bar(x + offset, values, width, label=label, color=color, zorder=3)
         for bar, value in zip(bars, values):
+            # Dynamic text label placement based on sign
+            if value >= 0:
+                y_pos = value + 0.015
+                va_dir = "bottom"
+            else:
+                y_pos = value - 0.015
+                va_dir = "top"
+                
             ax.text(
                 bar.get_x() + bar.get_width() / 2.0,
-                bar.get_height() + 0.006,
+                y_pos,
                 f"{value:.3f}",
                 ha="center",
-                va="bottom",
+                va=va_dir,
                 fontsize=8,
+                fontweight="semibold",
+                zorder=4
             )
 
     ax.set_xticks(x)
-    ax.set_xticklabels(models)
-    ax.set_ylabel("Mean value across horizons")
-    ax.set_ylim(0, max(0.35, float(grouped[metric_cols].max().max()) + 0.06))
-    ax.legend(frameon=False)
+    ax.set_xticklabels(model_display, fontsize=9, fontweight="semibold")
+    ax.set_ylabel("Mean value across horizons", fontsize=10, fontweight="semibold")
+    
+    # Calculate limits with margin
+    all_vals = grouped[metric_cols].to_numpy(dtype=float)
+    ymin = min(-1.1, all_vals.min() - 0.12)
+    ymax = max(0.35, all_vals.max() + 0.12)
+    ax.set_ylim(ymin, ymax)
+    
+    ax.legend(loc="lower left", frameon=True, facecolor="white", edgecolor="#D5D8DC", framealpha=0.95, fontsize=9.5)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
+    ax.grid(axis="y", linestyle=":", alpha=0.4, zorder=1)
     fig.tight_layout()
     _save_current_figure("figure2_skill_variance_retention")
 
