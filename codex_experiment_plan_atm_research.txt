@@ -1,0 +1,556 @@
+═══════════════════════════════════════════════════════════════════════════════
+CODEX EXPERIMENT PLAN — varret-pm10-paper
+Target journal: Atmospheric Research (Elsevier Q2)
+════════════════════════════════════════════════════════════════════════════════
+
+REPO: https://github.com/fedeg-umh-es/varret-pm10-paper
+LOCAL WORKING DIR: /home/fede/Documentos/repos/varret-pm10-paper
+BRANCH: claude/inspiring-knuth-cyvoL   (git pull before starting)
+
+CURRENT STATE
+─────────────
+The paper already has:
+• scripts/01_generate_e1_rr_lags_only_predictions.py  — rolling-origin pipeline
+  Produces predictions.csv with columns:
+  dataset, model, fold, origin_date, horizon, date, y_true, y_pred
+  Models currently included: persistence, hgb_direct, ridge_direct, seasonal_naive
+
+• src/models/sarima_model.py         — SARIMA already implemented (statsmodels)
+• src/diagnostics/variance.py        — alpha, skill_vp, bootstrap CIs
+• src/evaluation/compute_event_metrics.py — recall/precision logic (old pipeline)
+• outputs/tables/variance_retention_all_stations.csv — 357 rows, 17 stations×3 models×7h
+• data/miteco/                        — per-station CSVs with date,pm10 columns
+
+EXPERIMENT GAPS TO FILL
+───────────────────────
+GAP 1  No model achieves skill>0 AND α≥0.8 ("desirable zone" is empty)
+GAP 2  No operational consequence demonstrated (no exceedance/episode analysis)
+GAP 3  No statistical significance test on Skill (DM test missing)
+GAP 4  Collapse threshold α=0.5 unjustified (no sensitivity analysis)
+GAP 5  Missing key reference: Gneiting (2011) — add to references.bib
+GAP 6  Only RMSE skill reported; MAE skill absent
+BONUS  Murphy decomposition, concentration-scale analysis, cross-station regime
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 1 — ADD STL+RIDGE MODEL
+════════════════════════════════════════════════════════════════════════════════
+
+Create src/models/stl_ridge.py implementing a Seasonal-Trend decomposition +
+Ridge direct model. This model is expected to populate the desirable zone
+(skill > 0, α ≥ 0.8) because it explicitly separates the seasonal component
+from the residual before fitting Ridge, preserving seasonal amplitude.
+
+Algorithm for one rolling-origin fold:
+  1. Decompose training series y_1,...,y_T with STL(period=7, robust=True)
+     using statsmodels.tsa.seasonal.STL. Extract seasonal component S.
+  2. Compute residual R = y_train - S.
+  3. Build supervised dataset from R lags:
+     features = [R[t], R[t-1], ..., R[t-6]] (7 lags)
+     target   = R[t+h]   (residual at horizon h)
+     Apply StandardScaler to features.
+  4. Fit Ridge(alpha=1.0) on the residual supervised dataset.
+  5. Prediction for horizon h:
+     residual_pred = Ridge.predict(residual_lags_at_origin)
+     seasonal_pred = y[origin - 7 + h]   (= seasonal naive on raw series)
+     y_pred_h      = residual_pred + seasonal_pred
+
+Add STLRidgeForecaster class with:
+  __init__(self, season_length=7, ridge_alpha=1.0, n_lags=7)
+  fit(train_df)          — takes the full training DataFrame with date,pm10
+  predict_horizon(h)     — returns float y_pred for horizon h
+
+Then modify scripts/01_generate_e1_rr_lags_only_predictions.py to include
+stl_ridge as a fourth model inside _fit_predict_models(). The model name in
+predictions.csv should be "stl_ridge_direct".
+
+Note: STL requires at least 2×period = 14 observations; it is always satisfied
+since MIN_TRAIN_ROWS = 365.
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 2 — ADD SARIMA MODEL (sparse origins)
+════════════════════════════════════════════════════════════════════════════════
+
+Add SARIMA(1,0,1)(1,0,1)_7 as a fifth model. Use the existing
+src/models/sarima_model.py (SarimaForecaster class already implemented).
+
+Because SARIMA fitting is expensive (~1-2 s per origin), add a separate
+command-line flag --sarima-origin-step (default 14) to run SARIMA only on
+every 14th origin while HGB/Ridge/STL+Ridge/seasonal_naive run on every origin.
+
+Inside _generate_predictions_for_horizon, when fitting SARIMA:
+  - Build the full training time series (not just the supervised lag rows)
+    from the daily DataFrame up to origin_date
+  - Call SarimaForecaster.fit(y_train) then SarimaForecaster.forecast(steps=h)
+  - Record y_pred = forecast[h-1]
+  - Model name: "sarima"
+
+Create a separate convenience runner:
+  scripts/02_generate_sarima_predictions.py --input <station_csv>
+                                             --dataset <name>
+                                             --origin-step 14
+                                             --n-jobs 4
+
+Expected SARIMA α: between 0.3 and 0.7 depending on station. If any SARIMA
+cell achieves α ≥ 0.8 with positive skill, note it explicitly in a
+outputs/tables/sarima_desirable_cells.csv file.
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 3 — ADD MAE SKILL
+════════════════════════════════════════════════════════════════════════════════
+
+In scripts/01_generate_e1_rr_lags_only_predictions.py, extend
+_build_skill_summary() to also compute MAE-based skill alongside RMSE-based
+skill. Add column "mae_skill" to the skill_summary output.
+
+MAE skill:
+  mae_model    = mean(|y_true - y_pred_model|)
+  mae_baseline = mean(|y_true - y_pred_persistence|)
+  mae_skill    = 1 - mae_model / mae_baseline
+
+Rationale: MAE is less penalised by variance shrinkage than RMSE. If MAE_skill
+≈ RMSE_skill for HGB/Ridge, it confirms the skill is not purely from
+variance-flattening. If MAE_skill >> RMSE_skill, it shows the model gains
+RMSE advantage primarily by reducing forecast variability.
+
+Output: mae_skill column added to outputs/metrics/skill_summary.csv
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 4 — EXCEEDANCE ANALYSIS (fills GAP 2, the most critical gap)
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/03_exceedance_analysis.py
+
+For each station-level predictions.csv:
+  Inputs: predictions.csv (already has fold, origin_date, horizon, y_true, y_pred)
+
+  Thresholds:
+    T1: fold-recalibrated P75 — for each fold, P75 computed on training y_true
+        values where origin_date is in that fold's training window
+    T2: fold-recalibrated P90 — same methodology
+    T3: absolute 50 μg/m³    — EU PM10 daily limit value
+
+  For each (dataset, model, horizon, threshold):
+    Group predictions by fold.
+    For T1/T2: compute fold-specific threshold from training y_true in that fold.
+    For T3: use fixed 50.0 μg/m³.
+    Compute:
+      recall     = TP / (TP + FN)
+      precision  = TP / (TP + FP)
+      f1         = harmonic mean of recall and precision
+      flag_rate  = mean(y_pred > threshold)
+      base_rate  = mean(y_true > threshold)
+    Average across folds (macro-average over fold-level metrics).
+
+  Output: outputs/metrics/exceedance_<dataset>.csv
+  Columns: dataset, model, horizon, threshold_type, threshold_value,
+           recall, precision, f1, flag_rate, base_rate
+
+Then create scripts/04_build_unified_exceedance_table.py that concatenates
+all per-station exceedance CSVs into:
+  outputs/tables/exceedance_all_stations.csv
+with added columns: station_name, station_type, province
+
+Expected finding: HGB/Ridge recall at P75 will be substantially below
+persistence (≈ flag_rate of persistence ≈ 0.25 by definition).
+STL+Ridge should show higher recall than HGB/Ridge.
+Seasonal naive recall at P75 should be near 1.0 since it preserves variance.
+
+Create Figure: scripts/plot_exceedance_figure.py
+  Figure layout: 2 rows × 3 columns
+    Row 1: Recall at P75 by horizon, one panel per model (HGB, Ridge, STL+Ridge)
+    Row 2: Recall at P90 by horizon, one panel per model
+    Lines per panel = individual stations, colored by station_type
+    Station mean shown as thick line
+  Save to: outputs/figures/figure_exceedance_recall.pdf and .png
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 5 — DIEBOLD-MARIANO SIGNIFICANCE TEST (fills GAP 3)
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/05_dm_significance.py
+
+For each (dataset, model, horizon) where model != persistence:
+  Merge predictions for (model, horizon) with predictions for (persistence, horizon)
+  on (fold, date) to get paired loss differences.
+
+  d_t = (y_true - y_pred_persistence)^2 - (y_true - y_pred_model)^2
+
+  DM statistic with Harvey-Leybourne-Newbold (1997) small-sample correction:
+    n = number of paired observations
+    d_bar = mean(d_t)
+    gamma_0 = autocovariance of d_t at lag 0
+    # For multi-step horizons h > 1, include MA(h-1) autocovariance correction:
+    var_d = (1/n) * sum_{k=-(h-1)}^{h-1} gamma_k
+    DM_stat = d_bar / sqrt(var_d)
+    # HLN correction factor:
+    hlncorrection = sqrt((n + 1 - 2*h + h*(h-1)/n) / n)
+    DM_hlncorrected = DM_stat * hlncorrection
+    p_value = 2 * (1 - t.cdf(abs(DM_hlncorrected), df=n-1))
+
+  Apply Benjamini-Hochberg (1995) FDR correction across all tests within
+  each dataset (alpha_bh = 0.05).
+
+Output columns: dataset, model, horizon, n_pairs, dm_stat, dm_pval_raw,
+                dm_pval_bh, dm_significant (bool, BH-adjusted p < 0.05)
+
+Save to: outputs/tables/dm_significance_all_stations.csv
+
+Expected finding: HGB/Ridge will show statistically significant positive skill
+(dm_significant = True) for h ≥ 2 at most stations, confirming that the
+positive RMSE skill is real — not just sampling noise — even as α collapses.
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 6 — THRESHOLD SENSITIVITY ANALYSIS (fills GAP 4)
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/06_threshold_sensitivity.py
+
+Input: outputs/tables/variance_retention_all_stations.csv (already has alpha column)
+
+For threshold values T in [0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80]:
+  For each model:
+    collapse_rate = fraction of (station × horizon) cells with alpha < T
+
+Output: outputs/tables/threshold_sensitivity.csv
+Columns: threshold, model, n_cells, n_collapsed, collapse_rate
+
+Create Figure: scripts/plot_threshold_sensitivity.py
+  X-axis: threshold value (0.2 to 0.8)
+  Y-axis: collapse rate (0 to 1)
+  One line per model, colored consistently with other figures
+  Vertical dashed line at threshold=0.5 (the paper's chosen threshold)
+  Save to: outputs/figures/figure_threshold_sensitivity.pdf and .png
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 7 — MURPHY DECOMPOSITION (new experiment, levels up the paper)
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/07_murphy_decomposition.py
+
+Murphy (1988) decomposes MSE into three additive components:
+  MSE = (ȳ_pred - ȳ_true)²  +  (σ_pred - ρ·σ_true)²  +  (1 - ρ²)·σ_true²
+      = Bias²               +  Conditional Bias²      +  Irreducible error²
+
+where ρ = Pearson correlation(y_pred, y_true), σ = std.
+
+For each (dataset, model, horizon):
+  Compute:
+    bias_sq         = (mean_pred - mean_true)^2
+    cond_bias_sq    = (std_pred - rho*std_true)^2
+    irreducible_sq  = (1 - rho^2) * var_true
+    mse_total       = bias_sq + cond_bias_sq + irreducible_sq
+
+  Verify: abs(mse_total - mse_from_residuals) < 1e-6 (sanity check)
+
+  Also compute: rho, std_pred, std_true, alpha = (std_pred/std_true)^2
+
+Output: outputs/tables/murphy_decomposition_all_stations.csv
+Columns: dataset, model, horizon, mse, bias_sq, cond_bias_sq, irreducible_sq,
+         rho, std_pred_ug, std_true_ug, alpha
+
+Key insight: For HGB/Ridge, cond_bias_sq will be large (predictions too flat
+relative to truth). For STL+Ridge/SARIMA, cond_bias_sq should be smaller.
+
+Create Figure: scripts/plot_murphy_decomposition.py
+  Stacked bar chart: MSE decomposed into 3 components
+  One panel per model, X-axis = horizon h, colors = {bias, cond_bias, irreducible}
+  Save to: outputs/figures/figure_murphy_decomposition.pdf and .png
+
+═══════════════════════════════════════════════════════════════════════════════
+TASK 8 — CONCENTRATION-SCALE ANALYSIS (fills GAP 6)
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/08_concentration_scale.py
+
+For each (dataset, model, horizon):
+  Compute std_pred in μg/m³ and std_true in μg/m³ (raw units, NOT normalized)
+  Note: predictions.csv stores raw PM10 values (check units, they should already
+  be μg/m³ from MITECO data)
+
+  If predictions are normalized: multiply std back by the training std from that fold.
+  Otherwise: compute directly from y_true and y_pred in predictions.csv
+
+Output per station:
+  obs_mean_ug   = mean of y_true across all origins and horizons
+  obs_std_ug    = std of daily y_true values
+  pred_std_h1   = std of y_pred at h=1
+  pred_std_h7   = std of y_pred at h=7
+  alpha_h1      = (pred_std_h1 / obs_std_ug)^2   (should match variance table)
+  predicted_range_h1_ug = 2 × pred_std_h1  (≈ typical day-to-day swing predicted)
+  observed_range_ug     = 2 × obs_std_ug
+
+Output: outputs/tables/concentration_scale_summary.csv
+Columns: station_name, station_type, obs_mean_ug, obs_std_ug,
+         pred_std_hgb_h1, pred_std_hgb_h7, pred_std_stl_h1, pred_std_stl_h7
+
+Interpretation sentence template for the paper:
+  "At a station with typical day-to-day variability of X μg/m³ (±1 std),
+   HGB direct at h=7 produces predictions that vary by only Y μg/m³ (α=0.11),
+   implying that most episode-scale fluctuations are not captured."
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 9 — UPDATE UNIFIED TABLE AND RUN ALL STATIONS
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/09_build_comprehensive_unified_table.py
+
+Merge all per-station outputs into a single master table:
+  - variance_retention_all_stations.csv  (alpha, skill, skill_vp, bootstrap CIs)
+  - dm_significance_all_stations.csv     (dm_pval_bh, dm_significant)
+  - exceedance_all_stations.csv          (recall, precision, f1 at P75/P90/50μg)
+  - murphy_decomposition_all_stations.csv (bias_sq, cond_bias_sq, rho)
+  - concentration_scale_summary.csv      (obs_std_ug, pred_std_ug by model/horizon)
+
+Merge on keys: station_name, model, horizon
+Output: outputs/tables/master_diagnostic_table.csv
+
+Also update variance_retention_all_stations.csv to include the new columns
+(mae_skill, dm_pval_bh, dm_significant) for backward compatibility.
+
+BATCH RUNNER for all 17 stations + new models:
+Create scripts/run_all_stations_v2.sh:
+
+  #!/usr/bin/env bash
+  set -e
+  DATA_DIR="data/miteco"
+
+  for csv_file in "$DATA_DIR"/*.csv; do
+    station=$(basename "$csv_file" .csv)
+    echo "=== $station ==="
+
+    # Step 1: HGB/Ridge/STL+Ridge/Seasonal naive (full origins)
+    python scripts/01_generate_e1_rr_lags_only_predictions.py \
+      --input "$csv_file" \
+      --dataset "e1_rr_${station}" \
+      --start-year 2020 --end-year 2024 \
+      --n-jobs 4 \
+      --predictions-output "outputs/metrics/predictions_${station}.csv" \
+      --skill-output "outputs/metrics/skill_${station}.csv"
+
+    # Step 2: SARIMA (sparse origins, every 14 days)
+    python scripts/02_generate_sarima_predictions.py \
+      --input "$csv_file" \
+      --dataset "e1_rr_${station}" \
+      --origin-step 14 \
+      --n-jobs 2 \
+      --predictions-output "outputs/metrics/predictions_sarima_${station}.csv" \
+      --skill-output "outputs/metrics/skill_sarima_${station}.csv"
+
+    # Step 3: Variance retention table
+    python scripts/07_build_variance_retention_table.py \
+      --predictions "outputs/metrics/predictions_${station}.csv" \
+      --skill "outputs/metrics/skill_${station}.csv" \
+      --output "outputs/tables/varret_${station}.csv" \
+      --station-name "$station"
+
+    # Step 4: Exceedance analysis
+    python scripts/03_exceedance_analysis.py \
+      --predictions "outputs/metrics/predictions_${station}.csv" \
+      --output "outputs/metrics/exceedance_${station}.csv" \
+      --station "$station"
+
+    # Step 5: DM significance
+    python scripts/05_dm_significance.py \
+      --predictions "outputs/metrics/predictions_${station}.csv" \
+      --output "outputs/metrics/dm_${station}.csv" \
+      --station "$station"
+
+    echo "  Done: $station"
+  done
+
+  # Step 6: Merge all
+  python scripts/09_build_comprehensive_unified_table.py
+
+  # Step 7: Post-processing analyses
+  python scripts/06_threshold_sensitivity.py
+  python scripts/07_murphy_decomposition.py
+  python scripts/08_concentration_scale.py
+
+  # Step 8: Generate all figures
+  python scripts/10_generate_all_figures.py
+
+  echo "=== PIPELINE COMPLETE ==="
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 10 — FIGURE UPDATES
+════════════════════════════════════════════════════════════════════════════════
+
+Create scripts/10_generate_all_figures.py that calls all figure generators.
+
+UPDATE figure3_skill_profiles.py: add stl_ridge_direct as fourth panel
+  (or make it a 2×2 grid: HGB, Ridge, STL+Ridge, Seasonal naive)
+
+UPDATE figure4_alpha_profiles.py: add stl_ridge_direct line with new color
+  Mark the "desirable zone" (α ≥ 0.8) as a green shaded region above 0.8
+
+UPDATE figure5_scatter_skill_alpha.py: add STL+Ridge and SARIMA trajectories
+  Expected: STL+Ridge and/or SARIMA should appear in or near the green zone
+  (positive skill, α ≥ 0.5 or better)
+
+NEW figure_exceedance_recall.py:
+  Already described in TASK 4 above
+  Save as: outputs/figures/figure_exceedance_recall.pdf/.png
+
+NEW figure_threshold_sensitivity.py:
+  Already described in TASK 6 above
+  Save as: outputs/figures/figure_threshold_sensitivity.pdf/.png
+
+NEW figure_murphy_decomposition.py:
+  Already described in TASK 7 above
+  Save as: outputs/figures/figure_murphy_decomposition.pdf/.png
+
+All figures:
+  - Use serif fonts, font size 9
+  - No top/right spines
+  - Colors: HGB=#d62728 (red), Ridge=#1f77b4 (blue),
+            STL+Ridge=#2ca02c (green), SARIMA=#9467bd (purple),
+            Seasonal naive=#ff7f0e (orange)
+  - Save both .pdf and .png at dpi=300
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 11 — REFERENCES UPDATE
+════════════════════════════════════════════════════════════════════════════════
+
+Add to references.bib (critical missing references):
+
+@article{gneiting2011,
+  author  = {Gneiting, Tilmann},
+  title   = {Making and evaluating point forecasts},
+  journal = {Journal of the American Statistical Association},
+  year    = {2011},
+  volume  = {106},
+  number  = {494},
+  pages   = {746--762},
+  doi     = {10.1198/jasa.2011.r10138}
+}
+
+@article{murphy1988,
+  author  = {Murphy, Allan H.},
+  title   = {Skill scores based on the mean square error and their relationships
+             to the correlation coefficient},
+  journal = {Monthly Weather Review},
+  year    = {1988},
+  volume  = {116},
+  number  = {12},
+  pages   = {2417--2424}
+}
+
+@article{harvey1997,
+  author  = {Harvey, David and Leybourne, Stephen and Newbold, Paul},
+  title   = {Testing the equality of prediction mean squared errors},
+  journal = {International Journal of Forecasting},
+  year    = {1997},
+  volume  = {13},
+  number  = {2},
+  pages   = {281--291}
+}
+
+@article{taylor2001,
+  author  = {Taylor, Karl E.},
+  title   = {Summarizing multiple aspects of model performance in a single diagram},
+  journal = {Journal of Geophysical Research: Atmospheres},
+  year    = {2001},
+  volume  = {106},
+  number  = {D7},
+  pages   = {7183--7192}
+}
+
+════════════════════════════════════════════════════════════════════════════════
+TASK 12 — PAPER UPDATES (paper_a.tex)
+════════════════════════════════════════════════════════════════════════════════
+
+Section 4 (Case Study): Add STL+Ridge and SARIMA(1,0,1)(1,0,1)_7 as models 3 and 4.
+  State their purpose: "STL+Ridge is included to test whether explicit seasonal
+  decomposition prevents variance collapse while maintaining positive RMSE skill.
+  SARIMA(1,0,1)(1,0,1)_7 is included as a classical statistical benchmark
+  evaluated on a subset of origins (every 14th day) due to computational cost."
+
+Section 7 (Results): Add new subsections:
+  7.4  STL+Ridge: can explicit seasonality prevent variance collapse?
+       (Reports α and skill for STL+Ridge; notes if desirable zone is reached)
+  7.5  Statistical significance of RMSE skill (DM test results)
+       "The observed positive RMSE skill for HGB direct and Ridge direct is
+        statistically significant (BH-adjusted DM test p < 0.05) for h ≥ 2
+        at [N] of 17 stations, confirming that the skill–fidelity decoupling
+        is not a sampling artefact."
+  7.6  Operational consequence: exceedance detection
+       "Despite positive RMSE skill, HGB direct and Ridge direct recall only
+        X% of P75 events at h=1 (vs. Y% for seasonal naive and Z% for STL+Ridge),
+        declining further to X'% at h=7."
+  7.7  Sensitivity to the collapse threshold (brief, references the figure)
+
+Section 8 (Discussion): Add paragraph connecting Murphy decomposition findings
+  to the main narrative. The conditional bias component for HGB/Ridge explains
+  mechanically why RMSE skill coexists with variance collapse.
+
+Section 10 (Limitations): Remove "This study does not directly evaluate
+  exceedance detection" (now it does). Replace with:
+  "Exceedance analysis uses fold-recalibrated percentile thresholds; results
+  may differ under other threshold definitions."
+
+Section 11 (Conclusion): Update with new models and exceedance findings.
+
+════════════════════════════════════════════════════════════════════════════════
+EXPECTED KEY FINDINGS (HYPOTHESES)
+════════════════════════════════════════════════════════════════════════════════
+
+After running Tasks 1-12, the paper should show:
+
+H1  STL+Ridge achieves α > 0.5 at h=1 (and possibly α ≥ 0.8), confirming
+    that variance collapse is NOT inevitable — it is a consequence of the
+    lags-only paradigm, not of the ML approach per se.
+    If H1 is TRUE: the paper argues "decompose before fitting to retain dynamics"
+    If H1 is FALSE: "even with explicit seasonality, daily residuals collapse"
+    — both are publishable findings, with the second being more negative.
+
+H2  HGB/Ridge recall at P75 drops substantially vs persistence (expected <0.5
+    at h=7 based on α≈0.10). STL+Ridge recall > HGB/Ridge recall.
+    This provides the operational consequence currently missing from the paper.
+
+H3  DM tests confirm HGB/Ridge skill is statistically significant for h ≥ 2,
+    demonstrating the paradox explicitly: significantly better RMSE than
+    persistence, yet operationally degraded episode detection.
+
+H4  Collapse rates remain >90% for HGB/Ridge under any threshold from 0.3
+    to 0.7, making the α=0.5 choice robust.
+
+H5  Murphy decomposition shows that HGB/Ridge fail primarily through
+    conditional bias (σ_pred << σ_true), not unconditional bias, linking
+    the finding to established forecast verification theory.
+
+════════════════════════════════════════════════════════════════════════════════
+DEPENDENCY ORDER
+════════════════════════════════════════════════════════════════════════════════
+
+Run in this order:
+
+1.  Create src/models/stl_ridge.py                         (Task 1)
+2.  Update scripts/01_generate_e1_rr_lags_only_predictions.py (Tasks 1, 3)
+3.  Create scripts/02_generate_sarima_predictions.py       (Task 2)
+4.  Create scripts/03_exceedance_analysis.py               (Task 4)
+5.  Create scripts/05_dm_significance.py                   (Task 5)
+6.  Create scripts/06_threshold_sensitivity.py             (Task 6)
+7.  Create scripts/07_murphy_decomposition.py              (Task 7)
+8.  Create scripts/08_concentration_scale.py               (Task 8)
+9.  Create scripts/09_build_comprehensive_unified_table.py (Task 9)
+10. Create scripts/run_all_stations_v2.sh                  (Task 9)
+11. Run: bash scripts/run_all_stations_v2.sh               (EXECUTE ALL)
+12. Create/update figure scripts                           (Task 10)
+13. Update references.bib                                  (Task 11)
+14. Update paper_a.tex                                     (Task 12)
+
+IMPORTANT:
+- All monetary operations on predictions.csv assume values are in μg/m³.
+  If MITECO data was loaded in any other unit, document it clearly.
+- For SARIMA: if fitting fails (convergence warnings), catch the exception,
+  skip that origin, log to outputs/logs/sarima_failures.log, and continue.
+- Use joblib Parallel(n_jobs=-1) wherever possible for station-level loops.
+- Commit after each task with a descriptive message.
+- If STL+Ridge α at h=1 is below 0.5 for all stations, add a note in the
+  results: "No evaluated model achieved the desirable zone (α ≥ 0.8, Skill > 0)
+  under lags-only features; even STL+Ridge, which explicitly models the seasonal
+  component, exhibits partial variance collapse at h ≥ 2."
+
+════════════════════════════════════════════════════════════════════════════════
+END OF PLAN
+════════════════════════════════════════════════════════════════════════════════
