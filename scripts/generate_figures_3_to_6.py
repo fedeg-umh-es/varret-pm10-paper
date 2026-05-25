@@ -214,7 +214,7 @@ def figure6_collapse_rates(df: pd.DataFrame) -> None:
         plt.Line2D([], [], color=color, linewidth=5, label=label.title())
         for label, color in CLASS_COLORS.items()
     ]
-    ax.legend(handles=handles, loc="lower right", frameon=True)
+    ax.legend(handles=handles, loc="upper left", bbox_to_anchor=(1.02, 1.0), frameon=True)
     fig.tight_layout()
     _save(fig, "figure6_station_collapse_rates")
 

@@ -109,16 +109,17 @@ def main():
             zorder=3
         )
 
-    # Add quadrant label text
-    # Coordinates in data space
+    # Add quadrant label text with rounded semi-transparent bounding boxes
+    bbox_props = dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.85, edgecolor="#D5D8DC", linewidth=0.8)
+    
     # Top-Left: High Skill, Collapsed
-    ax.text(0.1, 0.28, "I: High Skill / Collapsed\n(HGB, Ridge, SARIMA)", fontsize=10, fontweight="semibold", color="#2C3E50", alpha=0.8)
+    ax.text(0.05, 0.28, "I: High Skill / Collapsed\n(HGB, Ridge, SARIMA)", fontsize=9.5, fontweight="semibold", color="#2C3E50", bbox=bbox_props, va="top", ha="left")
     # Top-Right: High Skill, Retained
-    ax.text(0.8, 0.28, "II: High Skill / Retained", fontsize=10, fontweight="semibold", color="#27AE60", alpha=0.8)
+    ax.text(0.80, 0.28, "II: High Skill / Retained", fontsize=9.5, fontweight="semibold", color="#27AE60", bbox=bbox_props, va="top", ha="left")
     # Bottom-Left: Low Skill, Collapsed
-    ax.text(0.1, -1.8, "III: Low Skill / Collapsed", fontsize=10, fontweight="semibold", color="#7F8C8D", alpha=0.8)
+    ax.text(0.05, -2.0, "III: Low Skill / Collapsed", fontsize=9.5, fontweight="semibold", color="#7F8C8D", bbox=bbox_props, va="bottom", ha="left")
     # Bottom-Right: Low Skill, Retained
-    ax.text(1.2, -1.8, "IV: Low Skill / Retained\n(STL+Ridge, Seasonal)", fontsize=10, fontweight="semibold", color="#C0392B", alpha=0.8)
+    ax.text(1.20, -2.0, "IV: Low Skill / Retained\n(STL+Ridge, Seasonal)", fontsize=9.5, fontweight="semibold", color="#C0392B", bbox=bbox_props, va="bottom", ha="left")
 
     # Styling
     ax.set_xlabel(r"Variance Retention Coefficient ($\alpha = s_{\hat{y}} / s_{y}$)", fontsize=12, fontweight="semibold")
