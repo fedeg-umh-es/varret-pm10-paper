@@ -1,17 +1,51 @@
-"""Build the mandatory P33 variance-retention diagnostic table."""
+"""Build a variance-retention diagnostic table from prediction and skill CSVs."""
 
+from __future__ import annotations
+
+import argparse
+import sys
 from pathlib import Path
 
 import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from src.diagnostics.variance import build_variance_retention_summary
 
 
 def main() -> None:
     """Read predictions and skill tables, then write the final diagnostic summary."""
-    predictions_path = Path("outputs/metrics/predictions.csv")
-    skill_path = Path("outputs/metrics/skill_summary.csv")
-    output_path = Path("outputs/tables/variance_retention_summary.csv")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--predictions",
+        type=Path,
+        default=Path("outputs/metrics/predictions.csv"),
+        help="Prediction table with y_true/y_pred rows.",
+    )
+    parser.add_argument(
+        "--skill",
+        type=Path,
+        default=Path("outputs/metrics/skill_summary.csv"),
+        help="Skill summary table with one row per dataset/model/horizon.",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("outputs/tables/variance_retention_summary.csv"),
+        help="Output variance-retention CSV.",
+    )
+    parser.add_argument(
+        "--station-name",
+        default=None,
+        help="Accepted for pipeline compatibility; station metadata is added by build_unified_variance_table.py.",
+    )
+    args = parser.parse_args()
+
+    predictions_path = args.predictions
+    skill_path = args.skill
+    output_path = args.output
 
     if not predictions_path.exists():
         raise FileNotFoundError(f"Missing predictions table: {predictions_path}")

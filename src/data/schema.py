@@ -2,14 +2,17 @@
 
 CANONICAL_DATASET_COLUMNS = ["date", "y"]
 PREDICTIONS_COLUMNS = ["dataset", "model", "fold", "origin_date", "horizon", "date", "y_true", "y_pred"]
-SKILL_COLUMNS = ["dataset", "model", "horizon", "skill"]
+SKILL_COLUMNS = ["dataset", "model", "horizon", "skill", "mae_skill"]
 VARIANCE_SUMMARY_COLUMNS = [
     "dataset",
     "model",
     "horizon",
     "n",
     "skill",
+    "mae_skill",
     "alpha",
+    "alpha_ci_low",
+    "alpha_ci_high",
     "skill_vp",
     "collapse_flag",
     "inflation_flag",

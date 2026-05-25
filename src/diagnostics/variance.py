@@ -22,6 +22,7 @@ def build_variance_retention_summary(predictions_df: pd.DataFrame, skill_df: pd.
 
     rows: list[dict] = []
     for (dataset, model, horizon), group in predictions_df.groupby(["dataset", "model", "horizon"]):
+        alpha_ci_low, alpha_ci_high = _bootstrap_alpha_ci(group)
         rows.append(
             {
                 "dataset": dataset,
@@ -29,11 +30,15 @@ def build_variance_retention_summary(predictions_df: pd.DataFrame, skill_df: pd.
                 "horizon": horizon,
                 "n": int(len(group)),
                 "alpha": _compute_alpha(group),
+                "alpha_ci_low": alpha_ci_low,
+                "alpha_ci_high": alpha_ci_high,
             }
         )
     grouped = pd.DataFrame(rows)
 
     merged = grouped.merge(skill_df, on=["dataset", "model", "horizon"], how="inner")
+    if "mae_skill" not in merged.columns:
+        merged["mae_skill"] = np.nan
     merged["skill_vp"] = merged["skill"] * merged["alpha"]
     merged["collapse_flag"] = merged["alpha"] < 0.5
     merged["inflation_flag"] = merged["alpha"] > 1.5
@@ -48,3 +53,24 @@ def _compute_alpha(group: pd.DataFrame) -> float:
     observed_variance = float(np.var(group["y_true"].to_numpy(dtype=float), ddof=0))
     predicted_variance = float(np.var(group["y_pred"].to_numpy(dtype=float), ddof=0))
     return predicted_variance / observed_variance if observed_variance > 0 else 0.0
+
+
+def _bootstrap_alpha_ci(
+    group: pd.DataFrame,
+    n_boot: int = 1000,
+    ci: float = 0.95,
+    seed: int = 42,
+) -> tuple[float, float]:
+    rng    = np.random.default_rng(seed)
+    y_true = group["y_true"].to_numpy(dtype=float)
+    y_pred = group["y_pred"].to_numpy(dtype=float)
+    n      = len(y_true)
+    alphas = []
+    for _ in range(n_boot):
+        idx  = rng.integers(0, n, size=n)
+        vt   = float(np.var(y_true[idx], ddof=0))
+        vp   = float(np.var(y_pred[idx], ddof=0))
+        alphas.append(vp / vt if vt > 0 else 0.0)
+    lo = float(np.percentile(alphas, (1 - ci) / 2 * 100))
+    hi = float(np.percentile(alphas, (1 + ci) / 2 * 100))
+    return lo, hi

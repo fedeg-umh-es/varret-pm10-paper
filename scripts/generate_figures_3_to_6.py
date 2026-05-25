@@ -1,270 +1,404 @@
-"""Generate figures 3-6 for the varret-pm10-paper (three-station E1-RR results)."""
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
+"""Generate unified multi-station figures for variance-retention diagnostics."""
+
 from pathlib import Path
 
-# ── Style ─────────────────────────────────────────────────────────────────────
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+TABLE_PATH = Path("outputs/tables/variance_retention_all_stations.csv")
+OUTDIR = Path("outputs/figures")
+OUTDIR.mkdir(parents=True, exist_ok=True)
+ML_STATION_RATE_PATH = Path("outputs/tables/station_ml_only_collapse_rates.csv")
+ML_MAP_CAPTION_PATH = Path("outputs/audit/station_map_ml_only_collapse_rate_caption.md")
+ML_MODELS = ("hgb_direct", "ridge_direct")
+
+CLASS_COLORS = {
+    "industrial": "#c23b35",
+    "urban": "#2878b5",
+    "rural": "#2f8f4e",
+}
+MODEL_MARKER = {
+    "hgb_direct": "o",
+    "ridge_direct": "s",
+    "seasonal_naive": "^",
+}
+MODEL_LABEL = {
+    "hgb_direct": "HGB direct",
+    "ridge_direct": "Ridge direct",
+    "seasonal_naive": "Seasonal naive",
+}
+
 plt.rcParams.update({
     "font.family": "serif",
-    "font.size": 9,
-    "axes.labelsize": 9,
-    "legend.fontsize": 7.5,
-    "xtick.labelsize": 8,
-    "ytick.labelsize": 8,
+    "font.size": 8.5,
+    "axes.labelsize": 8.5,
+    "axes.titlesize": 9,
+    "legend.fontsize": 7,
+    "xtick.labelsize": 7.5,
+    "ytick.labelsize": 7.5,
     "axes.spines.top": False,
     "axes.spines.right": False,
 })
 
-OUTDIR = Path("outputs/figures")
-OUTDIR.mkdir(parents=True, exist_ok=True)
 
-# ── Station metadata ───────────────────────────────────────────────────────────
-STATIONS = {
-    "Elx-Agroalimentari": {
-        "file":   "outputs/tables/variance_retention_summary.csv",
-        "color":  "#d62728",
-        "lat":    38.24222,
-        "lon":    -0.68278,
-        "alt":    44,
-        "dem":    "ES1624A",
-        "type":   "Suburban / industrial",
-    },
-    "València-Vivers": {
-        "file":   "outputs/tables/variance_retention_valencia_vivers.csv",
-        "color":  "#1f77b4",
-        "lat":    39.47806,
-        "lon":    -0.36833,
-        "alt":    11,
-        "dem":    "ES1619A",
-        "type":   "Urban / residential",
-    },
-    "Zarra (EMEP)": {
-        "file":   "outputs/tables/variance_retention_zarra_emep.csv",
-        "color":  "#2ca02c",
-        "lat":    39.08278,
-        "lon":    -1.10083,
-        "alt":    855,
-        "dem":    "ES0012R",
-        "type":   "Rural remote / EMEP",
-    },
-}
-MODEL_MARKER = {"hgb_direct": "o", "ridge_direct": "s"}
-MODEL_LS     = {"hgb_direct": "-", "ridge_direct": "--"}
+def _load() -> pd.DataFrame:
+    if not TABLE_PATH.exists():
+        raise FileNotFoundError(f"Missing unified table: {TABLE_PATH}")
+    df = pd.read_csv(TABLE_PATH)
+    required = {
+        "station_id",
+        "station_name",
+        "station_type",
+        "station_class",
+        "model",
+        "horizon",
+        "skill",
+        "alpha",
+        "collapse_flag",
+        "lat",
+        "lon",
+    }
+    missing = required - set(df.columns)
+    if missing:
+        raise ValueError(f"Unified table missing columns: {sorted(missing)}")
+    return df
 
-dfs = {name: pd.read_csv(meta["file"]) for name, meta in STATIONS.items()}
 
-# ── Figure 3 — Skill profiles by horizon ──────────────────────────────────────
-fig, axes = plt.subplots(1, 2, figsize=(9, 3.8), sharey=True)
-for ax, model in zip(axes, ["hgb_direct", "ridge_direct"]):
-    for name, meta in STATIONS.items():
-        d = dfs[name][dfs[name]["model"] == model].sort_values("horizon")
-        ax.plot(d["horizon"], d["skill"],
-                color=meta["color"], marker=MODEL_MARKER[model],
-                linestyle=MODEL_LS[model], linewidth=1.8,
-                markersize=5, label=name)
-    ax.axhline(0, color="gray", linewidth=0.7, linestyle=":")
-    ax.set_title(f"model: {model}", fontsize=9)
-    ax.set_xlabel("Forecast horizon $h$")
-    ax.set_xticks(range(1, 8))
-    ax.set_ylim(-0.02, 0.33)
-    ax.grid(True, alpha=0.2)
+def _station_order(df: pd.DataFrame) -> list[str]:
+    rates = df.groupby("station_id")["collapse_flag"].mean().sort_values(ascending=False)
+    return rates.index.tolist()
 
-axes[0].set_ylabel("Persistence-relative skill")
-axes[0].legend(loc="lower right")
-fig.suptitle("Skill profiles by horizon — three background stations", fontsize=9, y=1.01)
-plt.tight_layout()
-for ext in ("pdf", "png"):
-    fig.savefig(OUTDIR / f"figure3_skill_profiles.{ext}", dpi=300, bbox_inches="tight")
-plt.close()
-print(f"[OK] figure3_skill_profiles  →  {OUTDIR}/")
 
-# ── Figure 4 — Alpha profiles by horizon ──────────────────────────────────────
-fig, axes = plt.subplots(1, 2, figsize=(9, 3.8), sharey=True)
-for ax, model in zip(axes, ["hgb_direct", "ridge_direct"]):
-    ax.fill_between(range(1, 8), 0, 0.5, alpha=0.07, color="gray", zorder=0)
-    for name, meta in STATIONS.items():
-        d = dfs[name][dfs[name]["model"] == model].sort_values("horizon")
-        ax.plot(d["horizon"], d["alpha"],
-                color=meta["color"], marker=MODEL_MARKER[model],
-                linestyle=MODEL_LS[model], linewidth=1.8,
-                markersize=5, label=name)
-    ax.axhline(0.5, color="black", linewidth=1.0, linestyle="--",
-               label="Collapse threshold ($\\alpha=0.5$)")
-    ax.set_title(f"model: {model}", fontsize=9)
-    ax.set_xlabel("Forecast horizon $h$")
-    ax.set_xticks(range(1, 8))
-    ax.set_ylim(0, 0.58)
-    ax.grid(True, alpha=0.2)
+def _save(fig: plt.Figure, name: str) -> None:
+    for ext in ("pdf", "png"):
+        fig.savefig(OUTDIR / f"{name}.{ext}", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print(f"[OK] {name} -> {OUTDIR}/")
 
-axes[0].set_ylabel("Variance-retention ratio $\\alpha$")
-axes[0].legend(loc="upper right")
-fig.suptitle("Variance-retention profiles by horizon — three background stations", fontsize=9, y=1.01)
-plt.tight_layout()
-for ext in ("pdf", "png"):
-    fig.savefig(OUTDIR / f"figure4_alpha_profiles.{ext}", dpi=300, bbox_inches="tight")
-plt.close()
-print(f"[OK] figure4_alpha_profiles  →  {OUTDIR}/")
 
-# ── Figure 5 — Skill–alpha trajectories (2 panels, one per model) ─────────────
-# Layout: 2 data panels + 1 narrow legend panel on the right.
-# No inline text annotations — all labelling via the shared legend panel.
-fig = plt.figure(figsize=(11, 4.6))
-gs  = fig.add_gridspec(1, 3, width_ratios=[1, 1, 0.32], wspace=0.08)
-ax0 = fig.add_subplot(gs[0])
-ax1 = fig.add_subplot(gs[1], sharey=ax0, sharex=ax0)
-ax_leg = fig.add_subplot(gs[2])
-ax_leg.axis("off")
+def _ml_station_collapse_rates(df: pd.DataFrame) -> pd.DataFrame:
+    ml = df[df["model"].isin(ML_MODELS)].copy()
+    ml["collapsed_ml_cell"] = ml["alpha"] < 0.5
+    rates = (
+        ml.groupby(
+            ["station_id", "station_name", "station_type", "station_class", "lat", "lon"],
+            as_index=False,
+        )
+        .agg(
+            collapsed_ml_cells=("collapsed_ml_cell", "sum"),
+            total_ml_cells=("collapsed_ml_cell", "size"),
+        )
+        .sort_values(["collapsed_ml_cells", "station_name"], ascending=[True, True])
+    )
+    rates["collapse_rate"] = rates["collapsed_ml_cells"] / rates["total_ml_cells"]
+    rates["collapse_rate_pct"] = (rates["collapse_rate"] * 100).round(1)
+    if not rates["total_ml_cells"].eq(14).all():
+        raise ValueError("ML-only station collapse rates must use 14 cells per station.")
+    exceptions = set(rates.loc[rates["collapsed_ml_cells"].eq(13), "station_name"])
+    expected_exceptions = {"Huesca", "Barcelona Vall d'Hebron"}
+    if exceptions != expected_exceptions or not rates["collapsed_ml_cells"].isin({13, 14}).all():
+        raise ValueError(
+            "Unexpected ML-only collapse-rate pattern: expected Huesca and "
+            "Barcelona Vall d'Hebron at 13/14 and all other stations at 14/14."
+        )
+    return rates
 
-# h=1 annotation offsets per station (manually tuned to avoid overlap)
-H1_OFFSETS = {
-    "Elx-Agroalimentari": (-28,  4),
-    "València-Vivers":    (-28, -10),
-    "Zarra (EMEP)":       (-28,  4),
-}
 
-for ax, model in zip([ax0, ax1], ["hgb_direct", "ridge_direct"]):
-    ax.fill_between([0, 0.32], [0, 0], [0.5, 0.5],
-                    alpha=0.07, color="gray", zorder=0)
-    ax.axhline(0.5, color="#555", linewidth=0.9, linestyle="--", zorder=1)
-    ax.text(0.285, 0.505, "$\\alpha = 0.5$", fontsize=7,
-            color="#555", va="bottom", ha="right")
-    ax.text(0.285, 0.015, "COLLAPSE ZONE", fontsize=6.5,
-            color="#aaa", va="bottom", ha="right", style="italic")
+def figure3_skill_profiles(df: pd.DataFrame) -> None:
+    models = ["hgb_direct", "ridge_direct", "seasonal_naive"]
+    fig, axes = plt.subplots(1, 3, figsize=(11.5, 3.7), sharey=True)
+    for ax, model in zip(axes, models):
+        d_model = df[df["model"] == model]
+        for station_id, grp in d_model.groupby("station_id"):
+            grp = grp.sort_values("horizon")
+            station_class = grp["station_class"].iloc[0]
+            ax.plot(
+                grp["horizon"],
+                grp["skill"],
+                color=CLASS_COLORS.get(station_class, "#777777"),
+                marker=MODEL_MARKER[model],
+                linewidth=0.9,
+                markersize=2.8,
+                alpha=0.55,
+            )
+        mean_profile = d_model.groupby("horizon")["skill"].mean()
+        ax.plot(mean_profile.index, mean_profile.values, color="black", linewidth=2.0, marker="D", markersize=3.2)
+        ax.axhline(0, color="#666666", linewidth=0.7, linestyle=":")
+        ax.set_title(MODEL_LABEL[model])
+        ax.set_xlabel("Forecast horizon h")
+        ax.set_xticks(range(1, 8))
+        ax.grid(True, alpha=0.18)
+    axes[0].set_ylabel("Persistence-relative skill")
+    handles = [
+        plt.Line2D([], [], color=color, linewidth=2, label=label.title())
+        for label, color in CLASS_COLORS.items()
+    ]
+    handles.append(plt.Line2D([], [], color="black", marker="D", linewidth=2, label="Station mean"))
+    axes[-1].legend(handles=handles, loc="best", frameon=True)
+    fig.suptitle("Skill profiles by horizon across 17 PM10 stations", y=1.02, fontsize=9.5)
+    fig.tight_layout()
+    _save(fig, "figure3_skill_profiles")
 
-    for name, meta in STATIONS.items():
-        d   = dfs[name][dfs[name]["model"] == model].sort_values("horizon")
-        xs  = d["skill"].values
-        ys  = d["alpha"].values
 
-        # connecting line
-        ax.plot(xs, ys, color=meta["color"], linewidth=1.5,
-                alpha=0.55, zorder=2)
+def figure4_alpha_profiles(df: pd.DataFrame) -> None:
+    models = ["hgb_direct", "ridge_direct", "seasonal_naive"]
+    fig, axes = plt.subplots(1, 3, figsize=(11.5, 3.7), sharey=True)
+    for ax, model in zip(axes, models):
+        d_model = df[df["model"] == model]
+        ax.fill_between([1, 7], [0, 0], [0.5, 0.5], color="#999999", alpha=0.10)
+        for station_id, grp in d_model.groupby("station_id"):
+            grp = grp.sort_values("horizon")
+            station_class = grp["station_class"].iloc[0]
+            ax.plot(
+                grp["horizon"],
+                grp["alpha"],
+                color=CLASS_COLORS.get(station_class, "#777777"),
+                marker=MODEL_MARKER[model],
+                linewidth=0.9,
+                markersize=2.8,
+                alpha=0.55,
+            )
+        mean_profile = d_model.groupby("horizon")["alpha"].mean()
+        ax.plot(mean_profile.index, mean_profile.values, color="black", linewidth=2.0, marker="D", markersize=3.2)
+        ax.axhline(0.5, color="#333333", linewidth=0.8, linestyle="--")
+        ax.axhline(1.0, color="#777777", linewidth=0.7, linestyle=":")
+        ax.set_title(MODEL_LABEL[model])
+        ax.set_xlabel("Forecast horizon h")
+        ax.set_xticks(range(1, 8))
+        ax.grid(True, alpha=0.18)
+    axes[0].set_ylabel("Variance-retention ratio alpha")
+    axes[0].set_ylim(0, max(1.25, float(df["alpha"].quantile(0.98)) * 1.08))
+    fig.suptitle("Variance-retention profiles by horizon across 17 PM10 stations", y=1.02, fontsize=9.5)
+    fig.tight_layout()
+    _save(fig, "figure4_alpha_profiles")
 
-        # bubbles — size encodes horizon
-        sizes = [22 + 13 * int(h) for h in d["horizon"]]
-        ax.scatter(xs, ys, c=meta["color"], s=sizes, alpha=0.9,
-                   zorder=3, edgecolors="white", linewidths=0.5)
 
-        # direction arrow on last segment only
-        ax.annotate("", xy=(xs[-1], ys[-1]), xytext=(xs[-2], ys[-2]),
-                    arrowprops=dict(arrowstyle="-|>", color=meta["color"],
-                                   lw=1.2, mutation_scale=9), zorder=4)
+def figure5_skill_alpha(df: pd.DataFrame) -> None:
+    models = ["hgb_direct", "ridge_direct", "seasonal_naive"]
+    fig, axes = plt.subplots(1, 3, figsize=(11.5, 3.7), sharey=True)
+    for ax, model in zip(axes, models):
+        d_model = df[df["model"] == model]
+        ax.axhline(0.5, color="#333333", linewidth=0.8, linestyle="--")
+        ax.axvline(0, color="#777777", linewidth=0.7, linestyle=":")
+        for station_id, grp in d_model.groupby("station_id"):
+            grp = grp.sort_values("horizon")
+            station_class = grp["station_class"].iloc[0]
+            color = CLASS_COLORS.get(station_class, "#777777")
+            sizes = 14 + 8 * grp["horizon"].to_numpy()
+            ax.plot(grp["skill"], grp["alpha"], color=color, linewidth=0.8, alpha=0.35)
+            ax.scatter(grp["skill"], grp["alpha"], s=sizes, color=color, alpha=0.65, edgecolor="white", linewidth=0.3)
+        ax.set_title(MODEL_LABEL[model])
+        ax.set_xlabel("Persistence-relative skill")
+        ax.grid(True, alpha=0.18)
+    axes[0].set_ylabel("Variance-retention ratio alpha")
+    fig.suptitle("Skill-alpha trajectories by station and horizon", y=1.02, fontsize=9.5)
+    fig.tight_layout()
+    _save(fig, "figure5_scatter_skill_alpha")
 
-        # h=1 label (one per trajectory, offset tuned per station)
-        dx, dy = H1_OFFSETS[name]
-        ax.annotate("$h\\!=\\!1$", (xs[0], ys[0]),
-                    textcoords="offset points", xytext=(dx, dy),
-                    fontsize=6, color=meta["color"],
-                    arrowprops=dict(arrowstyle="-", color=meta["color"],
-                                   lw=0.5, shrinkA=0, shrinkB=3))
 
-    ax.set_xlabel("Persistence-relative skill", fontsize=9)
-    ax.set_title(f"model: {model}", fontsize=9, pad=6)
-    ax.set_xlim(0.02, 0.30)
-    ax.set_ylim(0.0,  0.55)
-    ax.grid(True, alpha=0.15)
+def figure6_collapse_rates(df: pd.DataFrame) -> None:
+    station_rates = (
+        df.groupby(["station_id", "station_name", "station_class"])["collapse_flag"]
+        .mean()
+        .reset_index()
+        .sort_values("collapse_flag", ascending=True)
+    )
+    fig, ax = plt.subplots(figsize=(8.5, 6.3))
+    colors = [CLASS_COLORS.get(v, "#777777") for v in station_rates["station_class"]]
+    ax.barh(station_rates["station_name"], station_rates["collapse_flag"] * 100, color=colors, alpha=0.85)
+    ax.set_xlabel("Collapse rate (% station x model x horizon cells with alpha < 0.5)")
+    ax.set_xlim(0, 100)
+    ax.grid(axis="x", alpha=0.18)
+    handles = [
+        plt.Line2D([], [], color=color, linewidth=5, label=label.title())
+        for label, color in CLASS_COLORS.items()
+    ]
+    ax.legend(handles=handles, loc="lower right", frameon=True)
+    fig.tight_layout()
+    _save(fig, "figure6_station_collapse_rates")
 
-ax0.set_ylabel("Variance-retention ratio $\\alpha$", fontsize=9)
-plt.setp(ax1.get_yticklabels(), visible=False)
 
-# ── Legend panel ─────────────────────────────────────────────────────────────
-# Station colours
-for name, meta in STATIONS.items():
-    ax_leg.plot([], [], color=meta["color"], linewidth=2.5,
-                label=name)
-# Horizon size scale
-for h_val, lab in [(1, "$h = 1$"), (4, "$h = 4$"), (7, "$h = 7$")]:
-    ax_leg.scatter([], [], c="#888", s=22 + 13 * h_val,
-                   edgecolors="white", linewidths=0.5, label=lab)
-# Collapse threshold
-ax_leg.plot([], [], color="#555", linewidth=0.9, linestyle="--",
-            label="Collapse\nthreshold")
-
-leg = ax_leg.legend(loc="center left", fontsize=7.5, frameon=True,
-                    framealpha=0.95, edgecolor="#ccc",
-                    handlelength=1.6, handletextpad=0.5,
-                    borderpad=0.7, labelspacing=0.55)
-leg.set_title("Station / Horizon", prop={"size": 7.5})
-
-fig.suptitle(
-    "Skill–$\\alpha$ trajectories ($h = 1 \\to 7$) — all trajectories remain in the collapse zone",
-    fontsize=9, y=1.01)
-fig.tight_layout(rect=[0, 0, 1, 1])
-for ext in ("pdf", "png"):
-    fig.savefig(OUTDIR / f"figure5_scatter_skill_alpha.{ext}", dpi=300, bbox_inches="tight")
-plt.close()
-print(f"[OK] figure5_scatter_skill_alpha  →  {OUTDIR}/")
-
-# ── Figure 6 — Station map ────────────────────────────────────────────────────
-def _make_map_cartopy(ax_in=None):
+def _map_with_cartopy(points: pd.DataFrame) -> plt.Figure:
     import cartopy.crs as ccrs
     import cartopy.feature as cfeature
-    fig_m = plt.figure(figsize=(6, 5.5))
-    ax_m  = fig_m.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
-    ax_m.set_extent([-1.8, 0.3, 37.8, 40.2], crs=ccrs.PlateCarree())
-    ax_m.add_feature(cfeature.LAND.with_scale("10m"),  facecolor="#f4f2ee")
-    ax_m.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#cce5f0")
-    ax_m.add_feature(cfeature.COASTLINE.with_scale("10m"), linewidth=0.6)
-    ax_m.add_feature(cfeature.BORDERS.with_scale("10m"),   linewidth=0.4, linestyle=":")
-    label_offsets = {
-        "Elx-Agroalimentari": ( 0.06, -0.14),
-        "València-Vivers":    ( 0.06,  0.06),
-        "Zarra (EMEP)":       (-0.55,  0.06),
-    }
-    for name, meta in STATIONS.items():
-        ax_m.plot(meta["lon"], meta["lat"], "o",
-                  color=meta["color"], markersize=10,
-                  transform=ccrs.PlateCarree(), zorder=5)
-        dx, dy = label_offsets[name]
-        ax_m.text(meta["lon"] + dx, meta["lat"] + dy,
-                  f"{name}\n{meta['dem']}  {meta['alt']} m a.s.l.",
-                  fontsize=7, transform=ccrs.PlateCarree(),
-                  color=meta["color"], fontweight="bold",
-                  bbox=dict(boxstyle="round,pad=0.2", fc="white", alpha=0.7, ec="none"))
-    gl = ax_m.gridlines(draw_labels=True, linewidth=0.3, alpha=0.4)
-    gl.top_labels = gl.right_labels = False
-    ax_m.set_title(
-        "Monitoring station locations — Valencian Community (Spain)", fontsize=9)
-    return fig_m
 
-def _make_map_simple():
-    fig_m, ax_m = plt.subplots(figsize=(6, 5.5))
-    for name, meta in STATIONS.items():
-        ax_m.plot(meta["lon"], meta["lat"], "o",
-                  color=meta["color"], markersize=11, zorder=5)
-        ax_m.annotate(
-            f"{name}\n{meta['dem']}  {meta['alt']} m",
-            (meta["lon"], meta["lat"]),
-            textcoords="offset points", xytext=(8, 4),
-            fontsize=7.5, color=meta["color"], fontweight="bold",
-            bbox=dict(boxstyle="round,pad=0.2", fc="white", alpha=0.8, ec="none"))
-    ax_m.set_xlim(-1.55, 0.15)
-    ax_m.set_ylim(37.9, 40.0)
-    ax_m.set_xlabel("Longitude (°E)")
-    ax_m.set_ylabel("Latitude (°N)")
-    ax_m.grid(True, alpha=0.3)
-    ax_m.set_title(
-        "Monitoring station locations — Valencian Community (Spain)", fontsize=9)
-    fig_m.tight_layout()
-    return fig_m
+    fig = plt.figure(figsize=(7.2, 6.2))
+    ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
+    ax.set_extent([-10, 5, 35, 45], crs=ccrs.PlateCarree())
+    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor="#f4f1e8")
+    ax.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#d8edf5")
+    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), linewidth=0.6)
+    ax.add_feature(cfeature.BORDERS.with_scale("10m"), linewidth=0.35, linestyle=":")
+    ax.add_feature(cfeature.RIVERS.with_scale("10m"), linewidth=0.25, alpha=0.35)
+    gl = ax.gridlines(draw_labels=True, linewidth=0.25, alpha=0.35)
+    gl.top_labels = False
+    gl.right_labels = False
+    _plot_map_points(ax, points, transform=ccrs.PlateCarree())
+    ax.set_title("PM10 station map: collapse rate encoded by marker size")
+    return fig
 
-try:
-    fig6 = _make_map_cartopy()
-    backend = "cartopy"
-except Exception:
-    fig6 = _make_map_simple()
-    backend = "matplotlib fallback"
 
-for ext in ("pdf", "png"):
-    fig6.savefig(OUTDIR / f"figure6_station_map.{ext}", dpi=300, bbox_inches="tight")
-plt.close()
-print(f"[OK] figure6_station_map  →  {OUTDIR}/  [{backend}]")
+def _ml_map_with_cartopy(points: pd.DataFrame) -> plt.Figure:
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
 
-# ── Summary ───────────────────────────────────────────────────────────────────
-print(f"\nAll 4 figures saved to:  {OUTDIR.resolve()}/")
-print("  figure3_skill_profiles.[pdf|png]")
-print("  figure4_alpha_profiles.[pdf|png]")
-print("  figure5_scatter_skill_alpha.[pdf|png]")
-print("  figure6_station_map.[pdf|png]")
+    fig = plt.figure(figsize=(7.2, 6.2))
+    ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
+    ax.set_extent([-10, 5, 35, 45], crs=ccrs.PlateCarree())
+    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor="#f4f1e8")
+    ax.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#d8edf5")
+    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), linewidth=0.6)
+    ax.add_feature(cfeature.BORDERS.with_scale("10m"), linewidth=0.35, linestyle=":")
+    ax.add_feature(cfeature.RIVERS.with_scale("10m"), linewidth=0.25, alpha=0.35)
+    gl = ax.gridlines(draw_labels=True, linewidth=0.25, alpha=0.35)
+    gl.top_labels = False
+    gl.right_labels = False
+    _plot_map_points(
+        ax,
+        points,
+        transform=ccrs.PlateCarree(),
+        size_legend_rates=sorted(points["collapse_rate"].unique()),
+        legend_title="ML collapse rate",
+    )
+    ax.set_title("PM10 station map: ML-only collapse rate encoded by marker size")
+    return fig
+
+
+def _map_simple(points: pd.DataFrame) -> plt.Figure:
+    fig, ax = plt.subplots(figsize=(7.2, 6.2))
+    ax.set_xlim(-10, 5)
+    ax.set_ylim(35, 45)
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
+    ax.grid(True, alpha=0.25)
+    _plot_map_points(ax, points, transform=None)
+    ax.set_title("PM10 station map: collapse rate encoded by marker size")
+    fig.tight_layout()
+    return fig
+
+
+def _ml_map_simple(points: pd.DataFrame) -> plt.Figure:
+    fig, ax = plt.subplots(figsize=(7.2, 6.2))
+    ax.set_xlim(-10, 5)
+    ax.set_ylim(35, 45)
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
+    ax.grid(True, alpha=0.25)
+    _plot_map_points(
+        ax,
+        points,
+        transform=None,
+        size_legend_rates=sorted(points["collapse_rate"].unique()),
+        legend_title="ML collapse rate",
+    )
+    ax.set_title("PM10 station map: ML-only collapse rate encoded by marker size")
+    fig.tight_layout()
+    return fig
+
+
+def _plot_map_points(
+    ax,
+    points: pd.DataFrame,
+    transform,
+    size_legend_rates: list[float] | tuple[float, ...] = (0.4, 0.7, 1.0),
+    legend_title: str = "Collapse rate",
+) -> None:
+    for _, row in points.iterrows():
+        color = CLASS_COLORS.get(row["station_class"], "#777777")
+        size = 35 + 180 * row["collapse_rate"]
+        kwargs = {"transform": transform} if transform is not None else {}
+        ax.scatter(
+            row["lon"],
+            row["lat"],
+            s=size,
+            color=color,
+            alpha=0.78,
+            edgecolor="white",
+            linewidth=0.7,
+            zorder=5,
+            **kwargs,
+        )
+    handles = [
+        plt.Line2D([], [], color=color, marker="o", linestyle="", markersize=7, label=label.title())
+        for label, color in CLASS_COLORS.items()
+    ]
+    for rate in size_legend_rates:
+        handles.append(
+            plt.scatter(
+                [],
+                [],
+                s=35 + 180 * rate,
+                color="#777777",
+                alpha=0.45,
+                edgecolor="white",
+                label=f"{rate * 100:.1f}%",
+            )
+        )
+    legend = ax.legend(handles=handles, loc="lower left", frameon=True, fontsize=7)
+    legend.set_title(legend_title, prop={"size": 7})
+
+
+def figure7_station_map(df: pd.DataFrame) -> None:
+    points = (
+        df.groupby(["station_id", "station_name", "station_class", "lat", "lon"], as_index=False)["collapse_flag"]
+        .mean()
+        .rename(columns={"collapse_flag": "collapse_rate"})
+    )
+    try:
+        fig = _map_with_cartopy(points)
+        backend = "cartopy"
+    except Exception as exc:
+        print(f"[WARN] cartopy map failed, using matplotlib fallback: {exc}")
+        fig = _map_simple(points)
+        backend = "matplotlib fallback"
+    _save(fig, "figure7_station_map_spain")
+    print(f"[OK] figure7 backend: {backend}")
+
+
+def station_map_ml_only_collapse_rate(df: pd.DataFrame) -> None:
+    points = _ml_station_collapse_rates(df)
+    ML_STATION_RATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    points[
+        [
+            "station_name",
+            "station_type",
+            "collapsed_ml_cells",
+            "total_ml_cells",
+            "collapse_rate_pct",
+        ]
+    ].rename(columns={"station_name": "station"}).to_csv(ML_STATION_RATE_PATH, index=False)
+
+    caption = (
+        "Geographic distribution of the 17 MITECO stations. Marker colour denotes station type. "
+        "Marker size denotes the ML-only collapse rate, computed over 14 model-horizon cells per "
+        "station (2 direct ML models x 7 horizons). Fifteen stations show 14/14 collapsed ML cells; "
+        "Huesca and Barcelona Vall d’Hebron show 13/14 due to one non-collapsed h=1 cell each."
+    )
+    ML_MAP_CAPTION_PATH.parent.mkdir(parents=True, exist_ok=True)
+    ML_MAP_CAPTION_PATH.write_text(caption + "\n", encoding="utf-8")
+
+    try:
+        fig = _ml_map_with_cartopy(points)
+        backend = "cartopy"
+    except Exception as exc:
+        print(f"[WARN] cartopy ML map failed, using matplotlib fallback: {exc}")
+        fig = _ml_map_simple(points)
+        backend = "matplotlib fallback"
+    _save(fig, "station_map_ml_only_collapse_rate")
+    print(f"[OK] ML-only station map backend: {backend}")
+
+
+def main() -> None:
+    df = _load()
+    figure3_skill_profiles(df)
+    figure4_alpha_profiles(df)
+    figure5_skill_alpha(df)
+    figure6_collapse_rates(df)
+    figure7_station_map(df)
+    station_map_ml_only_collapse_rate(df)
+    print(f"All figures saved to {OUTDIR.resolve()}/")
+
+
+if __name__ == "__main__":
+    main()
