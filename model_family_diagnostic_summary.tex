@@ -1,0 +1,16 @@
+\begin{table*}[htbp]
+\centering
+\caption{Comprehensive model-family diagnostic summary of forecasting skill, variance retention ($\alpha$), Diebold-Mariano outcomes, and threshold exceedance performance across 17 stations and 7 horizons.}
+\label{tab:five_model_diagnostic_summary}
+\begin{tabular}{llrrrrrrrrr}
+\toprule
+Model & Family & Med. Skill & Med. $\alpha$ & Collapse \% & Retained \% & Near-Ideal \% & Sig. Imp & Sig. Deg & Med. CSI & Med. FAR \\
+\midrule
+hgb\_direct & Direct ML & 0.205 & 0.151 & 99.2\% & 0.0\% & 0.0\% & 111 & 0 & 0.121 & 0.647 \\
+ridge\_direct & Direct ML & 0.219 & 0.087 & 99.2\% & 0.0\% & 0.0\% & 117 & 0 & 0.104 & 0.595 \\
+sarima & Statistical baseline & 0.208 & 0.095 & 92.4\% & 0.0\% & 0.0\% & 44 & 0 & 0.118 & 0.500 \\
+seasonal\_naive & Variance-preserving naive & -0.026 & 1.000 & 0.0\% & 98.3\% & 16.8\% & 5 & 34 & 0.111 & 0.822 \\
+stl\_ridge\_direct & Decomposition + Ridge & -1.107 & 1.399 & 0.0\% & 100.0\% & 0.0\% & 0 & 119 & 0.104 & 0.896 \\
+\bottomrule
+\end{tabular}
+\end{table*}

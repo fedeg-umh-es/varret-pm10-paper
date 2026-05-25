@@ -1,0 +1,8 @@
+Figure 5: The Predictability-Variance Frontier and model-family clusterings across 17 stations and 7 forecast horizons (N=595 cells). 
+
+The scatter plot maps persistence-relative forecasting skill (y-axis) against the variance retention coefficient alpha (x-axis, standard deviation of predictions divided by observations). 
+- Quadrant I (High Skill / Collapsed): Both direct machine learning models (HGB in teal, Ridge in slate blue) and the seasonal ARMA model (SARIMA in purple) cluster tightly in this quadrant, achieving high forecasting skill but collapsing forecast variance below alpha < 0.5 (median HGB alpha: 0.151, SARIMA: 0.095). 
+- Quadrant IV (Low Skill / Retained): Seasonal persistence (Seasonal Naive in gold) preserves variance perfectly (alpha = 1.000) but lacks skill. Additive decomposition regression (STL+Ridge in crimson) succeeds in restoring dynamic variance (alpha = 1.399) but suffers a catastrophic loss of skill (median: -1.107), falling substantially below the persistence baseline in all 119 cells.
+- The shaded green region represents the Near-Ideal variance retention band [0.8, 1.2].
+
+This distribution highlights the 'Predictability-Variance Dilemma' in PM10 forecasting: deterministic models optimized under mean squared error loss suppress dynamic variance in low-predictability horizons to minimize errors, whereas forcing variance preservation without a corresponding increase in true predictability inflates systematic and conditional error components, causing catastrophic skill failure.

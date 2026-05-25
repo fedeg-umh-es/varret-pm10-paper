@@ -1,0 +1,6 @@
+model,model_family,total_cells,high_skill_collapsed,high_skill_retained,low_skill_collapsed,low_skill_retained
+hgb_direct,Direct ML (HGB),119,118,1,0,0
+ridge_direct,Direct ML (Ridge),119,118,1,0,0
+sarima,Statistical (SARIMA),119,107,9,3,0
+seasonal_naive,Naive (Seasonal),119,0,20,0,99
+stl_ridge_direct,Decomposition (STL+Ridge),119,0,0,0,119
