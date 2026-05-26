@@ -77,8 +77,11 @@ def _station_order(df: pd.DataFrame) -> list[str]:
 def _save(fig: plt.Figure, name: str) -> None:
     for ext in ("pdf", "png"):
         fig.savefig(OUTDIR / f"{name}.{ext}", dpi=300, bbox_inches="tight")
+    root_dir = Path("/Users/federicogarciacrespi/Public/varret-pm10-paper")
+    for ext in ("pdf", "png"):
+        fig.savefig(root_dir / f"{name}.{ext}", dpi=300, bbox_inches="tight")
     plt.close(fig)
-    print(f"[OK] {name} -> {OUTDIR}/")
+    print(f"[OK] {name} -> {OUTDIR}/ & {root_dir}/")
 
 
 def _ml_station_collapse_rates(df: pd.DataFrame) -> pd.DataFrame:
@@ -111,8 +114,11 @@ def _ml_station_collapse_rates(df: pd.DataFrame) -> pd.DataFrame:
 
 def figure3_skill_profiles(df: pd.DataFrame) -> None:
     models = ["hgb_direct", "ridge_direct", "sarima", "seasonal_naive", "stl_ridge_direct"]
-    fig, axes = plt.subplots(1, 5, figsize=(18, 3.7), sharey=True)
-    for ax, model in zip(axes, models):
+    fig, axes = plt.subplots(3, 2, figsize=(9.0, 10.5), sharex=True, sharey=True)
+    axes_flat = axes.flatten()
+    
+    for i, model in enumerate(models):
+        ax = axes_flat[i]
         d_model = df[df["model"] == model]
         for station_id, grp in d_model.groupby("station_id"):
             grp = grp.sort_values("horizon")
@@ -129,26 +135,36 @@ def figure3_skill_profiles(df: pd.DataFrame) -> None:
         mean_profile = d_model.groupby("horizon")["skill"].mean()
         ax.plot(mean_profile.index, mean_profile.values, color="black", linewidth=2.0, marker="D", markersize=3.2)
         ax.axhline(0, color="#666666", linewidth=0.7, linestyle=":")
-        ax.set_title(MODEL_LABEL[model])
-        ax.set_xlabel("Forecast horizon h")
+        ax.set_title(MODEL_LABEL[model], fontsize=10, fontweight="bold")
+        ax.set_xlabel("Forecast horizon h", fontsize=8.5)
         ax.set_xticks(range(1, 8))
         ax.grid(True, alpha=0.18)
-    axes[0].set_ylabel("Persistence-relative skill")
+        
+    for row in range(3):
+        axes[row, 0].set_ylabel("Persistence-relative skill", fontsize=8.5)
+        
+    legend_ax = axes_flat[5]
+    legend_ax.axis("off")
+    
     handles = [
         plt.Line2D([], [], color=color, linewidth=2, label=label.title())
         for label, color in CLASS_COLORS.items()
     ]
     handles.append(plt.Line2D([], [], color="black", marker="D", linewidth=2, label="Station mean"))
-    axes[-1].legend(handles=handles, loc="upper left", bbox_to_anchor=(1.02, 1.0), frameon=True)
-    fig.suptitle("Skill profiles by horizon across 17 PM10 stations", y=1.02, fontsize=9.5)
+    legend_ax.legend(handles=handles, loc="center", frameon=True, facecolor="white", edgecolor="#D5D8DC", fontsize=9)
+    
+    fig.suptitle("Skill profiles by horizon across 17 PM10 stations", y=0.98, fontsize=11, fontweight="bold")
     fig.tight_layout()
     _save(fig, "figure3_skill_profiles")
 
 
 def figure4_alpha_profiles(df: pd.DataFrame) -> None:
     models = ["hgb_direct", "ridge_direct", "sarima", "seasonal_naive", "stl_ridge_direct"]
-    fig, axes = plt.subplots(1, 5, figsize=(18, 3.7), sharey=True)
-    for ax, model in zip(axes, models):
+    fig, axes = plt.subplots(3, 2, figsize=(9.0, 10.5), sharex=True, sharey=True)
+    axes_flat = axes.flatten()
+    
+    for i, model in enumerate(models):
+        ax = axes_flat[i]
         d_model = df[df["model"] == model]
         ax.fill_between([1, 7], [0, 0], [0.5, 0.5], color="#999999", alpha=0.10)
         for station_id, grp in d_model.groupby("station_id"):
@@ -167,13 +183,28 @@ def figure4_alpha_profiles(df: pd.DataFrame) -> None:
         ax.plot(mean_profile.index, mean_profile.values, color="black", linewidth=2.0, marker="D", markersize=3.2)
         ax.axhline(0.5, color="#333333", linewidth=0.8, linestyle="--")
         ax.axhline(1.0, color="#777777", linewidth=0.7, linestyle=":")
-        ax.set_title(MODEL_LABEL[model])
-        ax.set_xlabel("Forecast horizon h")
+        ax.set_title(MODEL_LABEL[model], fontsize=10, fontweight="bold")
+        ax.set_xlabel("Forecast horizon h", fontsize=8.5)
         ax.set_xticks(range(1, 8))
         ax.grid(True, alpha=0.18)
-    axes[0].set_ylabel("Variance-retention ratio alpha")
-    axes[0].set_ylim(0, max(2.2, float(df["alpha"].quantile(0.98)) * 1.08))
-    fig.suptitle("Variance-retention profiles by horizon across 17 PM10 stations", y=1.02, fontsize=9.5)
+        
+    for row in range(3):
+        axes[row, 0].set_ylabel("Variance-retention ratio alpha", fontsize=8.5)
+        
+    legend_ax = axes_flat[5]
+    legend_ax.axis("off")
+    
+    handles = [
+        plt.Line2D([], [], color=color, linewidth=2, label=label.title())
+        for label, color in CLASS_COLORS.items()
+    ]
+    handles.append(plt.Line2D([], [], color="black", marker="D", linewidth=2, label="Station mean"))
+    legend_ax.legend(handles=handles, loc="center", frameon=True, facecolor="white", edgecolor="#D5D8DC", fontsize=9)
+    
+    max_alpha = max(2.2, float(df["alpha"].quantile(0.98)) * 1.08)
+    axes[0, 0].set_ylim(0, max_alpha)
+    
+    fig.suptitle("Variance-retention profiles by horizon across 17 PM10 stations", y=0.98, fontsize=11, fontweight="bold")
     fig.tight_layout()
     _save(fig, "figure4_alpha_profiles")
 
@@ -334,16 +365,22 @@ def _map_with_cartopy(points: pd.DataFrame) -> plt.Figure:
     fig = plt.figure(figsize=(7.2, 6.2))
     ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
     ax.set_extent([-10, 5, 35, 45], crs=ccrs.PlateCarree())
-    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor="#f4f1e8")
-    ax.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#d8edf5")
-    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), linewidth=0.6)
-    ax.add_feature(cfeature.BORDERS.with_scale("10m"), linewidth=0.35, linestyle=":")
-    ax.add_feature(cfeature.RIVERS.with_scale("10m"), linewidth=0.25, alpha=0.35)
+    
+    # Premium High-Contrast Colors: warm-white land, soft-blue ocean, distinct dark-slate borders/coastlines
+    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor="#FCFAF7")
+    ax.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#EAF2F8")
+    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), edgecolor="#2E4053", linewidth=0.8)
+    ax.add_feature(cfeature.BORDERS.with_scale("10m"), edgecolor="#4D5656", linewidth=0.8, linestyle="-")
+    ax.add_feature(cfeature.RIVERS.with_scale("10m"), edgecolor="#AED6F1", linewidth=0.3, alpha=0.45)
+    
+    # Regional autonomous community boundaries for premium local context inside Spain
+    ax.add_feature(cfeature.STATES.with_scale("10m"), edgecolor="#BDC3C7", linewidth=0.5, linestyle=":")
+    
     gl = ax.gridlines(draw_labels=True, linewidth=0.25, alpha=0.35)
     gl.top_labels = False
     gl.right_labels = False
     _plot_map_points(ax, points, transform=ccrs.PlateCarree())
-    ax.set_title("PM10 station map: collapse rate encoded by marker size")
+    ax.set_title("PM10 station map: collapse rate encoded by marker size", fontsize=10, fontweight="bold", pad=8)
     return fig
 
 
@@ -354,11 +391,17 @@ def _ml_map_with_cartopy(points: pd.DataFrame) -> plt.Figure:
     fig = plt.figure(figsize=(7.2, 6.2))
     ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
     ax.set_extent([-10, 5, 35, 45], crs=ccrs.PlateCarree())
-    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor="#f4f1e8")
-    ax.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#d8edf5")
-    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), linewidth=0.6)
-    ax.add_feature(cfeature.BORDERS.with_scale("10m"), linewidth=0.35, linestyle=":")
-    ax.add_feature(cfeature.RIVERS.with_scale("10m"), linewidth=0.25, alpha=0.35)
+    
+    # Premium High-Contrast Colors: warm-white land, soft-blue ocean, distinct dark-slate borders/coastlines
+    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor="#FCFAF7")
+    ax.add_feature(cfeature.OCEAN.with_scale("10m"), facecolor="#EAF2F8")
+    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), edgecolor="#2E4053", linewidth=0.8)
+    ax.add_feature(cfeature.BORDERS.with_scale("10m"), edgecolor="#4D5656", linewidth=0.8, linestyle="-")
+    ax.add_feature(cfeature.RIVERS.with_scale("10m"), edgecolor="#AED6F1", linewidth=0.3, alpha=0.45)
+    
+    # Regional autonomous community boundaries for premium local context inside Spain
+    ax.add_feature(cfeature.STATES.with_scale("10m"), edgecolor="#BDC3C7", linewidth=0.5, linestyle=":")
+    
     gl = ax.gridlines(draw_labels=True, linewidth=0.25, alpha=0.35)
     gl.top_labels = False
     gl.right_labels = False
@@ -369,7 +412,7 @@ def _ml_map_with_cartopy(points: pd.DataFrame) -> plt.Figure:
         size_legend_rates=sorted(points["collapse_rate"].unique()),
         legend_title="ML collapse rate",
     )
-    ax.set_title("PM10 station map: ML-only collapse rate encoded by marker size")
+    ax.set_title("PM10 station map: ML-only collapse rate encoded by marker size", fontsize=10, fontweight="bold", pad=8)
     return fig
 
 
@@ -414,16 +457,17 @@ def _plot_map_points(
 ) -> None:
     for _, row in points.iterrows():
         color = CLASS_COLORS.get(row["station_class"], "#777777")
-        size = 35 + 180 * row["collapse_rate"]
+        # Larger base size and scaling for much better visual clarity on markers
+        size = 40 + 220 * row["collapse_rate"]
         kwargs = {"transform": transform} if transform is not None else {}
         ax.scatter(
             row["lon"],
             row["lat"],
             s=size,
             color=color,
-            alpha=0.78,
+            alpha=0.88,
             edgecolor="white",
-            linewidth=0.7,
+            linewidth=0.8,
             zorder=5,
             **kwargs,
         )
@@ -432,14 +476,16 @@ def _plot_map_points(
         for label, color in CLASS_COLORS.items()
     ]
     for rate in size_legend_rates:
+        # High contrast slate markers in size legend for flawless legibility
         handles.append(
             plt.scatter(
                 [],
                 [],
-                s=35 + 180 * rate,
-                color="#777777",
-                alpha=0.45,
+                s=40 + 220 * rate,
+                color="#2C3E50",
+                alpha=0.85,
                 edgecolor="white",
+                linewidths=0.8,
                 label=f"{rate * 100:.1f}%",
             )
         )
