@@ -1,0 +1,15 @@
+aggregation,key,n_cells,rank_reversal_rate,top_skill_top_kge_mismatch_rate
+horizon,1,17,1.0,0.4117647058823529
+horizon,2,17,1.0,0.8235294117647058
+horizon,3,17,1.0,0.9411764705882353
+horizon,4,17,1.0,0.9411764705882353
+horizon,5,17,1.0,1.0
+horizon,6,17,1.0,1.0
+horizon,7,17,1.0,1.0
+top_kge_model,hgb_direct,4,1.0,1.0
+top_kge_model,ridge_direct,6,1.0,0.16666666666666666
+top_kge_model,sarima,20,1.0,0.5
+top_kge_model,seasonal_naive,89,1.0,1.0
+station_class,industrial,28,1.0,0.8571428571428571
+station_class,rural,28,1.0,0.8214285714285714
+station_class,urban,63,1.0,0.9047619047619048
