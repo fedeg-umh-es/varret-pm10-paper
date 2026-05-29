@@ -1,0 +1,11 @@
+station_type,n_stations,n_station_horizon_cells,median_spearman_skill_vs_kge,median_spearman_phi_vs_r,rank_reversal_rate,top_skill_top_kge_mismatch_cells
+Rural Near-city/Industrial,1,7,0.3,0.0,1.0,6
+Rural Remote EMEP,1,7,0.3999999999999999,-0.7999999999999999,1.0,6
+Rural Remote/Background,1,7,0.4999999999999999,-0.4999999999999999,1.0,5
+Rural Remote/Industrial,1,7,0.3,0.3,1.0,6
+Suburban/Industrial,3,21,0.0999999999999999,-0.4999999999999999,1.0,17
+Suburban/Traffic,1,7,0.3,0.3999999999999999,1.0,6
+Urban/Background,4,28,0.0999999999999999,-0.6,1.0,26
+Urban/Industrial,1,7,0.3,0.0,1.0,7
+Urban/Residential,1,7,0.3,-0.7999999999999999,1.0,6
+Urban/Traffic,3,21,0.3,-0.4999999999999999,1.0,19
