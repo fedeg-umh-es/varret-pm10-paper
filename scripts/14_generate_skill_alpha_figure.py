@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Paths
-BASE_DIR = Path("/Users/federicogarciacrespi/Public/varret-pm10-paper")
+BASE_DIR = Path(__file__).resolve().parent.parent
 MASTER_CSV = BASE_DIR / "outputs/tables/master_diagnostic_table.csv"
 OUT_COUNTS_CSV = BASE_DIR / "outputs/tables/skill_alpha_quadrant_counts.csv"
 OUT_FIG_PDF = BASE_DIR / "outputs/figures/figure_skill_alpha_five_models.pdf"

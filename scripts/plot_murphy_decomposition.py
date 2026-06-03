@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plot Murphy MSE decomposition by model and horizon."""
+"""Plot compact Murphy MSE decomposition by model."""
 
 from __future__ import annotations
 
@@ -30,22 +30,48 @@ def main() -> None:
     models = [m for m in MODEL_ORDER if m in set(df["model"])]
     if not models:
         models = sorted(df["model"].unique())
-    plt.rcParams.update({"font.family": "serif", "font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
-    fig, axes = plt.subplots(1, len(models), figsize=(3.2 * len(models), 3.6), sharey=True)
-    if len(models) == 1:
-        axes = [axes]
-    for ax, model in zip(axes, models):
-        profile = df[df["model"].eq(model)].groupby("horizon")[[c[0] for c in COMPONENTS]].mean().sort_index()
-        bottom = None
-        for component, label, color in COMPONENTS:
-            ax.bar(profile.index, profile[component], bottom=bottom, color=color, label=label, width=0.75)
-            bottom = profile[component] if bottom is None else bottom + profile[component]
-        ax.set_title(model)
-        ax.set_xlabel("h")
-        ax.set_xticks(profile.index)
-        ax.grid(axis="y", alpha=0.2)
-    axes[0].set_ylabel("MSE component")
-    axes[-1].legend(frameon=True, loc="best")
+    plt.rcParams.update({
+        "font.family": "serif",
+        "font.size": 10,
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+    })
+    rows = []
+    for model in models:
+        mdf = df[df["model"].eq(model)]
+        medians = {component: float(mdf[component].median()) for component, _, _ in COMPONENTS}
+        total = sum(medians.values())
+        row = {"model": model, "total": total}
+        for component, _, _ in COMPONENTS:
+            row[component] = 100.0 * medians[component] / total if total else 0.0
+        rows.append(row)
+    profile = pd.DataFrame(rows)
+
+    labels = {
+        "hgb_direct": "HGB",
+        "ridge_direct": "Ridge",
+        "sarima": "SARIMA",
+        "seasonal_naive": "Seasonal\nnaive",
+        "stl_ridge_direct": "STL+\nRidge",
+    }
+    x = range(len(profile))
+    fig, ax = plt.subplots(figsize=(7.4, 4.9))
+    bottom = [0.0] * len(profile)
+    for component, label, color in COMPONENTS:
+        values = profile[component].to_list()
+        ax.bar(x, values, bottom=bottom, color=color, width=0.68, label=label, edgecolor="white", linewidth=0.7)
+        bottom = [b + v for b, v in zip(bottom, values)]
+
+    for idx, row in profile.iterrows():
+        ax.text(idx, 103, f"MSE\n{row['total']:.0f}", ha="center", va="bottom", fontsize=8)
+
+    ax.set_xticks(list(x))
+    ax.set_xticklabels([labels.get(model, model) for model in profile["model"]])
+    ax.set_ylim(0, 116)
+    ax.set_ylabel("Median component share of MSE (%)")
+    ax.set_title("Murphy decomposition: relative error structure by model")
+    ax.grid(axis="y", alpha=0.22)
+    ax.legend(frameon=True, ncol=3, loc="upper center", bbox_to_anchor=(0.5, -0.12))
     fig.tight_layout()
     args.output_stem.parent.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):

@@ -4,6 +4,9 @@ __pycache__/
 *.py[cod]
 .DS_Store
 *.egg-info/
+tmp/
+*.log
+varret_pm10_paper\ *.pdf
 
 outputs/*
 !outputs/.gitkeep
@@ -29,5 +32,6 @@ data/interim/*
 !data/interim/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+data/miteco_cache/
 
 airquality_datasets/**

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import numpy as np
 import pandas as pd
 
@@ -9,6 +11,86 @@ from src.data.schema import VARIANCE_SUMMARY_COLUMNS
 from src.data.validation import require_columns
 
 MIN_N_PER_GROUP = 30
+
+
+@dataclass(frozen=True)
+class VarianceDiagnosticFlags:
+    collapse_flag: bool
+    inflation_flag: bool
+    near_ideal_flag: bool
+
+
+def detect_variance_collapse(alpha: float, threshold: float = 0.5) -> bool:
+    """Return True when alpha indicates variance collapse."""
+    return bool(np.isfinite(alpha) and alpha < threshold)
+
+
+def variance_diagnostic_flags(
+    alpha: float,
+    skill: float = 0.0,
+    collapse_threshold: float = 0.5,
+    inflation_threshold: float = 1.5,
+) -> VarianceDiagnosticFlags:
+    """Build simple variance-retention diagnostic flags."""
+    collapse = detect_variance_collapse(alpha, threshold=collapse_threshold)
+    inflation = bool(np.isfinite(alpha) and alpha > inflation_threshold)
+    near_ideal = bool(np.isfinite(alpha) and skill > 0.0 and 0.8 <= alpha <= 1.2)
+    return VarianceDiagnosticFlags(
+        collapse_flag=collapse,
+        inflation_flag=inflation,
+        near_ideal_flag=near_ideal,
+    )
+
+
+def build_variance_retention_table(fold_metrics_df: pd.DataFrame, skill_df: pd.DataFrame) -> pd.DataFrame:
+    """Build the compact variance-retention table used by diagnostics tests."""
+    require_columns(
+        fold_metrics_df,
+        ["dataset", "model", "horizon", "y_true", "y_pred"],
+        "fold_metrics_df",
+    )
+    skill_col = "skill_vs_baseline" if "skill_vs_baseline" in skill_df.columns else "skill"
+    require_columns(skill_df, ["dataset", "model", "horizon", skill_col], "skill_df")
+
+    rows: list[dict[str, object]] = []
+    for (dataset, model, horizon), group in fold_metrics_df.groupby(["dataset", "model", "horizon"], sort=True):
+        alpha = _compute_alpha(group)
+        matched = skill_df[
+            skill_df["dataset"].eq(dataset)
+            & skill_df["model"].eq(model)
+            & skill_df["horizon"].eq(horizon)
+        ]
+        if matched.empty:
+            continue
+        skill = float(matched.iloc[0][skill_col])
+        flags = variance_diagnostic_flags(alpha=alpha, skill=skill)
+        rows.append(
+            {
+                "dataset": dataset,
+                "model": model,
+                "horizon": int(horizon),
+                "skill": skill,
+                "alpha": alpha,
+                "skill_vp": skill * min(1.0, max(0.0, alpha)),
+                "collapse_flag": flags.collapse_flag,
+                "inflation_flag": flags.inflation_flag,
+                "near_ideal_flag": flags.near_ideal_flag,
+            }
+        )
+
+    return pd.DataFrame(rows)[
+        [
+            "dataset",
+            "model",
+            "horizon",
+            "skill",
+            "alpha",
+            "skill_vp",
+            "collapse_flag",
+            "inflation_flag",
+            "near_ideal_flag",
+        ]
+    ].sort_values(["dataset", "model", "horizon"]).reset_index(drop=True)
 
 
 def build_variance_retention_summary(predictions_df: pd.DataFrame, skill_df: pd.DataFrame) -> pd.DataFrame:

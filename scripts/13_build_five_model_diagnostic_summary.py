@@ -6,13 +6,12 @@ Aggregate five-model PM10 forecast runs and generate:
 - Terminal summary with recommendations
 """
 
-import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
 # Paths
-BASE_DIR = Path("/Users/federicogarciacrespi/Public/varret-pm10-paper")
+BASE_DIR = Path(__file__).resolve().parents[1]
 MASTER_CSV = BASE_DIR / "outputs/tables/master_diagnostic_table.csv"
 EXCEEDANCE_CSV = BASE_DIR / "outputs/tables/exceedance_all_stations.csv"
 MURPHY_CSV = BASE_DIR / "outputs/tables/murphy_decomposition_all_stations.csv"

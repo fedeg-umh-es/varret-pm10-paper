@@ -1,13 +1,22 @@
-# P33 — Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting Under Rolling-Origin Evaluation
+# P33 — Variance Retention Diagnostic for Persistence-Relative Skill in Daily PM10 Forecasting
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20185328.svg)](https://doi.org/10.5281/zenodo.20185328)
 
-This repository is a paper-first research codebase for P33. It is designed to support a reproducible analysis of whether positive multi-horizon forecasting skill for daily PM10 under rolling-origin evaluation reflects credible operational value or instead coincides with variance collapse and plausible ghost skill.
+This repository is a paper-first research codebase for the PM10 variance-retention
+paper. It supports a reproducible analysis of whether positive multi-horizon
+forecasting skill for daily PM10 under rolling-origin evaluation can coexist with
+forecast-trajectory variance collapse.
+
+The active manuscript source is Overleaf. Local TeX/PDF files are treated as
+exports or historical snapshots unless explicitly synchronized from Overleaf.
+The target submission strategy is Q1, with the paper positioned as a restrained
+post-evaluation diagnostic study rather than a new model paper.
 
 ## Current Work Package
 
 The active scope is restricted to the post-evaluation of E1-RR outputs through variance retention, `alpha`, and `skill_vp` diagnostics.
 
-Do not mix this work package with E2-MET, E3-PROB, meteorological ablations, probabilistic extensions, or new model-family exploration.
+Do not mix this work package with E2-MET, E3-PROB, meteorological ablations,
+probabilistic extensions, or new model-family exploration.
 
 See `docs/e1_rr_post_evaluation_contract.md` before running or modifying the pipeline.
 
@@ -21,7 +30,7 @@ P33 evaluates whether a model can outperform a persistence baseline across horiz
 
 High skill with `alpha` near 1 supports stronger dynamic credibility. High skill with very low `alpha` is treated as a plausible ghost-skill pattern.
 
-## Scope
+## Scope for the Q1 version
 
 In scope:
 
@@ -29,10 +38,11 @@ In scope:
 - leakage-free rolling-origin evaluation
 - train-only preprocessing when needed inside each split
 - persistence as mandatory baseline
-- optional seasonal persistence if temporal structure justifies it
-- linear or autoregressive models
-- one boosting tabular model with lagged inputs
+- linear/direct lag-only model
+- one lag-based boosting or histogram-gradient model
 - variance-retention diagnostics and final tabular outputs for the paper
+- event/exceedance relevance and Murphy-style decomposition only when they
+  directly support the variance-collapse claim
 
 Out of scope:
 
@@ -41,6 +51,8 @@ Out of scope:
 - additional model families
 - unrelated exploratory analyses
 - generic public API design
+- H* cross-domain claims from `paper2H`
+- treating `Skill_VP` as a universal replacement for RMSE, skill, or formal tests
 
 ## Repository Layout
 
@@ -105,6 +117,10 @@ Required project output:
 8. Build the variance-retention summary table.
 9. Write a run summary referencing the final P33 output table.
 
+For submission cleanup, every manuscript figure/table should map to one artifact
+under `outputs/figures/`, `outputs/tables/`, or `outputs/metrics/`. Duplicate
+root-level figure exports are treated as convenience copies only.
+
 ## Execution
 
 Install dependencies:
@@ -136,6 +152,11 @@ pytest
 ## Notes
 
 This repository is oriented to the P33 paper workflow rather than a general-purpose forecasting package. The implementation is intentionally restrained, explicit, and auditable.
+
+## Companion KGE Note
+
+A consolidated companion-note package for the horizon-wise KGE diagnostic is indexed in `docs/companion_kge/`. It documents the post-evaluation KGE analysis, final tables and figures, supported claims, limitations, and manuscript drafting scaffold without regenerating the base forecasts.
+
 ## Citation
 
 If you use this software, please cite:
