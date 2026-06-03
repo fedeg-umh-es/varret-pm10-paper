@@ -253,7 +253,7 @@ def figure5_skill_alpha(df: pd.DataFrame) -> None:
     ax.grid(True, linestyle=":", linewidth=0.6, alpha=0.42)
     ax.legend(frameon=True, loc="lower left")
     fig.tight_layout()
-    _save_many(fig, ["figure5_scatter_skill_alpha", "figure_skill_alpha_five_models"])
+    _save(fig, "figure5_scatter_skill_alpha")
 
 
 def figure6_collapse_rates(df: pd.DataFrame) -> None:

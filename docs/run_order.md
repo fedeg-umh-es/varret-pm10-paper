@@ -48,12 +48,14 @@ python3 scripts/make_alpha_threshold_sensitivity.py
 python3 scripts/06_threshold_sensitivity.py
 ```
 
-Run the final tables and figures:
+Run the final tables and figures. Keep `scripts/14_generate_skill_alpha_figure.py`
+after `scripts/10_generate_all_figures.py` because it owns the final
+`figure_skill_alpha_five_models.*` artifact.
 
 ```bash
 python3 scripts/13_build_five_model_diagnostic_summary.py
-python3 scripts/14_generate_skill_alpha_figure.py
 python3 scripts/10_generate_all_figures.py
+python3 scripts/14_generate_skill_alpha_figure.py
 ```
 
 ## 3. Validation
