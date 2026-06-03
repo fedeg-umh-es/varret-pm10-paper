@@ -1,0 +1,10 @@
+figure_id,figure_file,input_files,variables_used,generated,omission_reason
+fig01,fig01_station_map.pdf,master_diagnostic_table.csv,"lat, lon, station_class, collapse_flag",yes,
+fig02,fig02_evaluation_workflow.pdf,(conceptual — no data input),N/A,yes,
+fig03,fig03_station_horizon_heatmap.pdf,master_diagnostic_table.csv,"station_name, horizon, alpha, model_family",yes,
+fig04,fig04_horizon_distribution.pdf,master_diagnostic_table.csv,"horizon, skill, alpha",yes,
+fig05,fig05_skill_variance_plane.pdf,master_diagnostic_table.csv,"alpha, skill, model_family",yes,
+fig06,fig06_station_collapse_rates.pdf,master_diagnostic_table.csv,"station_name, station_class, collapse_flag",yes,
+fig07,fig07_exceedance_diagnostics.pdf,exceedance_all_stations.csv,"threshold_type, model_family, recall, f1",yes,
+fig08,fig08_murphy_decomposition.pdf,murphy_decomposition_all_stations.csv,"model_family, bias_sq, cond_bias_sq, irreducible_sq",yes,
+fig09,fig09_episode_timeseries.pdf,predictions_all_stations.csv,"date, y_true, y_pred, model, station_id",yes,

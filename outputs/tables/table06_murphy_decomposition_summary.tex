@@ -1,0 +1,10 @@
+\begin{tabular}{lrrrrrrrr}
+\toprule
+model\_family & median\_mse & median\_bias\_sq & median\_cond\_bias\_sq & median\_irreducible\_sq & n\_cells & bias\_pct & cond\_bias\_pct & irreducible\_pct \\
+\midrule
+Direct ML & 91.5985 & 0.2920 & 1.3851 & 89.7779 & 238 & 0.3200 & 1.5100 & 98.1700 \\
+Decomposition + Ridge & 701.3793 & 445.8632 & 94.4670 & 94.4890 & 119 & 70.2300 & 14.8800 & 14.8800 \\
+Statistical baseline & 82.7796 & 0.2003 & 0.7536 & 80.1423 & 119 & 0.2500 & 0.9300 & 98.8200 \\
+Variance-preserving naive & 163.7590 & 0.0076 & 64.0407 & 97.8840 & 119 & 0.0000 & 39.5500 & 60.4500 \\
+\bottomrule
+\end{tabular}
