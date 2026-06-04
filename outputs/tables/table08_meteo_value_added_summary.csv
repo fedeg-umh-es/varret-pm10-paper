@@ -1,0 +1,3 @@
+network,n_stations,n_horizons,median_delta_skill_rmse_pct,mean_delta_skill_rmse_pct,max_delta_skill_rmse_pct,pct_horizons_positive,dm_significant_cells,dm_total_cells,median_phi_lags_only,median_phi_lags_meteo,delta_phi
+Madrid,15,24,4.25,4.37,12.13,87.5,1,4,0.6324,0.6673,0.0349
+Ireland,8,24,2.1,2.35,17.99,76.6,6,32,,,

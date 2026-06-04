@@ -1,0 +1,5 @@
+condition,model,H,H_star_relax,H_star_strict
+reference,persistence,24,0,0
+reference,sarima,24,20,8
+lags_meteo,xgboost_direct,24,17,17
+lags_only,xgboost_direct,24,15,9

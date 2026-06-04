@@ -1,0 +1,33 @@
+station,condition,model,H,H_star_relax,H_star_strict
+Birr co offlay,reference,persistence,24,0,0
+Birr co offlay,reference,sarima,24,24,16
+Birr co offlay,lags_meteo,xgboost_direct,24,24,24
+Birr co offlay,lags_only,xgboost_direct,24,24,24
+Dublin Airport,reference,persistence,24,0,0
+Dublin Airport,reference,sarima,24,24,24
+Dublin Airport,lags_meteo,xgboost_direct,24,24,23
+Dublin Airport,lags_only,xgboost_direct,24,24,22
+Dundalk Co Louth,reference,persistence,24,0,0
+Dundalk Co Louth,reference,sarima,24,24,18
+Dundalk Co Louth,lags_meteo,xgboost_direct,24,24,24
+Dundalk Co Louth,lags_only,xgboost_direct,24,24,24
+Pearse street dublin,reference,persistence,24,0,0
+Pearse street dublin,reference,sarima,24,23,17
+Pearse street dublin,lags_meteo,xgboost_direct,24,24,24
+Pearse street dublin,lags_only,xgboost_direct,24,24,24
+Ringsend dublin,reference,persistence,24,0,0
+Ringsend dublin,reference,sarima,24,20,9
+Ringsend dublin,lags_meteo,xgboost_direct,24,24,24
+Ringsend dublin,lags_only,xgboost_direct,24,24,24
+edenderry co offlay,reference,persistence,24,0,0
+edenderry co offlay,reference,sarima,24,21,9
+edenderry co offlay,lags_meteo,xgboost_direct,24,24,16
+edenderry co offlay,lags_only,xgboost_direct,24,24,16
+henry street Limerick,reference,persistence,24,0,0
+henry street Limerick,reference,sarima,24,17,4
+henry street Limerick,lags_meteo,xgboost_direct,24,24,24
+henry street Limerick,lags_only,xgboost_direct,24,24,18
+porrlaoise co laois,reference,persistence,24,0,0
+porrlaoise co laois,reference,sarima,24,17,17
+porrlaoise co laois,lags_meteo,xgboost_direct,24,24,24
+porrlaoise co laois,lags_only,xgboost_direct,24,24,24

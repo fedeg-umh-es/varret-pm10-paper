@@ -1,0 +1,37 @@
+network,station,horizon,n,dm_stat,p_value,favours,significant
+Madrid,aggregated,1,354,1.1690171716711577,0.2431855134234476,lags_meteo,False
+Madrid,aggregated,6,356,-0.048395868067895,0.9614279675871852,lags_only,False
+Madrid,aggregated,12,346,2.5158855136761615,0.0123268176090465,lags_meteo,True
+Madrid,aggregated,24,354,0.8468743743798238,0.3976389144310406,lags_meteo,False
+Ireland,Birr co offlay,1,211,3.020345010365623,0.0028380926591849,lags_meteo,True
+Ireland,Birr co offlay,6,212,0.6435425590655438,0.5205709359905929,lags_meteo,False
+Ireland,Birr co offlay,12,212,0.0563178093664838,0.9551419245664672,lags_meteo,False
+Ireland,Birr co offlay,24,212,0.6359863503833045,0.5254745475182212,lags_meteo,False
+Ireland,Dublin Airport,1,145,0.4434294894138266,0.6581206235170214,lags_meteo,False
+Ireland,Dublin Airport,6,145,-0.6585272081607807,0.5112509450252096,lags_only,False
+Ireland,Dublin Airport,12,145,-0.6523755218345845,0.51519898778645,lags_only,False
+Ireland,Dublin Airport,24,145,2.324122389675176,0.0215175821820621,lags_meteo,True
+Ireland,Dundalk Co Louth,1,151,1.6438490595828377,0.1023017324013339,lags_meteo,False
+Ireland,Dundalk Co Louth,6,152,2.913485987166877,0.0041175850073424,lags_meteo,True
+Ireland,Dundalk Co Louth,12,153,-0.0554716560159187,0.9558355575798972,lags_only,False
+Ireland,Dundalk Co Louth,24,152,1.5377387915434788,0.126205331519879,lags_meteo,False
+Ireland,Pearse street dublin,1,212,2.1904135690671356,0.0295897939026751,lags_meteo,True
+Ireland,Pearse street dublin,6,212,2.6533596998836786,0.0085759824541612,lags_meteo,True
+Ireland,Pearse street dublin,12,212,1.6621202731405011,0.0979735338864807,lags_meteo,False
+Ireland,Pearse street dublin,24,212,0.8012651949204724,0.4238795099472316,lags_meteo,False
+Ireland,Ringsend dublin,1,212,0.9875536631081792,0.3245023778147674,lags_meteo,False
+Ireland,Ringsend dublin,6,212,-0.5489316580227804,0.5836327616858441,lags_only,False
+Ireland,Ringsend dublin,12,212,0.7134309250827225,0.4763674810962844,lags_meteo,False
+Ireland,Ringsend dublin,24,212,1.3506271028745176,0.1782616379908484,lags_meteo,False
+Ireland,edenderry co offlay,1,208,-1.1181897996053158,0.2647819487068053,lags_only,False
+Ireland,edenderry co offlay,6,211,-0.9120224438588196,0.3628026742919094,lags_only,False
+Ireland,edenderry co offlay,12,211,0.434827747027331,0.6641339678013067,lags_meteo,False
+Ireland,edenderry co offlay,24,210,0.8658418950010599,0.3875696968683038,lags_meteo,False
+Ireland,henry street Limerick,1,211,1.551297555830404,0.1223361207005334,lags_meteo,False
+Ireland,henry street Limerick,6,211,-1.1185092938283414,0.2646273712933201,lags_only,False
+Ireland,henry street Limerick,12,210,0.3304224193995371,0.7414117918904573,lags_meteo,False
+Ireland,henry street Limerick,24,211,0.7110412806375731,0.477847654259143,lags_meteo,False
+Ireland,porrlaoise co laois,1,212,0.6183100708382967,0.5370378213575423,lags_meteo,False
+Ireland,porrlaoise co laois,6,212,-1.4684830194599947,0.1434622746745422,lags_only,False
+Ireland,porrlaoise co laois,12,212,2.790819794727251,0.0057395199029202,lags_meteo,True
+Ireland,porrlaoise co laois,24,212,,,undetermined,False

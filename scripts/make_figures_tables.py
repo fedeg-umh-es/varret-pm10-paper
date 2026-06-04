@@ -10,6 +10,8 @@ Inputs:
     outputs/tables/murphy_decomposition_all_stations.csv
     outputs/tables/exceedance_all_stations.csv
     outputs/metrics/predictions_all_stations.csv
+    data/external/madrid_meteo/*.csv  (from benchmark-pm-hstar)
+    data/external/ireland_meteo/*.csv (from benchmark-pm-hstar)
 
 Outputs:
     outputs/figures/fig01_station_map.{pdf,png}
@@ -21,6 +23,9 @@ Outputs:
     outputs/figures/fig07_exceedance_diagnostics.{pdf,png}
     outputs/figures/fig08_murphy_decomposition.{pdf,png}
     outputs/figures/fig09_episode_timeseries.{pdf,png}
+    outputs/figures/fig10_meteo_delta_skill_by_horizon.{pdf,png}
+    outputs/figures/fig11_meteo_phi_comparison.{pdf,png}
+    outputs/figures/fig12_meteo_ablation.{pdf,png}
     outputs/tables/table01_model_family_diagnostic_summary.{csv,tex}
     outputs/tables/table02_horizon_diagnostic_summary.{csv,tex}
     outputs/tables/table03_station_diagnostic_summary.{csv,tex}
@@ -28,6 +33,8 @@ Outputs:
     outputs/tables/table05_exceedance_summary.{csv,tex}
     outputs/tables/table06_murphy_decomposition_summary.{csv,tex}
     outputs/tables/table07_figure_source_mapping.csv
+    outputs/tables/table08_meteo_value_added_summary.{csv,tex}
+    outputs/tables/table09_meteo_dm_significance.{csv,tex}
 
 This script does NOT modify any .tex manuscript files.
 """
@@ -652,6 +659,297 @@ def table06_murphy_summary(murphy_df):
 
 
 # ---------------------------------------------------------------------------
+# Meteorology data loaders
+# ---------------------------------------------------------------------------
+METEO_DIR_MADRID = ROOT / "data" / "external" / "madrid_meteo"
+METEO_DIR_IRELAND = ROOT / "data" / "external" / "ireland_meteo"
+
+
+def load_meteo_data():
+    data = {}
+    madrid_delta = METEO_DIR_MADRID / "table_delta_lags_meteo_vs_lags_only.csv"
+    madrid_master = METEO_DIR_MADRID / "master_meteorology_diagnostic_table.csv"
+    madrid_ablation = METEO_DIR_MADRID / "meteorology_ablation_summary.csv"
+    madrid_dm = METEO_DIR_MADRID / "dm_lags_meteo_vs_lags_only.csv"
+    ireland_delta = METEO_DIR_IRELAND / "table_delta_skill_meteo_vs_lags.csv"
+    ireland_dm = METEO_DIR_IRELAND / "dm_lags_meteo_vs_lags_only.csv"
+
+    if not madrid_delta.exists() or not ireland_delta.exists():
+        log("WARNING: Meteorology data not found in data/external/ — meteo figures/tables will be skipped")
+        return None
+
+    data["madrid_delta"] = pd.read_csv(madrid_delta)
+    data["madrid_master"] = pd.read_csv(madrid_master)
+    data["madrid_ablation"] = pd.read_csv(madrid_ablation)
+    data["madrid_dm"] = pd.read_csv(madrid_dm)
+    data["ireland_delta"] = pd.read_csv(ireland_delta)
+    data["ireland_dm"] = pd.read_csv(ireland_dm)
+    log(f"Loaded meteorology data: Madrid ({len(data['madrid_master'])} rows master, "
+        f"{len(data['madrid_delta'])} horizons delta), Ireland ({len(data['ireland_delta'])} rows delta)")
+    return data
+
+
+# ---------------------------------------------------------------------------
+# FIGURE 10 — Meteorological value-added: delta skill by horizon (Madrid + Ireland)
+# ---------------------------------------------------------------------------
+def fig10_meteo_delta_skill(meteo):
+    if meteo is None:
+        omitted.append(("fig10_meteo_delta_skill_by_horizon", "meteorology data not found"))
+        return
+    log("Generating fig10_meteo_delta_skill_by_horizon...")
+
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+
+    # Madrid — single aggregated curve
+    md = meteo["madrid_delta"]
+    ax = axes[0]
+    ax.bar(md["horizon"], md["delta_skill_rmse_meteo_minus_lags"] * 100,
+           color="#1f77b4", alpha=0.7, edgecolor="white", linewidth=0.5)
+    ax.axhline(0, color="k", ls="-", lw=0.5)
+    ax.set_xlabel("Forecast horizon (hours)")
+    ax.set_ylabel("Δ Skill (meteo − lags-only) [percentage points]")
+    ax.set_title("Madrid (15 stations, aggregated)")
+    ax.grid(True, axis="y", alpha=0.3)
+
+    # Mark significant DM horizons
+    dm_m = meteo["madrid_dm"]
+    sig_m = dm_m[dm_m["p_value"] < 0.05]
+    for _, row in sig_m.iterrows():
+        h = row["horizon"]
+        val = md.loc[md["horizon"] == h, "delta_skill_rmse_meteo_minus_lags"].values
+        if len(val) > 0:
+            ax.annotate("*", xy=(h, val[0] * 100), ha="center", va="bottom",
+                        fontsize=14, fontweight="bold", color="red")
+
+    # Ireland — per-station lines
+    ir = meteo["ireland_delta"]
+    ax = axes[1]
+    for station in sorted(ir["station"].unique()):
+        sub = ir[ir["station"] == station].sort_values("horizon")
+        ax.plot(sub["horizon"], sub["delta_skill_rmse_meteo_minus_lags"] * 100,
+                "o-", ms=3, lw=0.8, alpha=0.5, label=station)
+    median_ir = ir.groupby("horizon")["delta_skill_rmse_meteo_minus_lags"].median() * 100
+    ax.plot(median_ir.index, median_ir.values, "k-", lw=2, label="Median", zorder=10)
+    ax.axhline(0, color="k", ls="-", lw=0.5)
+    ax.set_xlabel("Forecast horizon (hours)")
+    ax.set_title("Ireland (8 stations, per-station)")
+    ax.grid(True, axis="y", alpha=0.3)
+
+    # Mark significant DM tests
+    dm_i = meteo["ireland_dm"]
+    sig_i = dm_i[dm_i["p_value"] < 0.05]
+    sig_label_added = False
+    for _, row in sig_i.iterrows():
+        h = row["horizon"]
+        st = row["station"]
+        val = ir.loc[(ir["horizon"] == h) & (ir["station"] == st),
+                     "delta_skill_rmse_meteo_minus_lags"].values
+        if len(val) > 0:
+            lbl = "DM p < 0.05" if not sig_label_added else ""
+            ax.plot(h, val[0] * 100, "r*", ms=10, zorder=15, label=lbl)
+            sig_label_added = True
+
+    ax.legend(fontsize=6, ncol=2, loc="upper right")
+
+    fig.suptitle("Meteorological value-added: Δ persistence-relative skill (RMSE)\n"
+                 "lags + meteorology vs. lags only — XGBoost direct", fontsize=11)
+    fig.tight_layout()
+    savefig(fig, "fig10_meteo_delta_skill_by_horizon")
+
+
+# ---------------------------------------------------------------------------
+# FIGURE 11 — Variance retention (φ_h) with vs. without meteorology
+# ---------------------------------------------------------------------------
+def fig11_meteo_phi_comparison(meteo):
+    if meteo is None:
+        omitted.append(("fig11_meteo_phi_comparison", "meteorology data not found"))
+        return
+    log("Generating fig11_meteo_phi_comparison...")
+
+    m = meteo["madrid_master"]
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+    # Panel A: phi_h by horizon, both conditions
+    for ax, cond, color, label in [
+        (axes[0], "lag_only", "#d62728", "Lags only"),
+        (axes[0], "lag_plus_met", "#1f77b4", "Lags + meteorology"),
+    ]:
+        sub = m[m["condition"] == cond]
+        med = sub.groupby("horizon")["phi_h"].median()
+        q25 = sub.groupby("horizon")["phi_h"].quantile(0.25)
+        q75 = sub.groupby("horizon")["phi_h"].quantile(0.75)
+        ax.plot(med.index, med.values, "o-", color=color, ms=4, lw=1.5, label=label)
+        ax.fill_between(med.index, q25.values, q75.values, color=color, alpha=0.15)
+
+    axes[0].axhline(0.5, color="red", ls=":", lw=1, alpha=0.5, label="Collapse threshold (φ = 0.5)")
+    axes[0].axhline(1.0, color="green", ls=":", lw=1, alpha=0.5, label="Perfect retention (φ = 1)")
+    axes[0].set_xlabel("Forecast horizon (hours)")
+    axes[0].set_ylabel("Variance retention ratio (φ_h)")
+    axes[0].set_title("(a) Median φ_h by horizon")
+    axes[0].legend(fontsize=7)
+    axes[0].grid(True, alpha=0.3)
+    axes[0].set_ylim(0, 1.5)
+
+    # Panel B: scatter φ_h lags-only vs lags+met
+    pivot = m.pivot_table(values="phi_h", index=["station", "horizon"], columns="condition")
+    axes[1].scatter(pivot["lag_only"], pivot["lag_plus_met"],
+                    s=15, alpha=0.4, c="#1f77b4", edgecolors="none")
+    lims = [0, max(pivot.max().max() + 0.1, 1.5)]
+    axes[1].plot(lims, lims, "k--", lw=1, alpha=0.5, label="y = x")
+    axes[1].axhline(0.5, color="red", ls=":", lw=0.8, alpha=0.4)
+    axes[1].axvline(0.5, color="red", ls=":", lw=0.8, alpha=0.4)
+    axes[1].set_xlabel("φ_h (lags only)")
+    axes[1].set_ylabel("φ_h (lags + meteorology)")
+    axes[1].set_title("(b) Pairwise φ_h comparison (station × horizon)")
+    axes[1].set_xlim(lims)
+    axes[1].set_ylim(lims)
+    axes[1].set_aspect("equal")
+    axes[1].legend(fontsize=8)
+    axes[1].grid(True, alpha=0.3)
+
+    n_below_both = ((pivot["lag_only"] < 0.5) & (pivot["lag_plus_met"] < 0.5)).sum()
+    n_total = len(pivot)
+    axes[1].text(0.05, 0.95, f"{n_below_both}/{n_total} cells collapsed\nin both conditions",
+                 transform=axes[1].transAxes, fontsize=8, va="top",
+                 bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.5))
+
+    fig.suptitle("Variance retention with vs. without meteorological covariates\n"
+                 "Ireland + Madrid pooled (XGBoost direct)", fontsize=11)
+    fig.tight_layout()
+    savefig(fig, "fig11_meteo_phi_comparison")
+
+
+# ---------------------------------------------------------------------------
+# FIGURE 12 — Meteorology ablation (Madrid)
+# ---------------------------------------------------------------------------
+def fig12_meteo_ablation(meteo):
+    if meteo is None:
+        omitted.append(("fig12_meteo_ablation", "meteorology data not found"))
+        return
+    log("Generating fig12_meteo_ablation...")
+
+    abl = meteo["madrid_ablation"]
+    # Filter to rows with delta (exclude lag_only baseline)
+    abl = abl[abl["condition"] != "lag_only"].copy()
+
+    condition_labels = {
+        "lag_plus_met_all": "All meteo",
+        "lag_plus_rh": "+ Humidity",
+        "lag_plus_temp": "+ Temperature",
+        "lag_plus_wind": "+ Wind",
+    }
+    abl["label"] = abl["condition"].map(condition_labels)
+    abl = abl.dropna(subset=["label"])
+
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+    # Panel A: delta skill
+    ax = axes[0]
+    colors = ["#2ca02c", "#1f77b4", "#ff7f0e", "#d62728"]
+    bars = ax.barh(range(len(abl)), abl["delta_skill_vs_lag_only"] * 100,
+                   color=colors[:len(abl)], edgecolor="white")
+    ax.set_yticks(range(len(abl)))
+    ax.set_yticklabels(abl["label"])
+    ax.set_xlabel("Δ Skill vs. lags-only [percentage points]")
+    ax.set_title("(a) Skill improvement")
+    ax.axvline(0, color="k", lw=0.5)
+    ax.grid(True, axis="x", alpha=0.3)
+
+    # Panel B: delta phi
+    ax = axes[1]
+    bars = ax.barh(range(len(abl)), abl["delta_phi_vs_lag_only"],
+                   color=colors[:len(abl)], edgecolor="white")
+    ax.set_yticks(range(len(abl)))
+    ax.set_yticklabels(abl["label"])
+    ax.set_xlabel("Δ φ (variance retention) vs. lags-only")
+    ax.set_title("(b) Variance retention change")
+    ax.axvline(0, color="k", lw=0.5)
+    ax.grid(True, axis="x", alpha=0.3)
+
+    fig.suptitle("Meteorological covariate ablation — Madrid PM$_{10}$\n"
+                 "(XGBoost direct, median across stations × horizons)", fontsize=11)
+    fig.tight_layout()
+    savefig(fig, "fig12_meteo_ablation")
+
+
+# ---------------------------------------------------------------------------
+# TABLE 8 — Meteorological value-added summary
+# ---------------------------------------------------------------------------
+def table08_meteo_value_added(meteo):
+    if meteo is None:
+        omitted.append(("table08_meteo_value_added_summary", "meteorology data not found"))
+        return
+    log("Generating table08_meteo_value_added_summary...")
+
+    rows = []
+
+    # Madrid aggregated
+    md = meteo["madrid_delta"]
+    rows.append({
+        "network": "Madrid",
+        "n_stations": 15,
+        "n_horizons": len(md),
+        "median_delta_skill_rmse_pct": round(md["delta_skill_rmse_meteo_minus_lags"].median() * 100, 2),
+        "mean_delta_skill_rmse_pct": round(md["delta_skill_rmse_meteo_minus_lags"].mean() * 100, 2),
+        "max_delta_skill_rmse_pct": round(md["delta_skill_rmse_meteo_minus_lags"].max() * 100, 2),
+        "pct_horizons_positive": round((md["delta_skill_rmse_meteo_minus_lags"] > 0).sum() / len(md) * 100, 1),
+        "dm_significant_cells": len(meteo["madrid_dm"][meteo["madrid_dm"]["p_value"] < 0.05]),
+        "dm_total_cells": len(meteo["madrid_dm"]),
+    })
+
+    # Ireland per-station
+    ir = meteo["ireland_delta"]
+    rows.append({
+        "network": "Ireland",
+        "n_stations": ir["station"].nunique(),
+        "n_horizons": ir["horizon"].nunique(),
+        "median_delta_skill_rmse_pct": round(ir["delta_skill_rmse_meteo_minus_lags"].median() * 100, 2),
+        "mean_delta_skill_rmse_pct": round(ir["delta_skill_rmse_meteo_minus_lags"].mean() * 100, 2),
+        "max_delta_skill_rmse_pct": round(ir["delta_skill_rmse_meteo_minus_lags"].max() * 100, 2),
+        "pct_horizons_positive": round((ir["delta_skill_rmse_meteo_minus_lags"] > 0).sum() / len(ir) * 100, 1),
+        "dm_significant_cells": len(meteo["ireland_dm"][meteo["ireland_dm"]["p_value"] < 0.05]),
+        "dm_total_cells": len(meteo["ireland_dm"]),
+    })
+
+    # Phi comparison (from Madrid master)
+    m = meteo["madrid_master"]
+    phi_lag = m[m["condition"] == "lag_only"]["phi_h"].median()
+    phi_met = m[m["condition"] == "lag_plus_met"]["phi_h"].median()
+    for r in rows:
+        if r["network"] == "Madrid":
+            r["median_phi_lags_only"] = round(phi_lag, 4)
+            r["median_phi_lags_meteo"] = round(phi_met, 4)
+            r["delta_phi"] = round(phi_met - phi_lag, 4)
+
+    df = pd.DataFrame(rows)
+    save_table(df, "table08_meteo_value_added_summary")
+
+
+# ---------------------------------------------------------------------------
+# TABLE 9 — DM significance for meteorology comparison
+# ---------------------------------------------------------------------------
+def table09_meteo_dm_significance(meteo):
+    if meteo is None:
+        omitted.append(("table09_meteo_dm_significance", "meteorology data not found"))
+        return
+    log("Generating table09_meteo_dm_significance...")
+
+    # Combine Madrid and Ireland DM results
+    dm_m = meteo["madrid_dm"].copy()
+    dm_m["network"] = "Madrid"
+    dm_m["station"] = "aggregated"
+
+    dm_i = meteo["ireland_dm"].copy()
+    dm_i["network"] = "Ireland"
+
+    combined = pd.concat([dm_m, dm_i], ignore_index=True)
+    combined["significant"] = combined["p_value"] < 0.05
+    cols = ["network", "station", "horizon", "n", "dm_stat", "p_value", "favours", "significant"]
+    combined = combined[[c for c in cols if c in combined.columns]]
+    save_table(combined, "table09_meteo_dm_significance")
+
+
+# ---------------------------------------------------------------------------
 # TABLE 7 — Figure-source mapping
 # ---------------------------------------------------------------------------
 def table07_figure_source_mapping():
@@ -667,6 +965,9 @@ def table07_figure_source_mapping():
         ("fig07", "fig07_exceedance_diagnostics", "exceedance_all_stations.csv", "threshold_type, model_family, recall, f1"),
         ("fig08", "fig08_murphy_decomposition", "murphy_decomposition_all_stations.csv", "model_family, bias_sq, cond_bias_sq, irreducible_sq"),
         ("fig09", "fig09_episode_timeseries", "predictions_all_stations.csv", "date, y_true, y_pred, model, station_id"),
+        ("fig10", "fig10_meteo_delta_skill_by_horizon", "data/external/{madrid,ireland}_meteo/", "horizon, delta_skill_rmse, dm p-value"),
+        ("fig11", "fig11_meteo_phi_comparison", "data/external/madrid_meteo/master_meteorology_diagnostic_table.csv", "condition, horizon, phi_h, station"),
+        ("fig12", "fig12_meteo_ablation", "data/external/madrid_meteo/meteorology_ablation_summary.csv", "condition, delta_skill, delta_phi"),
     ]
 
     omitted_stems = {o[0] for o in omitted}
@@ -700,6 +1001,7 @@ def main():
     murphy = load_murphy()
     exc = load_exceedance()
     pred = load_predictions()
+    meteo = load_meteo_data()
 
     log("-" * 60)
     log("FIGURES")
@@ -713,6 +1015,9 @@ def main():
     fig07_exceedance_diagnostics(exc)
     fig08_murphy_decomposition(murphy)
     fig09_episode_timeseries(pred, master)
+    fig10_meteo_delta_skill(meteo)
+    fig11_meteo_phi_comparison(meteo)
+    fig12_meteo_ablation(meteo)
 
     log("-" * 60)
     log("TABLES")
@@ -723,6 +1028,8 @@ def main():
     table04_quadrants(master)
     table05_exceedance_summary(exc)
     table06_murphy_summary(murphy)
+    table08_meteo_value_added(meteo)
+    table09_meteo_dm_significance(meteo)
     table07_figure_source_mapping()
 
     log("=" * 60)
