@@ -1,18 +1,18 @@
-station_name,station_id,station_type,station_class,median_skill,median_alpha,collapse_pct,near_retained_pct,n_cells,best_family_by_skill
-Alcaniz Capuchinos,44013007_10_M,Urban/Industrial,industrial,0.197585292614929,0.2217177026388803,60.0,14.285714285714285,35,Statistical baseline
-San Pablo de los Montes,45153999_10_M,Rural Remote/Background,rural,0.1774258367720855,0.2686605297420877,57.14285714285714,0.0,35,Statistical baseline
-Barcelona El Port Vell,08019052_10_M,Suburban/Industrial,industrial,0.1671060445667238,0.40652298776083,57.14285714285714,0.0,35,Statistical baseline
-Barcelona L'Eixample,08019043_10_M,Urban/Traffic,urban,0.163238871893256,0.3009172521351125,57.14285714285714,8.571428571428571,35,Statistical baseline
-Barcelona Zona Universitaria,08019045_10_M,Urban/Background,urban,0.152067846604338,0.2933102725800243,57.14285714285714,8.571428571428571,35,Statistical baseline
-Barcelona Pl. Universitat,08019028_10_M,Urban/Traffic,urban,0.1493379889837482,0.3257796190175865,57.14285714285714,8.571428571428571,35,Statistical baseline
-Huesca,22125001_10_M,Urban/Traffic,urban,0.1466647056443955,0.266817231027285,54.285714285714285,0.0,35,Statistical baseline
-Sant Vicenc dels Horts Alaba,08263007_10_M,Suburban/Industrial,industrial,0.145078733969171,0.269557821979543,60.0,0.0,35,Statistical baseline
-Barcelona El Poblenou,08019004_10_M,Urban/Background,urban,0.1415381101030542,0.228797926679686,57.14285714285714,0.0,35,Statistical baseline
-Alcanar Montecarlo,43004006_10_M,Rural Remote/Industrial,rural,0.1411739429638495,0.1861569334216844,60.0,0.0,35,Statistical baseline
-Barcelona Vall d'Hebron,08019054_10_M,Urban/Background,urban,0.1377498104989916,0.2676040929025354,54.285714285714285,2.857142857142857,35,Statistical baseline
-Alagon,50008001_10_M,Suburban/Traffic,urban,0.1339127840841226,0.225581201831729,60.0,8.571428571428571,35,Statistical baseline
-Elx-Agroalimentari,03014002_10_M,Suburban/Industrial,industrial,0.08973280811703,0.1295924754776451,60.0,0.0,35,Direct ML
-Zarra-EMEP,46263999_10_M,Rural Remote EMEP,rural,0.0876360349409425,0.2289217304349452,57.14285714285714,0.0,35,Statistical baseline
-Alcanar Llar de Jubilats,43004005_10_M,Rural Near-city/Industrial,rural,0.0825095674380311,0.2203492515436525,60.0,0.0,35,Direct ML
-Valencia-Vivers,46250043_10_M,Urban/Residential,urban,0.0745176164127247,0.2276565180998454,60.0,5.714285714285714,35,Direct ML
-Teruel,44216001_10_M,Urban/Background,urban,0.0712915491603985,0.1506270846127895,60.0,0.0,35,Direct ML
+station_id,station_name,station_type,median_skill,median_alpha,collapse_pct,near_retained_pct,n_cells,best_model_family_by_median_skill
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,0.197585292614929,0.2217177026388803,60.0,14.285714285714285,35,Statistical baseline
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,0.1774258367720855,0.2686605297420877,57.14285714285714,0.0,35,Direct ML
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,0.1671060445667238,0.40652298776083,57.14285714285714,0.0,35,Statistical baseline
+08019043_10_M,Barcelona L'Eixample,Urban/Traffic,0.163238871893256,0.3009172521351125,57.14285714285714,8.571428571428571,35,Statistical baseline
+08019045_10_M,Barcelona Zona Universitaria,Urban/Background,0.152067846604338,0.2933102725800243,57.14285714285714,8.571428571428571,35,Statistical baseline
+08019028_10_M,Barcelona Pl. Universitat,Urban/Traffic,0.1493379889837482,0.3257796190175865,57.14285714285714,8.571428571428571,35,Statistical baseline
+22125001_10_M,Huesca,Urban/Traffic,0.1466647056443955,0.266817231027285,54.285714285714285,0.0,35,Statistical baseline
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,0.145078733969171,0.269557821979543,60.0,0.0,35,Direct ML
+08019004_10_M,Barcelona El Poblenou,Urban/Background,0.1415381101030542,0.228797926679686,57.14285714285714,0.0,35,Direct ML
+43004006_10_M,Alcanar Montecarlo,Rural Remote/Industrial,0.1411739429638495,0.1861569334216844,60.0,0.0,35,Direct ML
+08019054_10_M,Barcelona Vall d'Hebron,Urban/Background,0.1377498104989916,0.2676040929025354,54.285714285714285,2.857142857142857,35,Statistical baseline
+50008001_10_M,Alagon,Suburban/Traffic,0.1339127840841226,0.225581201831729,60.0,8.571428571428571,35,Direct ML
+03014002_10_M,Elx-Agroalimentari,Suburban/Industrial,0.08973280811703,0.1295924754776451,60.0,0.0,35,Direct ML
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,0.0876360349409425,0.2289217304349452,57.14285714285714,0.0,35,Direct ML
+43004005_10_M,Alcanar Llar de Jubilats,Rural Near-city/Industrial,0.0825095674380311,0.2203492515436525,60.0,0.0,35,Direct ML
+46250043_10_M,Valencia-Vivers,Urban/Residential,0.0745176164127247,0.2276565180998454,60.0,5.714285714285714,35,Direct ML
+44216001_10_M,Teruel,Urban/Background,0.0712915491603985,0.1506270846127895,60.0,0.0,35,Direct ML

@@ -1,18 +1,21 @@
-\begin{tabular}{llrrrr}
+\begin{tabular}{llrrrrr}
 \toprule
-threshold\_type & model\_family & median\_recall & median\_precision & median\_f1 & n\_cells \\
+threshold\_type & model\_family & median\_recall & median\_precision & median\_far & median\_csi & n\_cells \\
 \midrule
-abs\_50 & Direct ML & 0.0000 & 0.0000 & 0.1481 & 238 \\
-abs\_50 & Decomposition + Ridge & 0.3704 & 0.0254 & 0.0492 & 119 \\
-abs\_50 & Statistical baseline & 0.0000 & 0.2500 & 0.5000 & 110 \\
-abs\_50 & Variance-preserving naive & 0.0000 & 0.0000 & 0.0513 & 119 \\
-p75 & Direct ML & 0.1883 & 0.4257 & 0.2561 & 238 \\
-p75 & Decomposition + Ridge & 0.9887 & 0.2374 & 0.3834 & 119 \\
-p75 & Statistical baseline & 0.0652 & 0.5000 & 0.1875 & 119 \\
-p75 & Variance-preserving naive & 0.3248 & 0.3284 & 0.3253 & 119 \\
-p90 & Direct ML & 0.0219 & 0.2500 & 0.0662 & 238 \\
-p90 & Decomposition + Ridge & 0.8947 & 0.1037 & 0.1862 & 119 \\
-p90 & Statistical baseline & 0.0000 & 0.5000 & 0.2164 & 119 \\
-p90 & Variance-preserving naive & 0.1717 & 0.1773 & 0.1756 & 119 \\
+abs\_50 & Direct ML & 0.0000 & 0.0000 & 1.0000 & 0.0800 & 238 \\
+abs\_50 & Decomposition + Ridge & 0.3704 & 0.0254 & 0.9746 & 0.0252 & 119 \\
+abs\_50 & Persistence baseline & 0.0476 & 0.0476 & 0.9524 & 0.0496 & 119 \\
+abs\_50 & Statistical baseline & 0.0000 & 0.2500 & 0.7500 & 0.3333 & 119 \\
+abs\_50 & Variance-preserving naive & 0.0000 & 0.0000 & 1.0000 & 0.0263 & 119 \\
+p75 & Direct ML & 0.1883 & 0.4257 & 0.5743 & 0.1469 & 238 \\
+p75 & Decomposition + Ridge & 0.9887 & 0.2374 & 0.7626 & 0.2372 & 119 \\
+p75 & Persistence baseline & 0.3738 & 0.3713 & 0.6287 & 0.2272 & 119 \\
+p75 & Statistical baseline & 0.0652 & 0.5000 & 0.5000 & 0.1034 & 119 \\
+p75 & Variance-preserving naive & 0.3248 & 0.3284 & 0.6716 & 0.1942 & 119 \\
+p90 & Direct ML & 0.0219 & 0.2500 & 0.7500 & 0.0342 & 238 \\
+p90 & Decomposition + Ridge & 0.8947 & 0.1037 & 0.8963 & 0.1027 & 119 \\
+p90 & Persistence baseline & 0.2105 & 0.2143 & 0.7857 & 0.1203 & 119 \\
+p90 & Statistical baseline & 0.0000 & 0.5000 & 0.5000 & 0.1213 & 119 \\
+p90 & Variance-preserving naive & 0.1717 & 0.1773 & 0.8227 & 0.0963 & 119 \\
 \bottomrule
 \end{tabular}

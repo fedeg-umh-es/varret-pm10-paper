@@ -1,8 +1,7 @@
-skill_sign,alpha_class,count,pct
-non-positive skill,collapsed,3,0.5
-non-positive skill,inflated,115,19.33
-non-positive skill,intermediate,2,0.34
-non-positive skill,near-retained,101,16.97
-positive skill,collapsed,343,57.65
-positive skill,intermediate,11,1.85
-positive skill,near-retained,20,3.36
+quadrant,n_cells,pct_cells
+positive skill + collapsed alpha,343,57.65
+positive skill + near-retained alpha,20,3.36
+positive skill + inflated alpha,0,0.0
+non-positive skill + collapsed alpha,3,0.5
+non-positive skill + near-retained alpha,101,16.97
+non-positive skill + inflated alpha,115,19.33
