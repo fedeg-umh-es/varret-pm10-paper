@@ -13,8 +13,12 @@ variance attenuation and loss of P75-event sensitivity.  LightGBM is not
 presented as consistently skilled, and Skill_VP remains an auxiliary
 diagnostic.
 
-No target journal is defined in the repository.  Journal-fit review and
-template-specific submission items therefore remain pending.
+The repository names *Atmospheric Research* (Elsevier) as the target journal.
+Its official Guide for Authors was checked on 2026-07-22. The journal's scope
+includes air pollution and atmospheric aerosols, so the PM10 application is in
+scope; the remaining fit risk is the contribution threshold for a single
+station-year diagnostic study. Template-specific submission items remain
+pending author metadata and a final article-type decision.
 
 ## Problems found and corrections made
 
@@ -80,9 +84,9 @@ retention, and P75-event diagnostics in a leakage-free PM10 case study.
 
 #### B) Familiar framing check
 
-**Verdict: Familiar for environmental/time-series forecasting, pending a
-target journal.** Internal labels are not required to understand the title or
-abstract, and Skill_VP is introduced only after established quantities.
+**Verdict: Familiar for environmental/time-series forecasting.** Internal
+labels are not required to understand the title or abstract, and Skill_VP is
+introduced only after established quantities.
 
 #### C) Two-minute editor test
 
@@ -107,8 +111,16 @@ critique of prior literature.
 
 ### Part 1: Journal Fit
 
-Pending.  Neither a journal nor official aims and scope are specified in the
-repository, so no journal-specific fit claim is made.
+The repository's `codex_experiment_plan_atm_research.txt` names *Atmospheric
+Research* (Elsevier) as the target. Its official Guide for Authors, checked on
+2026-07-22, identifies air pollution and atmospheric aerosols among the
+journal's special emphases. The paper is therefore topically plausible, but its
+single-station, evaluation-diagnostic contribution has a material desk-reject
+risk relative to papers centred on atmospheric processes. The guide requires
+editable source files; it limits abstracts to 250 words, requests 1--7 English
+keywords, and requires title-page, competing-interests, funding, and CRediT
+information. It also lists highlights and a graphical abstract for submission
+preparation. These items are recorded in the checklist.
 
 ### Part 2: Structural diagnosis (C-C-C and PIER)
 
@@ -214,17 +226,10 @@ canonical numerical outputs.
 Skills used because they materially affected the review:
 
 - `github:github`: repository and branch orientation against `origin/main`.
-- `github:yeet`: scoped commit, publication, and draft-PR workflow; the GitHub
-  connector is used for publication because the local `gh` client and HTTPS
-  credentials are unavailable.
+- `github:yeet`: scoped commit, push, and draft-PR workflow; `gh` was
+  authenticated and used where connector coverage was not required.
 - `pdf`: clean compilation, page rendering, PDF metadata checks, and visual
   inspection of every page and both source figures.
-- `paper-a-anchor-guard`: claim-by-claim alignment with the Paper A empirical
-  anchor, including the prohibited legacy claims.
-- `academic-structural-reviewer`: C-C-C, PIER, section-purpose, and journal-fit
-  structural audit.
-- `editorial-support`: target-journal discovery, generic submission packaging,
-  and author-decision triage when no journal is specified.
 
 Applicable capabilities used alongside those skills were the real LaTeX
 toolchain, repository tests, automated manuscript/output consistency checks,
@@ -238,17 +243,16 @@ Skills considered but not used because they were not applicable:
   sufficient; no interactive browser task was needed.
 - `github:gh-address-comments` and `github:gh-fix-ci`: there were no existing PR
   review threads or failing GitHub Actions checks in scope.
-- `openai-library:library`: this is an externally versioned Git repository and
-  must not be duplicated in Library storage.
-- Presentation, spreadsheet, image-generation, chart, email, calendar,
-  messaging, website, Box, Drive, Notion, Wix, pet, and skill-creation skills:
-  none contributes to a LaTeX manuscript audit, reproducibility validation, or
-  GitHub delivery in this task.
+- Documents, presentations, spreadsheets, image generation, visualization,
+  email, calendar, messaging, website, Box, Drive, Notion, Wix, plugin, and
+  skill-creation skills: none contributes to this local LaTeX manuscript audit,
+  reproducibility validation, or GitHub delivery.
 
 ## Risks requiring human decision
 
-1. Select the target journal and decide whether its contribution threshold is
-   compatible with a single-station, single-year diagnostic study.
+1. Confirm *Atmospheric Research* as the target and decide whether its
+   contribution threshold is compatible with a single-station, single-year
+   diagnostic study.
 2. Confirm author name, affiliation, corresponding email, and ORCID.
 3. Decide whether the blocked-holdout sensitivity belongs in the main text or
    supplementary material for the selected journal.

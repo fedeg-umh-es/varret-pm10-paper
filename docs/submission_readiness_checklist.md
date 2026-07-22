@@ -31,18 +31,22 @@
   before submission; they were not added because new experiments were out of
   scope.
 
-## Pending target-journal decision
+## Pending *Atmospheric Research* preparation
 
-- [ ] Select journal; none is defined in the repository.
-- [ ] Apply journal template, word/page limits, and reference style.
+- [x] Target identified in `codex_experiment_plan_atm_research.txt` as
+  *Atmospheric Research* (Elsevier); its official Guide for Authors was checked
+  on 2026-07-22.
+- [x] Journal-fit risk documented: PM10 air-pollution forecasting is in scope,
+  but the contribution threshold remains a human editorial judgment.
+- [ ] Apply the current Elsevier LaTeX template and final reference style.
+- [ ] Add the required title-page metadata after authorship is confirmed.
 - [ ] Add required funding, conflict-of-interest, author-contribution, ethics,
   AI-use, and data declarations as applicable.
-- [ ] Determine requirements for highlights, graphical abstract, cover letter,
-  supplementary material, and repository anonymization.
-- [ ] Verify title-page and double-anonymous-review rules.
+- [ ] Prepare highlights and graphical abstract if requested by the submission
+  system; prepare a cover letter and any supplementary-material captions.
 
 ## Real blockers
 
-No scientific or technical blocker is known for author review of the generic
-manuscript.  Journal-specific submission cannot be declared ready until the
-target journal and author metadata are supplied.
+No scientific or technical blocker is known for author review. Submission to
+*Atmospheric Research* remains pending author metadata, declarations, and
+template-specific packaging.
