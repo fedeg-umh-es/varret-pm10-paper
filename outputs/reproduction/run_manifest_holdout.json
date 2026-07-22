@@ -1,0 +1,18 @@
+{
+  "protocol": "single chronological 80/20 blocked holdout",
+  "horizons_hours": [
+    1,
+    6,
+    24,
+    48
+  ],
+  "models": [
+    "lightgbm",
+    "sarima"
+  ],
+  "preprocessing": "validated targets only; input gaps forward-filled causally; no scaling",
+  "event_threshold": "P75 estimated separately from each fold training window",
+  "lightgbm": "one direct model per fold and horizon",
+  "sarima": "(1,0,1)(1,0,0)[24], fit per fold; state updated sequentially without refit",
+  "random_seed": 42
+}

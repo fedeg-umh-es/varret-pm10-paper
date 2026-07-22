@@ -23,7 +23,7 @@ paths:
 # ============================================================================
 preprocessing:
   # Imputation strategy for missing values
-  imputation_method: "forward_fill"  # "forward_fill" | "interpolate"
+  imputation_method: "forward_fill"  # causal; interpolation is intentionally unsupported
   
   # Remove first N hours due to lag features NaN
   remove_initial_nans: true

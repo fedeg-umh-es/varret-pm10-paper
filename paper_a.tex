@@ -32,25 +32,20 @@ We evaluate multi-horizon PM$_{10}$ point forecasts under a rolling-origin
 protocol with persistence as an explicit baseline, comparing LightGBM and
 SARIMA across lead times $h \in \{1,6,24,48\}$ hours at an hourly-resolution
 station in Madrid, Spain.
-Both models achieve high persistence-relative RMSE skill across all evaluated
-horizons (LightGBM: 0.92--0.96; SARIMA: 0.89, flat across horizons), an
-apparent equivalence that does not survive a variance-based reading: LightGBM
-retains 78--99\% of observed variance depending on horizon, while SARIMA
-retains less than 2\% at $h=1$ and near zero at longer leads.
-SARIMA's forecasts are thus close to a constant offset, and its RMSE skill
-reflects error reduction achieved by suppressing amplitude rather than by
-tracking the target series.
+The leakage-free rerun does not reproduce the previously reported high skill:
+LightGBM skill ranges from $-0.079$ to $0.073$, whereas SARIMA skill ranges
+from $0.031$ to $0.132$.  Variance retention nevertheless changes the
+interpretation of the positive SARIMA results: it falls from 79.8\% at
+$h=1$ to 2.9\% and 0.4\% at $h=24$ and $48$, respectively.
 We report horizon-wise variance retention alongside RMSE-based skill, and
 introduce Skill$_{VP}$, a bounded diagnostic auxiliary that discounts nominal
 skill by variance retention, to summarize this decoupling in a single
 horizon-wise quantity.
 Event-oriented evaluation under fold-recalibrated exceedance thresholds
-confirms the operational consequence: SARIMA detects approximately 40\% of
-high-PM$_{10}$ events, against 89--91\% for LightGBM.
-Together, these results show that RMSE-relative skill alone can substantially
-overstate the operational value of a multi-horizon forecast, and that
-reporting variance retention alongside it is a low-cost, broadly applicable
-safeguard against this failure mode.
+confirms the horizon dependence: SARIMA recall falls from 0.785 at $h=1$ to
+0.099 at $h=24$ and zero at $h=48$.  The results show why small positive
+RMSE-relative skill should not be read as operational value without an
+amplitude and event-detection diagnostic.
 \end{abstract}
 
 \keywords{PM$_{10}$ forecasting; multi-horizon forecasting; rolling-origin
@@ -113,9 +108,10 @@ The contribution is intentionally bounded and empirical:
   \item We provide horizon-wise evidence, under rolling-origin evaluation with
     persistence as an explicit baseline, that persistence-relative RMSE skill
     can decouple from dynamic fidelity as measured by variance retention.
-    LightGBM and SARIMA serve as contrasting cases: both are RMSE-skilled
-    relative to persistence, yet they differ sharply in variance retention and
-    in exceedance-detection ability.
+    LightGBM and SARIMA serve as contrasting cases: LightGBM does not
+    consistently beat persistence, while SARIMA's modest positive skill at
+    longer horizons coincides with severe variance attenuation and weak
+    exceedance detection.
   \item We introduce Skill$_{VP}$ as a simple diagnostic auxiliary metric that
     adjusts nominal persistence-relative RMSE skill by variance retention for
     horizon-wise interpretation, and we report event-oriented complements
@@ -188,9 +184,9 @@ empirical combination of a PM$_{10}$ case study with rolling-origin evaluation,
 persistence as an explicit operational baseline, horizon-by-horizon performance
 reading, and an explicit variance-retention diagnosis.
 In the reported results, LightGBM and SARIMA serve as contrasting cases:
-both are RMSE-skilled relative to persistence, but SARIMA provides the clearer
-extreme in which persistence-relative RMSE skill remains positive while
-predictive variance is near-collapsed.
+LightGBM does not consistently improve on persistence, while SARIMA provides
+the clearer case in which modest positive persistence-relative RMSE skill at
+long horizons coexists with near-collapsed predictive variance.
 This contrast motivates interpreting skill curves jointly with variance
 retention when discussing horizon-wise usefulness, without claiming that such
 decoupling must occur universally.
@@ -212,16 +208,20 @@ time.
 
 The empirical analysis was conducted on an hourly PM$_{10}$ series from the
 Casa de Campo monitoring station in Madrid, Spain, covering the full calendar
-year 2023 (2023-01-01 00:00 to 2023-12-31 23:00; 8,760 observations).
-The data were obtained from the European Environment Agency (EEA) Air Quality
-Download Service.
+year 2023 (2023-01-01 00:00 to 2023-12-31 23:00).  The regular hourly grid
+contains 8,760 time stamps, of which 8,465 have measurements marked as valid
+by the data provider; invalid or absent targets are excluded from verification.
+The data were obtained from the Madrid Open Data portal operated by the
+Ayuntamiento de Madrid.
 Table~\ref{tab:data_protocol} summarises the study site, data coverage, and
 evaluation protocol.
 
 We adopt a rolling-origin (walk-forward) evaluation protocol to approximate
 sequential operational use.
-For each origin $t$ in an evaluation window, the model is trained using only
-information available up to $t$ and predictions are generated for all horizons.
+Models are refitted at the start of each expanding fold using only its training
+window.  Within a test window, forecasts are issued sequentially using only
+information available at origin $t$; the SARIMA state is updated without
+parameter refitting when a new observation becomes available.
 For each horizon $h$, verification aggregates over the set of valid origins
 $\mathcal{T}_h$ with targets $y_{t+h}$ available, yielding horizon-wise sample
 sizes $N_h = |\mathcal{T}_h|$.
@@ -240,8 +240,8 @@ Item & Value \\
 Study site / station       & Casa de Campo (Madrid, Spain) \\
 Period                     & 2023-01-01 00:00 to 2023-12-31 23:00 \\
 Temporal resolution        & 1 hour \\
-Number of observations     & 8,760 \\
-Data source                & EEA Air Quality Download Service \\
+Hourly grid / valid values & 8,760 / 8,465 \\
+Data source                & Madrid Open Data, magnitude 10, station 024 \\
 Forecast horizons ($h$)    & 1, 6, 24, 48 h \\
 Rolling-origin folds       & 5 (expanding window, initial 50\%) \\
 Holdout split              & 80/20 chronological \\
@@ -265,14 +265,17 @@ reported horizon-wise.
 
 We report results for two empirical point-forecasting models.
 The first is a gradient-boosted decision tree model (LightGBM), trained
-independently for each horizon $h$ using lag features, rolling-window
-statistics, and temporal covariates \citep{ke2017}.
+independently for each fold and horizon $h$ using current and lagged values,
+causal rolling-window statistics, and known calendar covariates \citep{ke2017}.
+Unavailable inputs are forward-filled from the most recent valid observation;
+backward filling is never used, and invalid targets are excluded.
 LightGBM is included as a strong, widely used nonlinear predictor in applied
 forecasting.
 
-The second is SARIMA, a classical time-series model fitted on the raw
-normalized PM$_{10}$ series at each rolling-origin fold using a fixed order
-$(p,d,q)(P,D,Q)_s = (1,0,1)(1,0,1)_7$ and recursive multi-step forecasting
+The second is SARIMA, a classical time-series model fitted on the raw PM$_{10}$
+series at each rolling-origin fold using the fixed order
+$(p,d,q)(P,D,Q)_s = (1,0,1)(1,0,0)_{24}$ recovered from the upstream experiment
+configuration and recursive multi-step forecasting
 \citep{boxjenkins2015}.
 SARIMA is included not as a comprehensive statistical benchmark, but as a
 comparator that can exhibit qualitatively different dynamic-fidelity behavior
@@ -337,28 +340,15 @@ horizons where nominal skill and amplitude preservation diverge.
 
 \subsection{E1: Canonical horizon-wise results under rolling-origin evaluation}
 
-The central result is a sharp divergence in dynamic fidelity between two models
-that both achieve high persistence-relative RMSE skill.
-Table~\ref{tab:canonical_results} and Figure~\ref{fig:skill_curve} show that,
-while LightGBM and SARIMA are similarly RMSE-skilled relative to persistence
-across all evaluated horizons, their variance-retention profiles are
-qualitatively different: LightGBM preserves a substantial fraction of the
-observed variability, whereas SARIMA produces near-constant forecasts that
-retain almost none.
-
-Specifically, both models achieve high persistence-relative RMSE skill across
-$h\in\{1,6,24,48\}$ (LightGBM: 0.963, 0.919, 0.958, 0.957; SARIMA: 0.890,
-0.890, 0.889, 0.889).
-Interpreted in isolation, these values could be read as evidence that both
-models remain useful relative to persistence across all evaluated lead times.
-This reading does not survive the variance-retention diagnostic.
-LightGBM retains a substantial fraction of observed variance
-(VR\,=\,78\%, 81\%, 98\%, 99\% at $h=1,6,24,48$), consistent with a model
-that preserves meaningful amplitude variation in its predictions.
-SARIMA, by contrast, exhibits near-collapsed predictive variance despite
-remaining RMSE-skilled (VR\,=\,1.8\%, 1.2\%, 0.3\%, 0.1\%), indicating that
-its predictions are close to a constant offset and that persistence-relative
-RMSE skill in this case masks severe loss of dynamic fidelity.
+Table~\ref{tab:canonical_results} and Figure~\ref{fig:skill_curve} report the
+leakage-free rerun.  LightGBM does not consistently improve on persistence:
+its skill is $-0.010$, $0.073$, $-0.034$, and $-0.079$ at
+$h=1,6,24,48$.  SARIMA has modest positive skill at all four horizons
+($0.031$--$0.132$), but its variance retention falls sharply with lead time,
+from 79.8\% at $h=1$ to 35.7\% at $h=6$, 2.9\% at $h=24$, and 0.4\% at
+$h=48$.  Thus the diagnostic issue is not an apparent equivalence between two
+highly skilled models; it is the narrower observation that SARIMA's best
+relative skill occurs where its predictive amplitude is least credible.
 
 \begin{table}[t]
 \centering
@@ -376,10 +366,7 @@ RMSE skill in this case masks severe loss of dynamic fidelity.
 $h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
     & RMSE & Skill & VR (\%) & Skill$_{VP}$ \\
 \midrule
-1  & 0.335 & 0.963 & 78.2 & 0.753 & 0.984 & 0.890 & 1.8 & 0.016 \\
-6  & 0.726 & 0.919 & 80.9 & 0.743 & 0.985 & 0.890 & 1.2 & 0.011 \\
-24 & 0.375 & 0.958 & 97.6 & 0.935 & 0.989 & 0.889 & 0.3 & 0.003 \\
-48 & 0.381 & 0.957 & 98.7 & 0.945 & 0.991 & 0.889 & 0.1 & 0.001 \\
+\input{outputs/tables/paper_a_rolling_results.tex}
 \bottomrule
 \end{tabular}
 \end{table}
@@ -390,8 +377,8 @@ $h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
 \caption{Rolling-origin horizon-wise results for LightGBM and SARIMA.
   \textit{Left}: persistence-relative RMSE skill.
   \textit{Right}: variance retention (\%).
-  Both models appear similarly skilled under RMSE; variance retention
-  reveals a sharp divergence in dynamic fidelity.}
+  SARIMA retains modest positive skill while its variance collapses at long
+  horizons; LightGBM does not consistently beat persistence.}
 \label{fig:skill_curve}
 \end{figure}
 
@@ -401,66 +388,55 @@ $h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
 \caption{Diagnostic complements for horizon-wise interpretation.
   \textit{Left}: Skill$_{VP}$, which adjusts persistence-relative RMSE skill
   by variance retention.
-  \textit{Right}: reported across-horizon ranges for exceedance recall and
-  precision at the P75 threshold under fold-recalibrated evaluation; SARIMA
-  recall was reported approximately.}
+  \textit{Right}: horizon-wise exceedance recall and precision at the P75
+  threshold under fold-recalibrated evaluation.}
 \label{fig:diagnostic_profiles}
 \end{figure}
 
 Skill$_{VP}$ makes this decoupling explicit per horizon by attenuating
 persistence-relative RMSE skill when variance retention is low
 (Figure~\ref{fig:diagnostic_profiles}, left).
-For LightGBM, Skill$_{VP}$ remains relatively close to RMSE-based skill at
-longer horizons where variance retention is near-complete
-($\mathrm{Skill}_{VP}=0.935,\,0.945$ at $h=24,48$), with more pronounced
-attenuation at shorter horizons ($0.753,\,0.743$ at $h=1,6$).
-For SARIMA, the same high RMSE-relative skill levels translate into near-zero
-Skill$_{VP}$ values at every horizon ($0.016,\,0.011,\,0.003,\,0.001$), making
-the dynamic-fidelity loss explicit in a single summary quantity.
+For SARIMA, Skill$_{VP}$ falls from 0.025 and 0.029 at $h=1$ and $6$ to
+0.001 and effectively zero at $h=24$ and $48$.  LightGBM's negative skill is
+not rescued by variance retention: Skill$_{VP}$ remains non-positive except at
+$h=6$ (0.040).
 
 Importantly, the LightGBM results do not support a strong narrative of
 long-horizon variance collapse within the currently evaluated range.
-Variance retention increases with horizon for LightGBM, reaching 98--99\% at
-$h=24,48$.
+Variance retention is non-monotone for LightGBM and reaches 86.6\% at $h=48$.
 The stronger diagnostic signal is model-dependent: SARIMA provides the clearer
-extreme case, while LightGBM illustrates that high RMSE skill can coexist with
-comparatively plausible amplitude preservation.
+extreme case, while LightGBM illustrates that amplitude preservation alone
+cannot compensate for a lack of baseline-relative accuracy.
 
 \subsection{E2: Protocol robustness (rolling-origin vs.\ blocked holdout)}
 
 To assess whether the variance-retention contrast is specific to rolling-origin
 aggregation, we report an analogous blocked-holdout evaluation.
-The holdout results support the same qualitative pattern.
-LightGBM retains a substantial fraction of observed variance under holdout
-(VR\,=\,55.6\%, 56.7\%, 94.6\%, 92.9\% with
-$\mathrm{Skill}_{VP}=0.532,0.523,0.910,0.894$ for $h=1,6,24,48$).
-SARIMA remains RMSE-skilled but exhibits very low variance retention under
-holdout as well (VR\,=\,3.8\%, 2.6\%, 0.6\%, 0.1\% with
-$\mathrm{Skill}_{VP}=0.033,0.022,0.006,0.001$).
-These results confirm that the model-dependent decoupling between
-persistence-relative RMSE skill and dynamic fidelity is not an artifact of the
-rolling-origin aggregation.
+The holdout results support the same qualitative long-horizon SARIMA pattern.
+At $h=24$ and $48$, its variance retention is 3.35\% and 0.07\%, while skill
+is $-0.029$ and 0.029.  LightGBM holdout skill is $-0.065$, 0.057,
+$-0.062$, and 0.066, with variance retention of 79.5\%, 62.9\%, 68.2\%, and
+32.6\%.  The sign and magnitude of skill are protocol-sensitive, but SARIMA's
+long-horizon amplitude attenuation appears under both evaluations.
 
 \subsection{E3: Event-oriented complement}
 
 As a supportive operational complement, we evaluate exceedance detection at
 the P75 threshold under fold-recalibrated thresholds (one threshold per
 rolling-origin fold, fitted on that fold's training data).
-The results reinforce the variance-retention contrast: LightGBM achieves
-recall of 0.89--0.91 and precision of 0.80--0.93 across horizons, while
-SARIMA achieves recall of approximately 0.40 and precision that degrades
-from 0.79 at $h=1$ to 0.30 at $h=48$.
-SARIMA's flag rate ($\approx\!0.40$) shows that its predictions rarely exceed
-the fold-recalibrated threshold, consistent with the near-constant forecasts
-implied by near-zero variance retention.
+LightGBM recall decreases from 0.773 at $h=1$ to 0.323 at $h=48$, with
+precision decreasing from 0.815 to 0.390.  SARIMA recall decreases from 0.785
+at $h=1$ to 0.099 at $h=24$ and zero at $h=48$; its flag rate likewise falls
+from 0.300 to zero.  This long-horizon failure is consistent with its near-zero
+variance retention.
 
 These event-oriented results are treated as supportive diagnostics.
 Recall alone can be trivially high under threshold saturation—when forecasts
 remain above a permissive threshold at most time steps—and should therefore be
 interpreted jointly with precision, flag rate, and variance retention.
-Under fold-recalibrated thresholds, both recall and precision reflect
-meaningful predictive discrimination for LightGBM, while SARIMA's event
-detection is limited by its inability to predict concentration peaks.
+Under fold-recalibrated thresholds, neither model sustains strong event
+detection across all horizons, and SARIMA's long-horizon event detection is
+especially limited by its inability to predict concentration peaks.
 
 Overall, E1--E3 jointly support a bounded, model-dependent conclusion:
 persistence-relative RMSE skill can remain positive while dynamic fidelity
@@ -474,37 +450,32 @@ horizon-wise interpretation.
 The evidence in this manuscript supports a diagnostic, horizon-wise
 interpretation of multi-horizon PM$_{10}$ point forecasts under rolling-origin
 evaluation with persistence as an explicit baseline.
-Across the evaluated horizons, both LightGBM and SARIMA remain positively
-skilled relative to persistence under RMSE-based summaries.
-However, the variance diagnostics reveal that similar persistence-relative RMSE
-skill can coincide with sharply different levels of dynamic fidelity: LightGBM
-is a moderate case with substantial variance retention, whereas SARIMA is an
-extreme case in which predictive variance is near-collapsed.
-This contrast is consistent with the view that error-based skill alone can mask
-severe losses of amplitude in the predicted sequence, and that horizon-wise
-interpretation changes materially when variance retention is examined alongside
-RMSE-relative skill.
+LightGBM does not consistently improve on persistence, whereas SARIMA remains
+modestly positively skilled in the rolling-origin evaluation.  The variance
+diagnostics show that SARIMA's positive skill at $h=24$ and $48$ coincides with
+near-collapsed predictive variance.  This result is consistent with the view
+that even a positive error-based skill value can mask severe loss of amplitude,
+and that horizon-wise interpretation changes when variance retention is
+examined alongside RMSE-relative skill.
 
 Skill$_{VP}$ is useful as a diagnostic auxiliary metric precisely because it
 makes this divergence explicit and comparable across horizons without requiring
 additional probabilistic infrastructure.
-The LightGBM results do not support a strong long-horizon variance-collapse
-narrative; variance retention at longer horizons is comparatively high, and
-Skill$_{VP}$ adjustments are moderate.
-The SARIMA results, by contrast, provide clear evidence that RMSE-relative
-skill can coexist with near-zero variance retention, and the event-oriented
-evaluation confirms that this has direct operational consequences: a model that
-appears useful under RMSE skill may fail to detect concentration peaks when its
-predictions are near-constant.
+The LightGBM results do not support a monotone variance-collapse narrative,
+although its negative skill at three horizons rules out claims of consistent
+improvement over persistence.  SARIMA provides clearer evidence that modest
+RMSE-relative skill can coexist with near-zero variance retention, and the
+event-oriented evaluation confirms the operational consequence at long leads.
 
 Event-oriented evaluation must be handled cautiously.
 Recall alone may be trivially high under threshold saturation and does not by
 itself demonstrate predictive discrimination or operational usefulness.
 In this study, fold-recalibrated thresholds prevent artificial inflation of
 event base rates, and recall is reported jointly with precision and flag rate.
-Under these conditions, the event metrics support the same conclusion as the
-variance diagnostics: LightGBM retains operational usefulness across horizons,
-while SARIMA's operational value is limited despite its RMSE-relative skill.
+Under these conditions, the event metrics support the same cautious conclusion
+as the variance diagnostics: performance deteriorates with horizon for both
+models, and SARIMA's positive long-horizon skill does not translate into peak
+detection.
 
 % ============================================================
 \section{Limitations}
@@ -528,13 +499,10 @@ breaks remains untested.
 \section{Conclusion}
 
 In this PM$_{10}$ case study evaluated under rolling-origin protocols with
-persistence as an explicit baseline, both LightGBM and SARIMA achieve high
-persistence-relative RMSE skill across all evaluated horizons, yet their
-variance-retention profiles diverge sharply.
-LightGBM retains a substantial fraction of observed variance and achieves
-meaningful exceedance detection, while SARIMA produces near-constant forecasts
-that retain almost no variability and detect only 40\% of high-PM$_{10}$
-events.
+persistence as an explicit baseline, the reproducible evidence is modest:
+LightGBM does not consistently beat persistence, and SARIMA achieves only small
+positive skill.  Nevertheless, SARIMA's variance retention falls to 2.9\% and
+0.4\% at 24 and 48 hours, and its exceedance recall falls to 0.099 and zero.
 Reporting variance retention alongside RMSE skill, and using Skill$_{VP}$ as a
 diagnostic auxiliary metric, offers a practical way to make this divergence
 explicit for horizon-wise interpretation under rolling-origin evaluation,
@@ -546,9 +514,11 @@ without implying a universal replacement for established verification practices.
 The analysis code, configuration files, and evaluation scripts used in this
 study are available at
 \url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
-Raw PM$_{10}$ data were obtained from the European Environment Agency (EEA)
-Air Quality Download Service (\url{https://aqportal.discomap.eea.europa.eu/})
-and are publicly available under the EEA standard data policy.
+Raw PM$_{10}$ data were obtained from the Madrid Open Data hourly air-quality
+archive (\url{https://datos.madrid.es/dataset/201200-0-calidad-aire-horario})
+and are available under CC BY 4.0.  The repository records the annual archive
+URL and SHA-256 checksum and includes scripts that recover the station series
+and reproduce predictions, metrics, event diagnostics, and figures.
 
 \bibliographystyle{plainnat}
 \begingroup

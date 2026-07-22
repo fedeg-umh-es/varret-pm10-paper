@@ -121,6 +121,31 @@ Run the minimal paper pipeline:
 python scripts/run_p33_pipeline.py
 ```
 
+## Paper A empirical reproduction
+
+The submitted case study uses the 2023 hourly Madrid Open Data archive for
+Casa de Campo (station 024, PM10 magnitude 10). The checked-in archive is
+verified by SHA-256; invalid measurements remain missing and are never filled
+from the future.
+
+```bash
+make data          # re-download, verify, and parse the official archive
+make reproduce     # rolling-origin + 80/20 holdout + figures
+make paper         # compile the manuscript
+make test          # causal-protocol and metric tests
+```
+
+For the exact empirical software environment used in the committed rerun:
+
+```bash
+pip install -r requirements-reproduction.txt
+```
+
+The SARIMA evaluation updates state at every hourly origin and can take about
+15 minutes on a laptop. Row-level prediction artifacts and their aggregate
+tables are in `outputs/reproduction/`. The recovery and discrepancy audit is
+in `docs/empirical_reproducibility_audit.md`.
+
 Run the variance-retention table only:
 
 ```bash

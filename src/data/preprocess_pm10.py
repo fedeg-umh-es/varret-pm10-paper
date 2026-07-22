@@ -19,20 +19,21 @@ def impute_series(series: pd.Series, method: str = "forward_fill") -> pd.Series:
     
     Args:
         series: Series with possible NaN
-        method: "forward_fill" or "interpolate"
+        method: "forward_fill". Interpolation is rejected because ordinary
+            linear interpolation uses a future endpoint.
     
     Returns:
         Series without NaN
     """
     if method == "forward_fill":
-        return series.fillna(method='ffill').fillna(method='bfill')
+        return series.ffill()
     elif method == "interpolate":
-        return series.interpolate(method='linear').fillna(method='bfill').fillna(method='ffill')
+        raise ValueError("Linear interpolation is not causal; use forward_fill")
     else:
         raise ValueError(f"Unknown imputation method: {method}")
 
 
-def normalize_zscore(series: pd.Series) -> tuple:
+def normalize_zscore(series: pd.Series, fit_series: pd.Series | None = None) -> tuple:
     """
     Z-score normalize a series.
     
@@ -42,8 +43,9 @@ def normalize_zscore(series: pd.Series) -> tuple:
     Returns:
         (normalized series, dict with mean/std)
     """
-    mean = series.mean()
-    std = series.std()
+    fit_series = series if fit_series is None else fit_series
+    mean = fit_series.mean()
+    std = fit_series.std()
     normalized = (series - mean) / std
     return normalized, {"mean": float(mean), "std": float(std)}
 
@@ -52,6 +54,11 @@ def main():
     """Preprocess raw data."""
     parser = argparse.ArgumentParser(description="Preprocess PM10 data")
     parser.add_argument("--config", type=str, default="config/config.yaml")
+    parser.add_argument(
+        "--train-end",
+        required=True,
+        help="Last timestamp included when fitting normalization parameters",
+    )
     args = parser.parse_args()
     
     with open(args.config) as f:
@@ -72,9 +79,11 @@ def main():
     print(f"Imputing missing values ({series.isna().sum()} NaN)...")
     series = impute_series(series, method=cfg['preprocessing']['imputation_method'])
     
-    # Normalize (z-score on full series)
-    print("Normalizing (z-score)...")
-    series_norm, norm_params = normalize_zscore(series)
+    train = series.loc[:pd.Timestamp(args.train_end)].dropna()
+    if train.empty:
+        raise ValueError("--train-end selects an empty training window")
+    print("Normalizing (z-score fitted on training window only)...")
+    series_norm, norm_params = normalize_zscore(series, fit_series=train)
     
     # Save normalized series
     output_path = processed_dir / "pm10_preprocessed.parquet"

@@ -7,3 +7,5 @@ pyyaml
 pytest
 statsmodels
 scipy
+lightgbm
+pyarrow
