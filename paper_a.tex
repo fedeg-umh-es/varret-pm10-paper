@@ -13,8 +13,8 @@
 
 \newcommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1\par}
 
-\title{Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon
-PM$_{10}$ Forecasting Under Rolling-Origin Evaluation}
+\title{Variance Retention as a Diagnostic Complement to Persistence-Relative
+Skill in Multi-Horizon PM$_{10}$ Forecasting}
 \author{Francisco Federico Garcia Crespi}
 \date{April 2026}
 
@@ -24,26 +24,33 @@ PM$_{10}$ Forecasting Under Rolling-Origin Evaluation}
 
 % ============================================================
 \begin{abstract}
-% ACTION 4: recast around forecast evaluation under rolling-origin.
-% Lead with empirical setting and finding; remove defensive meta-framing.
+Persistence-relative RMSE skill is the standard yardstick for multi-horizon
+point-forecast evaluation, but a skilled forecast under this criterion can
+still be operationally uninformative if its predictions collapse toward a
+near-constant value.
 We evaluate multi-horizon PM$_{10}$ point forecasts under a rolling-origin
 protocol with persistence as an explicit baseline, comparing LightGBM and
-SARIMA across lead times $h \in \{1,6,24,48\}$ hours.
+SARIMA across lead times $h \in \{1,6,24,48\}$ hours at an hourly-resolution
+station in Madrid, Spain.
 Both models achieve high persistence-relative RMSE skill across all evaluated
-horizons; however, their variance-retention profiles diverge sharply.
-LightGBM retains 78--99\% of observed variance depending on horizon, while
-SARIMA retains less than 2\% at $h=1$ and near zero at longer leads, despite
-remaining RMSE-skilled relative to persistence.
-To make this decoupling explicit, we report horizon-wise variance retention
-and introduce Skill$_{VP}$ as a diagnostic auxiliary metric that adjusts
-persistence-relative RMSE skill by variance retention for horizon-wise
-interpretation, without proposing it as a replacement for RMSE.
+horizons (LightGBM: 0.92--0.96; SARIMA: 0.89, flat across horizons), an
+apparent equivalence that does not survive a variance-based reading: LightGBM
+retains 78--99\% of observed variance depending on horizon, while SARIMA
+retains less than 2\% at $h=1$ and near zero at longer leads.
+SARIMA's forecasts are thus close to a constant offset, and its RMSE skill
+reflects error reduction achieved by suppressing amplitude rather than by
+tracking the target series.
+We report horizon-wise variance retention alongside RMSE-based skill, and
+introduce Skill$_{VP}$, a bounded diagnostic auxiliary that discounts nominal
+skill by variance retention, to summarize this decoupling in a single
+horizon-wise quantity.
 Event-oriented evaluation under fold-recalibrated exceedance thresholds
 confirms the operational consequence: SARIMA detects approximately 40\% of
-high-PM$_{10}$ events, compared to 75--91\% for LightGBM.
-The results support reporting variance retention alongside RMSE-based skill
-as a practical complement for horizon-wise interpretation under rolling-origin
-evaluation.
+high-PM$_{10}$ events, against 75--91\% for LightGBM.
+Together, these results show that RMSE-relative skill alone can substantially
+overstate the operational value of a multi-horizon forecast, and that
+reporting variance retention alongside it is a low-cost, broadly applicable
+safeguard against this failure mode.
 \end{abstract}
 
 \keywords{PM$_{10}$ forecasting; multi-horizon forecasting; rolling-origin
@@ -88,19 +95,17 @@ performance over a sequence of forecast origins spanning changing conditions,
 thereby exposing horizon-dependent behaviors that may be less visible under a
 single blocked split \citep{tashman2000}.
 
-% ACTION 1+2: single narrative; no H*; ghost skill reduced to one brief note;
-% contributions simplified to 2 bullets.
 This study provides a bounded empirical characterization of this decoupling
 for LightGBM and SARIMA evaluated against a persistence baseline.
 We report horizon-wise RMSE and persistence-relative skill together with
 observed and predicted variances and variance retention, and we introduce
 Skill$_{VP}$ as a simple diagnostic auxiliary metric to summarize how nominal
 skill and variance retention jointly behave at each horizon.
-For reference, the pattern in which persistence-relative RMSE skill remains
-positive while predictive variance is substantially attenuated is sometimes
-described informally as ``ghost skill''; we do not adopt that term as field
-terminology, and use it here only as a shorthand for that specific decoupling
-pattern.
+The pattern in which persistence-relative RMSE skill remains positive while
+predictive variance is substantially attenuated is sometimes described
+informally in the forecasting community as ``ghost skill''; we use the term
+here only as shorthand for that specific decoupling and do not adopt it as
+formal terminology.
 
 \paragraph{Contributions.}
 The contribution is intentionally bounded and empirical:
@@ -173,9 +178,8 @@ verification set, we define
 used here in a bounded form (see Section~\ref{sec:method_skillvp}).
 Skill$_{VP}$ is positioned only as an auxiliary diagnostic complement that
 down-weights nominal persistence-relative RMSE skill when variance retention
-is low.
-It is not presented as a replacement for RMSE, not proposed as a new standard,
-and not intended to subsume probabilistic verification.
+is low; its precise scope and boundaries are stated in
+Section~\ref{sec:method_skillvp}.
 
 \subsection{Contribution statement}
 
@@ -322,17 +326,17 @@ diagnostic auxiliary:
   {\mathrm{Var}_{\mathrm{obs}}(h)}\right).
 \end{equation}
 The $\min(\cdot)$ bound prevents inflation when predictions are over-variable.
-This construction is intentionally simple and is used only as a horizon-wise
-diagnostic complement.
-It is not proposed as a universal score, does not address probabilistic
-calibration, and is not presented as a replacement for RMSE-based evaluation.
+This construction is intentionally simple and is scoped narrowly: Skill$_{VP}$
+is a horizon-wise diagnostic complement to RMSE-based skill, not a candidate
+replacement for it, and it makes no claim about probabilistic calibration or
+decision-theoretic optimality. Its sole purpose is to flag, at a glance,
+horizons where nominal skill and amplitude preservation diverge.
 
 % ============================================================
 \section{Results}
 
 \subsection{E1: Canonical horizon-wise results under rolling-origin evaluation}
 
-% ACTION 3: open from divergence, not from equivalence.
 The central result is a sharp divergence in dynamic fidelity between two models
 that both achieve high persistence-relative RMSE skill.
 Table~\ref{tab:canonical_results} and Figure~\ref{fig:skill_curve} show that,
@@ -347,7 +351,7 @@ $h\in\{1,6,24,48\}$ (LightGBM: 0.963, 0.919, 0.958, 0.957; SARIMA: 0.890,
 0.890, 0.889, 0.889).
 Interpreted in isolation, these values could be read as evidence that both
 models remain useful relative to persistence across all evaluated lead times.
-However, variance retention tells a different story.
+This reading does not survive the variance-retention diagnostic.
 LightGBM retains a substantial fraction of observed variance
 (VR\,=\,78\%, 81\%, 98\%, 99\% at $h=1,6,24,48$), consistent with a model
 that preserves meaningful amplitude variation in its predictions.
@@ -438,7 +442,6 @@ rolling-origin aggregation.
 
 \subsection{E3: Event-oriented complement}
 
-% ACTION 5: kept subordinate, not a second central contribution.
 As a supportive operational complement, we evaluate exceedance detection at
 the P75 threshold under fold-recalibrated thresholds (one threshold per
 rolling-origin fold, fitted on that fold's training data).
@@ -506,18 +509,19 @@ while SARIMA's operational value is limited despite its RMSE-relative skill.
 \section{Limitations}
 
 This study is intentionally limited in scope.
-The empirical evidence is anchored in a single PM$_{10}$ case study and may
-not transfer to other pollutants, temporal resolutions, regions, or operational
-contexts.
+The empirical evidence is anchored in a single station, a single calendar
+year, and five rolling-origin folds; external validity to other pollutants,
+temporal resolutions, monitoring sites, or longer evaluation windows has not
+been established.
 The results are restricted to the evaluated horizons $h\in\{1,6,24,48\}$ and
-to two model classes (LightGBM, SARIMA) with specific configurations.
-
-Skill$_{VP}$ is not presented as a general-purpose replacement for RMSE or as
-a new standard verification score.
-It is a simple diagnostic auxiliary intended to help interpret
-persistence-relative RMSE skill when variance retention is low.
-It does not address probabilistic calibration, does not provide
-decision-theoretic optimality, and has not been validated across diverse tasks.
+to two model classes (LightGBM, SARIMA) with specific, fixed configurations;
+neither model was tuned to compete for state-of-the-art accuracy, since the
+goal is to characterize a decoupling pattern rather than to benchmark model
+performance.
+Skill$_{VP}$'s scope is stated in Section~\ref{sec:method_skillvp} and is not
+repeated here; the metric has not been validated outside the present case
+study, and its behavior under regimes with strong seasonality or structural
+breaks remains untested.
 
 % ============================================================
 \section{Conclusion}
