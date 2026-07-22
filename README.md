@@ -1,179 +1,89 @@
-# P33 — Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting Under Rolling-Origin Evaluation
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20185328.svg)](https://doi.org/10.5281/zenodo.20185328)
+# Paper A: variance retention in multi-horizon PM10 forecasting
 
-This repository is a paper-first research codebase for P33. It is designed to support a reproducible analysis of whether positive multi-horizon forecasting skill for daily PM10 under rolling-origin evaluation reflects credible operational value or instead coincides with variance collapse and plausible ghost skill.
+This repository contains the manuscript, data-recovery code, row-level
+predictions, aggregate results, and figures for an hourly PM10 case study at
+Casa de Campo, Madrid.  The study examines whether persistence-relative RMSE
+skill and forecast variance retention convey different horizon-wise
+information under leakage-free rolling-origin evaluation.
 
-## Current Work Package
+## Canonical empirical scope
 
-The active scope is restricted to the post-evaluation of E1-RR outputs through variance retention, `alpha`, and `skill_vp` diagnostics.
+- Source: Madrid Open Data, Casa de Campo station 024, PM10 magnitude 10.
+- Period: calendar year 2023 on a regular 8,760-point hourly grid.
+- Valid observations: 8,465; missing or provider-invalid values: 295.
+- Horizons: 1, 6, 24, and 48 hours.
+- Models: fixed LightGBM and SARIMA configurations.
+- Required baseline: persistence.
+- Primary protocol: five-fold expanding rolling-origin evaluation.
+- Secondary sensitivity analysis: one chronological 80/20 holdout.
+- P75 event thresholds: estimated separately from each training fold.
 
-Do not mix this work package with E2-MET, E3-PROB, meteorological ablations, probabilistic extensions, or new model-family exploration.
+The empirical source of truth is the CSV and Parquet material under
+`outputs/reproduction/`.  `paper_a.tex` includes the canonical LaTeX table from
+`outputs/tables/paper_a_rolling_results.tex`; that table is regenerated from the
+rolling-origin CSV rather than maintained by hand.
 
-See `docs/e1_rr_post_evaluation_contract.md` before running or modifying the pipeline.
+## Non-negotiable safeguards
 
-## Scientific Question
+- preprocessing and threshold calibration use training information only;
+- unavailable inputs may be forward-filled causally, never backward-filled;
+- no full-series normalization is used in the Paper A reproduction;
+- invalid or absent verification targets are excluded, not imputed;
+- every model is compared with persistence on the same valid verification rows;
+- metrics and diagnostics are reported separately by horizon;
+- Skill_VP is an auxiliary diagnostic, not a replacement accuracy metric.
 
-P33 evaluates whether a model can outperform a persistence baseline across horizons up to 7 days while still preserving enough dynamic variability to remain operationally interpretable. The central diagnostic is the joint reading of:
+The repository also retains earlier daily P33/E1-RR modules for provenance.
+Those legacy modules, their documentation, and their outputs are not empirical
+sources for `paper_a.tex` and must not be mixed with the hourly Madrid case.
 
-- `skill`: baseline-relative forecast improvement
-- `alpha`: variance-retention indicator
-- `skill_vp`: auxiliary diagnostic adjustment combining skill and variance retention
+## Reproduce and validate
 
-High skill with `alpha` near 1 supports stronger dynamic credibility. High skill with very low `alpha` is treated as a plausible ghost-skill pattern.
-
-## Scope
-
-In scope:
-
-- daily PM10 forecasting
-- leakage-free rolling-origin evaluation
-- train-only preprocessing when needed inside each split
-- persistence as mandatory baseline
-- optional seasonal persistence if temporal structure justifies it
-- linear or autoregressive models
-- one boosting tabular model with lagged inputs
-- variance-retention diagnostics and final tabular outputs for the paper
-
-Out of scope:
-
-- notebooks
-- figures as a development target
-- additional model families
-- unrelated exploratory analyses
-- generic public API design
-
-## Repository Layout
-
-The repository contains legacy materials from earlier work and a new minimal P33-oriented structure. The P33 pipeline lives in the following directories:
-
-- `configs/`: dataset, experiment, and evaluation configuration
-- `scripts/`: executable entry points for the paper workflow
-- `src/`: core implementation modules
-- `tests/`: conceptual tests for rolling-origin, skill, and variance diagnostics
-- `docs/`: protocol, data dictionary, and runbook
-
-## Data Contracts
-
-Canonical processed dataset:
-
-- `date`
-- `y`
-
-Predictions table:
-
-- `dataset`
-- `model`
-- `fold`
-- `origin_date`
-- `horizon`
-- `date`
-- `y_true`
-- `y_pred`
-
-Aggregated skill table:
-
-- `dataset`
-- `model`
-- `horizon`
-- `skill`
-
-Final diagnostic table:
-
-- `dataset`
-- `model`
-- `horizon`
-- `skill`
-- `alpha`
-- `skill_vp`
-- `collapse_flag`
-- `inflation_flag`
-- `near_ideal_flag`
-
-Required project output:
-
-- `outputs/tables/variance_retention_summary.csv`
-
-## Pipeline
-
-1. Validate raw daily PM10 data.
-2. Build canonical processed datasets with columns `date` and `y`.
-3. Generate leakage-free rolling-origin splits with `Hmax = 7`.
-4. Run persistence and optional seasonal persistence baselines.
-5. Run linear/autoregressive models.
-6. Run one lag-based boosting model.
-7. Build skill tables relative to persistence.
-8. Build the variance-retention summary table.
-9. Write a run summary referencing the final P33 output table.
-
-## Execution
-
-Install dependencies:
+Create an environment and install the pinned empirical dependencies:
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-Run the minimal paper pipeline:
-
-```bash
-python scripts/run_p33_pipeline.py
-```
-
-## Paper A empirical reproduction
-
-The submitted case study uses the 2023 hourly Madrid Open Data archive for
-Casa de Campo (station 024, PM10 magnitude 10). The checked-in archive is
-verified by SHA-256; invalid measurements remain missing and are never filled
-from the future.
-
-```bash
-make data          # re-download, verify, and parse the official archive
-make reproduce     # rolling-origin + 80/20 holdout + figures
-make paper         # compile the manuscript
-make test          # causal-protocol and metric tests
-```
-
-For the exact empirical software environment used in the committed rerun:
-
-```bash
 pip install -r requirements-reproduction.txt
 ```
 
-The SARIMA evaluation updates state at every hourly origin and can take about
-15 minutes on a laptop. Row-level prediction artifacts and their aggregate
-tables are in `outputs/reproduction/`. The recovery and discrepancy audit is
-in `docs/empirical_reproducibility_audit.md`.
-
-Run the variance-retention table only:
+Run the complete workflow:
 
 ```bash
-python scripts/07_build_variance_retention_table.py
+make data          # recover and checksum the official 2023 archive
+make reproduce     # rerun rolling-origin and holdout predictions
+make figures       # regenerate the table and the two manuscript figures
+make paper         # compile paper_a.pdf with BibTeX
+make test          # run protocol, artifact, metric, and editorial checks
+make editorial-check
 ```
 
-Run tests:
+The SARIMA reproduction updates state at every hourly origin and may take about
+15 minutes on a laptop.  Exact run settings are recorded in
+`outputs/reproduction/run_manifest_rolling_origin.json` and
+`outputs/reproduction/run_manifest_holdout.json`.
 
-```bash
-pytest
-```
+## Key files
 
-Build the two submission figures and compile `paper_a.tex` with BibTeX:
+- `paper_a.tex`, `paper_a.pdf`: generic manuscript source and compiled PDF.
+- `scripts/run_paper_a_empirical.py`: canonical empirical rerun.
+- `scripts/recover_madrid_pm10.py`: official data recovery and checksum.
+- `scripts/render_paper_a_results.py`: canonical LaTeX table generator.
+- `src/plotting/plot_master_figure.py`: two manuscript figures.
+- `scripts/check_paper_a_consistency.py`: manuscript/artifact divergence guard.
+- `docs/empirical_reproducibility_audit.md`: recovery and leakage audit.
+- `docs/reference_audit.md`: cited-reference verification.
 
-```bash
-make paper
-```
+## Data and licensing
 
-The horizon-wise figure inputs are stored in
-`data/manuscript/paper_a_horizon_metrics.csv`. Event metrics are stored as the
-across-horizon ranges reported by the manuscript because the underlying hourly
-event-level predictions are not distributed in this repository.
+Madrid Open Data distributes the hourly air-quality dataset under CC BY 4.0.
+The exact annual archive URL and SHA-256 checksum are recorded in
+`data/processed/casa_de_campo_pm10_2023.manifest.json`.
 
-## Notes
-
-This repository is oriented to the P33 paper workflow rather than a general-purpose forecasting package. The implementation is intentionally restrained, explicit, and auditable.
 ## Citation
 
-If you use this software, please cite:
+If you use this software, cite:
 
-> García Crespi, F. (2026). varret-pm10-paper: Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.20185328
+> Garcia Crespi, F. F. (2026). *varret-pm10-paper: Variance Retention and
+> Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting* (v1.0.0).
+> Zenodo. https://doi.org/10.5281/zenodo.20185328

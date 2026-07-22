@@ -2,17 +2,29 @@
 
 Checked: 2026-07-22
 
-The eight entries added for citations used by `paper_a.tex` were checked
-against publisher/proceedings metadata. No incorrect DOI, volume, issue, page
-range, edition, or publication year was found.
+All nine entries cited by `paper_a.tex` were checked against a DOI landing
+page, publisher page, official proceedings record, or Crossref-backed metadata.
+Authors, title, year, venue, volume, issue, pages, and DOI/ISBN were compared
+where those fields apply.  No unresolved metadata discrepancies remain.
 
-| BibTeX key | Source checked | Result |
+| Citation key | Primary or authoritative record | Result |
 |---|---|---|
-| `donnelly2015` | <https://doi.org/10.1016/j.atmosenv.2014.12.011> | Volume 103, pp. 53-65, 2015: confirmed |
-| `murphy1992` | <https://doi.org/10.1175/1520-0434(1992)007%3C0692:CPATLC%3E2.0.CO;2> | Volume 7(4), pp. 692-698, 1992: confirmed |
-| `tashman2000` | <https://doi.org/10.1016/S0169-2070(00)00065-0> | Volume 16(4), pp. 437-450, 2000: confirmed |
-| `bentaieb2012` | <https://doi.org/10.1016/j.eswa.2012.01.039> | Volume 39(8), pp. 7067-7083, 2012: confirmed |
-| `ke2017` | <https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html> | NeurIPS volume 30, authors and year 2017: confirmed |
-| `boxjenkins2015` | <https://www.wiley.com/en-us/time-series-analysis-forecasting-and-control-5th-edition-p-9781118675021> | Four authors, fifth edition, Wiley, 2015: confirmed |
-| `gupta2009` | <https://doi.org/10.1016/j.jhydrol.2009.08.003> | Volume 377(1-2), pp. 80-91, 2009: confirmed |
-| `kling2012` | <https://doi.org/10.1016/j.jhydrol.2012.01.011> | Volume 424-425, pp. 264-277, 2012: confirmed |
+| `gneiting2011` | [DOI 10.1198/jasa.2011.r10138](https://doi.org/10.1198/jasa.2011.r10138) | Author, title, *JASA* 106(494), 746-762, 2011, DOI confirmed. |
+| `donnelly2015` | [Elsevier article record](https://www.sciencedirect.com/science/article/pii/S1352231014009595) | Three authors, title, *Atmospheric Environment* 103, 53-65, 2015, DOI confirmed. |
+| `murphy1992` | [AMS journal record](https://journals.ametsoc.org/view/journals/wefo/7/4/1520-0434_1992_007_0692_cpatlc_2_0_co_2.xml) | Author, title, *Weather and Forecasting* 7(4), 692-698, 1992, DOI confirmed. |
+| `tashman2000` | [Elsevier article record](https://www.sciencedirect.com/science/article/pii/S0169207000000650) | Author, title, *International Journal of Forecasting* 16(4), 437-450, 2000, DOI confirmed. |
+| `bentaieb2012` | [Elsevier article record](https://www.sciencedirect.com/science/article/abs/pii/S0957417412000528) | Four authors, title, *Expert Systems with Applications* 39(8), 7067-7083, 2012, DOI confirmed. |
+| `ke2017` | [Official NeurIPS proceedings](https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html) | Eight authors, title, volume 30, 2017 confirmed; no DOI asserted. |
+| `boxjenkins2015` | [Wiley book record](https://www.wiley.com/en-us/shop/general-introductory-statistics/time-series-analysis-forecasting-and-control-5th-edition-p-9781118675021) | Four authors, title, fifth edition, Wiley, 2015, ISBN 978-1-118-67502-1 confirmed. |
+| `gupta2009` | [Elsevier article record](https://www.sciencedirect.com/science/article/pii/S0022169409004843) | Four authors, title, *Journal of Hydrology* 377(1-2), 80-91, 2009, DOI confirmed. |
+| `kling2012` | [Elsevier article record](https://www.sciencedirect.com/science/article/pii/S0022169412000431) | Three authors, title, *Journal of Hydrology* 424-425, 264-277, 2012, DOI confirmed. |
+
+## Citation integrity
+
+- Citation keys used in the manuscript: 9.
+- Bibliography entries: 9.
+- Undefined citations: 0.
+- Uncited bibliography entries: 0.
+- The eight citations repaired in the empirical-reproduction commit remain
+  correct; `gneiting2011`, already present, was also rechecked.
+- BibTeX output is internally consistent under `plainnat`.

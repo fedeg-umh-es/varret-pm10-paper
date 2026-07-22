@@ -6,9 +6,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
-\usepackage{siunitx}
 \usepackage{natbib}
-\usepackage{subcaption}
+\usepackage[section]{placeins}
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1\par}
@@ -24,10 +23,9 @@ Skill in Multi-Horizon PM$_{10}$ Forecasting}
 
 % ============================================================
 \begin{abstract}
-Persistence-relative RMSE skill is the standard yardstick for multi-horizon
-point-forecast evaluation, but a skilled forecast under this criterion can
-still be operationally uninformative if its predictions collapse toward a
-near-constant value.
+Persistence-relative RMSE skill is commonly used in multi-horizon point-forecast
+evaluation, but positive skill under this criterion does not ensure that a
+forecast preserves variability relevant to event detection.
 We evaluate multi-horizon PM$_{10}$ point forecasts under a rolling-origin
 protocol with persistence as an explicit baseline, comparing LightGBM and
 SARIMA across lead times $h \in \{1,6,24,48\}$ hours at an hourly-resolution
@@ -37,15 +35,15 @@ LightGBM skill ranges from $-0.079$ to $0.073$, whereas SARIMA skill ranges
 from $0.031$ to $0.132$.  Variance retention nevertheless changes the
 interpretation of the positive SARIMA results: it falls from 79.8\% at
 $h=1$ to 2.9\% and 0.4\% at $h=24$ and $48$, respectively.
-We report horizon-wise variance retention alongside RMSE-based skill, and
-introduce Skill$_{VP}$, a bounded diagnostic auxiliary that discounts nominal
-skill by variance retention, to summarize this decoupling in a single
-horizon-wise quantity.
-Event-oriented evaluation under fold-recalibrated exceedance thresholds
+We report horizon-wise variance retention alongside RMSE-based skill and use
+Skill$_{VP}$, a bounded auxiliary diagnostic that discounts nominal skill by
+variance retention, to summarize this decoupling in a single horizon-wise
+quantity.
+Event-oriented evaluation under fold-recalibrated P75 thresholds
 confirms the horizon dependence: SARIMA recall falls from 0.785 at $h=1$ to
-0.099 at $h=24$ and zero at $h=48$.  The results show why small positive
-RMSE-relative skill should not be read as operational value without an
-amplitude and event-detection diagnostic.
+0.099 at $h=24$ and zero at $h=48$.  In this case study, small positive
+RMSE-relative skill does not by itself support claims of practical usefulness;
+amplitude and event-detection diagnostics materially qualify its interpretation.
 \end{abstract}
 
 \keywords{PM$_{10}$ forecasting; multi-horizon forecasting; rolling-origin
@@ -55,16 +53,12 @@ dynamic fidelity}
 % ============================================================
 \section{Introduction}
 
-Forecasts of particulate matter (PM$_{10}$) support operational activities
-such as public health advisories, short-term compliance planning, and the
-allocation of monitoring and mitigation resources \citep{donnelly2015}.
-In such settings, model evaluation is often framed around useful lead times:
-the range of horizons for which forecasts provide actionable information beyond
-simple references.
-Multi-horizon forecasting and horizon-wise verification are therefore standard
-in air quality applications, and persistence remains a common baseline because
-it is transparent and frequently competitive at short lead times
-\citep{murphy1992}.
+Short-term air-quality forecasting is used to anticipate changes in pollutant
+concentrations at successive lead times \citep{donnelly2015}.
+Its evaluation should therefore preserve the horizon as an explicit dimension:
+a forecast may improve on a simple reference at one lead time but not at
+another.  Persistence is a transparent reference forecast and an established
+standard against which relative skill can be interpreted \citep{murphy1992}.
 
 A practical complication is that squared-error criteria (MSE/RMSE) dominate
 both model optimization and the reporting of multi-horizon performance.
@@ -82,9 +76,9 @@ In multi-horizon PM$_{10}$ forecasting evaluated with rolling-origin protocols,
 positive persistence-relative RMSE skill can coexist with degraded dynamic
 fidelity, reflected by a pronounced reduction in predicted variance relative to
 observed variance at the same horizon.
-In such cases, a horizon-wise skill curve may suggest that forecasts remain
-useful at medium leads while the corresponding prediction sequences become
-under-variable and less informative about episode evolution.
+In such cases, a horizon-wise skill curve may remain positive at medium leads
+while the corresponding prediction sequences become under-variable and less
+responsive to episode evolution.
 Rolling-origin evaluation is central to this diagnostic because it aggregates
 performance over a sequence of forecast origins spanning changing conditions,
 thereby exposing horizon-dependent behaviors that may be less visible under a
@@ -111,12 +105,12 @@ The contribution is intentionally bounded and empirical:
     LightGBM and SARIMA serve as contrasting cases: LightGBM does not
     consistently beat persistence, while SARIMA's modest positive skill at
     longer horizons coincides with severe variance attenuation and weak
-    exceedance detection.
+    P75-event detection.
   \item We introduce Skill$_{VP}$ as a simple diagnostic auxiliary metric that
     adjusts nominal persistence-relative RMSE skill by variance retention for
     horizon-wise interpretation, and we report event-oriented complements
     (recall, precision, flag rate) under fold-recalibrated thresholds as a
-    further check on operational usefulness.
+    further check on event sensitivity.
 \end{itemize}
 
 % ============================================================
@@ -145,10 +139,9 @@ The present paper adopts this baseline-aware, horizon-wise reading in a
 deliberately narrow setting: deterministic point forecasts for PM$_{10}$
 evaluated under a rolling-origin protocol with persistence as an explicit
 baseline.
-Rolling-origin aggregation preserves temporal causality and reduces the
-optimistic bias that can arise when temporal dependence is insufficiently
-respected, while also exposing horizon-dependent behavior across changing
-conditions \citep{tashman2000}.
+Rolling-origin aggregation preserves temporal ordering and exposes
+horizon-dependent behavior across repeated forecast origins
+\citep{tashman2000}.
 
 \subsection{Variance-fidelity diagnostics}
 
@@ -188,8 +181,9 @@ LightGBM does not consistently improve on persistence, while SARIMA provides
 the clearer case in which modest positive persistence-relative RMSE skill at
 long horizons coexists with near-collapsed predictive variance.
 This contrast motivates interpreting skill curves jointly with variance
-retention when discussing horizon-wise usefulness, without claiming that such
-decoupling must occur universally.
+retention, without treating either diagnostic as direct evidence of usefulness
+in a specific decision setting and without claiming that such decoupling must
+occur universally.
 
 % ============================================================
 \section{Methodology}
@@ -212,21 +206,28 @@ year 2023 (2023-01-01 00:00 to 2023-12-31 23:00).  The regular hourly grid
 contains 8,760 time stamps, of which 8,465 have measurements marked as valid
 by the data provider; invalid or absent targets are excluded from verification.
 The data were obtained from the Madrid Open Data portal operated by the
-Ayuntamiento de Madrid.
+Ayuntamiento de Madrid.  The complete grid and the valid-observation count are
+reported separately because missing or provider-invalid values remain missing.
 Table~\ref{tab:data_protocol} summarises the study site, data coverage, and
 evaluation protocol.
 
 We adopt a rolling-origin (walk-forward) evaluation protocol to approximate
-sequential operational use.
-Models are refitted at the start of each expanding fold using only its training
-window.  Within a test window, forecasts are issued sequentially using only
+sequential use.  The design uses five expanding folds.  The first training
+window contains 4,380 hourly grid points (50\% of the year); each subsequent
+test window contains 876 grid points, and each completed test window is added
+to the next training window.  Models are refitted at the start of each fold
+using only its training window.  Within a test window, forecasts are issued
+sequentially using only
 information available at origin $t$; the SARIMA state is updated without
 parameter refitting when a new observation becomes available.
 For each horizon $h$, verification aggregates over the set of valid origins
 $\mathcal{T}_h$ with targets $y_{t+h}$ available, yielding horizon-wise sample
 sizes $N_h = |\mathcal{T}_h|$.
-This protocol avoids look-ahead and exposes the evaluation to changes in
-conditions across origins \citep{tashman2000}.
+No scaling is applied.  Unavailable inputs are forward-filled only from the
+latest value available at the origin; backward filling is not used.  The
+candidate and persistence forecasts are evaluated on exactly the same valid
+$(t,h)$ verification pairs.  This protocol avoids look-ahead and exposes the
+evaluation to changes in conditions across origins \citep{tashman2000}.
 
 \begin{table}[t]
 \centering
@@ -265,17 +266,23 @@ reported horizon-wise.
 
 We report results for two empirical point-forecasting models.
 The first is a gradient-boosted decision tree model (LightGBM), trained
-independently for each fold and horizon $h$ using current and lagged values,
-causal rolling-window statistics, and known calendar covariates \citep{ke2017}.
+independently for each fold and horizon $h$ using current and lagged values at
+0, 1, 6, 24, 48, and 168 hours, causal rolling means and standard deviations
+over 6, 24, 48, and 168 hours, and known target-calendar covariates
+\citep{ke2017}.  The fixed configuration uses 200 trees, maximum depth 8,
+31 leaves, learning rate 0.05, feature subsampling of 0.9, and random seed 42.
+The row-subsample parameter is 0.9 but its frequency remains at the LightGBM
+default of zero, so row subsampling is inactive.  Fitting is deterministic and
+single-threaded.
 Unavailable inputs are forward-filled from the most recent valid observation;
 backward filling is never used, and invalid targets are excluded.
-LightGBM is included as a strong, widely used nonlinear predictor in applied
-forecasting.
+LightGBM is included as a widely used nonlinear predictor in applied
+forecasting, not as a tuned state-of-the-art benchmark.
 
 The second is SARIMA, a classical time-series model fitted on the raw PM$_{10}$
-series at each rolling-origin fold using the fixed order
-$(p,d,q)(P,D,Q)_s = (1,0,1)(1,0,0)_{24}$ recovered from the upstream experiment
-configuration and recursive multi-step forecasting
+series at the start of each rolling-origin fold using the pre-specified order
+$(p,d,q)(P,D,Q)_s = (1,0,1)(1,0,0)_{24}$, a constant term, and recursive
+multi-step forecasting
 \citep{boxjenkins2015}.
 SARIMA is included not as a comprehensive statistical benchmark, but as a
 comparator that can exhibit qualitatively different dynamic-fidelity behavior
@@ -335,6 +342,18 @@ replacement for it, and it makes no claim about probabilistic calibration or
 decision-theoretic optimality. Its sole purpose is to flag, at a glance,
 horizons where nominal skill and amplitude preservation diverge.
 
+\subsection{Train-calibrated P75 event diagnostics}
+
+As a complementary event-based check, an event is defined as
+$y_{t+h}>q_{0.75}^{(f)}$, where $q_{0.75}^{(f)}$ is the 75th percentile of the
+valid PM$_{10}$ observations in fold $f$'s training window.  The same
+fold-specific threshold is applied to observations and predictions in that
+fold's test window.  We report recall, precision, prediction flag rate, and
+observed event base rate separately by horizon.  Precision is undefined when a
+model issues no positive flags; it is retained as missing rather than replaced
+by zero.  P75 is a data-derived diagnostic threshold, not a regulatory
+exceedance limit.
+
 % ============================================================
 \section{Results}
 
@@ -346,8 +365,8 @@ its skill is $-0.010$, $0.073$, $-0.034$, and $-0.079$ at
 $h=1,6,24,48$.  SARIMA has modest positive skill at all four horizons
 ($0.031$--$0.132$), but its variance retention falls sharply with lead time,
 from 79.8\% at $h=1$ to 35.7\% at $h=6$, 2.9\% at $h=24$, and 0.4\% at
-$h=48$.  Thus the diagnostic issue is not an apparent equivalence between two
-highly skilled models; it is the narrower observation that SARIMA's best
+$h=48$.  Thus the diagnostic issue is not a comparison of two models that both
+outperform persistence; it is the narrower observation that SARIMA's best
 relative skill occurs where its predictive amplitude is least credible.
 
 \begin{table}[t]
@@ -367,7 +386,6 @@ $h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
     & RMSE & Skill & VR (\%) & Skill$_{VP}$ \\
 \midrule
 \input{outputs/tables/paper_a_rolling_results.tex}
-\bottomrule
 \end{tabular}
 \end{table}
 
@@ -388,8 +406,9 @@ $h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
 \caption{Diagnostic complements for horizon-wise interpretation.
   \textit{Left}: Skill$_{VP}$, which adjusts persistence-relative RMSE skill
   by variance retention.
-  \textit{Right}: horizon-wise exceedance recall and precision at the P75
-  threshold under fold-recalibrated evaluation.}
+  \textit{Right}: horizon-wise P75-event recall and precision under
+  fold-recalibrated evaluation.  SARIMA precision at 48 h is undefined and is
+  omitted because the model issues no positive flags.}
 \label{fig:diagnostic_profiles}
 \end{figure}
 
@@ -408,10 +427,11 @@ The stronger diagnostic signal is model-dependent: SARIMA provides the clearer
 extreme case, while LightGBM illustrates that amplitude preservation alone
 cannot compensate for a lack of baseline-relative accuracy.
 
-\subsection{E2: Protocol robustness (rolling-origin vs.\ blocked holdout)}
+\subsection{E2: Protocol sensitivity (rolling-origin vs.\ blocked holdout)}
 
-To assess whether the variance-retention contrast is specific to rolling-origin
-aggregation, we report an analogous blocked-holdout evaluation.
+As a secondary sensitivity check, we report an analogous chronological 80/20
+blocked-holdout evaluation.  It is not treated as a substitute for the
+canonical rolling-origin analysis.
 The holdout results support the same qualitative long-horizon SARIMA pattern.
 At $h=24$ and $48$, its variance retention is 3.35\% and 0.07\%, while skill
 is $-0.029$ and 0.029.  LightGBM holdout skill is $-0.065$, 0.057,
@@ -421,22 +441,22 @@ long-horizon amplitude attenuation appears under both evaluations.
 
 \subsection{E3: Event-oriented complement}
 
-As a supportive operational complement, we evaluate exceedance detection at
-the P75 threshold under fold-recalibrated thresholds (one threshold per
-rolling-origin fold, fitted on that fold's training data).
+As a supportive event-oriented complement, we evaluate detection at the P75
+threshold using one threshold fitted on each rolling-origin fold's training
+data.
 LightGBM recall decreases from 0.773 at $h=1$ to 0.323 at $h=48$, with
 precision decreasing from 0.815 to 0.390.  SARIMA recall decreases from 0.785
 at $h=1$ to 0.099 at $h=24$ and zero at $h=48$; its flag rate likewise falls
-from 0.300 to zero.  This long-horizon failure is consistent with its near-zero
-variance retention.
+from 0.300 to zero.  Its precision at $h=48$ is undefined, rather than zero,
+because the model issues no positive flags.  This long-horizon loss of event
+sensitivity is consistent with its near-zero variance retention.
 
 These event-oriented results are treated as supportive diagnostics.
 Recall alone can be trivially high under threshold saturation—when forecasts
 remain above a permissive threshold at most time steps—and should therefore be
 interpreted jointly with precision, flag rate, and variance retention.
 Under fold-recalibrated thresholds, neither model sustains strong event
-detection across all horizons, and SARIMA's long-horizon event detection is
-especially limited by its inability to predict concentration peaks.
+detection across all horizons, and SARIMA does not flag P75 events at $h=48$.
 
 Overall, E1--E3 jointly support a bounded, model-dependent conclusion:
 persistence-relative RMSE skill can remain positive while dynamic fidelity
@@ -458,24 +478,24 @@ that even a positive error-based skill value can mask severe loss of amplitude,
 and that horizon-wise interpretation changes when variance retention is
 examined alongside RMSE-relative skill.
 
-Skill$_{VP}$ is useful as a diagnostic auxiliary metric precisely because it
-makes this divergence explicit and comparable across horizons without requiring
-additional probabilistic infrastructure.
+Skill$_{VP}$ provides a compact auxiliary description of this divergence across
+horizons; it does not establish predictive usefulness or replace the underlying
+RMSE, variance, and event metrics.
 The LightGBM results do not support a monotone variance-collapse narrative,
 although its negative skill at three horizons rules out claims of consistent
 improvement over persistence.  SARIMA provides clearer evidence that modest
 RMSE-relative skill can coexist with near-zero variance retention, and the
-event-oriented evaluation confirms the operational consequence at long leads.
+event-oriented evaluation supplies a convergent diagnostic at long leads.
 
 Event-oriented evaluation must be handled cautiously.
 Recall alone may be trivially high under threshold saturation and does not by
 itself demonstrate predictive discrimination or operational usefulness.
-In this study, fold-recalibrated thresholds prevent artificial inflation of
-event base rates, and recall is reported jointly with precision and flag rate.
+In this study, fold-specific training thresholds avoid using future test values
+to define events, and recall is reported jointly with precision and flag rate.
 Under these conditions, the event metrics support the same cautious conclusion
 as the variance diagnostics: performance deteriorates with horizon for both
-models, and SARIMA's positive long-horizon skill does not translate into peak
-detection.
+models, and SARIMA's positive long-horizon skill coexists with no positive P75
+flags at 48 h.
 
 % ============================================================
 \section{Limitations}
@@ -490,10 +510,13 @@ to two model classes (LightGBM, SARIMA) with specific, fixed configurations;
 neither model was tuned to compete for state-of-the-art accuracy, since the
 goal is to characterize a decoupling pattern rather than to benchmark model
 performance.
-Skill$_{VP}$'s scope is stated in Section~\ref{sec:method_skillvp} and is not
-repeated here; the metric has not been validated outside the present case
-study, and its behavior under regimes with strong seasonality or structural
-breaks remains untested.
+The study reports point estimates without confidence intervals or formal tests
+of forecast-loss differences.  The P75 analysis measures sensitivity to a
+training-calibrated distributional threshold and must not be interpreted as
+performance against a legal air-quality threshold.  Skill$_{VP}$ has not been
+validated outside the present case study, and its behavior under regimes with
+strong seasonality, structural breaks, variance inflation, or decision-specific
+losses remains untested.
 
 % ============================================================
 \section{Conclusion}
@@ -502,7 +525,7 @@ In this PM$_{10}$ case study evaluated under rolling-origin protocols with
 persistence as an explicit baseline, the reproducible evidence is modest:
 LightGBM does not consistently beat persistence, and SARIMA achieves only small
 positive skill.  Nevertheless, SARIMA's variance retention falls to 2.9\% and
-0.4\% at 24 and 48 hours, and its exceedance recall falls to 0.099 and zero.
+0.4\% at 24 and 48 hours, and its P75-event recall falls to 0.099 and zero.
 Reporting variance retention alongside RMSE skill, and using Skill$_{VP}$ as a
 diagnostic auxiliary metric, offers a practical way to make this divergence
 explicit for horizon-wise interpretation under rolling-origin evaluation,
@@ -511,8 +534,9 @@ without implying a universal replacement for established verification practices.
 % ============================================================
 \section*{Data and Code Availability}
 
-The analysis code, configuration files, and evaluation scripts used in this
-study are available at
+The processed series, row-level rolling-origin and holdout predictions,
+aggregate metrics, run manifests, analysis code, and evaluation scripts used in
+this study are available at
 \url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
 Raw PM$_{10}$ data were obtained from the Madrid Open Data hourly air-quality
 archive (\url{https://datos.madrid.es/dataset/201200-0-calidad-aire-horario})
