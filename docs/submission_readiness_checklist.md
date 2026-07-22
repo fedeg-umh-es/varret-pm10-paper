@@ -19,7 +19,7 @@
 - [x] README aligned with the hourly Paper A reproduction.
 - [x] Final clean PDF build and page-by-page visual inspection (8/8 pages).
 - [x] Full test suite (22 passed), consistency check, and `git diff --check`.
-- [ ] Branch pushed and draft PR opened.
+- [x] Branch pushed and draft PR opened: [PR #6](https://github.com/fedeg-umh-es/varret-pm10-paper/pull/6).
 
 ## Pending author decision
 
