@@ -10,8 +10,10 @@ A related but distinct line of work — verifying whether the horizon at which
 persistence-relative skill remains positive ($H_{\max}$) is being
 misreported as the predictability horizon ($\hstar$) — has been extended
 beyond what the "Conditions for Becoming a Standalone Paper" section below
-anticipated, and is promoted to an independent manuscript:
-`paper_b_predictability_bound.tex`.
+anticipated, and is promoted to an independent manuscript with its own
+self-contained reproducibility repository,
+[`fedeg-umh-es/pm10-predictability-bound`](https://github.com/fedeg-umh-es/pm10-predictability-bound)
+(`paper/paper_b_predictability_bound.tex`). It no longer lives in this repo.
 
 Conditions now met, against the list below:
 - additional PM10 stations: 3 (Elx-Agroalimentari, Valencia-Vivers,
@@ -38,10 +40,10 @@ zarra-emep, $h\le7$) is consistent with the autocorrelation-implied linear
 ceiling rather than anomalous relative to it.
 
 The claim guardrails below apply, unmodified, to the E1-RR/Skill$_{VP}$ module.
-`paper_b_predictability_bound.tex` has its own explicit Limitations section
-and should not be cited as evidence for claims outside its own scope (three
-stations, $h\le7$, linear predictability ceiling only — not a bound on
-non-linear or exogenous-covariate models).
+The predictability-bound manuscript (in its own repository) has its own explicit
+Limitations section and should not be cited as evidence for claims outside its
+own scope (three stations, $h\le7$, linear predictability ceiling only — not a
+bound on non-linear or exogenous-covariate models).
 
 ---
 
