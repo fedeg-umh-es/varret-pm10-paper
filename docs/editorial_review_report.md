@@ -209,6 +209,42 @@ canonical numerical outputs.
   undefined status is explicit in the caption and manuscript.
 - No clipping, overlap, broken glyph, or materially misplaced float was found.
 
+## Skills and tooling audit
+
+Skills used because they materially affected the review:
+
+- `github:github`: repository and branch orientation against `origin/main`.
+- `github:yeet`: scoped commit, publication, and draft-PR workflow; the GitHub
+  connector is used for publication because the local `gh` client and HTTPS
+  credentials are unavailable.
+- `pdf`: clean compilation, page rendering, PDF metadata checks, and visual
+  inspection of every page and both source figures.
+- `paper-a-anchor-guard`: claim-by-claim alignment with the Paper A empirical
+  anchor, including the prohibited legacy claims.
+- `academic-structural-reviewer`: C-C-C, PIER, section-purpose, and journal-fit
+  structural audit.
+- `editorial-support`: target-journal discovery, generic submission packaging,
+  and author-decision triage when no journal is specified.
+
+Applicable capabilities used alongside those skills were the real LaTeX
+toolchain, repository tests, automated manuscript/output consistency checks,
+and primary-source web verification for cited references.
+
+Skills considered but not used because they were not applicable:
+
+- `documents`: its artifact workflow targets Word/Google Docs rather than the
+  repository's LaTeX source.
+- `control-browser`: public search and direct official-source retrieval were
+  sufficient; no interactive browser task was needed.
+- `github:gh-address-comments` and `github:gh-fix-ci`: there were no existing PR
+  review threads or failing GitHub Actions checks in scope.
+- `openai-library:library`: this is an externally versioned Git repository and
+  must not be duplicated in Library storage.
+- Presentation, spreadsheet, image-generation, chart, email, calendar,
+  messaging, website, Box, Drive, Notion, Wix, pet, and skill-creation skills:
+  none contributes to a LaTeX manuscript audit, reproducibility validation, or
+  GitHub delivery in this task.
+
 ## Risks requiring human decision
 
 1. Select the target journal and decide whether its contribution threshold is
