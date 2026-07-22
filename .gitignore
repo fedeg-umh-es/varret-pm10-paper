@@ -4,6 +4,14 @@ __pycache__/
 *.py[cod]
 .DS_Store
 *.egg-info/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
 
 outputs/*
 !outputs/.gitkeep
@@ -18,16 +26,34 @@ outputs/metrics/*
 !outputs/metrics/.gitkeep
 outputs/tables/*
 !outputs/tables/.gitkeep
+!outputs/tables/paper_a_rolling_results.tex
 outputs/logs/*
 !outputs/logs/.gitkeep
 outputs/reports/*
 !outputs/reports/.gitkeep
 
+# Submission figures cited directly by paper_a.tex.
+!outputs/figures/
+outputs/figures/*
+!outputs/figures/figure1_skill_variance.png
+!outputs/figures/figure1_skill_variance.pdf
+!outputs/figures/figure2_skillvp_events.png
+!outputs/figures/figure2_skillvp_events.pdf
+
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/madrid_air_hourly_2023.zip
 data/interim/*
 !data/interim/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/casa_de_campo_pm10_2023.csv
+!data/processed/casa_de_campo_pm10_2023.manifest.json
+
+# Auditable empirical rerun: row-level predictions, metrics, and manifests.
+!outputs/reproduction/
+!outputs/reproduction/*.csv
+!outputs/reproduction/*.json
+!outputs/reproduction/*.parquet
 
 airquality_datasets/**

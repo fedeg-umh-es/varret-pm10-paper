@@ -1,0 +1,11 @@
+{
+  "source_url": "https://datos.madrid.es/dataset/201200-0-calidad-aire-horario/resource/201200-3-calidad-aire-horario-zip/download/201200-3-calidad-aire-horario-zip.zip",
+  "archive_sha256": "b3ee481e0a787239dd07b33e93b2da97e31e6b5123d3c659f49e14549fb62b2e",
+  "station": "Casa de Campo",
+  "station_code": 24,
+  "magnitude": "PM10",
+  "magnitude_code": 10,
+  "hourly_grid_rows": 8760,
+  "validated_observations": 8465,
+  "missing_or_invalid": 295
+}
