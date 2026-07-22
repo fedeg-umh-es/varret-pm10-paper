@@ -4,6 +4,14 @@ __pycache__/
 *.py[cod]
 .DS_Store
 *.egg-info/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
 
 outputs/*
 !outputs/.gitkeep
@@ -22,6 +30,14 @@ outputs/logs/*
 !outputs/logs/.gitkeep
 outputs/reports/*
 !outputs/reports/.gitkeep
+
+# Submission figures cited directly by paper_a.tex.
+!outputs/figures/
+outputs/figures/*
+!outputs/figures/figure1_skill_variance.png
+!outputs/figures/figure1_skill_variance.pdf
+!outputs/figures/figure2_skillvp_events.png
+!outputs/figures/figure2_skillvp_events.pdf
 
 data/raw/*
 !data/raw/.gitkeep

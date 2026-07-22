@@ -133,6 +133,17 @@ Run tests:
 pytest
 ```
 
+Build the two submission figures and compile `paper_a.tex` with BibTeX:
+
+```bash
+make paper
+```
+
+The horizon-wise figure inputs are stored in
+`data/manuscript/paper_a_horizon_metrics.csv`. Event metrics are stored as the
+across-horizon ranges reported by the manuscript because the underlying hourly
+event-level predictions are not distributed in this repository.
+
 ## Notes
 
 This repository is oriented to the P33 paper workflow rather than a general-purpose forecasting package. The implementation is intentionally restrained, explicit, and auditable.

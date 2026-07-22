@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -8,15 +9,14 @@
 \usepackage{siunitx}
 \usepackage{natbib}
 \usepackage{subcaption}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
+\usepackage[hidelinks]{hyperref}
 
 \newcommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1\par}
 
 \title{Variance Retention as a Diagnostic Complement to Persistence-Relative
 Skill in Multi-Horizon PM$_{10}$ Forecasting}
 \author{Francisco Federico Garcia Crespi}
-\date{April 2026}
+\date{July 2026}
 
 \begin{document}
 
@@ -46,7 +46,7 @@ skill by variance retention, to summarize this decoupling in a single
 horizon-wise quantity.
 Event-oriented evaluation under fold-recalibrated exceedance thresholds
 confirms the operational consequence: SARIMA detects approximately 40\% of
-high-PM$_{10}$ events, against 75--91\% for LightGBM.
+high-PM$_{10}$ events, against 89--91\% for LightGBM.
 Together, these results show that RMSE-relative skill alone can substantially
 overstate the operational value of a multi-horizon forecast, and that
 reporting variance retention alongside it is a low-cost, broadly applicable
@@ -311,7 +311,7 @@ Variance retention is reported as a percentage,
 Values substantially below 100\% indicate that predictions are under-variable
 relative to observations at the same horizon.
 
-\subsection{Skill$_{VP}$ as a diagnostic auxiliary metric}
+\subsection{\texorpdfstring{Skill$_{VP}$}{SkillVP} as a diagnostic auxiliary metric}
 \label{sec:method_skillvp}
 
 RMSE-based skill and variance retention capture different aspects of forecast
@@ -401,8 +401,9 @@ $h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
 \caption{Diagnostic complements for horizon-wise interpretation.
   \textit{Left}: Skill$_{VP}$, which adjusts persistence-relative RMSE skill
   by variance retention.
-  \textit{Right}: exceedance recall and precision at the P75 threshold under
-  fold-recalibrated evaluation.}
+  \textit{Right}: reported across-horizon ranges for exceedance recall and
+  precision at the P75 threshold under fold-recalibrated evaluation; SARIMA
+  recall was reported approximately.}
 \label{fig:diagnostic_profiles}
 \end{figure}
 
@@ -543,12 +544,17 @@ without implying a universal replacement for established verification practices.
 \section*{Data and Code Availability}
 
 The analysis code, configuration files, and evaluation scripts used in this
-study are available at \url{https://github.com/fedeg-umh-es/ghost-skill-paper-a}.
+study are available at
+\url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
 Raw PM$_{10}$ data were obtained from the European Environment Agency (EEA)
 Air Quality Download Service (\url{https://aqportal.discomap.eea.europa.eu/})
 and are publicly available under the EEA standard data policy.
 
 \bibliographystyle{plainnat}
+\begingroup
+\small
+\setlength{\bibsep}{2pt}
 \bibliography{references}
+\endgroup
 
 \end{document}

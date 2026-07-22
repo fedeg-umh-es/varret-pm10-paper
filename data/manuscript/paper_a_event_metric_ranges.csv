@@ -1,0 +1,5 @@
+model,metric,min_value,max_value,approximate
+lgbm,Recall,0.89,0.91,false
+lgbm,Precision,0.80,0.93,false
+sarima,Recall,0.40,0.40,true
+sarima,Precision,0.30,0.79,false
