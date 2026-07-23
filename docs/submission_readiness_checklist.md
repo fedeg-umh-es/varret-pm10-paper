@@ -17,13 +17,17 @@
 - [x] Generic manuscript language and claims reviewed line by line.
 - [x] Data and Code Availability updated.
 - [x] README aligned with the hourly Paper A reproduction.
-- [x] Final clean PDF build and page-by-page visual inspection (8/8 pages).
+- [x] Final clean PDF build and page-by-page visual inspection (9/9 pages).
 - [x] Full test suite (22 passed), consistency check, and `git diff --check`.
 - [x] Branch pushed and draft PR opened: [PR #6](https://github.com/fedeg-umh-es/varret-pm10-paper/pull/6).
+- [x] Federico García Crespi and Julio Alberto Ramos Martínez confirmed as
+  authors; affiliations, emails, corresponding author, and CRediT roles added.
+- [x] Competing-interest declaration restored from the confirmed earlier
+  manuscript.
 
 ## Pending author decision
 
-- [ ] Confirm author spelling, affiliation, corresponding email, and ORCID.
+- [ ] Supply and verify ORCID identifiers.
 - [ ] Approve title and bounded contribution statement.
 - [ ] Decide whether to retain “ghost skill” as informal shorthand.
 - [ ] Decide whether E2 blocked-holdout sensitivity stays in the main paper.
@@ -39,14 +43,15 @@
 - [x] Journal-fit risk documented: PM10 air-pollution forecasting is in scope,
   but the contribution threshold remains a human editorial judgment.
 - [ ] Apply the current Elsevier LaTeX template and final reference style.
-- [ ] Add the required title-page metadata after authorship is confirmed.
-- [ ] Add required funding, conflict-of-interest, author-contribution, ethics,
-  AI-use, and data declarations as applicable.
+- [x] Add confirmed author, affiliation, correspondence, CRediT, and
+  competing-interest information.
+- [ ] Add a funding statement and ethics or AI-use declarations as applicable;
+  no content is inferred where the authors have not supplied it.
 - [ ] Prepare highlights and graphical abstract if requested by the submission
   system; prepare a cover letter and any supplementary-material captions.
 
 ## Real blockers
 
 No scientific or technical blocker is known for author review. Submission to
-*Atmospheric Research* remains pending author metadata, declarations, and
-template-specific packaging.
+*Atmospheric Research* remains pending ORCID and funding information,
+applicable declarations, and template-specific packaging.

@@ -1,5 +1,18 @@
 # Manuscript change log
 
+## 2026-07-23: confirmed authorship and declarations
+
+- Restored Federico García Crespi and Julio Alberto Ramos Martínez as the
+  confirmed authors.
+- Added both UMH affiliations and email addresses and identified Federico
+  García Crespi as corresponding author.
+- Restored the confirmed CRediT roles and competing-interest declaration from
+  the earlier manuscript.
+- Left ORCID, funding, ethics, and AI-use information pending rather than
+  inferring unprovided declarations.
+- Did not import daily, multi-station empirical results into the canonical
+  hourly Paper A reproduction.
+
 ## 2026-07-22: complete editorial preparation
 
 ### Scientific and methodological clarification

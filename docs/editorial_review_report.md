@@ -18,7 +18,8 @@ Its official Guide for Authors was checked on 2026-07-22. The journal's scope
 includes air pollution and atmospheric aerosols, so the PM10 application is in
 scope; the remaining fit risk is the contribution threshold for a single
 station-year diagnostic study. Template-specific submission items remain
-pending author metadata and a final article-type decision.
+pending ORCID and funding information, applicable declarations, and a final
+article-type decision.
 
 ## Problems found and corrections made
 
@@ -210,10 +211,11 @@ canonical numerical outputs.
 ## Visual and PDF checks
 
 - Clean `latexmk` build completed with BibTeX.
-- Final PDF: 8 letter-size pages.
+- Final PDF: 9 letter-size pages after restoring confirmed authorship and
+  declarations.
 - Final log: no undefined citations, undefined references, overfull boxes, or
   underfull boxes.
-- All eight pages rendered to PNG and inspected individually.
+- All nine pages rendered to PNG and inspected individually.
 - Both manuscript figures opened separately at original resolution.
 - Table rules, negative signs, equations, captions, cross-references, line work,
   markers, legends, and page transitions are legible.
@@ -253,7 +255,10 @@ Skills considered but not used because they were not applicable:
 1. Confirm *Atmospheric Research* as the target and decide whether its
    contribution threshold is compatible with a single-station, single-year
    diagnostic study.
-2. Confirm author name, affiliation, corresponding email, and ORCID.
+2. Supply and verify both authors' ORCID identifiers and the funding statement;
+   author names, affiliations, emails, corresponding author, CRediT roles, and
+   competing-interest declaration have been confirmed from the earlier
+   manuscript.
 3. Decide whether the blocked-holdout sensitivity belongs in the main text or
    supplementary material for the selected journal.
 4. Accept or revise the lack of interval estimates/formal loss tests; adding
