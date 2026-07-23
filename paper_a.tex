@@ -35,6 +35,19 @@ Five model families are compared: two direct lag-only machine-learning forecaste
 The results show that maximising RMSE skill alone is insufficient for operational use: performance must be diagnosed jointly in terms of baseline-relative accuracy, dynamic fidelity (variance retention), and event-detection behaviour.
 \end{abstract}
 
+\section*{Significance Statement}
+Air-quality services increasingly rely on automatic PM$_{10}$ forecasts, which
+are usually judged by whether they beat a simple persistence forecast on average
+error. We show that this common test can mislead: across 17 Spanish monitoring
+stations and five forecasting methods, models that clearly beat persistence on
+average nonetheless flatten the day-to-day swings that matter for detecting
+pollution episodes. We propose a simple complementary check---variance
+retention---that flags this behaviour and separates genuinely informative
+forecasts from over-smoothed ones, and we confirm the operational consequence
+through exceedance detection. Reporting variance retention alongside standard
+skill scores would make routine air-quality forecast verification more
+trustworthy for episode-sensitive decisions.
+
 \keywords{forecast verification; deterministic point forecasts; PM$_{10}$ forecasting;
 rolling-origin evaluation; persistence baseline; persistence-relative skill;
 variance retention; variance collapse; Diebold--Mariano test; exceedance diagnostics;
@@ -334,17 +347,32 @@ The authors declare that they have no known competing financial interests or per
 \section*{Supplementary Material}
 \input{supplementary_material.tex}
 
-\section*{Data and Code Availability}
+\section*{Acknowledgments}
+The authors used a generative AI assistant for language editing and for
+LaTeX and reference formatting. All data processing, analysis, results, and
+scientific conclusions are the authors' own and were verified by the authors,
+who take full responsibility for the content of this paper.
+\emph{[Funding statement to be completed: grant number(s) and funding body.]}
+
+\section*{Data Availability Statement}
 
 The analysis code, configuration files, and evaluation scripts used in this
-study are available at \url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
-Raw daily PM$_{10}$ data were obtained from the MITECO national air-quality
-network portal (\url{https://www.miteco.gob.es/}) and are publicly available.
-The Supplementary Material contains the PRISMA reporting audit outputs and the
-full monitoring-station table referenced in the main text.
+study are openly available at
+\url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
+Raw daily PM$_{10}$ observations were obtained from the MITECO Spanish national
+air-quality network portal (\url{https://www.miteco.gob.es/}) and are publicly
+available. The Supplementary Material contains the PRISMA reporting-audit
+outputs and the full monitoring-station table referenced in the main text.
 
 
-\begin{thebibliography}{25}
+% === AMS (JAMC) migration note ===
+% For the AMS ametsocV6.1 template, replace this manual thebibliography with:
+%     \bibliographystyle{ametsocV6}
+%     \bibliography{references}
+% The companion references.bib (18 entries, author-date) is kept in sync with
+% the list below. AMS uses author-date citations; existing cite commands render
+% as "Author (Year)"/"(Author Year)" under natbib + ametsocV6 with no text edits.
+\begin{thebibliography}{18}
 
 \bibitem{who2021}
 World Health Organization (2021). \textit{WHO Global Air Quality Guidelines: Particulate Matter (PM$_{2.5}$ and PM$_{10}$), Ozone, Nitrogen Dioxide, Sulfur Dioxide, and Carbon Monoxide}. World Health Organization.
