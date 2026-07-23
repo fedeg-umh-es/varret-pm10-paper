@@ -20,7 +20,7 @@
 
 % Keywords macro (for article class)
 \providecommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1}
-\title{A Variance-Retention Diagnostic for Persistence-Relative Skill\\in Daily PM$_{10}$ Forecasting}
+\title{Variance Retention: A Forecast-Verification Diagnostic for\\Skilful-but-Smoothed Point Forecasts of Daily PM$_{10}$}
 \author{Federico Garc\'ia Crespi\thanks{Corresponding author: \texttt{fedeg@umh.es}} \\ Department of Computer Engineering, Universidad Miguel Hern\'andez \\ \and Julio Alberto Ramos Mart\'inez \\ Department of Statistics, Mathematics and Computer Science, Universidad Miguel Hern\'andez \\ \texttt{j.ramos@umh.es}}
 \date{May 2026}
 
@@ -28,17 +28,17 @@
 \maketitle
 
 \begin{abstract}
-Daily PM$_{10}$ point forecasts are often judged by persistence-relative RMSE skill, but skill improvements can coexist with trajectories that are dynamically over-smoothed. We quantify this skill--fidelity tension in a rolling-origin multi-horizon evaluation ($h=1,\ldots,7$) over 17 heterogeneous stations from the Spanish MITECO monitoring network, using persistence as an explicit baseline.
+Verification of deterministic air-quality forecasts relies heavily on persistence-relative RMSE skill, yet a forecast can be certified as skilful while its trajectory is dynamically over-smoothed. We introduce variance retention as a complementary verification diagnostic and quantify this skill--fidelity tension in a rolling-origin multi-horizon evaluation ($h=1,\ldots,7$) over 17 heterogeneous stations from the Spanish MITECO monitoring network, using persistence as an explicit baseline.
 
 Five model families are compared: two direct lag-only machine-learning forecasters (HGB direct and Ridge direct), a classical statistical baseline (SARIMA), a variance-preserving reference (seasonal naive), and a decomposition-based control (STL+Ridge). Direct HGB and Ridge achieve positive RMSE skill in all station--horizon cells and are frequently significantly better than persistence under BH-adjusted Diebold--Mariano tests, yet they exhibit near-universal variance collapse ($\alpha<0.5$) in 118/119 cells each. SARIMA partially reproduces the same pattern, collapsing in 110/119 cells. Seasonal naive preserves variance but does not improve RMSE on median, whereas STL+Ridge preserves or inflates variance and attains high exceedance recall at the cost of poor RMSE skill and many false alarms.
 
 The results show that maximising RMSE skill alone is insufficient for operational use: performance must be diagnosed jointly in terms of baseline-relative accuracy, dynamic fidelity (variance retention), and event-detection behaviour.
 \end{abstract}
 
-\keywords{PM$_{10}$ forecasting; daily forecasting; rolling-origin evaluation;
-persistence baseline; persistence-relative skill; variance retention; variance collapse;
-Diebold--Mariano test; bootstrap intervals; exceedance diagnostics; Murphy decomposition;
-MITECO monitoring network; Spain}
+\keywords{forecast verification; deterministic point forecasts; PM$_{10}$ forecasting;
+rolling-origin evaluation; persistence baseline; persistence-relative skill;
+variance retention; variance collapse; Diebold--Mariano test; exceedance diagnostics;
+Murphy decomposition; MITECO monitoring network; Spain}
 
 \section{Introduction}
 
@@ -49,6 +49,22 @@ In multi-horizon settings, persistence-relative RMSE skill is a necessary summar
 To address this gap, we introduce variance retention as a post-evaluation diagnostic layer to read dynamic fidelity alongside RMSE-based skill in a rolling-origin daily PM$_{10}$ study. We complement the joint skill–fidelity reading with (i) bootstrap intervals for the variance-retention ratio $\alpha$, (ii) threshold-sensitivity checks for the collapse convention, (iii) BH-adjusted Diebold–Mariano tests against persistence, (iv) exceedance diagnostics for episode sensitivity and false alarms, and (v) a Murphy decomposition to connect the empirical patterns to forecast verification theory \cite{murphy1988}.
 
 We further ask whether the skill–fidelity tension is specific to direct lag-only ML forecasters or also appears in classical statistical and decomposition-based alternatives.
+
+\paragraph{Contributions.} This paper contributes to forecast-verification
+practice, not to forecasting methodology or atmospheric-process understanding.
+Specifically: (i) we formalise \emph{variance retention} $\alpha(h)$ as a
+bounded, post-hoc verification diagnostic that complements persistence-relative
+skill by exposing amplitude collapse in deterministic point forecasts, together
+with an interpretive skill--retention template (Table~\ref{tab:interpretive});
+(ii) across 17 heterogeneous PM$_{10}$ stations and five model families, we show
+that statistically significant RMSE gains over persistence (BH-adjusted
+Diebold--Mariano) routinely coexist with near-universal variance collapse and
+degraded event detection, and we connect this pattern to a Murphy decomposition
+of mean squared error; and (iii) we distil a minimum set of reporting practices
+for verifying deterministic air-quality forecasts. The claims are deliberately
+bounded to the evaluated setting and are not offered as a general theory of
+forecast skill.
+
 \section{Evaluation Reporting Gaps in Particulate Matter Forecasting}
 
 Machine-learning and deep-learning air-quality forecasting has grown rapidly, especially for particulate matter. Reviews describe increasingly complex architectures, hybrid modelling strategies, and data-driven pipelines for PM$_{10}$ and PM$_{2.5}$ prediction \cite{mendez2023,tang2024,chadalavada2025}.
