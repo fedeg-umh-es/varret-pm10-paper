@@ -17,7 +17,6 @@
 
 % Links
 \usepackage{hyperref}
-\usepackage[textsize=footnotesize]{todonotes}
 
 % Keywords macro (for article class)
 \providecommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1}
@@ -47,7 +46,7 @@ Daily PM$_{10}$ forecasts support a short-horizon interpretation in air-quality 
 
 In multi-horizon settings, persistence-relative RMSE skill is a necessary summary because it tests whether a model improves over an explicit operational baseline \cite{hyndman2006}. However, point-forecast accuracy summaries remain incomplete for decision support \cite{gneiting2011}: a model can be significantly skilful in RMSE while producing trajectories that are dynamically over-smoothed.
 
-To address this gap, we introduce variance retention as a post-evaluation diagnostic layer to read dynamic fidelity alongside RMSE-based skill in a rolling-origin daily PM$_{10}$ study. We complement the joint skill–fidelity reading with (i) bootstrap intervals for the variance-retention ratio $\alpha$, (ii) threshold-sensitivity cheques for the collapse convention, (iii) BH-adjusted Diebold–Mariano tests against persistence, (iv) exceedance diagnostics for episode sensitivity and false alarms, and (v) a Murphy decomposition to connect the empirical patterns to forecast verification theory \cite{murphy1988}.
+To address this gap, we introduce variance retention as a post-evaluation diagnostic layer to read dynamic fidelity alongside RMSE-based skill in a rolling-origin daily PM$_{10}$ study. We complement the joint skill–fidelity reading with (i) bootstrap intervals for the variance-retention ratio $\alpha$, (ii) threshold-sensitivity checks for the collapse convention, (iii) BH-adjusted Diebold–Mariano tests against persistence, (iv) exceedance diagnostics for episode sensitivity and false alarms, and (v) a Murphy decomposition to connect the empirical patterns to forecast verification theory \cite{murphy1988}.
 
 We further ask whether the skill–fidelity tension is specific to direct lag-only ML forecasters or also appears in classical statistical and decomposition-based alternatives.
 \section{Evaluation Reporting Gaps in Particulate Matter Forecasting}
@@ -139,7 +138,7 @@ We define the variance-retention ratio at horizon \(h\) as
 
 The ratio \(\alpha(h)\) compares forecast trajectory variability with observed variability at the same horizon. Values \(\alpha(h)\ll 1\) indicate variance shrinkage consistent with smoothed point-forecast trajectories, while values \(\alpha(h)\gg 1\) indicate forecast variance inflation.
 
-Variance retention should not be interpreted as a complete measure of trajectory quality. A forecast may retain the observed variance and still be biassed, phase-shifted, or poor at reproducing individual episodes. The diagnostic is therefore intended to detect one specific failure mode—variance shrinkage—rather than to certify full dynamic adequacy.
+Variance retention should not be interpreted as a complete measure of trajectory quality. A forecast may retain the observed variance and still be biased, phase-shifted, or poor at reproducing individual episodes. The diagnostic is therefore intended to detect one specific failure mode—variance shrinkage—rather than to certify full dynamic adequacy.
 
 Variance retention is not a calibration measure and is not intended to assess probabilistic uncertainty. It is a bounded post-evaluation diagnostic for reading point forecasts when operational interpretation depends on day-to-day fluctuations as well as on average accuracy \cite{jolliffe2012}.
 
@@ -182,24 +181,14 @@ To make the multi-horizon behaviour readable in the main text, we summarise hori
 
 \begin{figure}[t]
   \centering
-  \IfFileExists{figure3_skill_profiles.pdf}{%
-    \includegraphics[width=\linewidth]{figure3_skill_profiles.pdf}%
-  }{%
-    % NOTE TO AUTHOR: Upload figure3_skill_profiles.pdf (single-plot horizon skill profile) before final compilation.
-    \fbox{\parbox{0.95\linewidth}{\centering Missing file: figure3\_skill\_profiles.pdf}}
-  }
+  \includegraphics[width=\linewidth]{figure3_skill_profiles.pdf}
   \caption{Median persistence-relative RMSE skill by forecast horizon across 17 PM$_{10}$ stations. Shaded bands denote interquartile ranges across stations. HGB, Ridge, and SARIMA retain positive median skill, whereas seasonal naive remains close to persistence and STL+Ridge is substantially worse than persistence.}
   \label{fig:skill_profiles}
 \end{figure}
 
 \begin{figure}[t]
   \centering
-  \IfFileExists{figure4_alpha_profiles.pdf}{%
-    \includegraphics[width=\linewidth]{figure4_alpha_profiles.pdf}%
-  }{%
-    % NOTE TO AUTHOR: Upload figure4_alpha_profiles.pdf (single-plot horizon alpha profile) before final compilation.
-    \fbox{\parbox{0.95\linewidth}{\centering Missing file: figure4\_alpha\_profiles.pdf}}
-  }
+  \includegraphics[width=\linewidth]{figure4_alpha_profiles.pdf}
   \caption{Median variance-retention ratio by forecast horizon across 17 PM$_{10}$ stations. The grey region indicates collapsed variance ($\alpha < 0.5$), and the green band indicates near-retained variance. HGB, Ridge, and SARIMA rapidly enter the collapsed region, while seasonal naive remains close to $\alpha = 1$ and STL+Ridge preserves or inflates variance.}
   \label{fig:alpha_profiles}
 \end{figure}
@@ -267,12 +256,7 @@ The station set is heterogeneous, including urban traffic, urban/background, sub
 
 \begin{figure}[t]
   \centering
-  \IfFileExists{station_map_ml_only_collapse_rate.pdf}{%
-    \includegraphics[width=\linewidth]{station_map_ml_only_collapse_rate.pdf}%
-  }{%
-    % NOTE TO AUTHOR: Upload station_map_ml_only_collapse_rate.pdf (ML-only map) before compiling the final submission.
-    \fbox{\parbox{0.95\linewidth}{\centering Missing file: station\_map\_ml\_only\_collapse\_rate.pdf}}
-  }
+  \includegraphics[width=\linewidth]{station_map_ml_only_collapse_rate.pdf}
   \caption{Geographic distribution of the 17 MITECO stations. Marker colour denotes station type. Marker size denotes the ML-only collapse rate, computed over 14 model-horizon cells per station (2 direct ML models x 7 horizons). Fifteen stations show 14/14 collapsed ML cells; Huesca and Barcelona Vall d'Hebron show 13/14 due to one non-collapsed h=1 cell each.}
   \label{fig:station_map_ml_only}
 \end{figure}
@@ -292,7 +276,7 @@ Including SARIMA shows that variance collapse is not an architectural defect uni
 Seasonal naive preserves variance (0/119 collapsed cells; median $\alpha \approx 1.000$) but has a slightly negative median skill ($-0.026$) and a high median FAR (0.822). STL+Ridge preserves or inflates variance in all cells (median $\alpha = 1.399$) and shows very high exceedance recall, but its median RMSE skill is strongly negative ($-1.107$) and it exhibits high false-alarm rates (median FAR 0.896). Preserving amplitude is therefore necessary but not sufficient: variability must also be forecast-relevant and not dominated by false alarms.
 
 \subsection{Implications for operational PM$_{10}$ forecasting}
-RMSE skill, variance retention, and exceedance behaviour expose different failure modes. Positive baseline-relative RMSE skill can coexist with variance collapse and trajectory smoothing, whereas variance preservation can coexist with weak RMSE skill and high false-alarm rates. Interpreting daily PM$_{10}$ point forecasts therefore requires reading baseline-relative accuracy alongside variance retention and operational exceedance cheques, rather than treating any single summary as a universal score.
+RMSE skill, variance retention, and exceedance behaviour expose different failure modes. Positive baseline-relative RMSE skill can coexist with variance collapse and trajectory smoothing, whereas variance preservation can coexist with weak RMSE skill and high false-alarm rates. Interpreting daily PM$_{10}$ point forecasts therefore requires reading baseline-relative accuracy alongside variance retention and operational exceedance checks, rather than treating any single summary as a universal score.
 
 
 \section{Implications for Forecast Evaluation Practice}
@@ -308,7 +292,7 @@ not assessed.
 The five-model comparison is diagnostic rather than exhaustive; the models are intended to reveal failure modes under a common rolling-origin protocol, not to establish a definitive leaderboard.
 The model set spans two direct lag-feature ML forecasters (HGB direct, Ridge direct), a sparse classical statistical baseline (SARIMA), a decomposition-based variant (STL+Ridge), and a seasonal naive reference; other architectures, covariate-rich designs, and probabilistic forecasters may exhibit different variance-retention behaviour.
 SARIMA is used as a sparse statistical baseline; its results should not be interpreted as the best attainable SARIMA performance under extensive manual specification.
-Exceedance diagnostics are included as compact operational cheques, not as a full event-classification benchmark.
+Exceedance diagnostics are included as compact operational checks, not as a full event-classification benchmark.
 Skill$_{VP}$ is not proposed as a general-purpose replacement for RMSE or as a
 new standard verification score; it is a simple diagnostic auxiliary whose value
 lies in making the skill–fidelity decoupling explicit at each horizon.
@@ -325,7 +309,7 @@ The central lesson is therefore not that one model family is universally prefera
 
 
 \section*{CRediT author statement}
-Federico Garc\'ia Crespi: Conceptualisation, Data curation, Formal analysis, Investigation, Methodology, Software, Validation, Visualisation, Writing -- original draught, Writing -- review \& editing. Julio Alberto Ramos Mart\'inez: Conceptualisation, Supervision, Writing -- review \& editing.
+Federico Garc\'ia Crespi: Conceptualisation, Data curation, Formal analysis, Investigation, Methodology, Software, Validation, Visualisation, Writing -- original draft, Writing -- review \& editing. Julio Alberto Ramos Mart\'inez: Conceptualisation, Supervision, Writing -- review \& editing.
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
@@ -355,15 +339,6 @@ Wilks, D. S. (2011). \textit{Statistical Methods in the Atmospheric Sciences} (3
 \bibitem{jolliffe2012}
 Jolliffe, I. T., and Stephenson, D. B. (Eds.) (2012). \textit{Forecast Verification: A Practitioner's Guide in Atmospheric Science} (2nd ed.). Wiley.
 
-\bibitem{armstrong2001}
-Armstrong, J. S. (Ed.) (2001). \textit{Principles of Forecasting: A Handbook for Researchers and Practitioners}. Kluwer Academic Publishers.
-
-\bibitem{chatfield2000}
-Chatfield, C. (2000). \textit{Time-Series Forecasting}. Chapman \& Hall/CRC.
-
-\bibitem{box2015}
-Box, G. E. P., Jenkins, G. M., Reinsel, G. C., and Ljung, G. M. (2015). \textit{Time Series Analysis: Forecasting and Control} (5th ed.). Wiley.
-
 \bibitem{tashman2000}
 Tashman, L. J. (2000). Out-of-sample tests of forecasting accuracy: an analysis and review. \textit{International Journal of Forecasting}, 16(4), 437--450.
 
@@ -376,9 +351,6 @@ Makridakis, S., Spiliotis, E., and Assimakopoulos, V. (2018). The M4 Competition
 \bibitem{cerqueira2020}
 Cerqueira, V., Torgo, L., and Soares, C. (2022). A case study comparing machine learning with statistical methods for time series forecasting: size matters. \textit{Journal of Intelligent Information Systems}, 59, 415--433.
 
-
-\bibitem{hyndman2021}
-Hyndman, R. J., and Athanasopoulos, G. (2021). \textit{Forecasting: Principles and Practice} (3rd ed.). OTexts.
 
 \bibitem{hyndman2006}
 Hyndman, R. J., and Koehler, A. B. (2006). Another look at measures of forecast accuracy. \textit{International Journal of Forecasting}, 22(4), 679--688.
@@ -398,12 +370,6 @@ Murphy, A. H. (1988). Skill scores based on the mean square error and their rela
 \bibitem{taylor2001}
 Taylor, K. E. (2001). Summarizing multiple aspects of model performance in a single diagram. \textit{Journal of Geophysical Research: Atmospheres}, 106(D7), 7183--7192.
 
-\bibitem{gneiting2007}
-Gneiting, T., and Raftery, A. E. (2007). Strictly proper scoring rules, prediction, and estimation. \textit{Journal of the American Statistical Association}, 102(477), 359--378.
-
-\bibitem{gneiting2014}
-Gneiting, T., and Katzfuss, M. (2014). Probabilistic forecasting. \textit{Annual Review of Statistics and Its Application}, 1, 125--151.
-
 \bibitem{kaufman2012}
 Kaufman, S., Rosset, S., Perlich, C., and Stitelman, O. (2012). Leakage in data mining: formulation, detection, and avoidance. \textit{ACM Transactions on Knowledge Discovery from Data}, 6(4), 1--21.
 
@@ -418,13 +384,6 @@ Tang, D., Zhan, Y., and Yang, F. (2024). A review of machine learning for modeli
 
 \bibitem{chadalavada2025}
 Chadalavada, S., Faust, O., Salvi, M., Seoni, S., Raj, N., Raghavendra, U., Gudigar, A., Barua, P. D., Molinari, F., and Acharya, U. R. (2025). Application of artificial intelligence in air pollution monitoring and forecasting: a systematic review. \textit{Environmental Modelling \& Software}, 185, 106312.
-
-\bibitem{zheng2015}
-Zheng, Y., Liu, F., and Hsieh, H.-P. (2015). U-Air: when urban air quality inference meets big data. \textit{Proceedings of the 21st ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}.
-
-\bibitem{li2017pm25}
-Li, X., Peng, L., Hu, Y., Shao, J., and Chi, T. (2017). Deep learning architecture for air quality predictions. \textit{Environmental Science and Pollution Research}.
-
 
 \end{thebibliography}
 
