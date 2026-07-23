@@ -1,6 +1,9 @@
-\begin{table*}[htbp]
+\begin{landscape}
+\begin{table}[p]
 \centering
-\caption{Comprehensive model-family diagnostic summary of forecasting skill, variance retention ($\alpha$), Diebold-Mariano outcomes, and threshold exceedance performance across 17 stations and 7 horizons.}
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{Model-family diagnostic summary across 17 stations and seven horizons. Collapse is defined as $\alpha < 0.5$. Near-ideal cells require positive RMSE skill and $\alpha \geq 0.8$. DM counts report BH-adjusted Diebold-Mariano tests against persistence. Exceedance metrics summarize event-detection behaviour across the evaluated thresholds.}
 \label{tab:five_model_diagnostic_summary}
 \begin{tabular}{llrrrrrrrrr}
 \toprule
@@ -13,4 +16,5 @@ seasonal\_naive & Variance-preserving naive & -0.026 & 1.000 & 0.0\% & 98.3\% & 
 stl\_ridge\_direct & Decomposition + Ridge & -1.107 & 1.399 & 0.0\% & 100.0\% & 0.0\% & 0 & 119 & 0.104 & 0.896 \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
+\end{landscape}

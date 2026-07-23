@@ -1,530 +1,435 @@
 \documentclass{article}
 
+% Encoding and fonts
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Layout and tables
 \usepackage[margin=1in]{geometry}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage{booktabs}
-\usepackage{siunitx}
-\usepackage{natbib}
-\usepackage{subcaption}
-\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+\usepackage{pdflscape} % landscape table in model_family_diagnostic_summary.tex
 
-\newcommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1\par}
+% Math and graphics
+\usepackage{amsmath}
+\usepackage{amssymb} % for \mathbb
+\usepackage{graphicx}
 
-\title{Variance Retention as a Diagnostic Complement to Persistence-Relative
-Skill in Multi-Horizon PM$_{10}$ Forecasting}
-\author{Francisco Federico Garcia Crespi}
-\date{July 2026}
+% Links
+\usepackage{hyperref}
+
+% Keywords macro (for article class)
+\providecommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1}
+\title{Variance Retention: A Forecast-Verification Diagnostic for\\Skilful-but-Smoothed Point Forecasts of Daily PM$_{10}$}
+\author{Federico Garc\'ia Crespi\thanks{Corresponding author: \texttt{fedeg@umh.es}} \\ Department of Computer Engineering, Universidad Miguel Hern\'andez \\ \and Julio Alberto Ramos Mart\'inez \\ Department of Statistics, Mathematics and Computer Science, Universidad Miguel Hern\'andez \\ \texttt{j.ramos@umh.es}}
+\date{May 2026}
 
 \begin{document}
-
 \maketitle
 
-% ============================================================
 \begin{abstract}
-Persistence-relative RMSE skill is the standard yardstick for multi-horizon
-point-forecast evaluation, but a skilled forecast under this criterion can
-still be operationally uninformative if its predictions collapse toward a
-near-constant value.
-We evaluate multi-horizon PM$_{10}$ point forecasts under a rolling-origin
-protocol with persistence as an explicit baseline, comparing LightGBM and
-SARIMA across lead times $h \in \{1,6,24,48\}$ hours at an hourly-resolution
-station in Madrid, Spain.
-The leakage-free rerun does not reproduce the previously reported high skill:
-LightGBM skill ranges from $-0.079$ to $0.073$, whereas SARIMA skill ranges
-from $0.031$ to $0.132$.  Variance retention nevertheless changes the
-interpretation of the positive SARIMA results: it falls from 79.8\% at
-$h=1$ to 2.9\% and 0.4\% at $h=24$ and $48$, respectively.
-We report horizon-wise variance retention alongside RMSE-based skill, and
-introduce Skill$_{VP}$, a bounded diagnostic auxiliary that discounts nominal
-skill by variance retention, to summarize this decoupling in a single
-horizon-wise quantity.
-Event-oriented evaluation under fold-recalibrated exceedance thresholds
-confirms the horizon dependence: SARIMA recall falls from 0.785 at $h=1$ to
-0.099 at $h=24$ and zero at $h=48$.  The results show why small positive
-RMSE-relative skill should not be read as operational value without an
-amplitude and event-detection diagnostic.
+Verification of deterministic air-quality forecasts relies heavily on persistence-relative RMSE skill, yet a forecast can be certified as skilful while its trajectory is dynamically over-smoothed. We introduce variance retention as a complementary verification diagnostic and quantify this skill--fidelity tension in a rolling-origin multi-horizon evaluation ($h=1,\ldots,7$) over 17 heterogeneous stations from the Spanish MITECO monitoring network, using persistence as an explicit baseline.
+
+Five model families are compared: two direct lag-only machine-learning forecasters (HGB direct and Ridge direct), a classical statistical baseline (SARIMA), a variance-preserving reference (seasonal naive), and a decomposition-based control (STL+Ridge). Direct HGB and Ridge achieve positive RMSE skill in all station--horizon cells and are frequently significantly better than persistence under BH-adjusted Diebold--Mariano tests, yet they exhibit near-universal variance collapse ($\alpha<0.5$) in 118/119 cells each. SARIMA partially reproduces the same pattern, collapsing in 110/119 cells. Seasonal naive preserves variance but does not improve RMSE on median, whereas STL+Ridge preserves or inflates variance and attains high exceedance recall at the cost of poor RMSE skill and many false alarms.
+
+The results show that maximising RMSE skill alone is insufficient for operational use: performance must be diagnosed jointly in terms of baseline-relative accuracy, dynamic fidelity (variance retention), and event-detection behaviour.
 \end{abstract}
 
-\keywords{PM$_{10}$ forecasting; multi-horizon forecasting; rolling-origin
-evaluation; persistence baseline; forecast skill; variance retention;
-dynamic fidelity}
+\section*{Significance Statement}
+Air-quality services increasingly rely on automatic PM$_{10}$ forecasts, which
+are usually judged by whether they beat a simple persistence forecast on average
+error. We show that this common test can mislead: across 17 Spanish monitoring
+stations and five forecasting methods, models that clearly beat persistence on
+average nonetheless flatten the day-to-day swings that matter for detecting
+pollution episodes. We propose a simple complementary check---variance
+retention---that flags this behaviour and separates genuinely informative
+forecasts from over-smoothed ones, and we confirm the operational consequence
+through exceedance detection. Reporting variance retention alongside standard
+skill scores would make routine air-quality forecast verification more
+trustworthy for episode-sensitive decisions.
 
-% ============================================================
+\keywords{forecast verification; deterministic point forecasts; PM$_{10}$ forecasting;
+rolling-origin evaluation; persistence baseline; persistence-relative skill;
+variance retention; variance collapse; Diebold--Mariano test; exceedance diagnostics;
+Murphy decomposition; MITECO monitoring network; Spain}
+
 \section{Introduction}
 
-Forecasts of particulate matter (PM$_{10}$) support operational activities
-such as public health advisories, short-term compliance planning, and the
-allocation of monitoring and mitigation resources \citep{donnelly2015}.
-In such settings, model evaluation is often framed around useful lead times:
-the range of horizons for which forecasts provide actionable information beyond
-simple references.
-Multi-horizon forecasting and horizon-wise verification are therefore standard
-in air quality applications, and persistence remains a common baseline because
-it is transparent and frequently competitive at short lead times
-\citep{murphy1992}.
+Daily PM$_{10}$ forecasts support a short-horizon interpretation in air-quality management and public-health communication, where decisions are sensitive to near-term changes as well as average error \cite{who2021,wilks2011}. In operational settings, however, usefulness depends not only on average error but also on whether forecasts reproduce meaningful day-to-day changes and identify episodes.
 
-A practical complication is that squared-error criteria (MSE/RMSE) dominate
-both model optimization and the reporting of multi-horizon performance.
-Under limited predictability, point forecasts that shrink toward a central
-tendency and dampen fluctuations can reduce squared error by avoiding large
-misses, even if this also suppresses variability that may be operationally
-relevant \citep{gneiting2011}.
-This trade-off is well known in point forecasting under squared loss:
-improvements in average error can coincide with reduced amplitude, and this
-tension may become more salient as lead time increases and the conditional
-distribution of outcomes broadens.
+In multi-horizon settings, persistence-relative RMSE skill is a necessary summary because it tests whether a model improves over an explicit operational baseline \cite{hyndman2006}. However, point-forecast accuracy summaries remain incomplete for decision support \cite{gneiting2011}: a model can be significantly skilful in RMSE while producing trajectories that are dynamically over-smoothed.
 
-The gap addressed in this paper is empirical and protocol-specific.
-In multi-horizon PM$_{10}$ forecasting evaluated with rolling-origin protocols,
-positive persistence-relative RMSE skill can coexist with degraded dynamic
-fidelity, reflected by a pronounced reduction in predicted variance relative to
-observed variance at the same horizon.
-In such cases, a horizon-wise skill curve may suggest that forecasts remain
-useful at medium leads while the corresponding prediction sequences become
-under-variable and less informative about episode evolution.
-Rolling-origin evaluation is central to this diagnostic because it aggregates
-performance over a sequence of forecast origins spanning changing conditions,
-thereby exposing horizon-dependent behaviors that may be less visible under a
-single blocked split \citep{tashman2000}.
+To address this gap, we introduce variance retention as a post-evaluation diagnostic layer to read dynamic fidelity alongside RMSE-based skill in a rolling-origin daily PM$_{10}$ study. We complement the joint skill–fidelity reading with (i) bootstrap intervals for the variance-retention ratio $\alpha$, (ii) threshold-sensitivity checks for the collapse convention, (iii) BH-adjusted Diebold–Mariano tests against persistence, (iv) exceedance diagnostics for episode sensitivity and false alarms, and (v) a Murphy decomposition to connect the empirical patterns to forecast verification theory \cite{murphy1988}.
 
-This study provides a bounded empirical characterization of this decoupling
-for LightGBM and SARIMA evaluated against a persistence baseline.
-We report horizon-wise RMSE and persistence-relative skill together with
-observed and predicted variances and variance retention, and we introduce
-Skill$_{VP}$ as a simple diagnostic auxiliary metric to summarize how nominal
-skill and variance retention jointly behave at each horizon.
-The pattern in which persistence-relative RMSE skill remains positive while
-predictive variance is substantially attenuated is sometimes described
-informally in the forecasting community as ``ghost skill''; we use the term
-here only as shorthand for that specific decoupling and do not adopt it as
-formal terminology.
+We further ask whether the skill–fidelity tension is specific to direct lag-only ML forecasters or also appears in classical statistical and decomposition-based alternatives.
 
-\paragraph{Contributions.}
-The contribution is intentionally bounded and empirical:
-\begin{itemize}
-  \item We provide horizon-wise evidence, under rolling-origin evaluation with
-    persistence as an explicit baseline, that persistence-relative RMSE skill
-    can decouple from dynamic fidelity as measured by variance retention.
-    LightGBM and SARIMA serve as contrasting cases: LightGBM does not
-    consistently beat persistence, while SARIMA's modest positive skill at
-    longer horizons coincides with severe variance attenuation and weak
-    exceedance detection.
-  \item We introduce Skill$_{VP}$ as a simple diagnostic auxiliary metric that
-    adjusts nominal persistence-relative RMSE skill by variance retention for
-    horizon-wise interpretation, and we report event-oriented complements
-    (recall, precision, flag rate) under fold-recalibrated thresholds as a
-    further check on operational usefulness.
-\end{itemize}
+\paragraph{Contributions.} This paper contributes to forecast-verification
+practice, not to forecasting methodology or atmospheric-process understanding.
+Specifically: (i) we formalise \emph{variance retention} $\alpha(h)$ as a
+bounded, post-hoc verification diagnostic that complements persistence-relative
+skill by exposing amplitude collapse in deterministic point forecasts, together
+with an interpretive skill--retention template (Table~\ref{tab:interpretive});
+(ii) across 17 heterogeneous PM$_{10}$ stations and five model families, we show
+that statistically significant RMSE gains over persistence (BH-adjusted
+Diebold--Mariano) routinely coexist with near-universal variance collapse and
+degraded event detection, and we connect this pattern to a Murphy decomposition
+of mean squared error; and (iii) we distil a minimum set of reporting practices
+for verifying deterministic air-quality forecasts. The claims are deliberately
+bounded to the evaluated setting and are not offered as a general theory of
+forecast skill.
 
-% ============================================================
-\section{Related Work and Positioning}
+\section{Evaluation Reporting Gaps in Particulate Matter Forecasting}
 
-This manuscript is positioned as a restrained empirical-diagnostic study in
-multi-horizon environmental forecasting.
-It does not aim to advance general forecasting theory or introduce new universal
-verification metrics.
-Instead, it operationalizes several established verification ideas in a
-deterministic PM$_{10}$ case study using a rolling-origin protocol,
-persistence as an explicit baseline, horizon-by-horizon reading of skill, and
-an explicit diagnosis of variance retention.
+Machine-learning and deep-learning air-quality forecasting has grown rapidly, especially for particulate matter. Reviews describe increasingly complex architectures, hybrid modelling strategies, and data-driven pipelines for PM$_{10}$ and PM$_{2.5}$ prediction \cite{mendez2023,tang2024,chadalavada2025}.
 
-\subsection{Forecast skill and baseline-aware evaluation}
+This growth has shifted much of the literature toward comparisons between modelling architectures, feature sets, and learning algorithms. However, methodological claims about ``predictive gains'' are only interpretable when the evaluation design is stated clearly enough that a reader can understand what was tested, what the baseline comparator was, and how the forecast horizons were handled \cite{makridakis2018,cerqueira2020}.
 
-The horizon-wise perspective motivates treating the horizon as the primary unit
-of interpretation in multi-step evaluation, rather than collapsing performance
-into a single aggregate number \citep{bentaieb2012}.
-In applied environmental forecasting, this framing is paired with explicit
-reference forecasts that provide an operationally meaningful benchmark for
-interpreting whether a model adds information beyond simple persistence-like
-behavior \citep{murphy1992}.
+Five evaluation reporting dimensions are central to operational interpretability in particulate matter forecasting: temporal validation, leakage-safe preprocessing, persistence or naive baselines, horizon-wise reporting, and operational-usefulness framing. Temporal validation establishes deployment-like chronological credibility; leakage-safe preprocessing protects against information bleed across train--test boundaries; persistence baselines provide a minimum operational comparator; horizon-wise reporting supports multi-step interpretability; and operational framing links performance summaries to decision relevance \cite{tashman2000,kaufman2012,jolliffe2012}.
 
-The present paper adopts this baseline-aware, horizon-wise reading in a
-deliberately narrow setting: deterministic point forecasts for PM$_{10}$
-evaluated under a rolling-origin protocol with persistence as an explicit
-baseline.
-Rolling-origin aggregation preserves temporal causality and reduces the
-optimistic bias that can arise when temporal dependence is insufficiently
-respected, while also exposing horizon-dependent behavior across changing
-conditions \citep{tashman2000}.
+To motivate why an additional trajectory-fidelity diagnostic can be useful in practice, we conducted a PRISMA~2020 audit of PM$_{10}$/PM$_{2.5}$ forecasting studies (Scopus and Web of Science, 2015--2025; reproducible materials archived at Zenodo, concept DOI: 10.5281/zenodo.18675211, release: 10.5281/zenodo.19125915). At the abstract level, key evaluation choices (e.g., explicit persistence baselines, horizon-wise reporting, and temporally appropriate validation) were often not made visible. These rates reflect reporting opacity rather than confirmed absence. The need for such a diagnostic is amplified by a broader reporting problem in PM forecasting evaluation: when evaluation details and trajectory behaviour are not reported, baseline-relative improvements can be difficult to interpret operationally.
 
-\subsection{Variance-fidelity diagnostics}
 
-A well-known concern in deterministic point forecasting is that squared-error
-optimization can encourage shrinkage toward conditional means, which may
-suppress predictive variability as lead time increases \citep{gneiting2011}.
-In environmental and hydrological verification, this issue connects to
-antecedents that explicitly separate different components of performance,
-including diagnostics that track variability ratios (e.g., the variability
-component of KGE-style decompositions) and adjacent discussions of
-oversmoothing and amplitude damping \citep{gupta2009,kling2012}.
 
-The ingredients used here are classical: a baseline-relative skill quantity
-and a variance ratio.
-Letting $\mathrm{Skill}(h)$ denote persistence-relative RMSE skill at horizon
-$h$ and letting $\sigma_{\hat{y}}^2(h)$ and $\sigma_y^2(h)$ denote the
-horizon-wise predicted and observed variances over the rolling-origin
-verification set, we define
-\begin{equation}
-  \mathrm{Skill}_{VP}(h) = \mathrm{Skill}(h)\,
-  \frac{\sigma_{\hat{y}}^2(h)}{\sigma_y^2(h)},
-\end{equation}
-used here in a bounded form (see Section~\ref{sec:method_skillvp}).
-Skill$_{VP}$ is positioned only as an auxiliary diagnostic complement that
-down-weights nominal persistence-relative RMSE skill when variance retention
-is low; its precise scope and boundaries are stated in
-Section~\ref{sec:method_skillvp}.
+\section{Post-Evaluation Diagnostic Framework}
 
-\subsection{Contribution statement}
+The post-evaluation framework is organised around three complementary questions:
 
-The strongest contribution of this paper is not conceptual novelty, but the
-empirical combination of a PM$_{10}$ case study with rolling-origin evaluation,
-persistence as an explicit operational baseline, horizon-by-horizon performance
-reading, and an explicit variance-retention diagnosis.
-In the reported results, LightGBM and SARIMA serve as contrasting cases:
-LightGBM does not consistently improve on persistence, while SARIMA provides
-the clearer case in which modest positive persistence-relative RMSE skill at
-long horizons coexists with near-collapsed predictive variance.
-This contrast motivates interpreting skill curves jointly with variance
-retention when discussing horizon-wise usefulness, without claiming that such
-decoupling must occur universally.
+\textbf{Skill:} Does the model beat persistence? In this manuscript, skill is defined relative to persistence under RMSE, so positive \(\mathrm{Skill}(h)\) indicates lower RMSE than persistence at the same horizon \(h\) \cite{hyndman2006,tashman2000}.
 
-% ============================================================
-\section{Methodology}
+\textbf{Variance retention:} Does the forecast retain observed variability? The variance-retention ratio \(\alpha(h)=\mathrm{SD}(\hat{y})/\mathrm{SD}(y)\) is interpreted post-evaluation; low \(\alpha(h)\) indicates variability shrinkage consistent with smoothed trajectories, which can complicate operational interpretation even when RMSE skill is positive.
 
-\subsection{Forecasting setting and multi-horizon notation}
+\textbf{Skill$_{VP}$:} What compact auxiliary summary helps read both together? Skill$_{VP}$ is reported only as a bounded diagnostic auxiliary alongside \(\mathrm{Skill}(h)\) and \(\alpha(h)\), not as a replacement for standard accuracy metrics.
 
-Let $y_t$ denote the observed PM$_{10}$ concentration at time index $t$.
-At each forecast origin $t$, a point forecasting model issues multi-horizon
-predictions $\hat{y}_{t+h\mid t}$ for horizons $h \in \{1,\dots,H\}$.
-Evaluation is performed separately for each horizon to avoid conflating
-short- and long-lead behavior, since both error characteristics and the
-operational interpretation of forecasts can change substantially with lead
-time.
-
-\subsection{Rolling-origin evaluation}
-
-The empirical analysis was conducted on an hourly PM$_{10}$ series from the
-Casa de Campo monitoring station in Madrid, Spain, covering the full calendar
-year 2023 (2023-01-01 00:00 to 2023-12-31 23:00).  The regular hourly grid
-contains 8,760 time stamps, of which 8,465 have measurements marked as valid
-by the data provider; invalid or absent targets are excluded from verification.
-The data were obtained from the Madrid Open Data portal operated by the
-Ayuntamiento de Madrid.
-Table~\ref{tab:data_protocol} summarises the study site, data coverage, and
-evaluation protocol.
-
-We adopt a rolling-origin (walk-forward) evaluation protocol to approximate
-sequential operational use.
-Models are refitted at the start of each expanding fold using only its training
-window.  Within a test window, forecasts are issued sequentially using only
-information available at origin $t$; the SARIMA state is updated without
-parameter refitting when a new observation becomes available.
-For each horizon $h$, verification aggregates over the set of valid origins
-$\mathcal{T}_h$ with targets $y_{t+h}$ available, yielding horizon-wise sample
-sizes $N_h = |\mathcal{T}_h|$.
-This protocol avoids look-ahead and exposes the evaluation to changes in
-conditions across origins \citep{tashman2000}.
-
-\begin{table}[t]
+\begin{table}[ht]
 \centering
-\small
-\caption{Summary of the study site, data coverage, and evaluation protocol.}
-\label{tab:data_protocol}
-\begin{tabular}{@{}ll@{}}
-\toprule
-Item & Value \\
-\midrule
-Study site / station       & Casa de Campo (Madrid, Spain) \\
-Period                     & 2023-01-01 00:00 to 2023-12-31 23:00 \\
-Temporal resolution        & 1 hour \\
-Hourly grid / valid values & 8,760 / 8,465 \\
-Data source                & Madrid Open Data, magnitude 10, station 024 \\
-Forecast horizons ($h$)    & 1, 6, 24, 48 h \\
-Rolling-origin folds       & 5 (expanding window, initial 50\%) \\
-Holdout split              & 80/20 chronological \\
-Models compared            & LightGBM; SARIMA \\
-Baseline                   & Persistence \\
-\bottomrule
+\caption{Interpretive template for joint reading of persistence-relative skill and variance retention. Rows distinguish positive from negative skill; columns distinguish retained from collapsed variance. The template is a diagnostic aid, not a decision rule.}
+\label{tab:interpretive}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}}
+\hline
+ & $\alpha(h) \geq 0.8$ (retained) & $\alpha(h) < 0.5$ (collapsed) \\
+\hline
+Skill$(h) > 0$ & \textbf{Desirable case.} Model improves over persistence and preserves observed variability. Forecasts are more credible under both diagnostics. & \textbf{Skill--fidelity decoupling.} Model reduces RMSE but dampens day-to-day fluctuations. Forecasts track the mean level but may under-represent episode amplitude. \\[6pt]
+Skill$(h) \leq 0$ & \textbf{No improvement with preserved dynamics.} Model does not outperform persistence despite retaining variance. Forecasts reproduce variability but are not more accurate. & \textbf{Worst case.} Model is both less accurate than persistence and smoothed. No evident operational value under these two diagnostics. \\
+\hline
 \end{tabular}
 \end{table}
 
-\subsection{Reference forecast: persistence}
+The boundaries $\alpha = 0.8$ and $\alpha = 0.5$ are diagnostic conventions adopted in this study; they are not derived from a formal loss criterion.
 
-Persistence is used as an explicit baseline forecast.
-For each origin $t$ and horizon $h$, the persistence prediction is
+\section{Case Study and Experimental Setting}
+
+The case study uses daily PM$_{10}$ observations from 17 monitoring stations in the Spanish MITECO national air-quality network. The station set is intentionally heterogeneous in site type (industrial, traffic, urban/background, residential, and rural/remote), spans multiple autonomous communities (including the Comunitat Valenciana, Catalunya, Arag\'on, and Castilla-La Mancha), and covers the 2017--2024 period, with observational coverage ranging from 80.4\% to 98.5\%.
+
+Three stations are described in detail as representative examples of the three environmental types.
+
+\begin{itemize}
+  \item \textbf{Elx-Agroalimentari} (ES0446A): suburban/industrial station; 44\,m a.s.l.; 2,350 observed daily values (80.4\% coverage, 2017--2024).
+  \item \textbf{Valencia-Vivers} (ES1619A): urban/residential station; 11\,m a.s.l.; 2,679 observed daily values (91.7\% coverage, 2017--2024).
+  \item \textbf{Zarra-EMEP} (ES0012R): rural remote EMEP station; 855\,m a.s.l.; 2,804 observed daily values (96.0\% coverage, 2017--2024).
+\end{itemize}
+
+Meteorological covariates (temperature, relative humidity, wind speed,
+and wind direction) are available for Elx-Agroalimentari only but are
+deliberately excluded from all experiments: the study intentionally employs a lags-only design to isolate the autoregressive signal.
+
+Each series was reindexed to a complete daily calendar before lag
+construction. Dates with missing PM$_{10}$ values, missing lagged
+predictors, or unavailable verification targets after horizon alignment
+were excluded by listwise deletion. No interpolation or imputation was
+applied.
+
+The objective is not to maximise predictive accuracy, but to create a transparent evaluation setting in which persistence-relative skill, horizon-wise behaviour, and variance retention can be inspected jointly.
+
+Five diagnostic comparators are evaluated. HGB direct and Ridge direct are direct lag-feature ML forecasters. SARIMA is included as a sparse classical statistical baseline. STL+Ridge is a decomposition-based variant used to test whether explicit seasonal separation can preserve trajectory variability. Seasonal naive is included as a variance-preserving seasonal reference. These models are not used as a leaderboard of optimised forecasting systems, but as diagnostic contrasts for separating baseline-relative accuracy from trajectory fidelity.
+
+Forecasts are evaluated for horizons \(h=1,\dots,7\) using rolling-origin (time-series) evaluation with a mandatory persistence baseline, and the analysis focuses on point forecasts. When preprocessing is applicable (e.g., scaling), transformations are fitted on the training window only and then applied to the corresponding test window to reduce leakage risk \cite{bergmeir2018,kaufman2012}.
+
+A lags-only design is intentionally restrictive: if positive skill appears even in this controlled setting, the variance-retention diagnostic can reveal whether the improvement is accompanied by retained forecast variability or by systematically smoothed trajectories.
+
+\section{Metrics and Diagnostic Categories}
+
+\subsection{Persistence-relative skill}
+Let \(y_h\) denote the verifying observation at horizon \(h\), and \(\hat{y}_h\) the corresponding point forecast produced by a model. Let \(\hat{y}^{(p)}_h\) denote the persistence baseline forecast for the same horizon. For a chosen loss function \(L(\cdot,\cdot)\), the baseline-relative (persistence-relative) skill score at horizon \(h\) is
 \begin{equation}
-  \hat{y}^{(p)}_{t+h\mid t} = y_t.
+\mathrm{Skill}(h) = 1 - \frac{\mathbb{E}[L(y_h,\hat{y}_h)]}{\mathbb{E}[L(y_h,\hat{y}^{(p)}_h)]}.
 \end{equation}
-All skill statements in this paper are made relative to persistence and are
-reported horizon-wise.
+In this work, the empirical results use an RMSE-based loss, so \(\mathrm{Skill}(h)>0\) indicates a lower RMSE than persistence for the same horizon and evaluation sample \cite{hyndman2006}.
 
-\subsection{Empirical models: LightGBM and SARIMA}
+Persistence-relative skill is useful because it anchors interpretation to an operationally meaningful comparator rather than to a model-to-model ranking alone. It also supports horizon-wise reading: in multi-step settings, skill can vary substantially across lead times.
 
-We report results for two empirical point-forecasting models.
-The first is a gradient-boosted decision tree model (LightGBM), trained
-independently for each fold and horizon $h$ using current and lagged values,
-causal rolling-window statistics, and known calendar covariates \citep{ke2017}.
-Unavailable inputs are forward-filled from the most recent valid observation;
-backward filling is never used, and invalid targets are excluded.
-LightGBM is included as a strong, widely used nonlinear predictor in applied
-forecasting.
+At the same time, skill is a summary of pointwise error behaviour under a chosen loss. It does not, by itself, describe the trajectory shape of the point forecasts, and it does not indicate whether an apparent improvement is associated with reduced dynamic variability.
 
-The second is SARIMA, a classical time-series model fitted on the raw PM$_{10}$
-series at each rolling-origin fold using the fixed order
-$(p,d,q)(P,D,Q)_s = (1,0,1)(1,0,0)_{24}$ recovered from the upstream experiment
-configuration and recursive multi-step forecasting
-\citep{boxjenkins2015}.
-SARIMA is included not as a comprehensive statistical benchmark, but as a
-comparator that can exhibit qualitatively different dynamic-fidelity behavior
-under the same rolling-origin evaluation and persistence-relative skill framing.
-
-\subsection{Horizon-wise RMSE and persistence-relative RMSE skill}
-
-For model $m$ at horizon $h$, the rolling-origin RMSE is
+\subsection{Variance retention}
+We define the variance-retention ratio at horizon \(h\) as
 \begin{equation}
-  \mathrm{RMSE}_m(h) = \sqrt{\frac{1}{N_h}\sum_{t \in \mathcal{T}_h}
-  \left(\hat{y}^{(m)}_{t+h\mid t}-y_{t+h}\right)^2}.
+\alpha(h) = \frac{\mathrm{SD}(\hat{y}_h)}{\mathrm{SD}(y_h)}.
 \end{equation}
-Persistence-relative RMSE skill is defined as
-\begin{equation}
-  \mathrm{Skill}_{\mathrm{RMSE}}(h) = 1 -
-  \frac{\mathrm{RMSE}_m(h)}{\mathrm{RMSE}_p(h)}.
-\end{equation}
-Positive values indicate lower RMSE than persistence at horizon $h$.
 
-\subsection{Dynamic fidelity via variance retention}
+The ratio \(\alpha(h)\) compares forecast trajectory variability with observed variability at the same horizon. Values \(\alpha(h)\ll 1\) indicate variance shrinkage consistent with smoothed point-forecast trajectories, while values \(\alpha(h)\gg 1\) indicate forecast variance inflation.
 
-To characterize amplitude preservation, we compute horizon-wise sample
-variances over the same evaluation set $\mathcal{T}_h$:
-\begin{equation}
-  \mathrm{Var}_{\mathrm{obs}}(h)=
-  \mathrm{Var}\!\left(\{y_{t+h}: t\in\mathcal{T}_h\}\right),
-  \qquad
-  \mathrm{Var}_{\mathrm{pred}}(h)=
-  \mathrm{Var}\!\left(\{\hat{y}^{(m)}_{t+h\mid t}: t\in\mathcal{T}_h\}\right).
-\end{equation}
-Variance retention is reported as a percentage,
-\begin{equation}
-  \mathrm{VR}(h) = 100 \times
-  \frac{\mathrm{Var}_{\mathrm{pred}}(h)}{\mathrm{Var}_{\mathrm{obs}}(h)}.
-\end{equation}
-Values substantially below 100\% indicate that predictions are under-variable
-relative to observations at the same horizon.
+Variance retention should not be interpreted as a complete measure of trajectory quality. A forecast may retain the observed variance and still be biased, phase-shifted, or poor at reproducing individual episodes. The diagnostic is therefore intended to detect one specific failure mode—variance shrinkage—rather than to certify full dynamic adequacy.
 
-\subsection{\texorpdfstring{Skill$_{VP}$}{SkillVP} as a diagnostic auxiliary metric}
-\label{sec:method_skillvp}
+Variance retention is not a calibration measure and is not intended to assess probabilistic uncertainty. It is a bounded post-evaluation diagnostic for reading point forecasts when operational interpretation depends on day-to-day fluctuations as well as on average accuracy \cite{jolliffe2012}.
 
-RMSE-based skill and variance retention capture different aspects of forecast
-behavior: the former summarizes average squared deviations, while the latter
-summarizes amplitude preservation.
-To characterize horizons where persistence-relative RMSE skill coexists with
-low variance retention, we define Skill$_{VP}$ as a variance-preserving
-diagnostic auxiliary:
+\subsection{Auxiliary \texorpdfstring{\(\mathrm{Skill}_{VP}\)}{Skill\_VP}}
+To summarise the joint behaviour of baseline-relative accuracy and variance retention, we also report an auxiliary variance-penalised skill diagnostic
 \begin{equation}
-  \mathrm{Skill}_{VP}(h) = \mathrm{Skill}_{\mathrm{RMSE}}(h)\times
-  \min\!\left(1,\frac{\mathrm{Var}_{\mathrm{pred}}(h)}
-  {\mathrm{Var}_{\mathrm{obs}}(h)}\right).
+\mathrm{Skill}_{VP}(h) = \mathrm{Skill}(h)\cdot\alpha(h).
 \end{equation}
-The $\min(\cdot)$ bound prevents inflation when predictions are over-variable.
-This construction is intentionally simple and is scoped narrowly: Skill$_{VP}$
-is a horizon-wise diagnostic complement to RMSE-based skill, not a candidate
-replacement for it, and it makes no claim about probabilistic calibration or
-decision-theoretic optimality. Its sole purpose is to flag, at a glance,
-horizons where nominal skill and amplitude preservation diverge.
+
+The auxiliary diagnostic is intended to highlight cases where positive persistence-relative skill co-occurs with strong variance shrinkage. The product form is not claimed to be uniquely optimal; it is used here only as a transparent descriptive penalty that keeps the sign of \(\mathrm{Skill}(h)\) while reducing positive skill when forecast variance is strongly collapsed. It should not be interpreted as a replacement for standard accuracy metrics, uncertainty quantification, or statistical significance testing \cite{diebold1995}.
+
+Accordingly, \(\mathrm{Skill}_{VP}(h)\) is used only as a bounded diagnostic layer for post-evaluation interpretation. Its role is to provide a compact joint summary alongside \(\mathrm{Skill}(h)\) and \(\alpha(h)\), rather than to define a universal performance criterion.
+
+\subsection{Diagnostic flags}
+In addition to \(\alpha(h)\) and \(\mathrm{Skill}_{VP}(h)\), the post-evaluation reports diagnose flags for horizon-wise interpretation. The \texttt{collapse\_flag} is used when \(\alpha(h) < 0.5\). The \texttt{inflation\_flag} is used when \(\alpha(h) > 1.5\). The \texttt{near\_ideal\_flag} is used when \(\mathrm{Skill}(h)>0\) and \(0.8 \leq \alpha(h) \leq 1.2\). The \texttt{low\_sample\_flag} indicates fewer than 30 verification samples for a model/horizon cell.
+
+These thresholds are diagnostic conventions for this post-evaluation, not universal decision rules. A collapse flag does not invalidate a model, and an inflation flag does not imply a better dynamic representation; the flags are intended to make horizon-wise interpretation auditable and reproducible.
+
+\section{Reproducible Workflow}
+
+The five-model evaluation produces a unified station$\times$model$\times$horizon table with 595 rows (17 stations $\times$ 5 models $\times$ 7 horizons) containing persistence-relative RMSE skill, variance retention $\alpha$, Skill$_{VP}$, and bootstrap confidence intervals (\texttt{alpha\_ci\_low}, \texttt{alpha\_ci\_high}). Repository scripts regenerate all manuscript tables and figures from the underlying forecast outputs, enabling inspection of post-evaluation assumptions (horizon structure, baseline definition, and preprocessing boundaries) and reproducible recomputation of the diagnostic layer \cite{sandve2013}.
+
+Reproducibility here is intended to support the auditability of the evaluation workflow rather than introduce a new forecasting architecture: readers can re-run the study and examine how persistence-relative skill, horizon-wise behaviour, and variance retention interact.
 
 % ============================================================
 \section{Results}
 
-\subsection{E1: Canonical horizon-wise results under rolling-origin evaluation}
+\subsection{Five-model diagnostic summary}
+\label{sec:results_five_model_summary}
 
-Table~\ref{tab:canonical_results} and Figure~\ref{fig:skill_curve} report the
-leakage-free rerun.  LightGBM does not consistently improve on persistence:
-its skill is $-0.010$, $0.073$, $-0.034$, and $-0.079$ at
-$h=1,6,24,48$.  SARIMA has modest positive skill at all four horizons
-($0.031$--$0.132$), but its variance retention falls sharply with lead time,
-from 79.8\% at $h=1$ to 35.7\% at $h=6$, 2.9\% at $h=24$, and 0.4\% at
-$h=48$.  Thus the diagnostic issue is not an apparent equivalence between two
-highly skilled models; it is the narrower observation that SARIMA's best
-relative skill occurs where its predictive amplitude is least credible.
+Across 17 stations and seven forecast horizons, direct HGB and Ridge achieve positive RMSE skill in all station-horizon cells but show near-universal variance collapse. HGB collapses in 118/119 cells (99.2\%) and Ridge in 118/119 cells (99.2\%), with only two $h=1$ point-estimate exceptions: Huesca for HGB ($\alpha = 0.544$) and Barcelona Vall d'Hebron for Ridge ($\alpha = 0.502$). SARIMA exhibits a similar but slightly less extreme pattern, collapsing in 110/119 cells (92.4\%). Seasonal naive preserves variance (0/119 collapsed cells) but has slightly negative median skill, whereas STL+Ridge avoids variance collapse but inflates variability and performs substantially worse in RMSE skill. Thus, the observed trade-off is not a simple model ranking problem: models can be significantly skillful in RMSE while dynamically over-smoothed, or dynamically variable while inaccurate.
 
-\begin{table}[t]
-\centering
-\small
-\setlength{\tabcolsep}{5pt}
-\caption{Canonical horizon-wise results under rolling-origin evaluation (E1).
-  VR denotes variance retention (\%), and Skill$_{VP}$ is a diagnostic
-  auxiliary adjustment of persistence-relative RMSE skill by variance
-  retention.}
-\label{tab:canonical_results}
-\begin{tabular}{@{}rcccccccc@{}}
-\toprule
-& \multicolumn{4}{c}{LightGBM} & \multicolumn{4}{c}{SARIMA} \\
-\cmidrule(lr){2-5}\cmidrule(lr){6-9}
-$h$ & RMSE & Skill & VR (\%) & Skill$_{VP}$
-    & RMSE & Skill & VR (\%) & Skill$_{VP}$ \\
-\midrule
-\input{outputs/tables/paper_a_rolling_results.tex}
-\bottomrule
-\end{tabular}
-\end{table}
+\input{model_family_diagnostic_summary.tex}
+
+Under the ``near-ideal'' criterion (Skill $>0$ and $\alpha \geq 0.8$), no non-naive evaluated model attains any near-ideal cell: HGB direct, Ridge direct, SARIMA, and STL+Ridge each have 0/119 near-ideal cells. Seasonal naive contributes 20/119 near-ideal cells, but it is a naive reference and should not be interpreted as a superior predictive model.
+
+\subsection{Horizon profiles of skill and variance retention}
+
+To make the multi-horizon behaviour readable in the main text, we summarise horizon profiles using station-wise medians and interquartile ranges (IQR). Figure~\ref{fig:skill_profiles} reports median persistence-relative RMSE skill by horizon, and Figure~\ref{fig:alpha_profiles} reports the corresponding variance-retention ratio $\alpha$. The detailed three-model horizon table used in early diagnostic development is provided in the Supplementary Material.
 
 \begin{figure}[t]
-\centering
-\includegraphics[width=0.95\linewidth]{outputs/figures/figure1_skill_variance.png}
-\caption{Rolling-origin horizon-wise results for LightGBM and SARIMA.
-  \textit{Left}: persistence-relative RMSE skill.
-  \textit{Right}: variance retention (\%).
-  SARIMA retains modest positive skill while its variance collapses at long
-  horizons; LightGBM does not consistently beat persistence.}
-\label{fig:skill_curve}
+  \centering
+  \includegraphics[width=\linewidth]{figure3_skill_profiles.pdf}
+  \caption{Median persistence-relative RMSE skill by forecast horizon across 17 PM$_{10}$ stations. Shaded bands denote interquartile ranges across stations. HGB, Ridge, and SARIMA retain positive median skill, whereas seasonal naive remains close to persistence and STL+Ridge is substantially worse than persistence.}
+  \label{fig:skill_profiles}
 \end{figure}
 
 \begin{figure}[t]
-\centering
-\includegraphics[width=0.95\linewidth]{outputs/figures/figure2_skillvp_events.png}
-\caption{Diagnostic complements for horizon-wise interpretation.
-  \textit{Left}: Skill$_{VP}$, which adjusts persistence-relative RMSE skill
-  by variance retention.
-  \textit{Right}: horizon-wise exceedance recall and precision at the P75
-  threshold under fold-recalibrated evaluation.}
-\label{fig:diagnostic_profiles}
+  \centering
+  \includegraphics[width=\linewidth]{figure4_alpha_profiles.pdf}
+  \caption{Median variance-retention ratio by forecast horizon across 17 PM$_{10}$ stations. The grey region indicates collapsed variance ($\alpha < 0.5$), and the green band indicates near-retained variance. HGB, Ridge, and SARIMA rapidly enter the collapsed region, while seasonal naive remains close to $\alpha = 1$ and STL+Ridge preserves or inflates variance.}
+  \label{fig:alpha_profiles}
 \end{figure}
 
-Skill$_{VP}$ makes this decoupling explicit per horizon by attenuating
-persistence-relative RMSE skill when variance retention is low
-(Figure~\ref{fig:diagnostic_profiles}, left).
-For SARIMA, Skill$_{VP}$ falls from 0.025 and 0.029 at $h=1$ and $6$ to
-0.001 and effectively zero at $h=24$ and $48$.  LightGBM's negative skill is
-not rescued by variance retention: Skill$_{VP}$ remains non-positive except at
-$h=6$ (0.040).
+\subsection{Skill--$\alpha$ diagnostic space}
 
-Importantly, the LightGBM results do not support a strong narrative of
-long-horizon variance collapse within the currently evaluated range.
-Variance retention is non-monotone for LightGBM and reaches 86.6\% at $h=48$.
-The stronger diagnostic signal is model-dependent: SARIMA provides the clearer
-extreme case, while LightGBM illustrates that amplitude preservation alone
-cannot compensate for a lack of baseline-relative accuracy.
+Figure~\ref{fig:skill_alpha_space} provides a single-reading diagnostic summary of the skill--fidelity trade-off (cf. joint-performance summaries in \cite{taylor2001}).
 
-\subsection{E2: Protocol robustness (rolling-origin vs.\ blocked holdout)}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figure5_scatter_skill_alpha.pdf}
+  \caption{Skill-retention diagnostic by model. Points show model-level medians across station-horizon cells, and error bars show interquartile ranges. HGB, Ridge, and SARIMA occupy the skillful-but-collapsed region, seasonal naive lies near retained variance but near-zero skill, and STL+Ridge preserves or inflates variance while losing RMSE skill.}
+  \label{fig:skill_alpha_space}
+\end{figure}
 
-To assess whether the variance-retention contrast is specific to rolling-origin
-aggregation, we report an analogous blocked-holdout evaluation.
-The holdout results support the same qualitative long-horizon SARIMA pattern.
-At $h=24$ and $48$, its variance retention is 3.35\% and 0.07\%, while skill
-is $-0.029$ and 0.029.  LightGBM holdout skill is $-0.065$, 0.057,
-$-0.062$, and 0.066, with variance retention of 79.5\%, 62.9\%, 68.2\%, and
-32.6\%.  The sign and magnitude of skill are protocol-sensitive, but SARIMA's
-long-horizon amplitude attenuation appears under both evaluations.
+\subsection{SARIMA and STL+Ridge as diagnostic controls}
 
-\subsection{E3: Event-oriented complement}
+SARIMA and STL+Ridge were included to test whether the skill--variance trade-off is specific to direct lag-only ML. SARIMA behaves similarly to HGB and Ridge: it obtains positive median RMSE skill (0.208) but collapses in 110/119 cells (92.4\%). STL+Ridge provides the opposite control case. It avoids variance collapse in all cells and has median $\alpha = 1.399$, but its median RMSE skill is strongly negative ($-1.107$) and all 119 station-horizon cells are significantly worse than persistence under the BH-adjusted DM test. This result shows that preserving amplitude is necessary but not sufficient: the retained variability must also be phase-aligned and forecast-relevant.
 
-As a supportive operational complement, we evaluate exceedance detection at
-the P75 threshold under fold-recalibrated thresholds (one threshold per
-rolling-origin fold, fitted on that fold's training data).
-LightGBM recall decreases from 0.773 at $h=1$ to 0.323 at $h=48$, with
-precision decreasing from 0.815 to 0.390.  SARIMA recall decreases from 0.785
-at $h=1$ to 0.099 at $h=24$ and zero at $h=48$; its flag rate likewise falls
-from 0.300 to zero.  This long-horizon failure is consistent with its near-zero
-variance retention.
+% Bootstrap confidence intervals for $\alpha$ are reported in the Supplementary Material to keep the main text focused on single-reading figures.
 
-These event-oriented results are treated as supportive diagnostics.
-Recall alone can be trivially high under threshold saturation—when forecasts
-remain above a permissive threshold at most time steps—and should therefore be
-interpreted jointly with precision, flag rate, and variance retention.
-Under fold-recalibrated thresholds, neither model sustains strong event
-detection across all horizons, and SARIMA's long-horizon event detection is
-especially limited by its inability to predict concentration peaks.
+\subsection{Sensitivity to the $\alpha$ threshold}
 
-Overall, E1--E3 jointly support a bounded, model-dependent conclusion:
-persistence-relative RMSE skill can remain positive while dynamic fidelity
-differs markedly across models, and variance retention together with
-Skill$_{VP}$ provides a practical diagnostic view of this divergence for
-horizon-wise interpretation.
+The conclusion is robust to threshold perturbations. At $\alpha < 0.4$, HGB and Ridge still collapse in 92.4\% and 89.9\% of cells, respectively; at $\alpha < 0.5$ both collapse in 99.2\%; and at $\alpha < 0.6$ both collapse in 100.0\%. SARIMA also remains highly collapsed across this range (89.9\%, 92.4\%, and 96.6\%, respectively). Seasonal naive and STL+Ridge remain non-collapsed at these thresholds. The threshold $\alpha = 0.5$ is therefore not driving the qualitative conclusion, although it should be interpreted as a diagnostic convention rather than a universal physical boundary.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figure_threshold_sensitivity.pdf}
+  \caption{Sensitivity of the variance-collapse diagnostic to the $\alpha$ threshold. Collapse remains near-universal for HGB and Ridge across reasonable thresholds around $\alpha = 0.5$, and SARIMA follows the same qualitative pattern. Seasonal naive and STL+Ridge remain non-collapsed over the same range, showing that the diagnostic separates smoothed forecasts from variance-preserving or variance-inflating alternatives.}
+  \label{fig:threshold_sensitivity}
+\end{figure}
+
+% Detailed threshold tables for the original three-model diagnostic development are provided in the Supplementary Material.
+
+\subsection{Diebold--Mariano significance against persistence}
+
+The RMSE gains of the smoothed models are not merely sampling noise. Relative to persistence, the BH-adjusted Diebold--Mariano tests (paired squared losses with the Harvey--Leybourne--Newbold correction \cite{harvey1997}) identify significant improvements in 111/119 HGB cells and 117/119 Ridge cells. SARIMA is significantly better in 44/119 cells. In contrast, STL+Ridge is significantly worse in all 119 cells. These tests make the central paradox explicit: statistically significant RMSE improvements can coexist with severe loss of predictive variance and poor event sensitivity.
+
+\subsection{Operational consequence: exceedance behaviour}
+
+The operational consequence of variance collapse is visible in event detection. For P75 events, mean recall is 26.9\% for HGB, 21.0\% for Ridge, and 15.6\% for SARIMA, compared with 40.0\% for persistence and 32.6\% for seasonal naive. At P90, recall falls to 7.4\%, 5.6\%, and 6.9\%, respectively. STL+Ridge achieves much higher recall (98.4\% at P75 and 87.7\% at P90), but with low precision (mean 24.2\% at P75) and high false-alarm rates. Thus, neither RMSE skill nor variance retention alone is sufficient for operational forecasting: the evaluation must jointly consider amplitude, event detection, and false alarms.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figure_exceedance_recall.pdf}
+  \caption{Mean exceedance recall across stations and horizons. Despite positive RMSE skill, HGB, Ridge, and SARIMA miss many P75 and P90 events. STL+Ridge attains high recall, but this must be interpreted together with its low precision and high false-alarm rate.}
+  \label{fig:exceedance_recall}
+\end{figure}
+
+\subsection{Murphy decomposition}
+
+The Murphy decomposition links the empirical findings to forecast verification theory \cite{murphy1988}. The smoothed models reduce error while compressing predictive variability, whereas STL+Ridge preserves or inflates variability but introduces large error components. This decomposition supports the interpretation that the main failure mode is not simple unconditional bias but a mismatch between forecast amplitude, phase, and conditional structure.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figure_murphy_decomposition.pdf}
+  \caption{Murphy decomposition of mean squared error by model. Bars show median percentage contribution of bias, conditional bias, and irreducible components; labels above bars report median MSE. The decomposition shows that variance preservation alone does not guarantee useful deterministic forecasts.}
+  \label{fig:murphy_decomposition}
+\end{figure}
+
+\subsection{Cross-station consistency and station heterogeneity}
+\label{E3}
+
+The station set is heterogeneous, including urban traffic, urban/background, suburban industrial, rural remote/background, and EMEP sites. Figure~\ref{fig:station_map_ml_only} shows the geographic distribution and confirms that variance collapse in direct ML is nearly ubiquitous across station types.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{station_map_ml_only_collapse_rate.pdf}
+  \caption{Geographic distribution of the 17 MITECO stations. Marker colour denotes station type. Marker size denotes the ML-only collapse rate, computed over 14 model-horizon cells per station (2 direct ML models x 7 horizons). Fifteen stations show 14/14 collapsed ML cells; Huesca and Barcelona Vall d'Hebron show 13/14 due to one non-collapsed h=1 cell each.}
+  \label{fig:station_map_ml_only}
+\end{figure}
+
+The results set an operational paradox: the direct ML forecasters can improve upon persistence in RMSE while producing trajectories that are substantially smoother than the observations. Interpreting performance therefore requires separating baseline-relative error reduction from the extent to which forecasts preserve day-to-day variability across horizons. The following discussion connects this decoupling to the squared-error objective and clarifies what it implies for episode-sensitive use.
 
 % ============================================================
 \section{Discussion}
 
-The evidence in this manuscript supports a diagnostic, horizon-wise
-interpretation of multi-horizon PM$_{10}$ point forecasts under rolling-origin
-evaluation with persistence as an explicit baseline.
-LightGBM does not consistently improve on persistence, whereas SARIMA remains
-modestly positively skilled in the rolling-origin evaluation.  The variance
-diagnostics show that SARIMA's positive skill at $h=24$ and $48$ coincides with
-near-collapsed predictive variance.  This result is consistent with the view
-that even a positive error-based skill value can mask severe loss of amplitude,
-and that horizon-wise interpretation changes when variance retention is
-examined alongside RMSE-relative skill.
+\subsection{Positive skill does not imply dynamic fidelity}
+Daily PM$_{10}$ forecasting exhibits a skill--fidelity trade-off: persistence-relative RMSE skill can be positive while point-forecast trajectories retain only a small fraction of observed day-to-day variability. In this study, HGB direct and Ridge direct attain positive RMSE skill in all cells and are significantly better than persistence in most cells under the BH-adjusted DM test; yet, both collapse variance in 118/119 cells (99.2\%) (Table~\ref{tab:five_model_diagnostic_summary}).
 
-Skill$_{VP}$ is useful as a diagnostic auxiliary metric precisely because it
-makes this divergence explicit and comparable across horizons without requiring
-additional probabilistic infrastructure.
-The LightGBM results do not support a monotone variance-collapse narrative,
-although its negative skill at three horizons rules out claims of consistent
-improvement over persistence.  SARIMA provides clearer evidence that modest
-RMSE-relative skill can coexist with near-zero variance retention, and the
-event-oriented evaluation confirms the operational consequence at long leads.
+\subsection{Variance collapse is not restricted to machine learning}
+Including SARIMA shows that variance collapse is not an architectural defect unique to direct ML. SARIMA retains a positive median skill (0.208) but collapses in 110/119 cells (92.4\%), indicating that the skill–fidelity tension can arise in classical statistical baselines as well as in machine-learning models when evaluated against persistence.
 
-Event-oriented evaluation must be handled cautiously.
-Recall alone may be trivially high under threshold saturation and does not by
-itself demonstrate predictive discrimination or operational usefulness.
-In this study, fold-recalibrated thresholds prevent artificial inflation of
-event base rates, and recall is reported jointly with precision and flag rate.
-Under these conditions, the event metrics support the same cautious conclusion
-as the variance diagnostics: performance deteriorates with horizon for both
-models, and SARIMA's positive long-horizon skill does not translate into peak
-detection.
+\subsection{Variance preservation is not sufficient for usefulness}
+Seasonal naive preserves variance (0/119 collapsed cells; median $\alpha \approx 1.000$) but has a slightly negative median skill ($-0.026$) and a high median FAR (0.822). STL+Ridge preserves or inflates variance in all cells (median $\alpha = 1.399$) and shows very high exceedance recall, but its median RMSE skill is strongly negative ($-1.107$) and it exhibits high false-alarm rates (median FAR 0.896). Preserving amplitude is therefore necessary but not sufficient: variability must also be forecast-relevant and not dominated by false alarms.
+
+\subsection{Implications for operational PM$_{10}$ forecasting}
+RMSE skill, variance retention, and exceedance behaviour expose different failure modes. Positive baseline-relative RMSE skill can coexist with variance collapse and trajectory smoothing, whereas variance preservation can coexist with weak RMSE skill and high false-alarm rates. Interpreting daily PM$_{10}$ point forecasts therefore requires reading baseline-relative accuracy alongside variance retention and operational exceedance checks, rather than treating any single summary as a universal score.
+
+
+\section{Implications for Forecast Evaluation Practice}
+Minimum reporting practices can substantially improve interpretability in PM forecasting evaluation: (i) report persistence-relative RMSE skill so that gains are anchored to an operational baseline; (ii) report horizon-wise performance rather than only aggregate scores; (iii) disclose temporal validation design and train-only preprocessing boundaries to support deployment-like credibility; and (iv) when point trajectories are interpreted operationally, report variance retention or another trajectory-fidelity diagnostic as a complementary post-evaluation output.
 
 % ============================================================
 \section{Limitations}
 
 This study is intentionally limited in scope.
-The empirical evidence is anchored in a single station, a single calendar
-year, and five rolling-origin folds; external validity to other pollutants,
-temporal resolutions, monitoring sites, or longer evaluation windows has not
-been established.
-The results are restricted to the evaluated horizons $h\in\{1,6,24,48\}$ and
-to two model classes (LightGBM, SARIMA) with specific, fixed configurations;
-neither model was tuned to compete for state-of-the-art accuracy, since the
-goal is to characterize a decoupling pattern rather than to benchmark model
-performance.
-Skill$_{VP}$'s scope is stated in Section~\ref{sec:method_skillvp} and is not
-repeated here; the metric has not been validated outside the present case
-study, and its behavior under regimes with strong seasonality or structural
-breaks remains untested.
+The empirical evidence covers 17 MITECO stations at the daily temporal scale;
+transfer to other pollutants, temporal resolutions, or national networks is
+not assessed.
+The five-model comparison is diagnostic rather than exhaustive; the models are intended to reveal failure modes under a common rolling-origin protocol, not to establish a definitive leaderboard.
+The model set spans two direct lag-feature ML forecasters (HGB direct, Ridge direct), a sparse classical statistical baseline (SARIMA), a decomposition-based variant (STL+Ridge), and a seasonal naive reference; other architectures, covariate-rich designs, and probabilistic forecasters may exhibit different variance-retention behaviour.
+SARIMA is used as a sparse statistical baseline; its results should not be interpreted as the best attainable SARIMA performance under extensive manual specification.
+Exceedance diagnostics are included as compact operational checks, not as a full event-classification benchmark.
+Skill$_{VP}$ is not proposed as a general-purpose replacement for RMSE or as a
+new standard verification score; it is a simple diagnostic auxiliary whose value
+lies in making the skill–fidelity decoupling explicit at each horizon.
+The collapse threshold $\alpha = 0.5$ is operationally motivated but not derived
+from a formal loss criterion. It should be interpreted as a diagnostic convention rather than a universal physical boundary. Threshold-sensitivity results for the five-model experiment (Figure~\ref{fig:threshold_sensitivity}) support the same qualitative conclusion across reasonable perturbations around $\alpha = 0.5$.
 
 % ============================================================
 \section{Conclusion}
 
-In this PM$_{10}$ case study evaluated under rolling-origin protocols with
-persistence as an explicit baseline, the reproducible evidence is modest:
-LightGBM does not consistently beat persistence, and SARIMA achieves only small
-positive skill.  Nevertheless, SARIMA's variance retention falls to 2.9\% and
-0.4\% at 24 and 48 hours, and its exceedance recall falls to 0.099 and zero.
-Reporting variance retention alongside RMSE skill, and using Skill$_{VP}$ as a
-diagnostic auxiliary metric, offers a practical way to make this divergence
-explicit for horizon-wise interpretation under rolling-origin evaluation,
-without implying a universal replacement for established verification practices.
+Daily PM$_{10}$ forecasting exhibits a skill--fidelity trade-off under persistence-relative RMSE evaluation. HGB direct, Ridge direct, and SARIMA achieve positive median persistence-relative RMSE skill, but they do so while collapsing forecast variance (median $\alpha$ 0.151, 0.087, and 0.095; collapse rates 99.2\%, 99.2\%, and 92.4\%, respectively). Seasonal naive and STL+Ridge preserve or inflate variance (median $\alpha \approx 1.000$ and 1.399) but do not provide useful RMSE skill on median (median skill $-0.026$ and $-1.107$), and STL+Ridge illustrates that variance preservation can coincide with low precision and high false-alarm rates in exceedance diagnostics (Table~\ref{tab:five_model_diagnostic_summary}).
+
+The central lesson is therefore not that one model family is universally preferable, but that baseline-relative accuracy, variance retention, and exceedance behaviour expose different failure modes. In particular, statistically significant RMSE gains (as confirmed by BH-adjusted Diebold--Mariano tests) can coexist with severe variance collapse and weak event sensitivity, while variance preservation can coexist with poor RMSE skill and high false-alarm rates. Skill$_{VP}$ is retained only as an auxiliary diagnostic to compactly summarise the joint reading of skill and variance retention, not as a universal verification score. A forecast that beats persistence in RMSE is not necessarily dynamically credible, and a forecast that preserves variance is not necessarily operationally useful.
+
+
+
+\section*{CRediT author statement}
+Federico Garc\'ia Crespi: Conceptualisation, Data curation, Formal analysis, Investigation, Methodology, Software, Validation, Visualisation, Writing -- original draft, Writing -- review \& editing. Julio Alberto Ramos Mart\'inez: Conceptualisation, Supervision, Writing -- review \& editing.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 % ============================================================
-\section*{Data and Code Availability}
+\section*{Supplementary Material}
+\input{supplementary_material.tex}
+
+\section*{Acknowledgments}
+The authors used a generative AI assistant for language editing and for
+LaTeX and reference formatting. All data processing, analysis, results, and
+scientific conclusions are the authors' own and were verified by the authors,
+who take full responsibility for the content of this paper.
+\emph{[Funding statement to be completed: grant number(s) and funding body.]}
+
+\section*{Data Availability Statement}
 
 The analysis code, configuration files, and evaluation scripts used in this
-study are available at
+study are openly available at
 \url{https://github.com/fedeg-umh-es/varret-pm10-paper}.
-Raw PM$_{10}$ data were obtained from the Madrid Open Data hourly air-quality
-archive (\url{https://datos.madrid.es/dataset/201200-0-calidad-aire-horario})
-and are available under CC BY 4.0.  The repository records the annual archive
-URL and SHA-256 checksum and includes scripts that recover the station series
-and reproduce predictions, metrics, event diagnostics, and figures.
+Raw daily PM$_{10}$ observations were obtained from the MITECO Spanish national
+air-quality network portal (\url{https://www.miteco.gob.es/}) and are publicly
+available. The Supplementary Material contains the PRISMA reporting-audit
+outputs and the full monitoring-station table referenced in the main text.
 
-\bibliographystyle{plainnat}
-\begingroup
-\small
-\setlength{\bibsep}{2pt}
-\bibliography{references}
-\endgroup
+
+% === AMS (JAMC) migration note ===
+% For the AMS ametsocV6.1 template, replace this manual thebibliography with:
+%     \bibliographystyle{ametsocV6}
+%     \bibliography{references}
+% The companion references.bib (18 entries, author-date) is kept in sync with
+% the list below. AMS uses author-date citations; existing cite commands render
+% as "Author (Year)"/"(Author Year)" under natbib + ametsocV6 with no text edits.
+\begin{thebibliography}{18}
+
+\bibitem{who2021}
+World Health Organization (2021). \textit{WHO Global Air Quality Guidelines: Particulate Matter (PM$_{2.5}$ and PM$_{10}$), Ozone, Nitrogen Dioxide, Sulfur Dioxide, and Carbon Monoxide}. World Health Organization.
+
+\bibitem{wilks2011}
+Wilks, D. S. (2011). \textit{Statistical Methods in the Atmospheric Sciences} (3rd ed.). Academic Press.
+
+\bibitem{jolliffe2012}
+Jolliffe, I. T., and Stephenson, D. B. (Eds.) (2012). \textit{Forecast Verification: A Practitioner's Guide in Atmospheric Science} (2nd ed.). Wiley.
+
+\bibitem{tashman2000}
+Tashman, L. J. (2000). Out-of-sample tests of forecasting accuracy: an analysis and review. \textit{International Journal of Forecasting}, 16(4), 437--450.
+
+\bibitem{bergmeir2018}
+Bergmeir, C., Hyndman, R. J., and Koo, B. (2018). A note on the validity of cross-validation for evaluating autoregressive time series prediction. \textit{Computational Statistics \& Data Analysis}.
+
+\bibitem{makridakis2018}
+Makridakis, S., Spiliotis, E., and Assimakopoulos, V. (2018). The M4 Competition: Results, findings, conclusion and way forward. \textit{International Journal of Forecasting}, 34(4), 802--808.
+
+\bibitem{cerqueira2020}
+Cerqueira, V., Torgo, L., and Soares, C. (2022). A case study comparing machine learning with statistical methods for time series forecasting: size matters. \textit{Journal of Intelligent Information Systems}, 59, 415--433.
+
+
+\bibitem{hyndman2006}
+Hyndman, R. J., and Koehler, A. B. (2006). Another look at measures of forecast accuracy. \textit{International Journal of Forecasting}, 22(4), 679--688.
+
+\bibitem{diebold1995}
+Diebold, F. X., and Mariano, R. S. (1995). Comparing predictive accuracy. \textit{Journal of Business \& Economic Statistics}, 13(3), 253--263.
+
+\bibitem{harvey1997}
+Harvey, D., Leybourne, S., and Newbold, P. (1997). Testing the equality of prediction mean squared errors. \textit{International Journal of Forecasting}, 13(2), 281--291.
+
+\bibitem{gneiting2011}
+Gneiting, T. (2011). Making and evaluating point forecasts. \textit{Journal of the American Statistical Association}, 106(494), 746--762. doi:10.1198/jasa.2011.r10138.
+
+\bibitem{murphy1988}
+Murphy, A. H. (1988). Skill scores based on the mean square error and their relationships to the correlation coefficient. \textit{Monthly Weather Review}, 116(12), 2417--2424.
+
+\bibitem{taylor2001}
+Taylor, K. E. (2001). Summarizing multiple aspects of model performance in a single diagram. \textit{Journal of Geophysical Research: Atmospheres}, 106(D7), 7183--7192.
+
+\bibitem{kaufman2012}
+Kaufman, S., Rosset, S., Perlich, C., and Stitelman, O. (2012). Leakage in data mining: formulation, detection, and avoidance. \textit{ACM Transactions on Knowledge Discovery from Data}, 6(4), 1--21.
+
+\bibitem{sandve2013}
+Sandve, G. K., Nekrutenko, A., Taylor, J., and Hovig, E. (2013). Ten simple rules for reproducible computational research. \textit{PLoS Computational Biology}, 9(10), e1003285.
+
+\bibitem{mendez2023}
+M{\'e}ndez, M., Merayo, M. G., and N{\'u}{\~n}ez, M. (2023). Machine learning algorithms to forecast air quality: a survey. \textit{Artificial Intelligence Review}, 56, 10031--10066.
+
+\bibitem{tang2024}
+Tang, D., Zhan, Y., and Yang, F. (2024). A review of machine learning for modeling air quality: overlooked but important issues. \textit{Atmospheric Research}, 300, 107261.
+
+\bibitem{chadalavada2025}
+Chadalavada, S., Faust, O., Salvi, M., Seoni, S., Raj, N., Raghavendra, U., Gudigar, A., Barua, P. D., Molinari, F., and Acharya, U. R. (2025). Application of artificial intelligence in air pollution monitoring and forecasting: a systematic review. \textit{Environmental Modelling \& Software}, 185, 106312.
+
+\end{thebibliography}
 
 \end{document}
