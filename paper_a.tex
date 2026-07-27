@@ -97,7 +97,7 @@ The post-evaluation framework is organised around three complementary questions:
 
 \textbf{Skill:} Does the model beat persistence? In this manuscript, skill is defined relative to persistence under RMSE, so positive \(\mathrm{Skill}(h)\) indicates lower RMSE than persistence at the same horizon \(h\) \cite{hyndman2006,tashman2000}.
 
-\textbf{Variance retention:} Does the forecast retain observed variability? The variance-retention ratio \(\alpha(h)=\mathrm{SD}(\hat{y})/\mathrm{SD}(y)\) is interpreted post-evaluation; low \(\alpha(h)\) indicates variability shrinkage consistent with smoothed trajectories, which can complicate operational interpretation even when RMSE skill is positive.
+\textbf{Variance retention:} Does the forecast retain observed variability? The variance-retention ratio \(\alpha(h)=\operatorname{Var}(\hat{y})/\operatorname{Var}(y)\) is interpreted post-evaluation; low \(\alpha(h)\) indicates variability shrinkage consistent with smoothed trajectories, which can complicate operational interpretation even when RMSE skill is positive.
 
 \textbf{Skill$_{VP}$:} What compact auxiliary summary helps read both together? Skill$_{VP}$ is reported only as a bounded diagnostic auxiliary alongside \(\mathrm{Skill}(h)\) and \(\alpha(h)\), not as a replacement for standard accuracy metrics.
 
@@ -163,8 +163,16 @@ At the same time, skill is a summary of pointwise error behaviour under a chosen
 \subsection{Variance retention}
 We define the variance-retention ratio at horizon \(h\) as
 \begin{equation}
-\alpha(h) = \frac{\mathrm{SD}(\hat{y}_h)}{\mathrm{SD}(y_h)}.
+\alpha(h) = \frac{\sigma^2_{\hat{y}_h}}{\sigma^2_{y_h}}
+          = \frac{\operatorname{Var}(\hat{y}_h)}{\operatorname{Var}(y_h)},
 \end{equation}
+the ratio of the predicted to the observed \emph{variance} at horizon \(h\).
+Both variances are population variances (\(\mathrm{ddof}=0\)) computed over the
+matched finite forecast--observation pairs within each station--model--horizon
+cell, so \(\alpha(h)\) is the fraction of observed variance retained by the
+forecast (a value of \(0.5\) corresponds to half the observed variance
+retained). This is a variance ratio, not a standard-deviation ratio; the two
+differ by a square and are not interchangeable.
 
 The ratio \(\alpha(h)\) compares forecast trajectory variability with observed variability at the same horizon. Values \(\alpha(h)\ll 1\) indicate variance shrinkage consistent with smoothed point-forecast trajectories, while values \(\alpha(h)\gg 1\) indicate forecast variance inflation.
 

@@ -1,0 +1,6 @@
+station,horizon,model,fold_or_scope,alpha_before,alpha_after,absolute_change,relative_change,ranking_before,ranking_after,threshold_changed,note
+ALL(17)_median,ALL(1-7)_median,hgb_direct,per-model median over 119 cells,0.150627,0.150627,0.0,0.0,3,3,no,sd_ratio that erroneous SD/SD label implied = sqrt(alpha) = 0.3881
+ALL(17)_median,ALL(1-7)_median,ridge_direct,per-model median over 119 cells,0.08743,0.08743,0.0,0.0,5,5,no,sd_ratio that erroneous SD/SD label implied = sqrt(alpha) = 0.2957
+ALL(17)_median,ALL(1-7)_median,sarima,per-model median over 119 cells,0.095113,0.095113,0.0,0.0,4,4,no,sd_ratio that erroneous SD/SD label implied = sqrt(alpha) = 0.3084
+ALL(17)_median,ALL(1-7)_median,seasonal_naive,per-model median over 119 cells,0.999781,0.999781,0.0,0.0,2,2,no,sd_ratio that erroneous SD/SD label implied = sqrt(alpha) = 0.9999
+ALL(17)_median,ALL(1-7)_median,stl_ridge_direct,per-model median over 119 cells,1.398663,1.398663,0.0,0.0,1,1,no,sd_ratio that erroneous SD/SD label implied = sqrt(alpha) = 1.1827

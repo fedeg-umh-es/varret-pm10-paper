@@ -1,0 +1,6 @@
+source_function,output_column,output_file,table_or_figure,manuscript_location,claim,affected_by_fix
+src/diagnostics/variance.py::_compute_alpha,alpha,outputs/tables/variance_retention_summary.csv,Table (five-model diagnostic) + figure4_alpha_profiles.pdf + figure5_scatter_skill_alpha.pdf,"Results: variance retention; Fig4/Fig5",variance collapse 118/119 (alpha<0.5),NO (numbers unchanged; label corrected to variance ratio)
+src/diagnostics/variance.py::_compute_alpha,skill_vp,outputs/tables/variance_retention_summary.csv,five-model diagnostic table,"Results / Methods (Skill_VP=Skill*alpha)",Skill_VP median values,NO
+src/diagnostics/variance.py::_bootstrap_alpha_ci,alpha_ci_low/high,outputs/tables/variance_retention_summary.csv,Supplementary bootstrap CIs,"Methods (ii); Suppl.",alpha bootstrap intervals,NO
+src/diagnostics/variance.py::_compute_alpha,median_alpha,outputs/tables/model_family_diagnostic_summary.csv,model_family_diagnostic_summary table,"Abstract + Results medians",median alpha 0.151/0.087/0.095/1.000/1.399,NO
+src/diagnostics/variance.py::_compute_alpha,collapse_flag,outputs/tables/*,figure6_threshold_sensitivity.pdf,"Sensitivity to alpha threshold",collapse rates across thresholds,NO
