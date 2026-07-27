@@ -1,0 +1,6 @@
+file,line_range,expression_or_text,expected,status,action
+paper_a.tex,97-102,\alpha(h)=\operatorname{Var}(\hat{y})/\operatorname{Var}(y),\alpha(h)=\operatorname{Var}(\hat{y})/\operatorname{Var}(y),PASS,NONE
+paper_a.tex,163-169,\alpha(h) = \frac{\sigma^2_{\hat{y}_h}}{\sigma^2_{y_h}} = \frac{\operatorname{Var}(\hat{y}_h)}{\operatorname{Var}(y_h)},Population variance ratio ddof=0,PASS,NONE
+paper_a.tex,174,This is a variance ratio not a standard-deviation ratio,Explicit variance ratio clause,PASS,NONE
+model_family_diagnostic_summary.tex,1-15,Median \alpha reported as variance ratio,Variance ratio,PASS,NONE
+supplementary_material.tex,1-50,Variance ratio retention metrics,Variance ratio,PASS,NONE

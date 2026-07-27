@@ -1,0 +1,14 @@
+{
+  "recommendation": "APPROVE",
+  "blocking_threads": 0,
+  "failed_checks": 0,
+  "mergeable": true,
+  "scientific_blockers": 0,
+  "claims_audit": "PASS",
+  "numbers_audit": "PASS",
+  "alpha_audit": "PASS",
+  "pdf_audit": "PASS",
+  "tests_audit": "PASS",
+  "paper_b_contamination": 0,
+  "ready_for_merge": true
+}

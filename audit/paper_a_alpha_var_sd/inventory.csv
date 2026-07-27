@@ -1,0 +1,6 @@
+file,line_or_symbol,name_used,actual_formula,ddof,valid_pair_policy,aggregation_level,downstream_use,status
+src/diagnostics/variance.py,_compute_alpha (L51-55),alpha,var(y_pred)/var(y_true),0,"group rows as-is (predictions_df pre-aligned; no explicit finite mask)","(dataset,model,horizon)","alpha; skill_vp=skill*alpha; collapse_flag(<0.5); inflation_flag(>1.5); near_ideal_flag([0.8,1.2])",CONSISTENT_VAR
+src/diagnostics/variance.py,_bootstrap_alpha_ci (L58-76),alpha (CI),var(y_pred[idx])/var(y_true[idx]) resampled,0,"group rows as-is",(dataset,model,horizon),alpha_ci_low; alpha_ci_high,CONSISTENT_VAR
+src/kge_diagnostics.py,compute_kge_components (L35-66),alpha_h / phi_h,SD(y_pred)/SD(y_true),0,finite-pair masked,(dataset,model,horizon),"KGE_h; KGE tables (separate KGE/Paper C diagnostic, NOT Paper A variance retention)",CONSISTENT_SD
+outputs/tables/variance_retention_summary.csv,alpha column,alpha,"variance ratio (produced by _compute_alpha)",0,-,cell,"Paper A Table + figure4/figure5",CONSISTENT_VAR
+outputs/tables/model_family_diagnostic_summary.csv,median_alpha,alpha,variance ratio,-,-,model,"Paper A reported medians (0.151/0.087/0.095/1.000/1.399)",CONSISTENT_VAR

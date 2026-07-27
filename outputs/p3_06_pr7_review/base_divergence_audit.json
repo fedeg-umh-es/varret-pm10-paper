@@ -1,0 +1,12 @@
+{
+  "base_ref": "origin/main",
+  "base_sha": "0f89526c71cde697e7f5c0d661a9d838cde11a50",
+  "head_sha": "0dcac80fdf91a5d09f80d43f9d13fa425aae4630",
+  "base_ahead_count": 1,
+  "head_ahead_count": 8,
+  "textual_conflicts": 0,
+  "semantic_conflicts": 0,
+  "rebase_required": false,
+  "merge_required": true,
+  "status": "MERGEABLE_CLEAN"
+}

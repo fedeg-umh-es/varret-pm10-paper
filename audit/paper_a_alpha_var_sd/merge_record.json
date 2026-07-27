@@ -1,0 +1,20 @@
+{
+  "repository": "fedeg-umh-es/varret-pm10-paper",
+  "pr_number": 10,
+  "pr_title": "fix: align alpha definition across code and Paper A (variance ratio, not SD)",
+  "base_branch": "claude/auditoria-hstar-censura-cota-4sqaa5",
+  "note_on_base": "PR #10 merged INTO the Paper A (PR #7) branch, not into main; this does not drag PR #7 to main.",
+  "head_branch": "audit/paper-a-alpha-var-sd",
+  "source_commit": "62cc0b88a857ce388a6e270468bcdb7a39e958a9",
+  "merge_sha": "a0894ecdcfd15b0e1609dfcf34da6a9634d4ffb5",
+  "merge_method": "squash",
+  "files_changed": ["paper_a.tex", "audit/paper_a_alpha_var_sd/*"],
+  "tests_passed": ["audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py (10/10)"],
+  "scientific_verification": "14/14 cells alpha==Var ratio, 0/14 ==SD; production _compute_alpha returns variance ratio",
+  "manuscript_compiled": "not compiled (no pdflatex in env); structural check passed (balanced env/braces, amsmath present, 0 SD-ratio defs remain)",
+  "numerical_outputs_changed": false,
+  "predictions_regenerated": false,
+  "bootstrap_executed": false,
+  "collapse_result_118_of_119": "unchanged",
+  "verdict": "MANUSCRIPT_ERROR corrected (text only)"
+}

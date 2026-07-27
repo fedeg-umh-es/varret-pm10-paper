@@ -1,0 +1,6 @@
+requirement,expected,observed,status,notes
+head_commit_ancestor,0dcac8031dcfd547fbb12e752bca1c3b53f65e20,0dcac8031dcfd547fbb12e752bca1c3b53f65e20,PASS,P3-05 commit is HEAD of PR #7
+compiled_pdf_exists,true,true,PASS,paper_a.pdf is present
+pdf_sha256_match,1ae9d41ea76ba63c78bc44d8b7872a733dd3d40696e46d15f2d00c0e1fa7312d,1ae9d41ea76ba63c78bc44d8b7872a733dd3d40696e46d15f2d00c0e1fa7312d,PASS,PDF hash matches P3-05 canonical build
+verification_outputs_present,true,true,PASS,outputs/p3_05_manuscript_verification present
+status_outputs_present,true,true,PASS,outputs/p3_05_status_check present

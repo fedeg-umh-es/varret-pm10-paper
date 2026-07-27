@@ -1,0 +1,9 @@
+{
+  "local_tests": "PASS (10/10 pytest tests passed in 0.47s)",
+  "local_compilation": "PASS (3 passes of pdflatex executed with 0 fatal errors, 0 undefined references, 0 undefined citations)",
+  "remote_checks": "NONE_CONFIGURED",
+  "pending_checks": 0,
+  "failed_checks": 0,
+  "required_checks": 0,
+  "overall_status": "PASS"
+}

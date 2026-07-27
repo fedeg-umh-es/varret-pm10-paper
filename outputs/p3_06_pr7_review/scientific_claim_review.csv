@@ -1,0 +1,11 @@
+claim_id,section,line_range,claim_short,canonical_source,scope_status,scientific_status,severity,required_action,notes
+C1,Abstract,L30-L38,Rolling-origin multi-horizon evaluation over 17 MITECO stations,A1,SUPPORTED,SUPPORTED,NONE,NONE,Framed strictly around 17 MITECO stations and verification practice
+C2,Results,L115-L125,HGB and Ridge direct collapse variance in 118/119 cells,A1,SUPPORTED,SUPPORTED,NONE,NONE,Exact match with canonical evidence
+C3,Results,L126-L135,SARIMA collapses in 110/119 cells with median skill 0.208,A2,SUPPORTED,SUPPORTED,NONE,NONE,Exact match with canonical evidence
+C4,Results,L136-L145,Seasonal naive median alpha 0.9998 with 0/119 collapsed cells,A3,SUPPORTED,SUPPORTED,NONE,NONE,Exact match with canonical evidence
+C5,Results,L146-L155,STL+Ridge median alpha 1.3987 with skill -1.107,A4,SUPPORTED,SUPPORTED,NONE,NONE,Exact match with canonical evidence
+C6,Methods,L97-L102,Variance retention alpha(h) = Var(y_hat)/Var(y) is a post-evaluation diagnostic,A5,SUPPORTED,SUPPORTED,NONE,NONE,PR #10 fix aligned variance ratio definition
+C7,Methods,L103-L108,Skill_VP(h) = Skill(h)*alpha(h) reported as bounded auxiliary diagnostic,A6,SUPPORTED,SUPPORTED,NONE,NONE,Framed strictly as auxiliary diagnostic
+C8,Results,L156-L162,Zero non-naive models attain near-ideal cells,A7,SUPPORTED,SUPPORTED,NONE,NONE,Exact match with canonical evidence
+C9,Discussion,L170-L180,Variance collapse robust across alpha thresholds,A8,SUPPORTED,SUPPORTED,NONE,NONE,Threshold sensitivity audit confirmed
+C10,Methods,L163-L169,alpha is population variance ratio (ddof=0) over matched pairs,A9,SUPPORTED,SUPPORTED,NONE,NONE,Empirical 14/14 match confirmed

@@ -1,0 +1,16 @@
+{
+  "number": 7,
+  "title": "Replace Paper A with the canonical 17-station daily variance-retention study",
+  "repository": "fedeg-umh-es/varret-pm10-paper",
+  "url": "https://github.com/fedeg-umh-es/varret-pm10-paper/pull/7",
+  "state": "OPEN",
+  "is_draft": false,
+  "base_ref": "main",
+  "head_ref": "claude/auditoria-hstar-censura-cota-4sqaa5",
+  "head_sha": "0dcac80fdf91a5d09f80d43f9d13fa425aae4630",
+  "mergeable": "MERGEABLE",
+  "merge_state_status": "CLEAN",
+  "review_decision": "APPROVED",
+  "unresolved_threads": 0,
+  "status_checks": "PASSED_LOCAL"
+}

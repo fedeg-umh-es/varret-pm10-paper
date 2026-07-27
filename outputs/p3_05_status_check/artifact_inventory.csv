@@ -1,0 +1,16 @@
+path,exists,type,size_bytes,modified_time,git_tracked,sha256,status
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/alpha_definition_audit.csv,true,file,665,2026-07-27T19:13:52+02:00,false,446e2a5d6c1f5396845de6ae2671ad35b9bda1c416836b8737e79b1f392932b6,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/cross_paper_contamination_audit.csv,true,file,819,2026-07-27T19:13:52+02:00,false,e4fc7d7c774a587501b434a2639527f7f16967ff5a84c4fcc6605800c2bfe667,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/desk_reject_surface.md,true,file,2154,2026-07-27T19:15:51+02:00,false,cd47721ae812509a344150261fdc113d8ecaaa4c36a1a27ec90b778563e0ab68,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/figure_audit.csv,true,file,1725,2026-07-27T19:13:52+02:00,false,c2df6fe000843f2498a6f4557b6dd23be45cb15992abc8dd1a09e1d331877ead,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/final_report.md,true,file,6111,2026-07-27T19:15:51+02:00,false,f94c94686b9f62acde02fdfd6efbb677149b6a02db598c353c66402c86e45c14,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/latex_dependency_audit.csv,true,file,1402,2026-07-27T19:13:52+02:00,false,51adb0b9ffd9b66334da7c2df07a0ed80bdf4a8af5b81d92afcc3558400b3d53,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/latex_log_audit.csv,true,file,440,2026-07-27T19:13:52+02:00,false,cade885a329152d96d9e4c66985fa044e138aff73ae389badd080f30c0bf3da9,PARTIAL
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/manuscript_claim_audit.csv,true,file,2008,2026-07-27T19:13:52+02:00,false,1e0d34311bc90561767002d9dd4660602341ec1dae9b98ff43c95bd118a00b4f,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/manuscript_inventory.csv,true,file,3876,2026-07-27T19:13:52+02:00,false,6d1fb25f5aca1c55946fbd9af3f169b68c32bc6caba5f29f77e619075b1b36a9,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/manuscript_number_audit.csv,true,file,1708,2026-07-27T19:13:52+02:00,false,8e1bbafc5c1edcc6beb2a25d4d37f29e362c67f05360510f179feeb3488b9a75,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/pdf_visual_audit.md,true,file,2331,2026-07-27T19:15:51+02:00,false,96f79c1315e0924558cc0ffb41b36b567dc016fa11d86b7a384ee61105298b74,PARTIAL
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/README.md,true,file,1423,2026-07-27T19:15:51+02:00,false,34d2d3eb71eb8063bbc655a617f600d55321ea2683ff94080a3f30dfa58fa69a,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/repair_plan.md,true,file,1029,2026-07-27T19:15:51+02:00,false,5e99f53d566d5ac94a6d78ccc4cca60a9a61e21e782cb71af81319196b3bc208,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/table_audit.csv,true,file,523,2026-07-27T19:13:52+02:00,false,ecd477d546dd3ad5e1406c03cd44f3d925bbff1984335d859d995a24b3f29d54,PASS
+/tmp/paper-a-p3-05/outputs/p3_05_manuscript_verification/verification_summary.json,true,file,1529,2026-07-27T19:15:51+02:00,false,b8750f2907e92e42029d29d1ae4aaa5b09213c2978e45a6ed9672f3ac4b4ffec,PASS
