@@ -1,0 +1,110 @@
+{
+  "repository": {
+    "name": "fedeg-umh-es/varret-pm10-paper",
+    "path": "/home/user/varret-pm10-paper",
+    "remote_origin": "http://local_proxy@127.0.0.1:41729/git/fedeg-umh-es/varret-pm10-paper",
+    "remote_origin_canonical": "github.com/fedeg-umh-es/varret-pm10-paper",
+    "branch": "claude/auditoria-hstar-censura-cota-4sqaa5",
+    "commit_sha": "25f124d8c1ebbb06133b39d0ecd369059de15957",
+    "commit_sha_short": "25f124d",
+    "commit_date": "2026-07-23T11:33:16+00:00",
+    "working_tree_status": "clean (before audit; only new files under audit/ added afterwards)"
+  },
+  "constraints": {
+    "bootstrap_executed": false,
+    "tables_regenerated": false,
+    "models_retrained": false,
+    "predictions_regenerated": false,
+    "scientific_outputs_modified": false
+  },
+  "stations": [
+    {
+      "station": "Elche",
+      "raw_data_path": "data/raw/pm10_daily.csv",
+      "predictions_path": "outputs/metrics/predictions.csv",
+      "source_repo": "fedeg-umh-es/varret-pm10-paper",
+      "raw_exists": true,
+      "raw_sha256": "5ab9cd34f6d6764d6b96fea0cdd7980878155de3f359b7db56206dfefa401726",
+      "raw_size_bytes": 82827,
+      "raw_rows": 2350,
+      "raw_columns": ["date", "pm10", "temp", "hr", "ws", "wd"],
+      "raw_git_blob_sha": "964af589e4916b646e769872b6713c325bf0eeff",
+      "raw_last_commit": "e7e40fd798792a35748c5f538b4109dc96ee6711",
+      "predictions_exists": true,
+      "predictions_sha256": "915a821ca74c7d51507d8b6cd3420c8d141ec26f1478a580d9792398641b58ee",
+      "predictions_size_bytes": 2027461,
+      "predictions_rows": 26001,
+      "predictions_columns": ["dataset", "model", "fold", "origin_date", "horizon", "date", "y_true", "y_pred"],
+      "predictions_git_blob_sha": "3b997c6fff0d6335ba14e9f4455187ffef0376b5",
+      "predictions_last_commit": "e7e40fd798792a35748c5f538b4109dc96ee6711",
+      "hash_status": "VERIFICADO",
+      "observations": "Raw incluye temp,hr,ws,wd (no usados en el estudio lags-only). Baseline de persistencia presente como valor de 'model', no como columna."
+    },
+    {
+      "station": "Valencia-Vivers",
+      "raw_data_path": "data/raw/pm10_valencia_vivers.csv",
+      "predictions_path": "outputs/metrics/predictions_valencia_vivers.csv",
+      "source_repo": "fedeg-umh-es/varret-pm10-paper",
+      "raw_exists": true,
+      "raw_sha256": "3eabf0e518c07abc608ba434e349731e840e0c951ace4c773cc52d36594533cf",
+      "raw_size_bytes": 42738,
+      "raw_rows": 2679,
+      "raw_columns": ["date", "pm10"],
+      "raw_git_blob_sha": "f8d1bb7aae68a184621872a5bab1195fe6aa94eb",
+      "raw_last_commit": "975336cdc18856777ccd4c20a8bfdd193bc9349b",
+      "predictions_exists": true,
+      "predictions_sha256": "bfb21ff09652c390daf15b72cad2086fe13eacdd85d9e5e736a87e2d9b51890a",
+      "predictions_size_bytes": 4606894,
+      "predictions_rows": 52028,
+      "predictions_columns": ["dataset", "model", "fold", "origin_date", "horizon", "date", "y_true", "y_pred"],
+      "predictions_git_blob_sha": "d8feaa751fc2d0f36c051d82a7e47537def3c3e3",
+      "predictions_last_commit": "e2120f827050050a041f73953c674920bb321a88",
+      "hash_status": "VERIFICADO",
+      "observations": "Raw solo date,pm10. Baseline de persistencia presente como valor de 'model', no como columna."
+    },
+    {
+      "station": "Zarra",
+      "raw_data_path": "data/raw/pm10_zarra_emep.csv",
+      "predictions_path": "outputs/metrics/predictions_zarra_emep.csv",
+      "source_repo": "fedeg-umh-es/varret-pm10-paper",
+      "raw_exists": true,
+      "raw_sha256": "f4630d0df551da201011f91d24c8811f87311c1426f256f610f140f2160259ec",
+      "raw_size_bytes": 43550,
+      "raw_rows": 2804,
+      "raw_columns": ["date", "pm10"],
+      "raw_git_blob_sha": "158269ece4e67a928fffed633c3db281df5eb37c",
+      "raw_last_commit": "975336cdc18856777ccd4c20a8bfdd193bc9349b",
+      "predictions_exists": true,
+      "predictions_sha256": "601440c364f266696c8ed8e8aa4a368a8150a4da4e27a5b9a315bcca52fce1a7",
+      "predictions_size_bytes": 4326018,
+      "predictions_rows": 52136,
+      "predictions_columns": ["dataset", "model", "fold", "origin_date", "horizon", "date", "y_true", "y_pred"],
+      "predictions_git_blob_sha": "cd1eafab12cd9e7db2367d69a0cfa9ca1e722030",
+      "predictions_last_commit": "e2120f827050050a041f73953c674920bb321a88",
+      "hash_status": "VERIFICADO",
+      "observations": "Raw solo date,pm10. Baseline de persistencia presente como valor de 'model', no como columna."
+    }
+  ],
+  "predictions_schema_check": {
+    "shared_header": ["dataset", "model", "fold", "origin_date", "horizon", "date", "y_true", "y_pred"],
+    "fields": {
+      "station": {"detected_column": "dataset", "status": "AMBIGUO"},
+      "origin": {"detected_column": "origin_date", "status": "PRESENTE"},
+      "forecast_timestamp": {"detected_column": "date", "status": "PRESENTE"},
+      "horizon": {"detected_column": "horizon", "status": "PRESENTE"},
+      "model": {"detected_column": "model", "status": "PRESENTE"},
+      "baseline_persistence": {"detected_column": null, "status": "AUSENTE"},
+      "y_true": {"detected_column": "y_true", "status": "PRESENTE"},
+      "y_pred": {"detected_column": "y_pred", "status": "PRESENTE"},
+      "train_end": {"detected_column": null, "status": "AUSENTE"},
+      "fold_split": {"detected_column": "fold", "status": "PRESENTE"},
+      "valid_pair": {"detected_column": null, "status": "AUSENTE"}
+    }
+  },
+  "verdict": {
+    "Elche": "VERIFICADO",
+    "Valencia-Vivers": "VERIFICADO",
+    "Zarra": "VERIFICADO",
+    "audited_commit": "25f124d8c1ebbb06133b39d0ecd369059de15957"
+  }
+}
