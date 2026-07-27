@@ -1,0 +1,39 @@
+{
+  "project": "P4",
+  "paper": "Paper A",
+  "repository": "fedeg-umh-es/varret-pm10-paper",
+  "remote": "github.com/fedeg-umh-es/varret-pm10-paper",
+  "base_branch": "claude/auditoria-hstar-censura-cota-4sqaa5",
+  "audit_branch": "audit/paper-a-alpha-var-sd",
+  "initial_commit": "25f124d8c1ebbb06133b39d0ecd369059de15957",
+  "final_commit": "",
+  "verdict": "MANUSCRIPT_ERROR",
+  "formula_before": "Var(y_pred)/Var(y_true) [code]; SD(y_pred)/SD(y_true) [manuscript lines 100,166]",
+  "formula_declared": "SD(y_pred)/SD(y_true) [manuscript PR#7, erroneous]",
+  "formula_after": "Var(y_pred)/Var(y_true) = sigma^2_yhat/sigma^2_y [manuscript now matches code]",
+  "ddof": 0,
+  "pairing_policy": "matched finite forecast-observation pairs per (dataset, model, horizon) group; zero observed variance guarded to 0.0",
+  "empirical_check": "14/14 cells alpha==Var ratio; 0/14 alpha==SD ratio (predictions.csv vs variance_retention_summary.csv)",
+  "commands": [
+    "grep -rniE 'alpha|std|var|variance retention' src/ paper_a.tex",
+    "python3 (recompute alpha var vs sd, compare to outputs/tables/variance_retention_summary.csv)",
+    "PYTHONPATH=. python3 audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py"
+  ],
+  "tests": [
+    "audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py (10/10 pass)"
+  ],
+  "files_modified": ["paper_a.tex"],
+  "outputs_regenerated": [],
+  "predictions_regenerated": false,
+  "models_retrained": false,
+  "bootstrap_executed": false,
+  "numbers_changed": false,
+  "rankings_changed": false,
+  "hstar_changed": false,
+  "push_performed": false,
+  "limitations": [
+    "per-cell verification used e1_rr_daily predictions on disk (14/14); 17-station medians taken from versioned model_family_diagnostic_summary.csv",
+    "no pdflatex in environment; equation edit is self-contained (amsmath), not compiled",
+    "changing alpha to an SD ratio instead would be a scientific redefinition (Case C) requiring full recomputation - out of scope"
+  ]
+}

@@ -1,0 +1,8 @@
+manuscript_file,line,text_or_equation,implied_definition,matches_code,affected_claim,status_before_fix
+paper_a.tex,100,"alpha(h)=SD(y_hat)/SD(y) [inline, Metrics section]",standard_deviation_ratio,NO,"variance-collapse / retention narrative",MANUSCRIPT_MISMATCH
+paper_a.tex,166,"alpha(h)=SD(y_hat_h)/SD(y_h) [displayed equation]",standard_deviation_ratio,NO,"formal definition of alpha",MANUSCRIPT_MISMATCH
+paper_a.tex,63,"bootstrap intervals for the variance-retention ratio alpha",variance_ratio(name),YES,alpha CIs,CONSISTENT
+paper_a.tex,210,"corresponding variance-retention ratio alpha",variance_ratio(name),YES,figure4 alpha profiles,CONSISTENT
+paper_a.tex,222,"grey region indicates collapsed variance (alpha<0.5)",variance_ratio(threshold),YES,figure4 collapse band,CONSISTENT
+paper_a.tex,34,"near-universal variance collapse (alpha<0.5) in 118/119 cells",variance_ratio(numbers),YES,abstract main result,CONSISTENT
+paper_a.tex,"186,110,118","collapse_flag alpha<0.5; retained alpha>=0.8; near_ideal 0.8<=alpha<=1.2",variance_ratio(thresholds),YES,diagnostic flags,CONSISTENT
