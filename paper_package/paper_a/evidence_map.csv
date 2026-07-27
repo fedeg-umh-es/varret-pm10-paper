@@ -1,0 +1,11 @@
+claim_id,claim,source_table,prediction_artifact,script,commit,manuscript_location
+A1,"HGB & Ridge positive skill all cells, collapse 118/119",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex abstract + Results (variance retention)"
+A2,"SARIMA 110/119 collapse, median skill 0.208",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex Results"
+A3,"seasonal naive preserves variance, negative skill",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex Results + Discussion"
+A4,"STL+Ridge inflates variance, negative skill",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex Results + Discussion"
+A5,"alpha(h)=Var ratio diagnostic",outputs/tables/variance_retention_summary.csv,outputs/metrics/predictions*.csv,src/diagnostics/variance.py,4b7cc95,"paper_a.tex Variance retention (eq)"
+A6,"Skill_VP=Skill*alpha",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex Methods/Results"
+A7,"0/119 near-ideal for non-naive models",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex Results"
+A8,"threshold robustness of collapse",outputs/tables/variance_retention_summary.csv,outputs/metrics/predictions*.csv,scripts/06_threshold_sensitivity.py,4b7cc95,"paper_a.tex Sensitivity + figure_threshold_sensitivity.pdf"
+A9,"alpha is variance ratio (14/14)",audit/paper_a_alpha_var_sd/before_after.csv,outputs/metrics/predictions.csv,audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py,4b7cc95,"paper_a.tex Variance retention (eq, corrected)"
+A10,"skill decouples from dynamic fidelity",outputs/tables/model_family_diagnostic_summary.csv,outputs/metrics/predictions*.csv,scripts/13_build_five_model_diagnostic_summary.py,4b7cc95,"paper_a.tex Introduction + Discussion"

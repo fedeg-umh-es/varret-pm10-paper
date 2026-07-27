@@ -1,0 +1,25 @@
+{
+  "project": "P4 - Ghost Skill & Dynamic Fidelity",
+  "paper": "Paper A",
+  "repository": "fedeg-umh-es/varret-pm10-paper",
+  "source_branch": "claude/auditoria-hstar-censura-cota-4sqaa5 (PR #7; contains the merged alpha fix from PR #10)",
+  "source_commit": "4b7cc950b29594311063ce81dadc8ab9f850ece3",
+  "alpha_definition": "Var(y_pred)/Var(y_true), ddof=0, matched finite pairs per (dataset,model,horizon)",
+  "canonical_outputs": {
+    "main_table": "outputs/tables/model_family_diagnostic_summary.csv",
+    "per_cell_table": "outputs/tables/variance_retention_summary.csv"
+  },
+  "regeneration_commands": [
+    "python3 scripts/13_build_five_model_diagnostic_summary.py",
+    "python3 scripts/06_threshold_sensitivity.py",
+    "python3 scripts/10_build_figures.py",
+    "python3 scripts/14_generate_skill_alpha_figure.py",
+    "PYTHONPATH=. python3 audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py"
+  ],
+  "study_dimensions": {"stations": 17, "models": 5, "horizons": 7, "cells_total": 595, "cells_per_model": 119},
+  "predictions_regenerated": false,
+  "models_retrained": false,
+  "bootstrap_executed": false,
+  "numbers_changed_by_alpha_fix": false,
+  "notes": "Evidence package only; documents provenance of already-versioned outputs. No absolute local paths; all paths repo-relative."
+}

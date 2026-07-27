@@ -1,0 +1,28 @@
+number_id,value,unit,scope,source_file,source_row_or_query,regeneration_command,verified
+n_stations,17,count,study,docs/data_dictionary.md,MITECO daily PM10 stations,-,yes
+n_models,5,count,study,outputs/tables/model_family_diagnostic_summary.csv,distinct model rows,-,yes
+n_horizons,7,count,study,config/config.yaml,h=1..7,-,yes
+n_cells_per_model,119,count,per model,outputs/tables/model_family_diagnostic_summary.csv,n_cells,-,yes
+n_cells_total,595,count,study,outputs/tables/model_family_diagnostic_summary.csv,sum(n_cells)=5*119,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_alpha_hgb_direct,0.1506,variance_ratio,hgb_direct,outputs/tables/model_family_diagnostic_summary.csv,model==hgb_direct:median_alpha,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapsed_cells_hgb_direct,118,count,hgb_direct,outputs/tables/model_family_diagnostic_summary.csv,model==hgb_direct:collapsed_cells (alpha<0.5),python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapse_rate_hgb_direct,99.16,percent,hgb_direct,outputs/tables/model_family_diagnostic_summary.csv,model==hgb_direct:collapse_rate_pct,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_skill_hgb_direct,0.2046,persistence_relative_rmse_skill,hgb_direct,outputs/tables/model_family_diagnostic_summary.csv,model==hgb_direct:median_skill,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_alpha_ridge_direct,0.0874,variance_ratio,ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==ridge_direct:median_alpha,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapsed_cells_ridge_direct,118,count,ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==ridge_direct:collapsed_cells (alpha<0.5),python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapse_rate_ridge_direct,99.16,percent,ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==ridge_direct:collapse_rate_pct,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_skill_ridge_direct,0.219,persistence_relative_rmse_skill,ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==ridge_direct:median_skill,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_alpha_sarima,0.0951,variance_ratio,sarima,outputs/tables/model_family_diagnostic_summary.csv,model==sarima:median_alpha,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapsed_cells_sarima,110,count,sarima,outputs/tables/model_family_diagnostic_summary.csv,model==sarima:collapsed_cells (alpha<0.5),python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapse_rate_sarima,92.44,percent,sarima,outputs/tables/model_family_diagnostic_summary.csv,model==sarima:collapse_rate_pct,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_skill_sarima,0.2077,persistence_relative_rmse_skill,sarima,outputs/tables/model_family_diagnostic_summary.csv,model==sarima:median_skill,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_alpha_seasonal_naive,0.9998,variance_ratio,seasonal_naive,outputs/tables/model_family_diagnostic_summary.csv,model==seasonal_naive:median_alpha,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapsed_cells_seasonal_naive,0,count,seasonal_naive,outputs/tables/model_family_diagnostic_summary.csv,model==seasonal_naive:collapsed_cells (alpha<0.5),python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapse_rate_seasonal_naive,0.0,percent,seasonal_naive,outputs/tables/model_family_diagnostic_summary.csv,model==seasonal_naive:collapse_rate_pct,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_skill_seasonal_naive,-0.0262,persistence_relative_rmse_skill,seasonal_naive,outputs/tables/model_family_diagnostic_summary.csv,model==seasonal_naive:median_skill,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_alpha_stl_ridge_direct,1.3987,variance_ratio,stl_ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==stl_ridge_direct:median_alpha,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapsed_cells_stl_ridge_direct,0,count,stl_ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==stl_ridge_direct:collapsed_cells (alpha<0.5),python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+collapse_rate_stl_ridge_direct,0.0,percent,stl_ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==stl_ridge_direct:collapse_rate_pct,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+median_skill_stl_ridge_direct,-1.1072,persistence_relative_rmse_skill,stl_ridge_direct,outputs/tables/model_family_diagnostic_summary.csv,model==stl_ridge_direct:median_skill,python3 scripts/13_build_five_model_diagnostic_summary.py,yes
+alpha_var_ratio_cell_match,14/14,cells_matched,alpha definition,outputs/tables/variance_retention_summary.csv,recompute Var(yhat)/Var(y) vs alpha column,PYTHONPATH=. python3 audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py,yes
+alpha_sd_ratio_cell_match,0/14,cells_matched,alpha definition,outputs/tables/variance_retention_summary.csv,recompute SD(yhat)/SD(y) vs alpha column,-,yes
