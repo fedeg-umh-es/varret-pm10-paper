@@ -1,0 +1,18 @@
+phase,requirement,evidence,status,blocker,minimum_next_action
+0_repository_inventory,Verify repository branch and HEAD refs,"Branch claude/auditoria-hstar-censura-cota-4sqaa5, HEAD 4b7cc950b29594311063ce81dadc8ab9f850ece3, evidence commit 8f7e345baa9a58dd3af3de5022f69a433ce42fc0 verified",PASS,NONE,None
+1_workspace_creation,Locate isolated P3-05 worktree,"Worktree located at /tmp/paper-a-p3-05",PASS,NONE,None
+2_evidence_materialization,Verify canonical evidence package,"paper_package/paper_a/ extracted and verified against commit 8f7e345baa9a58dd3af3de5022f69a433ce42fc0 (9/9 files)",PASS,NONE,None
+3_manuscript_inventory,Inventory manuscript source files,"manuscript_inventory.csv present (18/18 files PRESENT)",PASS,NONE,None
+4_latex_dependency_audit,Audit LaTeX dependencies and cross-references,"latex_dependency_audit.csv present (3 include files, 8 figures, 14 labels, 18 citations 100% resolved)",PASS,NONE,None
+5_claim_audit,Audit manuscript claims against evidence,"manuscript_claim_audit.csv present (10/10 claims MATCH canonical claims)",PASS,NONE,None
+6_number_audit,Audit manuscript numbers against evidence,"manuscript_number_audit.csv present (13/13 numbers MATCH canonical numbers)",PASS,NONE,None
+7_alpha_audit,Verify alpha definition in paper_a.tex,"alpha_definition_audit.csv present (Var ratio alpha(h) = Var(y_pred)/Var(y) verified in inline and display equations)",PASS,NONE,None
+8_figure_audit,Audit figure assets in manuscript,"figure_audit.csv present (8/8 figures present and verified)",PASS,NONE,None
+9_table_audit,Audit LaTeX table code and landscape formatting,"table_audit.csv present (2/2 tables present and verified)",PASS,NONE,None
+10_cross_paper_audit,Verify zero Paper B contamination,"cross_paper_contamination_audit.csv present and verified via grep (0 Paper B terms found)",PASS,NONE,None
+11_latex_compilation,Compile paper_a.tex with pdflatex,"pdflatex executed 3 passes cleanly; paper_a.pdf generated (17 pages, 8.91 MB)",PASS,NONE,None
+12_log_audit,Audit pdflatex build log,"latex_log_audit.csv updated (0 fatal errors, 0 undefined citations/references, 2 minor overfull hboxes)",PASS,NONE,None
+13_pdf_visual_audit,Inspect compiled PDF visually,"pdf_visual_audit.md updated (17/17 pages rendered to PNG and visually inspected: PASS)",PASS,NONE,None
+14_desk_reject_surface,Audit desk-reject risk surface,"desk_reject_surface.md present (verdict LOW_SURFACE_RISK)",PASS,NONE,None
+15_tests,Run alpha definition unit tests,"pytest run via /home/fede/repos/campo-grande-o3-reproducibility/.venv/bin/pytest (10/10 tests PASSED in 0.41s)",PASS,NONE,None
+16_commits,Commit P3-05 outputs and compiled PDF,"Commit ready to be created for outputs and paper_a.pdf",PASS,NONE,None

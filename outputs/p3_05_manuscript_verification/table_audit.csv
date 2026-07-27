@@ -1,0 +1,3 @@
+table_id,source_file,caption,canonical_role,rows_expected,columns_expected,numbers_checked,status,notes
+Table 1,model_family_diagnostic_summary.tex,Diagnostic summary of five model families across 17 MITECO stations (119 cells per family),Main diagnostic summary table,5,9,45,PASS,"Covers HGB, Ridge, SARIMA, Seasonal Naive, STL+Ridge"
+Table 2,prisma_reporting_audit_summary.tex,PRISMA systematic review reporting gap audit,Systematic review reporting audit,4,4,16,PASS,Audits reporting of variance retention in literature

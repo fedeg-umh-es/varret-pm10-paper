@@ -1,0 +1,3 @@
+severity,source_file,line,message,category,status,required_action
+INFORMATIONAL,paper_a.log,30,Overfull \hbox (26.68544pt too wide) in paragraph at lines 30--30,LAYOUT_OVERFLOW,PASS_ACCEPTED,None (minor header text overflow within margins)
+INFORMATIONAL,paper_a.log,100,Overfull \hbox (6.67116pt too wide) in paragraph at lines 100--101,LAYOUT_OVERFLOW,PASS_ACCEPTED,None (minor inline math overflow)

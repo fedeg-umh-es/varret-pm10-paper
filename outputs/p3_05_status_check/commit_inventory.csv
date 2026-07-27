@@ -1,0 +1,7 @@
+commit_sha,branch,author,date,message,manuscript_modified,evidence_modified,verification_outputs_versioned
+4b7cc950b29594311063ce81dadc8ab9f850ece3,claude/auditoria-hstar-censura-cota-4sqaa5,Fede,2026-07-27,docs: record PR #10 merge for Paper A alpha fix,false,false,false
+a0894ec,claude/auditoria-hstar-censura-cota-4sqaa5,Fede,2026-07-27,fix: align alpha definition across code and Paper A (#10),true,false,false
+8f7e345baa9a58dd3af3de5022f69a433ce42fc0,paper/paper-a-evidence-package,Fede,2026-07-27,Add canonical evidence package for Paper A,false,true,false
+25f124d,claude/auditoria-hstar-censura-cota-4sqaa5,Fede,2026-07-27,Load pdflscape for the landscape Table 1,true,false,false
+7ae86ae,claude/auditoria-hstar-censura-cota-4sqaa5,Fede,2026-07-27,Adapt Paper A to AMS (JAMC) submission requirements,true,false,false
+a3f07b7,claude/auditoria-hstar-censura-cota-4sqaa5,Fede,2026-07-27,Reframe Paper A to a single forecast-verification identity,true,false,false

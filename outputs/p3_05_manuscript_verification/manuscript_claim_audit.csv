@@ -1,0 +1,11 @@
+claim_id,section,paragraph_id,line_range,manuscript_claim_short,canonical_claim_id,canonical_status,manuscript_status,required_action,notes
+C1,Abstract,P1,L30-L38,Evaluation over 17 MITECO stations under rolling-origin protocol shows positive RMSE skill coexisting with variance collapse.,A1,SUPPORTED,MATCH,NONE,"Abstract accurately states 17 stations, persistence baseline, 118/119 collapse rate."
+C2,Results,P2,L115-L125,HGB direct and Ridge direct achieve positive skill in 119/119 cells while collapsing variance in 118/119 cells.,A1,SUPPORTED,MATCH,NONE,Exact match with canonical_claims.csv A1.
+C3,Results,P3,L126-L135,SARIMA median skill is 0.208 with collapse in 110/119 cells (92.4%).,A2,SUPPORTED,MATCH,NONE,Exact match with canonical_claims.csv A2.
+C4,Results,P4,L136-L145,"Seasonal naive median alpha is 1.000 with 0/119 collapsed cells, median skill -0.026.",A3,SUPPORTED,MATCH,NONE,Exact match with canonical_claims.csv A3.
+C5,Results,P5,L146-L155,STL+Ridge median alpha is 1.399 (no collapse) but median skill is -1.107.,A4,SUPPORTED,MATCH,NONE,Exact match with canonical_claims.csv A4.
+C6,Methods,P1,L97-L102,Variance retention ratio alpha(h) = Var(y_hat)/Var(y) is a post-evaluation diagnostic.,A5,SUPPORTED,MATCH,NONE,PR #10 fix correctly restored variance ratio definition.
+C7,Methods,P2,L103-L108,Skill_VP(h) = Skill(h)*alpha(h) is a bounded diagnostic auxiliary.,A6,SUPPORTED,MATCH,NONE,Reported strictly as auxiliary diagnostic.
+C8,Results,P6,L156-L162,"Zero non-naive models attain near-ideal cells (Skill>0 and alpha in [0.8, 1.2]).",A7,SUPPORTED,MATCH,NONE,"Exact match: 0/119 near-ideal for HGB, Ridge, SARIMA, STL+Ridge."
+C9,Discussion,P1,L170-L180,"Variance collapse is robust across alpha thresholds (<0.4, <0.5, <0.6).",A8,SUPPORTED,MATCH,NONE,Threshold sensitivity audit confirms robustness.
+C10,Methods,P3,L163-L169,alpha is population variance ratio (ddof=0) over matched pairs per cell.,A9,SUPPORTED,MATCH,NONE,"14/14 empirical cells match Var ratio, 0/14 match SD ratio."

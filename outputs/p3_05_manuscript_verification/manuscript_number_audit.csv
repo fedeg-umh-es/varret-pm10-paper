@@ -1,0 +1,14 @@
+number_id,section,line_range,reported_value,quantity,canonical_value,canonical_source,status,required_action,notes
+N1,Introduction,L40-L50,17,stations,17,canonical_numbers.csv:n_stations,MATCH,NONE,Exact match
+N2,Methods,L80-L90,5,model families,5,canonical_numbers.csv:n_models,MATCH,NONE,Exact match
+N3,Methods,L80-L90,7,forecast horizons,7,canonical_numbers.csv:n_horizons,MATCH,NONE,Exact match h=1..7
+N4,Results,L115-L125,119,cells per model,119,canonical_numbers.csv:n_cells_per_model,MATCH,NONE,17 stations x 7 horizons = 119
+N5,Results,L115-L125,118,HGB collapse cells,118,canonical_numbers.csv:collapsed_cells_hgb_direct,MATCH,NONE,118/119 (99.16%)
+N6,Results,L115-L125,118,Ridge collapse cells,118,canonical_numbers.csv:collapsed_cells_ridge_direct,MATCH,NONE,118/119 (99.16%)
+N7,Results,L126-L135,110,SARIMA collapse cells,110,canonical_numbers.csv:collapsed_cells_sarima,MATCH,NONE,110/119 (92.44%)
+N8,Results,L115-L125,0.1506,HGB median alpha,0.1506,canonical_numbers.csv:median_alpha_hgb_direct,MATCH,NONE,Exact match
+N9,Results,L115-L125,0.0874,Ridge median alpha,0.0874,canonical_numbers.csv:median_alpha_ridge_direct,MATCH,NONE,Exact match
+N10,Results,L126-L135,0.0951,SARIMA median alpha,0.0951,canonical_numbers.csv:median_alpha_sarima,MATCH,NONE,Exact match
+N11,Results,L136-L145,0.9998,Seasonal Naive median alpha,0.9998,canonical_numbers.csv:median_alpha_seasonal_naive,MATCH,NONE,Exact match
+N12,Results,L146-L155,1.3987,STL+Ridge median alpha,1.3987,canonical_numbers.csv:median_alpha_stl_ridge_direct,MATCH,NONE,Exact match
+N13,Methods,L163-L169,14/14,alpha empirical Var match,14/14,canonical_numbers.csv:alpha_var_ratio_cell_match,MATCH,NONE,"14/14 match Var ratio, 0/14 SD ratio"

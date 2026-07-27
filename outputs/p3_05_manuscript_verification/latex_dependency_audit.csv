@@ -1,0 +1,12 @@
+dependency_type,source_file,line,target,exists,resolved_path,status,notes
+INPUT,paper_a.tex,118,model_family_diagnostic_summary.tex,True,model_family_diagnostic_summary.tex,PASS,Landscape summary table included
+INPUT,paper_a.tex,195,supplementary_material.tex,True,supplementary_material.tex,PASS,Supplementary material section included
+INPUT,paper_a.tex,210,prisma_reporting_audit_summary.tex,True,prisma_reporting_audit_summary.tex,PASS,PRISMA reporting audit table included
+BIBLIOGRAPHY,paper_a.tex,240,references.bib,True,references.bib,PASS,18 cited keys match 18 defined in references.bib and embedded bibitem
+GRAPHICS,paper_a.tex,0,figure5_scatter_skill_alpha.pdf,True,figure5_scatter_skill_alpha.pdf,PASS,PDF figure asset
+GRAPHICS,paper_a.tex,0,figure_exceedance_recall.pdf,True,figure_exceedance_recall.pdf,PASS,PDF figure asset
+GRAPHICS,paper_a.tex,0,figure3_skill_profiles.pdf,True,figure3_skill_profiles.pdf,PASS,PDF figure asset
+GRAPHICS,paper_a.tex,0,figure_murphy_decomposition.pdf,True,figure_murphy_decomposition.pdf,PASS,PDF figure asset
+GRAPHICS,paper_a.tex,0,figure4_alpha_profiles.pdf,True,figure4_alpha_profiles.pdf,PASS,PDF figure asset
+GRAPHICS,paper_a.tex,0,station_map_ml_only_collapse_rate.pdf,True,station_map_ml_only_collapse_rate.pdf,PASS,PDF figure asset
+GRAPHICS,paper_a.tex,0,figure_threshold_sensitivity.pdf,True,figure_threshold_sensitivity.pdf,PASS,PDF figure asset

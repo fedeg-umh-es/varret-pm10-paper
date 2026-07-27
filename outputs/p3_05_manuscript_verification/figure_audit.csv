@@ -1,0 +1,8 @@
+figure_id,manuscript_caption,asset_path,exists,canonical_role,data_source,claim_supported,caption_status,visual_status,status,notes
+Fig 1,Reporting gap audit PRISMA summary,figure1_reporting_gap_audit.pdf,True,Reporting gap audit,prisma_reporting_audit_summary.tex,Need for variance retention diagnostic,PASS,PASS,VERIFIED,"Asset present, size 16.8KB"
+Fig 2,Skill vs Variance Retention conceptual diagram,figure2_skill_variance_retention.pdf,True,Conceptual taxonomy,src/diagnostics/variance.py,Decoupling of skill and variance retention,PASS,PASS,VERIFIED,"Asset present, size 22.1KB"
+Fig 3,Skill profiles h=1..7 across 17 stations,figure3_skill_profiles.pdf,True,Skill profiles,outputs/tables/variance_retention_summary.csv,HGB/Ridge positive skill in 119/119 cells,PASS,PASS,VERIFIED,"Asset present, size 19.9KB"
+Fig 4,Alpha profiles h=1..7 across 17 stations,figure4_alpha_profiles.pdf,True,Variance retention profiles,outputs/tables/variance_retention_summary.csv,Universal collapse alpha<0.5 for HGB/Ridge,PASS,PASS,VERIFIED,"Asset present, size 20.4KB"
+Fig 5,Scatter plot of Skill vs Alpha,figure5_scatter_skill_alpha.pdf,True,Decoupling scatter,outputs/tables/model_family_diagnostic_summary.csv,Coexistence of positive skill and variance collapse,PASS,PASS,VERIFIED,"Asset present, size 22.4KB"
+Fig 6,Station collapse rates map/bar,figure6_station_collapse_rates.pdf,True,Spatial collapse rate,outputs/tables/model_family_diagnostic_summary.csv,118/119 collapse rate spatially distributed,PASS,PASS,VERIFIED,"Asset present, size 20.4KB"
+Fig 7,Spanish MITECO station map,figure7_station_map_spain.pdf,True,Network map,docs/data_dictionary.md,17 MITECO stations coverage,PASS,PASS,VERIFIED,"Asset present, size 8.0MB"
