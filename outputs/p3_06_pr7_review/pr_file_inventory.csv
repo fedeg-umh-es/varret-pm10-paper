@@ -1,0 +1,26 @@
+path,change_type,scientific_role,expected_scope,risk,status,notes
+paper_a.tex,M,Canonical Paper A manuscript source,EXPECTED,LOW,PASS,Contains 17-station MITECO daily PM10 text
+paper_a.pdf,M,Compiled Paper A manuscript PDF,EXPECTED,LOW,PASS,17 pages 8.91MB compiled cleanly from paper_a.tex
+supplementary_material.tex,A,Supplementary material include,EXPECTED,LOW,PASS,Includes station metadata table
+prisma_reporting_audit_summary.tex,A,PRISMA audit summary include,EXPECTED,LOW,PASS,Includes reporting audit details
+model_family_diagnostic_summary.tex,M,Model family summary include,EXPECTED,LOW,PASS,Includes 5-family diagnostic summary
+references.bib,M,Bibliography database,EXPECTED,LOW,PASS,18 reference entries
+figure1_reporting_gap_audit.pdf,A,Figure asset,EXPECTED,LOW,PASS,Reporting gap audit figure
+figure3_skill_profiles.pdf,M,Figure asset,EXPECTED,LOW,PASS,Median skill profiles figure
+figure4_alpha_profiles.pdf,M,Figure asset,EXPECTED,LOW,PASS,Median alpha profiles figure
+figure5_scatter_skill_alpha.pdf,M,Figure asset,EXPECTED,LOW,PASS,Skill vs alpha scatter figure
+figure_exceedance_recall.pdf,A,Figure asset,EXPECTED,LOW,PASS,Exceedance recall figure
+figure_murphy_decomposition.pdf,A,Figure asset,EXPECTED,LOW,PASS,Murphy decomposition figure
+figure_threshold_sensitivity.pdf,A,Figure asset,EXPECTED,LOW,PASS,Threshold sensitivity figure
+station_map_ml_only_collapse_rate.pdf,M,Figure asset,EXPECTED,LOW,PASS,17 station map figure
+audit/paper_a_alpha_var_sd/before_after.csv,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/impact_map.csv,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/inventory.csv,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/manifest.json,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/manuscript_inventory.csv,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/merge_record.json,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/merge_record.md,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/report.md,A,Audit artifact,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix audit
+audit/paper_a_alpha_var_sd/test_alpha_var_vs_sd.py,A,Test suite,JUSTIFIED_AUXILIARY,LOW,PASS,PR #10 alpha fix unit test
+outputs/p3_05_manuscript_verification/*,A,Verification outputs,JUSTIFIED_AUXILIARY,LOW,PASS,P3-05 verification outputs
+outputs/p3_05_status_check/*,A,Status check outputs,JUSTIFIED_AUXILIARY,LOW,PASS,P3-05 status check outputs

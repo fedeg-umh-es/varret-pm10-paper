@@ -1,0 +1,12 @@
+{
+  "pdf_path": "paper_a.pdf",
+  "pdf_sha256": "1ae9d41ea76ba63c78bc44d8b7872a733dd3d40696e46d15f2d00c0e1fa7312d",
+  "pdf_pages": 17,
+  "compilation_status": "PASS (3 passes of pdflatex executed cleanly)",
+  "undefined_references": 0,
+  "undefined_citations": 0,
+  "visual_inspection": "PASS (17/17 pages verified via PNG renderings)",
+  "figure_assets_verified": 8,
+  "table_assets_verified": 2,
+  "identity_check": "17_STATION_MITECO_DAILY_PM10_PASS"
+}
