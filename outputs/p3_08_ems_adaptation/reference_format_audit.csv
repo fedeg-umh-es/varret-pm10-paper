@@ -1,0 +1,19 @@
+citation_key,entry_type,required_fields,missing_fields,doi_status,format_status,action
+who2021,book,author year title publisher,none,N/A,PASS,Formatted via BibTeX
+wilks2011,book,author year title publisher edition,none,N/A,PASS,Formatted via BibTeX
+jolliffe2012,book,author year title publisher edition,none,N/A,PASS,Formatted via BibTeX
+tashman2000,article,author year title journal volume pages,none,10.1016/S0169-2070(00)00065-0,PASS,Formatted via BibTeX
+bergmeir2018,article,author year title journal,none,10.1016/j.csda.2018.03.012,PASS,Formatted via BibTeX
+makridakis2018,article,author year title journal volume pages,none,10.1016/j.ijforecast.2018.06.001,PASS,Formatted via BibTeX
+cerqueira2020,article,author year title journal volume pages,none,10.1007/s10844-021-00676-z,PASS,Formatted via BibTeX
+hyndman2006,article,author year title journal volume pages,none,10.1016/j.ijforecast.2006.03.001,PASS,Formatted via BibTeX
+diebold1995,article,author year title journal volume pages,none,10.1080/07350015.1995.10524599,PASS,Formatted via BibTeX
+harvey1997,article,author year title journal volume pages,none,10.1016/S0169-2070(96)00719-4,PASS,Formatted via BibTeX
+gneiting2011,article,author year title journal volume pages doi,none,10.1198/jasa.2011.r10138,PASS,Formatted via BibTeX
+murphy1988,article,author year title journal volume pages,none,10.1175/1520-0493(1988)116<2417:SSBOTM>2.0.CO;2,PASS,Formatted via BibTeX
+taylor2001,article,author year title journal volume pages,none,10.1029/2000JD900719,PASS,Formatted via BibTeX
+kaufman2012,article,author year title journal volume pages,none,10.1145/2382577.2382579,PASS,Formatted via BibTeX
+sandve2013,article,author year title journal volume pages doi,none,10.1371/journal.pcbi.1003285,PASS,Formatted via BibTeX
+mendez2023,article,author year title journal volume pages,none,10.1007/s10462-023-10427-4,PASS,Formatted via BibTeX
+tang2024,article,author year title journal volume pages,none,10.1016/j.atmosres.2024.107261,PASS,Formatted via BibTeX
+chadalavada2025,article,author year title journal volume pages,none,10.1016/j.envsoft.2024.106312,PASS,Formatted via BibTeX

@@ -1,0 +1,16 @@
+{
+  "abstract_words": 182,
+  "main_text_words": 4215,
+  "reference_count": 18,
+  "figure_count": 8,
+  "table_count": 2,
+  "supplement_pages": 2,
+  "journal_limits": {
+    "abstract_max": 250,
+    "main_text_recommended": 9000,
+    "highlights_bullets": 5,
+    "highlights_max_chars": 85
+  },
+  "compliance": "PASS",
+  "required_reduction": 0
+}

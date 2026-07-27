@@ -1,0 +1,28 @@
+file_item,destination_path,submission_type,status,notes
+paper_a_ems.tex,submission_package/ems/paper_a_ems.tex,Manuscript Source,PASS,Official elsarticle LaTeX source
+paper_a_ems.pdf,submission_package/ems/paper_a_ems.pdf,Manuscript PDF,PASS,Compiled canonical PDF (17 pages)
+highlights.txt,submission_package/ems/highlights.txt,Highlights,PASS,5 bullet points (68-82 chars each)
+graphical_abstract.pdf,submission_package/ems/graphical_abstract.pdf,Graphical Abstract,PASS,Vector PDF graphical abstract
+graphical_abstract.png,submission_package/ems/graphical_abstract.png,Graphical Abstract (Raster),PASS,300 DPI PNG graphical abstract
+references.bib,submission_package/ems/references.bib,Bibliography File,PASS,18 bibtex entries
+figure1_reporting_gap_audit.pdf,submission_package/ems/figure1_reporting_gap_audit.pdf,Figure 1,PASS,Vector PDF
+figure2_skill_variance_retention.pdf,submission_package/ems/figure2_skill_variance_retention.pdf,Figure 2,PASS,Vector PDF
+figure3_skill_profiles.pdf,submission_package/ems/figure3_skill_profiles.pdf,Figure 3,PASS,Vector PDF
+figure4_alpha_profiles.pdf,submission_package/ems/figure4_alpha_profiles.pdf,Figure 4,PASS,Vector PDF
+figure5_scatter_skill_alpha.pdf,submission_package/ems/figure5_scatter_skill_alpha.pdf,Figure 5,PASS,Vector PDF
+figure6_station_collapse_rates.pdf,submission_package/ems/figure6_station_collapse_rates.pdf,Figure 6,PASS,Vector PDF
+figure7_station_map_spain.pdf,submission_package/ems/figure7_station_map_spain.pdf,Figure 7,PASS,Vector PDF
+figure_exceedance_recall.pdf,submission_package/ems/figure_exceedance_recall.pdf,Figure 8,PASS,Vector PDF
+figure_murphy_decomposition.pdf,submission_package/ems/figure_murphy_decomposition.pdf,Figure 9,PASS,Vector PDF
+figure_threshold_sensitivity.pdf,submission_package/ems/figure_threshold_sensitivity.pdf,Figure 10,PASS,Vector PDF
+station_map_ml_only_collapse_rate.pdf,submission_package/ems/station_map_ml_only_collapse_rate.pdf,Figure 11,PASS,Vector PDF
+supplementary_material_ems.tex,submission_package/ems/supplementary_material_ems.tex,Supplementary Material Source,PASS,LaTeX source for supplement
+supplementary_material_ems.pdf,submission_package/ems/supplementary_material_ems.pdf,Supplementary Material PDF,PASS,Compiled supplement PDF
+declaration_of_competing_interest.txt,submission_package/ems/declaration_of_competing_interest.txt,Declaration of Interest,PASS,No conflict declared
+credit_author_statement.txt,submission_package/ems/credit_author_statement.txt,CRediT Statement,PASS,CRediT roles specified
+data_availability_statement.txt,submission_package/ems/data_availability_statement.txt,Data Availability,PASS,GitHub URL and MITECO portal
+code_availability_statement.txt,submission_package/ems/code_availability_statement.txt,Code Availability,PASS,GitHub URL
+funding_statement.txt,submission_package/ems/funding_statement.txt,Funding Statement,PASS,Placeholder for grant numbers
+cover_letter_draft.md,submission_package/ems/cover_letter_draft.md,Cover Letter Draft,PASS,Prepared for submission
+file_manifest.csv,submission_package/ems/file_manifest.csv,Submission Manifest,PASS,File inventory
+README.md,submission_package/ems/README.md,Submission Overview,PASS,Guide for authors/submitter

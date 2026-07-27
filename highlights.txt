@@ -1,0 +1,5 @@
+Formalises variance retention alpha(h) to expose amplitude collapse in forecasts.
+Evaluates 17 MITECO stations, 5 model families, and lead times h=1 to 7.
+ML models achieve positive RMSE skill in 119/119 cells but collapse in 118/119.
+Episode exceedance recall drops below 10% for over-smoothed ML models at h>=3.
+Provides a post-evaluation diagnostic layer for air-quality forecast verification.

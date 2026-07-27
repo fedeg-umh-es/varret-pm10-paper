@@ -1,0 +1,3 @@
+Data Availability Statement
+
+The analysis code, configuration files, and evaluation scripts used in this study are openly available at https://github.com/fedeg-umh-es/varret-pm10-paper. Raw daily PM10 observations were obtained from the MITECO Spanish national air-quality network portal (https://www.miteco.gob.es/) and are publicly available. The Supplementary Material contains the PRISMA reporting-audit outputs and the full monitoring-station table referenced in the main text.

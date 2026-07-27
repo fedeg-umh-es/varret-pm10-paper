@@ -1,0 +1,3 @@
+asset,source_file,dimensions,format,description
+graphical_abstract.pdf,figure5_scatter_skill_alpha.pdf,Vector (PDF),PDF,Skill vs Variance Retention diagnostic space scatter plot
+graphical_abstract.png,graphical_abstract.pdf,1920x1080 (300 DPI),PNG,High-resolution raster rendering of graphical abstract

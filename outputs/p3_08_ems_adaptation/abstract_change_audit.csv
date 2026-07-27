@@ -1,0 +1,4 @@
+segment,before,after,reason,scientific_change,status
+abstract_text,"Verification of deterministic air-quality forecasts relies heavily on persistence-relative RMSE skill...","Verification of deterministic air-quality forecasts relies heavily on persistence-relative RMSE skill...",Identical text retained,NONE,PASS
+word_count,182 words,182 words,Within 250 word limit for EM&S,NONE,PASS
+keywords_formatting,"Keywords: forecast verification; ...","\begin{keyword} forecast verification \sep ... \end{keyword}",Formatted to elsarticle.cls keyword syntax,NONE,PASS

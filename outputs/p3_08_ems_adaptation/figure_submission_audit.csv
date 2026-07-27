@@ -1,0 +1,12 @@
+figure,current_format,dimensions,resolution,font_legibility,journal_compliance,separate_file_ready,action,status
+figure1_reporting_gap_audit.pdf,PDF (Vector),Single column,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure2_skill_variance_retention.pdf,PDF (Vector),Double column,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure3_skill_profiles.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure4_alpha_profiles.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure5_scatter_skill_alpha.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure6_station_collapse_rates.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure7_station_map_spain.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure_exceedance_recall.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure_murphy_decomposition.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+figure_threshold_sensitivity.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS
+station_map_ml_only_collapse_rate.pdf,PDF (Vector),Full width,Vector,PASS,100% compliant,YES,Include as separate submission file,PASS

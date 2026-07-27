@@ -1,0 +1,3 @@
+Code Availability Statement
+
+The Python and R scripts for rolling-origin evaluation, model fitting, metric computation, and manuscript figure/table rendering are archived and version-controlled at https://github.com/fedeg-umh-es/varret-pm10-paper. All diagnostic metrics can be reproduced directly from the provided evidence package.
