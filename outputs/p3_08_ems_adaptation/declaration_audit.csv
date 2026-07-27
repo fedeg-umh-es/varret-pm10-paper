@@ -3,5 +3,5 @@ CRediT Author Statement,YES,YES,submission_package/ems/credit_author_statement.t
 Declaration of Competing Interest,YES,YES,submission_package/ems/declaration_of_competing_interest.txt,PASS,No competing interests declared
 Data Availability Statement,YES,YES,submission_package/ems/data_availability_statement.txt,PASS,Code repository URL and MITECO portal cited
 Code Availability Statement,YES,YES,submission_package/ems/code_availability_statement.txt,PASS,GitHub repository linked
-Funding Statement,YES,YES,submission_package/ems/funding_statement.txt,MINOR_PLACEHOLDER,[Funding statement to be completed: grant number(s)]
+Funding Statement,YES,YES,submission_package/ems/funding_statement.txt,PASS,Standard Elsevier no-grant declaration included
 AI-Assisted Writing Disclosure,YES,YES,Included in Acknowledgments,PASS,Elsevier AI policy compliant
