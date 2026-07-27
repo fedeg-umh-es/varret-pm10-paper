@@ -1,0 +1,24 @@
+{
+  "project": "P3 — Ghost Skill / Variance Retention",
+  "paper": "Paper A",
+  "repository": "fedeg-umh-es/varret-pm10-paper",
+  "manuscript_commit": "2939d26fb4e3447347ed9d6ba8e2d244462cb67b",
+  "decision_date": "2026-07-27",
+  "best_target": "Environmental Modelling & Software",
+  "fallback": "Atmospheric Environment",
+  "do_not_send_now": "International Journal of Forecasting / MDPI Journals",
+  "best_target_scope_fit": "HIGH",
+  "best_target_contribution_fit": "HIGH",
+  "best_target_publication_model": "Hybrid (Subscription route available with €0 APC)",
+  "best_target_subscription_available": true,
+  "best_target_mandatory_apc": false,
+  "best_target_indexing": "Web of Science SCIE (JCR Q1, Impact Factor 4.8)",
+  "best_target_recent_novelty_risk": "LOW",
+  "best_target_desk_reject_risk": "LOW",
+  "required_pre_submission_changes": [
+    "Draft 3-5 highlights (max 85 chars) for EM&S submission portal.",
+    "Draft cover letter tailored to EM&S framing the verification diagnostic layer."
+  ],
+  "overall_verdict": "GO_TARGET_CONFIRMED",
+  "minimum_next_action": "Prepare submission package (highlights and cover letter) for Environmental Modelling & Software."
+}
