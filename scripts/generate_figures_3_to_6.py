@@ -308,7 +308,7 @@ def figure5_skill_alpha(df: pd.DataFrame) -> None:
     ax.text(0.04, -2.0, "III: Low Skill / Collapsed", fontsize=9.5, fontweight="semibold", color="#7F8C8D", bbox=bbox_props, va="bottom", ha="left")
     ax.text(1.20, -2.0, "IV: Low Skill / Retained\n(STL+Ridge, Seasonal)", fontsize=9.5, fontweight="semibold", color="#C0392B", bbox=bbox_props, va="bottom", ha="left")
 
-    ax.set_xlabel(r"Variance Retention Coefficient ($\alpha = s_{\hat{y}} / s_{y}$)", fontsize=12, fontweight="semibold", labelpad=8)
+    ax.set_xlabel(r"Variance Retention Coefficient ($\alpha = \mathrm{Var}(\hat{y}) / \mathrm{Var}(y)$)", fontsize=12, fontweight="semibold", labelpad=8)
     ax.set_ylabel(r"Forecasting Skill (Persistence-Relative $1 - \text{MSE}/\text{MSE}_{\text{pers}}$)", fontsize=12, fontweight="semibold", labelpad=8)
     ax.set_title("The Predictability-Variance Frontier in PM10 Forecasting", fontsize=14, fontweight="bold", pad=15)
     

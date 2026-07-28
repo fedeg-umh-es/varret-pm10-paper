@@ -1,0 +1,44 @@
+{
+  "decision": "SUBMISSION_HOLD_RECOVERABLE",
+  "decision_date": "2026-07-28",
+  "question": "Existe en algun repositorio, rama, commit, release, artifact, PR, worktree, backup o almacenamiento local accesible un paquete completo y regenerable que soporte los claims de 17 estaciones de Paper A?",
+  "answer": "SI, con una salvedad critica: el paquete completo y regenerable EXISTE y fue verificado (incluyendo recomputo independiente de alpha a precision de punto flotante desde 895,737 filas de predicciones row-level), pero vive UNICAMENTE en un directorio local no versionado (/home/fede/investigacion/repos/varret-pm10-paper), con git corrupto y cambios locales no commiteados, fuera del repositorio git principal (/home/fede/repos/varret-pm10-paper) y de GitHub. Nunca fue consolidado ni respaldado formalmente.",
+  "reasoning": [
+    "Evidencia clasificada A_COMPLETE en cuanto a existencia y verificabilidad (ver evidence_classification.json).",
+    "El repositorio git principal, evaluado solo, es C_MANUSCRIPT_AHEAD (numeros y figuras publicados sin fuente row-level versionada).",
+    "La fuente recuperada tiene procedencia git no verificable (indice corrupto) -- no es 'reachable' via ningun commit/branch/tag inspeccionable con git.",
+    "No se ha ejecutado ninguna regeneracion real de Figura 5 todavia (bloqueo de entorno Python, no de datos).",
+    "Tres tablas suplementarias (DM, exceedance, Murphy) fueron encontradas con el esquema correcto pero NO recalculadas de forma independiente en esta sesion.",
+    "Por disciplina cientifica y editorial, un HOLD_RECOVERABLE es mas seguro que un GO: hay que consolidar y respaldar la evidencia recuperada antes de declarar el pipeline reproducible de forma canonica."
+  ],
+  "not_selected_alternatives": {
+    "SUBMISSION_GO": "Rechazada -- exigiria evidencia A ya consolidada en el repositorio versionado, no solo encontrada en una copia externa con git corrupto.",
+    "SUBMISSION_HOLD_REGENERATION_REQUIRED": "Rechazada -- no hace falta reejecutar el pipeline; los datos ya existen y fueron verificados.",
+    "SUBMISSION_HOLD_REDUCE_CORPUS": "Rechazada por ahora -- se reserva como plan de contingencia (ver decision_options.csv) si la recuperacion fallara.",
+    "SUBMISSION_STOP_EVIDENCE_UNSUPPORTED": "Rechazada -- si existe una ruta razonable y ya verificada para sustentar los claims; 'STOP' seria desproporcionado dado el hallazgo."
+  },
+  "claims_allowed": [
+    "El estudio cubre 17 estaciones x 5 modelos x 7 horizontes = 595 celdas (evidencia row-level encontrada y verificada, pendiente de consolidacion formal).",
+    "HGB y Ridge logran skill positivo en 119/119 celdas cada uno, con colapso de varianza (alpha<0.5) en 118/119 celdas cada uno.",
+    "SARIMA reproduce el mismo patron con colapso en 110/119 celdas.",
+    "Seasonal naive preserva varianza (0/119 colapso) con skill ligeramente negativo.",
+    "STL+Ridge preserva/infla varianza pero con skill fuertemente negativo.",
+    "0/119 celdas near-ideal para HGB/Ridge/SARIMA/STL+Ridge; 20/119 para seasonal naive.",
+    "alpha = Var(y_hat)/Var(y), ddof=0 -- definicion ya correcta en el codigo (src/diagnostics/variance.py); el rotulo visual de Figura 5 esta corregido en el script pero el PDF publicado todavia no."
+  ],
+  "claims_prohibited": [
+    "Afirmar en el manuscrito o en comunicaciones editoriales que el pipeline de 17 estaciones esta 'completamente reproducible desde el repositorio publico' -- no lo esta todavia; la evidencia critica no esta en GitHub ni en el repo git principal.",
+    "Enviar el manuscrito a Environmental Modelling & Software u otra revista dentro de esta tarea o antes de consolidar la evidencia.",
+    "Declarar a Figura 5 como 'corregida' -- el PDF publicado sigue con el rotulo antiguo (SD/SD); solo el script fuente fue corregido.",
+    "Afirmar que dm_significance_all_stations.csv, exceedance_all_stations.csv y murphy_decomposition_all_stations.csv fueron verificados numericamente -- solo se verifico su existencia y esquema, no sus valores.",
+    "Cualquier claim que dependa de reentrenar modelos o generar nuevas predicciones -- fuera de alcance y no autorizado."
+  ],
+  "required_next_evidence": [
+    "Respaldo inmediato (backup fuera de /home/fede/investigacion) de variance_retention_all_stations.csv, predictions_all_stations.csv y las demas tablas *_all_stations.csv encontradas -- ya iniciado en outputs/p3_11r_evidence_reconciliation/recovered_candidates/ (copias de solo lectura, hashes verificados).",
+    "Decision explicita del responsable del proyecto sobre si consolidar estos archivos en el repositorio git principal (opcion 'recover 17-station artifacts' en decision_options.csv).",
+    "Instalacion del entorno Python (requirements.txt) para poder regenerar Figura 5 y ejecutar pytest.",
+    "Recalculo independiente (mismo metodo usado aqui para alpha) de dm_significance_all_stations.csv y exceedance_all_stations.csv antes de darlos por buenos.",
+    "Investigar por que el indice git de /home/fede/investigacion/repos/varret-pm10-paper esta corrupto y si es recuperable, para restablecer una cadena de procedencia git limpia."
+  ],
+  "effect_on_manuscript": "Ninguno todavia. No se modifico paper_a.tex en esta tarea. Los claims narrativos actuales del manuscrito coinciden numericamente con la evidencia recuperada (verificado), por lo que NO se requiere ningun cambio de contenido cientifico -- solo consolidacion de la evidencia que lo respalda y correccion del rotulo visual de Figura 5."
+}

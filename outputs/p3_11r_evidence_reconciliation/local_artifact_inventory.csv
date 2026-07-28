@@ -1,0 +1,19 @@
+path,location_root,size_bytes,category,relevance
+outputs/tables/variance_retention_all_stations.csv,/home/fede/investigacion/repos/varret-pm10-paper,161572,ALL_STATIONS_TABLE,CRITICAL — artefacto objetivo principal, validado
+outputs/metrics/predictions_all_stations.csv,/home/fede/investigacion/repos/varret-pm10-paper,77080400,ROW_LEVEL_PREDICTIONS,CRITICAL — evidencia row-level, usada para recomputo independiente
+outputs/tables/master_diagnostic_table.csv,/home/fede/investigacion/repos/varret-pm10-paper,415591,ALL_STATIONS_TABLE,CRITICAL — artefacto objetivo, encontrado
+outputs/tables/dm_significance_all_stations.csv,/home/fede/investigacion/repos/varret-pm10-paper,64861,ALL_STATIONS_TABLE,ALTA — artefacto objetivo, encontrado
+outputs/tables/exceedance_all_stations.csv,/home/fede/investigacion/repos/varret-pm10-paper,431989,ALL_STATIONS_TABLE,ALTA — artefacto objetivo, encontrado
+outputs/tables/murphy_decomposition_all_stations.csv,/home/fede/investigacion/repos/varret-pm10-paper,132040,ALL_STATIONS_TABLE,MEDIA — soporte de figura Murphy decomposition
+outputs/tables/alpha_threshold_sensitivity.csv,/home/fede/investigacion/repos/varret-pm10-paper,497,SUPPLEMENTARY_TABLE,ALTA — artefacto objetivo, encontrado
+outputs/tables/variance_retention_<14 station ids>.csv,/home/fede/investigacion/repos/varret-pm10-paper,~6.3KB c/u,PER_STATION_TABLE,ALTA — precursores de las 14 estaciones que faltaban en /home/fede/repos
+outputs/tables/skill_vp_auxiliary_*.csv (15 archivos),/home/fede/investigacion/repos/varret-pm10-paper,~1KB c/u,SUPPLEMENTARY_TABLE,MEDIA — diagnostico auxiliar Skill_VP por dataset/modelo
+outputs/tables/table01..table09_*.csv/.tex,/home/fede/investigacion/repos/varret-pm10-paper,variable,MANUSCRIPT_TABLE,MEDIA — tablas numeradas de un borrador de manuscrito mas extenso que el actual paper_a.tex
+figure5_scatter_skill_alpha.pdf (version antigua),/home/fede/investigacion/repos/varret-pm10-paper,n/a,FIGURE,BAJA — version distinta (script antiguo) a la actualmente citada en paper_a.tex; no sustituye a la Figura 5 publicada
+outputs/tables/variance_retention_all_stations.csv (copia identica),/home/fede/.local/share/Trash/files/repos/varret-pm10-paper,161572,ALL_STATIONS_TABLE,CORROBORACION — mismo sha256 que la copia activa; refuerza autenticidad
+data/raw/pm10_*.csv (3 estaciones),/home/fede/repos/varret-pm10-paper,~43-83KB c/u,RAW_DATA,YA_CONOCIDO — solo 3/17 estaciones presentes en el repo git principal (auditado previamente en PR#9)
+outputs/tables/variance_retention_summary.csv (+valencia_vivers+zarra_emep),/home/fede/repos/varret-pm10-paper,~6.1-6.5KB c/u,PER_STATION_TABLE,YA_CONOCIDO — 3 de 17 estaciones, precursores validos pero insuficientes
+paper_package/paper_a/*.csv/*.md/*.json,rama git origin/paper/paper-a-evidence-package (PR#11),variable,DOCUMENTATION_PACKAGE,EXCLUIDO_POR_REGLA — documentacion agregada, no evidencia row-level; contiene una inconsistencia interna (ver candidate_validation.csv)
+audit/trazabilidad_tres_estaciones.{md,csv,json},/home/fede/repos/varret-pm10-paper (rama main via PR#9),variable,AUDIT,CORROBORACION — auditoria previa e independiente que ya certifico el corpus de 3 estaciones con SHA-256 y conteo de filas
+submission_package/ems/*,rama git origin/editorial/p3-08-ems-adaptation (PR#13, draft),variable,SUBMISSION_PACKAGE,INFORMATIVO — adaptacion editorial para EM&S; no aporta datos nuevos, hereda el mismo corpus que main
+p34-variance-retention-api/outputs/archive/variance_retention_summary_pre_coverage_filter.csv,/home/fede/repos/p34-variance-retention-api,~1.3KB,OTHER_PROJECT,DESCARTADO — proyecto distinto, incompatible
