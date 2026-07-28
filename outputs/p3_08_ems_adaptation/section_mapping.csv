@@ -1,0 +1,14 @@
+current_section,target_section,journal_requirement,action,status,notes
+Section 1 Introduction,Section 1 Introduction,Mandatory,Preserve,PASS,Includes contributions paragraph
+Section 2 Evaluation Reporting Gaps,Section 2 Evaluation Reporting Gaps,Mandatory/Context,Preserve,PASS,Includes PRISMA audit summary
+Section 3 Post-Evaluation Framework,Section 3 Post-Evaluation Framework,Mandatory/Methodology,Preserve,PASS,Includes Table 1 interpretive template
+Section 4 Case Study,Section 4 Case Study and Setting,Mandatory/Setting,Preserve,PASS,Includes 17 MITECO stations description
+Section 5 Metrics & Categories,Section 5 Metrics & Categories,Mandatory/Methodology,Preserve,PASS,Formalises skill and alpha(h)
+Section 6 Reproducible Workflow,Section 6 Reproducible Workflow,Mandatory/Software,Preserve,PASS,EM&S values software reproducibility
+Section 7 Results,Section 7 Results,Mandatory,Preserve,PASS,7.1 to 7.9 subsection structure intact
+Section 8 Discussion,Section 8 Discussion,Mandatory,Preserve,PASS,Discusses skill vs fidelity trade-off
+Section 9 Reporting Practice,Section 9 Implications for Evaluation Practice,Mandatory/Practices,Preserve,PASS,Minimum reporting practices
+Section 10 Limitations,Section 10 Limitations,Mandatory,Preserve,PASS,8 explicit scope limitations preserved
+Section 11 Conclusion,Section 11 Conclusion,Mandatory,Preserve,PASS,Summarises central findings
+Declarations,CRediT / Competing Interests / Data Availability,Mandatory,Formatted for Elsevier,PASS,Added to backmatter
+Supplementary Material,Supplementary Material,Optional/Encouraged,Included in paper_a_ems.tex,PASS,PRISMA summary & full station table

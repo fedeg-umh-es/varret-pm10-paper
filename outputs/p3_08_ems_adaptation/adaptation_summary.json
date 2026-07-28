@@ -1,0 +1,17 @@
+{
+  "target_journal": "Environmental Modelling & Software",
+  "publisher": "Elsevier",
+  "publication_route": "Subscription / Hybrid (0 EUR mandatory APC)",
+  "canonical_branch": "main",
+  "canonical_commit": "2939d26fb4e3447347ed9d6ba8e2d244462cb67b",
+  "adapted_manuscript": "paper_a_ems.tex",
+  "compiled_pdf": "paper_a_ems.pdf",
+  "pdf_page_count": 17,
+  "compilation_status": "SUCCESS_ZERO_ERRORS",
+  "scientific_invariance": "PASS_MATCH_100_PERCENT",
+  "desk_reject_risk": "LOW",
+  "highlights_status": "5_BULLETS_COMPLIANT_MAX_82_CHARS",
+  "graphical_abstract_status": "PDF_AND_PNG_CREATED",
+  "declarations_status": "CREDIT_COMPETING_INTEREST_DATA_CODE_FUNDING_INCLUDED",
+  "verdict": "P3_08_READY_FOR_AUTHOR_REVIEW"
+}

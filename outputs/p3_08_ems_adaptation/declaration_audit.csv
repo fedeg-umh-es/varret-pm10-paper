@@ -1,0 +1,7 @@
+declaration_type,required_by_journal,included_in_manuscript,standalone_file_created,status,notes
+CRediT Author Statement,YES,YES,submission_package/ems/credit_author_statement.txt,PASS,Roles explicitly specified according to CRediT taxonomy
+Declaration of Competing Interest,YES,YES,submission_package/ems/declaration_of_competing_interest.txt,PASS,No competing interests declared
+Data Availability Statement,YES,YES,submission_package/ems/data_availability_statement.txt,PASS,Code repository URL and MITECO portal cited
+Code Availability Statement,YES,YES,submission_package/ems/code_availability_statement.txt,PASS,GitHub repository linked
+Funding Statement,YES,YES,submission_package/ems/funding_statement.txt,PASS,Standard Elsevier no-grant declaration included
+AI-Assisted Writing Disclosure,YES,YES,Included in Acknowledgments,PASS,Elsevier AI policy compliant

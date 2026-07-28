@@ -1,0 +1,20 @@
+item,canonical_value_or_claim,adapted_value_or_claim,match,change_type,severity,status
+stations_count,17 stations,17 stations,TRUE,FORMATTING_ONLY,NONE,MATCH
+models_count,5 model families,5 model families,TRUE,FORMATTING_ONLY,NONE,MATCH
+horizons_count,7 horizons (h=1..7),7 horizons (h=1..7),TRUE,FORMATTING_ONLY,NONE,MATCH
+cells_per_model,119 station-horizon cells,119 station-horizon cells,TRUE,FORMATTING_ONLY,NONE,MATCH
+hgb_skill_cells,119/119 positive skill,119/119 positive skill,TRUE,FORMATTING_ONLY,NONE,MATCH
+ridge_skill_cells,119/119 positive skill,119/119 positive skill,TRUE,FORMATTING_ONLY,NONE,MATCH
+hgb_collapse_cells,118/119 collapse (99.2%),118/119 collapse (99.2%),TRUE,FORMATTING_ONLY,NONE,MATCH
+ridge_collapse_cells,118/119 collapse (99.2%),118/119 collapse (99.2%),TRUE,FORMATTING_ONLY,NONE,MATCH
+sarima_collapse_cells,110/119 collapse (92.4%),110/119 collapse (92.4%),TRUE,FORMATTING_ONLY,NONE,MATCH
+seasonal_naive_collapse,0/119 collapse,0/119 collapse,TRUE,FORMATTING_ONLY,NONE,MATCH
+median_alpha_hgb,0.1506,0.1506,TRUE,FORMATTING_ONLY,NONE,MATCH
+median_alpha_ridge,0.0874,0.0874,TRUE,FORMATTING_ONLY,NONE,MATCH
+median_alpha_sarima,0.0951,0.0951,TRUE,FORMATTING_ONLY,NONE,MATCH
+median_alpha_seasonal_naive,0.9998,0.9998,TRUE,FORMATTING_ONLY,NONE,MATCH
+median_alpha_stl_ridge,1.3987,1.3987,TRUE,FORMATTING_ONLY,NONE,MATCH
+alpha_definition,Var(y_hat_h) / Var(y_h),Var(y_hat_h) / Var(y_h),TRUE,FORMATTING_ONLY,NONE,MATCH
+central_claim,"Positive skill coexists with variance collapse","Positive skill coexists with variance collapse",TRUE,FORMATTING_ONLY,NONE,MATCH
+methodological_contribution,"Variance retention is a complementary diagnostic","Variance retention is a complementary diagnostic",TRUE,FORMATTING_ONLY,NONE,MATCH
+limitations_preserved,All 8 limitations preserved,All 8 limitations preserved,TRUE,FORMATTING_ONLY,NONE,MATCH
