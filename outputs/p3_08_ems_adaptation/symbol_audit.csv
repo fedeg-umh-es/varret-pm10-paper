@@ -1,0 +1,12 @@
+symbol,definition,canonical_math,adapted_math,status
+alpha(h),"Variance retention ratio at horizon h",Var(y_hat_h) / Var(y_h),Var(y_hat_h) / Var(y_h),PASS
+Skill(h),"Persistence-relative RMSE skill score at horizon h",1 - RMSE(model)/RMSE(persistence),1 - RMSE(model)/RMSE(persistence),PASS
+Skill_VP(h),"Variance-penalised auxiliary skill diagnostic",Skill(h) * alpha(h),Skill(h) * alpha(h),PASS
+RMSE,"Root mean squared error",sqrt(mean((y - y_hat)^2)),sqrt(mean((y - y_hat)^2)),PASS
+DM,"Diebold-Mariano test statistic",Harvey-Leybourne-Newbold corrected DM,Harvey-Leybourne-Newbold corrected DM,PASS
+BH,"Benjamini-Hochberg FDR adjustment",Benjamini-Hochberg false discovery rate,Benjamini-Hochberg false discovery rate,PASS
+HGB,"HistGradientBoosting regressor",Direct lag-feature forecaster,Direct lag-feature forecaster,PASS
+Ridge,"Ridge linear regressor",Direct lag-feature forecaster,Direct lag-feature forecaster,PASS
+SARIMA,"Seasonal autoregressive integrated moving average",Sparse statistical baseline,Sparse statistical baseline,PASS
+STL+Ridge,"Seasonal-trend decomposition with Ridge",Decomposition-based control,Decomposition-based control,PASS
+Seasonal Naive,"Seasonal naive persistence reference",y_hat(t+h) = y(t+h-365),y_hat(t+h) = y(t+h-365),PASS

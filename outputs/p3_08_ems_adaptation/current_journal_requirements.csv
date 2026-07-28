@@ -1,0 +1,10 @@
+requirement,official_value,official_source,verification_date,mandatory,current_manuscript_status,action_required,notes
+latex_class,elsarticle.cls (Elsevier LaTeX template),EM&S Author Information,2026-07-27,YES,PASS_ADAPTED,Use \documentclass[3p,times,single-column]{elsarticle},Converted to elsarticle class
+abstract_word_count,max 250 words,EM&S Guide for Authors,2026-07-27,YES,PASS (182 words),NONE,Abstract is 182 words
+keywords,3 to 6 keywords,EM&S Guide for Authors,2026-07-27,YES,PASS (5 keywords),NONE,5 keywords specified
+highlights,3 to 5 bullets (max 85 chars each),Elsevier Mandatory Requirement,2026-07-27,YES,PASS_CREATED,Create highlights.txt,Highlights formatted in highlights.txt
+graphical_abstract,Optional / Encouraged,Elsevier Guidelines,2026-07-27,NO,PASS_CREATED,Create graphical_abstract.pdf and .png,Graphical abstract generated from canonical data
+credit_statement,Mandatory CRediT Author Statement,Elsevier Policy,2026-07-27,YES,PASS_CREATED,Include in manuscript and standalone text file,CRediT roles specified
+competing_interest,Mandatory Declaration of Competing Interest,Elsevier Policy,2026-07-27,YES,PASS_CREATED,Include in manuscript and standalone text file,No conflict declared
+data_code_availability,Mandatory Data and Code Availability Statement,EM&S Policy,2026-07-27,YES,PASS_CREATED,Include in manuscript and standalone text file,GitHub and evidence package linked
+bibliography_style,elsarticle-num.bst or elsarticle-harv.bst,EM&S Guidelines,2026-07-27,YES,PASS_ADAPTED,Use \bibliographystyle{elsarticle-num-names},Formatted cleanly with BibTeX

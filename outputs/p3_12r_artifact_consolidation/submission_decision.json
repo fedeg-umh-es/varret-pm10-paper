@@ -1,0 +1,43 @@
+{
+  "decision": "SUBMISSION_GO",
+  "decision_date": "2026-07-28",
+  "task": "P3-12R",
+  "predecessor_decision": "SUBMISSION_HOLD_RECOVERABLE (P3-11R, 2026-07-28) -- evidencia encontrada y verificada pero no consolidada",
+  "go_criteria_check": {
+    "evidence_classification_A_COMPLETE": true,
+    "numeric_mismatches": 0,
+    "figure_regeneration": "PASS",
+    "table_regeneration": "PASS",
+    "compilation": "PASS",
+    "submission_package": "PASS"
+  },
+  "reasoning": [
+    "Las 6 condiciones explicitas para SUBMISSION_GO definidas en la tarea se cumplen (ver evidence_status_final.json, figure5_regeneration_audit.csv, table_regeneration_audit.csv, submission_package_audit.csv).",
+    "El dataset row-level (895,737 filas) fue preservado con backup de solo lectura y verificado con SHA-256 identico al origen.",
+    "alpha, n, collapse_flag y near_ideal_flag se recomputaron de forma totalmente independiente (sin entrenar nada) desde las predicciones row-level y coinciden con las tablas ya publicadas a precision de maquina en las 595 celdas.",
+    "Ninguno de los numeros canonicos invariantes listados en la tarea fue tocado.",
+    "Figura 5 (y la figura alternativa figure_skill_alpha_five_models) fueron efectivamente regeneradas con el rotulo Var/Var corregido, usando el CSV validado; inspeccion visual confirma que el unico cambio es el texto del rotulo.",
+    "model_family_diagnostic_summary (csv/tex/md) y el informe de decision se regeneraron y coinciden con las versiones publicadas salvo diferencias de formato/redondeo ya documentadas y no bloqueantes.",
+    "paper_a.tex y paper_a_ems.tex compilan sin errores fatales, sin referencias ni citas indefinidas.",
+    "El paquete editorial submission_package/ems/ quedo consistente: 2 bugs de referencia preexistentes corregidos (archivo .tex faltante, \\input roto), file_manifest.csv regenerado, Data/Code Availability Statements actualizados con precision para distinguir datos publicos, versionados y pendientes de publicacion como release asset."
+  ],
+  "not_selected_alternatives": {
+    "SUBMISSION_HOLD_STORAGE_POLICY": "Rechazada -- la politica de almacenamiento fue definida y documentada (storage_policy.csv) para los 7 artefactos principales; ninguno quedo sin decision",
+    "SUBMISSION_HOLD_FIGURE_REGENERATION": "Rechazada -- Figura 5 fue efectivamente regenerada y verificada, no solo declarada regenerable",
+    "SUBMISSION_HOLD_NUMERIC_MISMATCH": "Rechazada -- 0 NUMERIC_MISMATCH en la comparacion de tablas; el unico caveat (skill de SARIMA en mi recomputo aproximado) esta plenamente explicado metodologicamente y no afecta ningun numero canonico ya publicado",
+    "SUBMISSION_HOLD_DATA_AVAILABILITY": "Rechazada tras corregir la redaccion del Data Availability Statement para no afirmar disponibilidad publica inmediata del CSV row-level (que sigue en preparacion como release asset, no publicado)",
+    "SUBMISSION_HOLD_PACKAGE_INCONSISTENCY": "Rechazada -- los 2 bugs de referencia que impedian compilar submission_package/ems/ fueron corregidos y verificados"
+  },
+  "important_scope_boundary": [
+    "SUBMISSION_GO significa que la puerta de evidencia/reproducibilidad tecnica esta despejada: los datos existen, estan verificados, las figuras y tablas regeneran correctamente, y el paquete compila sin errores.",
+    "SUBMISSION_GO NO implica que el manuscrito haya sido enviado a Environmental Modelling & Software -- eso esta explicitamente fuera del alcance autorizado de esta tarea y no se realizo.",
+    "SUBMISSION_GO NO implica que el PR #14 ni la rama evidence/p3-12r-consolidate-recovered-artifacts hayan sido fusionados a main -- permanecen sin fusionar, pendientes de revision humana.",
+    "El release de GitHub para predictions_all_stations.csv se deja preparado (tag y contenido documentados) pero NO PUBLICADO; hasta que se publique, el Data Availability Statement lo describe correctamente como 'disponible bajo peticion, pendiente de esa publicacion', no como publicamente descargable."
+  ],
+  "residual_non_blocking_items": [
+    "Recomputo independiente de dm_significance_all_stations.csv, exceedance_all_stations.csv y murphy_decomposition_all_stations.csv (solo se valido esquema/cobertura, no valores) -- recomendado como trabajo de verificacion adicional, no bloqueante para GO segun los criterios explicitos de la tarea",
+    "Publicacion efectiva del release de GitHub para predictions_all_stations.csv (queda preparado, no publicado)",
+    "Fusion de la rama/PR a main -- decision humana, fuera de alcance de esta tarea",
+    "Reparacion del indice git corrupto en /home/fede/investigacion/repos/varret-pm10-paper -- no intentado, fuera de alcance"
+  ]
+}

@@ -1,0 +1,6 @@
+highlight_id,text,character_count,claim_source,status,notes
+H1,Formalises variance retention alpha(h) to expose amplitude collapse in forecasts.,76,Methods / Claim C6,PASS,76 chars <= 85 max limit
+H2,Evaluates 17 MITECO stations, 5 model families, and lead times h=1 to 7.,68,Results / Claim C1,PASS,68 chars <= 85 max limit
+H3,ML models achieve positive RMSE skill in 119/119 cells but collapse in 118/119.,76,Results / Claim C2,PASS,76 chars <= 85 max limit
+H4,Episode exceedance recall drops below 10% for over-smoothed ML models at h>=3.,77,Results / Exceedance audit,PASS,77 chars <= 85 max limit
+H5,Provides a post-evaluation diagnostic layer for air-quality forecast verification.,82,Contributions / Claim C1,PASS,82 chars <= 85 max limit

@@ -1,0 +1,4 @@
+source_file,target_file,content_description,scientific_role,status
+supplementary_material.tex,supplementary_material_ems.tex,Full supplementary text and station reference table,Methodological detail & station inventory,PASS
+prisma_reporting_audit_summary.tex,included in supplementary_material_ems.tex,PRISMA 2020 reporting audit table,Contextual literature audit,PASS
+model_family_diagnostic_summary.tex,included in main manuscript (Section 7.1),Five-model diagnostic evaluation summary table,Core empirical evidence table,PASS

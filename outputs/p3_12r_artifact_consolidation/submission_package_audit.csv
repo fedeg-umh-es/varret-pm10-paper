@@ -1,0 +1,17 @@
+check,expected,found,status,notes
+paper_a_ems.tex present and compiles,SI,SI (exit 0, 0 undefined refs/citations),PASS,Requirio 2 correcciones mecanicas (ver notas de check siguientes)
+paper_a_ems.pdf present,SI,SI (17 paginas, sha256 c84d269a...),PASS,
+figure files (11),11,11 presentes; 2 regeneradas (figure5_scatter_skill_alpha.pdf, figure_skill_alpha_five_models.pdf),PASS,Figura 5 con rotulo Var/Var corregido
+source data manifest,SI,file_manifest.csv regenerado (34 archivos vs 15 antes),PASS,Manifiesto anterior estaba incompleto; ahora cubre todos los archivos reales de la carpeta
+supplement,SI,supplementary_material_ems.tex + .pdf presentes,PASS,PDF ya compilado previamente (no regenerado en esta tarea porque su contenido no cambio)
+highlights,SI,highlights.txt presente (5 bullets),PASS,Sin cambios
+graphical abstract,SI,graphical_abstract.pdf + .png + _source.csv presentes,PASS,Sin cambios
+cover letter,SI,cover_letter_draft.md presente,PASS,Sin cambios
+data availability statement,SI,"actualizada para distinguir raw/processed/aggregate/row-level/code (ver data_availability_audit.csv)",PASS,Actualizacion mecanica de referencias, sin cambiar claims cientificos
+code availability statement,SI,actualizada con verificacion de recomputo,PASS,Idem
+missing_input_model_family_diagnostic_summary.tex,debia estar presente (paper_a_ems.tex lo \input),NO estaba -- copiado en esta tarea,FIXED,Bloqueaba la compilacion; corregido
+broken_reference_supplementary_material.tex,\input{supplementary_material.tex} pero el archivo real se llama supplementary_material_ems.tex,referencia corregida a supplementary_material_ems.tex,FIXED,Bloqueaba la compilacion; corregido (cambio mecanico de nombre de archivo, sin alterar contenido)
+missing_elsarticle_cls_at_root,paper_a_ems.tex en la raiz del repo no encuentra elsarticle.cls,"resuelto compilando desde submission_package/ems/ (donde SI estan las clases .cls/.bst)",RESOLVED_BY_COMPILE_LOCATION,No es un bug del paquete en si; el paquete de submission siempre debio compilarse desde su propia carpeta
+row_level_predictions_in_package,NO debe incluirse salvo que la revista lo requiera,NO incluido,PASS,Cumple la restriccion explicita de la Fase 15
+build_artifacts_cleanup,NO deben quedar archivos .aux/.log/.bbl/etc en el paquete final,se generaron temporalmente al compilar y se eliminaron,PASS,Limpieza aplicada tras verificar compilacion exitosa
+overall_package_status,,,PASS,"Paquete compilable end-to-end, sin claims cientificos alterados, con Figura 5 corregida y trazabilidad de evidencia anadida"

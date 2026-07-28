@@ -1,0 +1,5 @@
+table_id,caption,location,formatting_style,landscape,journal_compliance,status
+Table 1,Interpretive template for joint reading of skill and variance retention,Main text (Section 3),LaTeX tabular with booktabs rules,NO,PASS,100% compliant
+Table 2,Five-model diagnostic evaluation summary across 17 MITECO stations and 7 horizons,Main text (Section 7.1),LaTeX landscape tabular with booktabs rules,YES,PASS,100% compliant
+Table S1,PRISMA 2020 reporting audit summary for PM forecasting literature,Supplementary Material,LaTeX tabular with booktabs rules,NO,PASS,100% compliant
+Table S2,Characteristics of the 17 MITECO PM10 monitoring stations,Supplementary Material,LaTeX tabular with booktabs rules,NO,PASS,100% compliant
