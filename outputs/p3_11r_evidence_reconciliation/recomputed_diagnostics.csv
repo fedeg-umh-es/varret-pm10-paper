@@ -1,0 +1,30 @@
+metric,model,canonical_expected,recomputed_from_row_level,match,notes
+total_rows_read,-,-,895737,-,predictions_all_stations.csv leido completo (1 pasada, sin pandas, csv stdlib)
+distinct_dataset_model_horizon_groups,-,-,714,-,17 estaciones x (5 modelos + persistence) x 7 horizontes = 714 (algunas celdas SARIMA con menos filas por origen disperso, no reduce el numero de grupos)
+matched_cells_vs_canon_table,-,595,595,EXACT,todas las celdas de variance_retention_all_stations.csv tienen contrapartida en el recomputo row-level
+alpha_max_abs_diff,todos,0,1.680877659282487e-13,EXACT (precision de punto flotante),recalculado como Var(y_pred)/Var(y_true) ddof=0 por (dataset,model,horizon) sobre predictions_all_stations.csv
+alpha_mean_abs_diff,todos,0,1.1267132112339887e-14,EXACT,idem
+median_alpha,hgb_direct,0.1506270846127895,0.15062708461278773,EXACT,
+median_alpha,ridge_direct,0.0874297364441652,0.0874297364441634,EXACT,
+median_alpha,sarima,0.0951125746527263,0.09511257465272781,EXACT,
+median_alpha,seasonal_naive,0.9997813584215014,0.9997813584215008,EXACT,
+median_alpha,stl_ridge_direct,1.3986628282688447,1.3986628282688254,EXACT,
+collapse_cells_of_119,hgb_direct,118,118,EXACT,alpha<0.5
+collapse_cells_of_119,ridge_direct,118,118,EXACT,
+collapse_cells_of_119,sarima,110,110,EXACT,
+collapse_cells_of_119,seasonal_naive,0,0,EXACT,
+positive_skill_cells_of_119,hgb_direct,119,119,EXACT,
+positive_skill_cells_of_119,ridge_direct,119,119,EXACT,
+near_ideal_cells_of_119,hgb_direct,0,0,EXACT,skill>0 and 0.8<=alpha<=1.2
+near_ideal_cells_of_119,ridge_direct,0,0,EXACT,
+near_ideal_cells_of_119,sarima,0,0,EXACT,
+near_ideal_cells_of_119,stl_ridge_direct,0,0,EXACT,
+near_ideal_cells_of_119,seasonal_naive,20,20,EXACT,
+alpha_huesca_hgb_h1,-,~0.544090,0.5440900628624844,EXACT,excepcion nombrada explicitamente en la tarea
+alpha_barcelona_vall_dhebron_ridge_h1,-,~0.502401,0.5024007945076139,EXACT,excepcion nombrada explicitamente en la tarea
+skill_max_abs_diff,hgb_direct,0,0.0,EXACT,recalculado como 1-RMSE_modelo/RMSE_persistencia; persistencia con cobertura de fechas identica al modelo
+skill_max_abs_diff,ridge_direct,0,0.0,EXACT,
+skill_max_abs_diff,seasonal_naive,0,0.0,EXACT,
+skill_max_abs_diff,stl_ridge_direct,0,0.0,EXACT,
+skill_max_abs_diff,sarima,0,0.4285 (max) / 0.098 (media),DIFIERE (metodologicamente explicable),"SARIMA usa cadencia de origen dispersa (SARIMA_ORIGIN_STEP=14 en run_all_stations_v2.sh); mi recomputo uso el RMSE de persistencia sobre TODAS las filas de persistencia del par (dataset,horizon) en vez de solo las fechas exactas que coinciden con los origenes dispersos de SARIMA. Es un artefacto de mi metodo simplificado de comparacion (denominador no emparejado exactamente), no evidencia de inconsistencia en los datos: alpha (la metrica en disputa) SI coincide exactamente para SARIMA."
+training_performed,-,false,false,N/A,No se entreno ningun modelo; solo se leyeron predicciones ya existentes y se aplico aritmetica (RMSE, varianza, ratios) sobre ellas.

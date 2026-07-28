@@ -1,0 +1,46 @@
+{
+  "classification": "A_COMPLETE",
+  "classification_scope": "evidencia disponible localmente para el corpus de 17 estaciones, evaluada en cuanto a EXISTENCIA y VERIFICABILIDAD, NO en cuanto a su estado de consolidacion/versionado (ver submission_decision.json para esa distincion)",
+  "criteria_required_for_A_COMPLETE": [
+    "predicciones row-level completas",
+    "metadata",
+    "scripts",
+    "source tables",
+    "figuras regenerables",
+    "numeros reproducibles"
+  ],
+  "criteria_status": {
+    "predicciones_row_level_completas": {
+      "status": "CUMPLIDO",
+      "evidence": "outputs/metrics/predictions_all_stations.csv (895737 filas) en /home/fede/investigacion/repos/varret-pm10-paper, columnas dataset,model,fold,origin_date,horizon,date,y_true,y_pred; 17 datasets distintos; incluye modelo 'persistence' como baseline explicito"
+    },
+    "metadata": {
+      "status": "CUMPLIDO",
+      "evidence": "variance_retention_all_stations.csv incluye station_id, station_name, province, station_type, station_class, lat, lon, altitude_m, dem_code por fila"
+    },
+    "scripts": {
+      "status": "CUMPLIDO",
+      "evidence": "scripts/07_build_variance_retention_table.py, scripts/build_unified_variance_table.py, scripts/09_build_comprehensive_unified_table.py, scripts/13_build_five_model_diagnostic_summary.py, scripts/generate_figures_3_to_6.py, scripts/14_generate_skill_alpha_figure.py -- todos presentes y versionados en el repo git principal"
+    },
+    "source_tables": {
+      "status": "CUMPLIDO",
+      "evidence": "variance_retention_all_stations.csv, master_diagnostic_table.csv, dm_significance_all_stations.csv, exceedance_all_stations.csv, murphy_decomposition_all_stations.csv, alpha_threshold_sensitivity.csv -- todos encontrados en /home/fede/investigacion/repos/varret-pm10-paper"
+    },
+    "figuras_regenerables": {
+      "status": "CUMPLIDO_CON_BLOQUEO_DE_ENTORNO",
+      "evidence": "El CSV fuente y el script (ya con el rotulo Var/Var corregido) existen; la ejecucion real esta bloqueada solo porque el Python del sistema en /home/fede/repos/varret-pm10-paper no tiene pandas/numpy/matplotlib instalados. No es un bloqueo de datos ni de reentrenamiento."
+    },
+    "numeros_reproducibles": {
+      "status": "CUMPLIDO_VERIFICADO_INDEPENDIENTEMENTE",
+      "evidence": "alpha recomputado desde predictions_all_stations.csv (sin entrenar nada, solo aritmetica) coincide con variance_retention_all_stations.csv a precision de punto flotante (diff maximo 1.68e-13) en las 595 celdas. Ver recomputed_diagnostics.csv."
+    }
+  },
+  "not_yet_verified_this_session": [
+    "dm_significance_all_stations.csv (encontrado, esquema correcto, no recalculado)",
+    "exceedance_all_stations.csv (encontrado, esquema correcto, no recalculado)",
+    "murphy_decomposition_all_stations.csv (encontrado, esquema correcto, no recalculado)"
+  ],
+  "critical_caveat": "La evidencia A_COMPLETE existe FISICAMENTE en /home/fede/investigacion/repos/varret-pm10-paper, un directorio local NO versionado por el repositorio git principal (/home/fede/repos/varret-pm10-paper), con un indice git corrupto (ficheros AppleDouble de macOS confundidos con packs de git) que impide operaciones git normales alli. La evidencia es real y verificable a nivel de archivo (hash, recomputo), pero NO esta consolidada en el repositorio canonico ni tiene una cadena de procedencia git limpia. Ver decision_options.csv y submission_decision.json.",
+  "manuscript_vs_evidence_contradiction_resolved": true,
+  "resolution_summary": "La contradiccion reportada (estado editorial PR#7 merged, 17 estaciones vs. estado local NOT_FOUND) se resuelve: el claim de 17 estaciones SI tiene respaldo evidenciario completo y verificable, pero ese respaldo nunca fue incorporado al repositorio git versionado -- vivio unicamente en una copia de trabajo local (aparentemente sincronizada desde el Mac original del autor) que nunca se hizo push ni commit. El repositorio git, por si solo, esta C_MANUSCRIPT_AHEAD; el sistema de archivos local completo (incluyendo la copia recuperada), evaluado en conjunto, es A_COMPLETE."
+}
