@@ -55,3 +55,52 @@ Se leyó de forma completa (una pasada, sin pandas) para recomputar
 coincide con `aggregates/variance_retention_all_stations.csv` con una
 diferencia máxima de 1.68e-13 en las 595 celdas. Ver
 `outputs/p3_12r_artifact_consolidation/recomputation_comparison.csv`.
+
+## Limitación conocida: `skill` de SARIMA no es recomputable celda-a-celda desde este archivo
+
+**Causa técnica.** Las filas `model=="persistence"` de este CSV cubren
+2020-01-01 a 2024-12-30 (rango del script base,
+`01_generate_e1_rr_lags_only_predictions.py --start-year 2020 --end-year
+2024`). Las filas `model=="sarima"` cubren 2018-01-17 a 2024-12-30 (rango
+completo de la serie, generado por `scripts/02_generate_sarima_predictions.py
+--origin-step 14`, sin restricción de años). Ese mismo script genera
+internamente sus propias filas de persistencia sobre el rango completo
+2018-2024 para emparejar con SARIMA (`_predict_one_origin`,
+`_build_skill_summary`, inner join exacto por `origin_date`/`date`), pero
+`scripts/combine_prediction_tables.py` descarta esas filas de persistencia
+propias de SARIMA al combinar las tablas row-level (`sarima_only =
+sarima_predictions[model == "sarima"]`), para no duplicar persistencia ya
+presente desde el script base. El resultado: ~30-45% de los pares
+`(origen, fecha_objetivo)` de SARIMA (los anteriores a 2020) no tienen
+contraparte de persistencia en este CSV.
+
+**Archivo fuente canónico.** El `skill` publicado para SARIMA no proviene de
+este CSV row-level, sino de `skill_sarima_{station}.csv` (salida directa de
+`scripts/02_generate_sarima_predictions.py`), donde el emparejamiento SARIMA
+vs. persistencia es exacto (mismo origen, misma fecha objetivo, mismo
+horizonte) sobre el rango completo 2018-2024. `scripts/
+combine_prediction_tables.py` conserva ese valor de skill (concat +
+`drop_duplicates(keep="last")`), por lo que la cifra publicada en
+`aggregates/variance_retention_all_stations.csv` es correcta y está
+correctamente emparejada; simplemente no es re-derivable solo a partir de
+`predictions_all_stations.csv`.
+
+**Alcance.** 119 de 595 celdas (17 estaciones × 7 horizontes = toda la
+rejilla SARIMA). Afecta únicamente a `skill`. `alpha`, `collapse_flag` y
+`near_ideal_flag` de SARIMA coinciden con precisión de punto flotante
+(diferencia máxima 8.88e-16) porque no dependen de la persistencia ni de
+este emparejamiento.
+
+**Sin impacto en los claims centrales.** El recómputo restringido al solape
+2020-2024 reproduce una mediana de skill SARIMA (0.2098) muy cercana a la
+citada en el manuscrito (0.208); no cambia el signo, el ranking entre
+modelos, ni los conteos de colapso (110/119) o near-ideal (0/119) citados en
+`paper_a_ems.tex`.
+
+**Limitación exacta del release row-level.** `predictions_all_stations.csv`
+(y el release `paper-a-row-level-evidence-v1` que lo distribuye) permite
+reproducir de forma independiente y completa: `alpha`, `collapse_flag` y
+`near_ideal_flag` para las 595 celdas, y `skill` para 476/595 celdas (los
+cuatro modelos no-SARIMA). No permite reproducir de forma independiente el
+`skill` celda-a-celda de SARIMA (119 celdas); para verificar esas cifras es
+necesario `skill_sarima_{station}.csv`, que no forma parte de este release.
