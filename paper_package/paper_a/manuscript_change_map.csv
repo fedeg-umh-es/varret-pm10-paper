@@ -1,0 +1,3 @@
+change_id,location,before,after,reason,numbers_changed
+M1,paper_a.tex line ~100 (Metrics),"alpha(h)=SD(y_hat)/SD(y)","alpha(h)=Var(y_hat)/Var(y)","align manuscript with code (variance ratio); MANUSCRIPT_ERROR fix",no
+M2,paper_a.tex line ~166 (Variance retention eq),"alpha(h)=SD(y_hat_h)/SD(y_h)","alpha(h)=sigma^2_yhat/sigma^2_y=Var(y_hat)/Var(y) + estimator clause (population variance, ddof=0, matched pairs per station-model-horizon)","align definition with code, name, thresholds, Skill_VP, and original manuscript",no
