@@ -1,0 +1,74 @@
+{
+  "classification": "A_COMPLETE",
+  "classification_date": "2026-07-28",
+  "task": "P3-12R",
+  "criteria_required_for_A_COMPLETE": [
+    "row-level evidence preservada",
+    "hashes",
+    "procedencia",
+    "source tables",
+    "scripts",
+    "Figura 5 regenerable",
+    "tablas regenerables",
+    "numeros coincidentes",
+    "paquete editorial consistente"
+  ],
+  "criteria_status": {
+    "row_level_evidence_preservada": {
+      "status": "CUMPLIDO",
+      "evidence": "predictions_all_stations.csv (895737 filas) respaldado en /home/fede/backups/p3-12r-recovered-evidence/source-copy/ (rsync de solo lectura) y en outputs/p3_11r_evidence_reconciliation/recovered_candidates/ (copia previa); hash identico verificado en ambas copias y en el origen"
+    },
+    "hashes": {
+      "status": "CUMPLIDO",
+      "evidence": "source_manifest.csv/.sha256 (624 archivos), provenance_manifest.csv (hash origen vs copiado, TRUE en todos los casos)"
+    },
+    "procedencia": {
+      "status": "CUMPLIDO",
+      "evidence": "evidence/paper_a/README.md documenta explicitamente 'RECOVERED FROM LOCAL SOURCE COPY', fecha de descubrimiento, limitaciones (indice git corrupto en la fuente)"
+    },
+    "source_tables": {
+      "status": "CUMPLIDO",
+      "evidence": "evidence/paper_a/aggregates/ (6 tablas) + evidence/paper_a/source_tables/ (17 tablas por estacion) + outputs/tables/ operacional (mismos archivos, para compatibilidad con scripts existentes)"
+    },
+    "scripts": {
+      "status": "CUMPLIDO",
+      "evidence": "scripts/generate_figures_3_to_6.py, scripts/14_generate_skill_alpha_figure.py, scripts/13_build_five_model_diagnostic_summary.py -- todos ejecutados exitosamente en esta tarea contra los datos recuperados"
+    },
+    "figura5_regenerable": {
+      "status": "CUMPLIDO_Y_EJECUTADO",
+      "evidence": "figure5_scatter_skill_alpha.pdf Y figure_skill_alpha_five_models.pdf efectivamente regenerados (no solo 'regenerables') con rotulo Var/Var; ver figure5_regeneration_audit.csv, status=PASS en ambos"
+    },
+    "tablas_regenerables": {
+      "status": "CUMPLIDO_Y_VERIFICADO",
+      "evidence": "model_family_diagnostic_summary.{csv,tex,md} y new_story_decision.md regenerados y comparados; 0 NUMERIC_MISMATCH (solo ROUNDING_ONLY a nivel ULP y FORMATTING_ONLY en el wrapper landscape ya preexistente). Ver table_regeneration_audit.csv"
+    },
+    "numeros_coincidentes": {
+      "status": "CUMPLIDO",
+      "evidence": "Recomputo independiente desde predictions_all_stations.csv: alpha coincide a precision de maquina (max diff 4.44e-16) en 595/595 celdas; n coincide exacto en 595/595; collapse_flag y near_ideal_flag coinciden en 595/595. skill coincide exacto en 476/595 (HGB/Ridge/seasonal_naive/STL+Ridge); SARIMA (119 celdas) difiere por una causa metodologica identificada y documentada (su ventana temporal se extiende a 2018-2019, fuera de la cobertura del baseline de persistencia compartido en el CSV row-level) -- no es un mismatch de datos, es una limitacion de mi metodo de recomputo de skill para ese modelo especifico. Ninguno de los NUMEROS CANONICOS INVARIANTES listados en la tarea (colapsos 118/118/110, medianas de alpha, excepciones nombradas) se ve afectado por esta salvedad."
+    },
+    "paquete_editorial_consistente": {
+      "status": "CUMPLIDO",
+      "evidence": "submission_package/ems/ compila sin errores (0 referencias/citas indefinidas), file_manifest.csv regenerado (34 archivos), 2 bugs preexistentes de referencia corregidos (model_family_diagnostic_summary.tex faltante, \\input roto a supplementary_material.tex). Ver submission_package_audit.csv, overall_package_status=PASS"
+    }
+  },
+  "invariance_check": {
+    "17_stations": "PRESERVADO (verificado en variance_retention_all_stations.csv y predictions_all_stations.csv)",
+    "7_horizons": "PRESERVADO",
+    "5_model_families": "PRESERVADO",
+    "119_cells_per_family": "PRESERVADO",
+    "895737_row_level_rows": "PRESERVADO (no modificado, solo leido)",
+    "595_aggregate_rows": "PRESERVADO (no modificado, solo leido y copiado con verificacion de hash)",
+    "alpha_definition": "SIN CAMBIOS: Var(y_hat)/Var(y), ddof=0",
+    "near_ideal_definition": "SIN CAMBIOS: skill>0 AND 0.8<=alpha<=1.2",
+    "canonical_numbers_touched": false,
+    "manuscript_scientific_claims_touched": false,
+    "models_retrained": false,
+    "predictions_regenerated_or_modified": false,
+    "data_fabricated": false
+  },
+  "residual_gaps_not_blocking_go": [
+    "dm_significance_all_stations.csv, exceedance_all_stations.csv, murphy_decomposition_all_stations.csv: esquema y cobertura validados (17/17 datasets), pero sus VALORES no fueron recomputados de forma independiente en esta tarea (fuera de alcance de tiempo; solo alpha/skill/n desde predicciones row-level)",
+    "El release asset de GitHub para predictions_all_stations.csv queda preparado (documentado, con tag propuesto) pero no publicado en este momento -- ver submission_decision.json",
+    "El indice git de /home/fede/investigacion/repos/varret-pm10-paper sigue corrupto; no se intento repararlo (fuera de alcance, riesgo de accion destructiva sobre una fuente no respaldada previamente)"
+  ]
+}

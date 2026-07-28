@@ -27,3 +27,25 @@ This folder contains the complete, ready-to-upload submission package for **Pape
 
 5. **Figure Files:**
    - All 11 PDF figure files (`figure1_*.pdf` through `station_map_*.pdf`).
+
+## P3-12R consolidation note (2026-07-28)
+
+- `figure5_scatter_skill_alpha.pdf` and `figure_skill_alpha_five_models.pdf`
+  were regenerated from the validated, recovered 17-station evidence
+  (`evidence/paper_a/aggregates/`); the only visual change is the x-axis
+  label, corrected from an SD/SD notation to the canonical
+  `alpha = Var(y_hat)/Var(y)`. See `outputs/p3_12r_artifact_consolidation/figure5_regeneration_audit.csv`.
+- `model_family_diagnostic_summary.tex` was added to this folder (it is
+  `\input` by `paper_a_ems.tex` but was missing from the package).
+- The `\input{supplementary_material.tex}` reference in `paper_a_ems.tex` was
+  corrected to `\input{supplementary_material_ems.tex}` to match the actual
+  filename present in this folder (mechanical fix, no content change).
+- `data_availability_statement.txt` and `code_availability_statement.txt`
+  (and the matching section in `paper_a_ems.tex`) were updated to precisely
+  distinguish raw data, processed data, aggregate diagnostics, row-level
+  predictions, and code, per `outputs/p3_12r_artifact_consolidation/data_availability_audit.csv`.
+- `file_manifest.csv` was regenerated to cover all 34 files actually present
+  in this folder (the previous manifest only listed 15).
+- Row-level predictions (`predictions_all_stations.csv`, 895,737 rows) are
+  **not** included in this editorial package; see the Data Availability
+  Statement for their location.

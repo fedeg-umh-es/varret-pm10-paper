@@ -337,14 +337,14 @@ The central lesson is therefore not that one model family is universally prefera
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 \section*{Data Availability Statement}
-The analysis code, configuration files, and evaluation scripts used in this study are openly available at \url{https://github.com/fedeg-umh-es/varret-pm10-paper}. Raw daily PM$_{10}$ observations were obtained from the MITECO Spanish national air-quality network portal (\url{https://www.miteco.gob.es/}) and are publicly available. The Supplementary Material contains the PRISMA reporting-audit outputs and the full monitoring-station table referenced in the main text.
+Raw daily PM$_{10}$ observations were obtained from the MITECO Spanish national air-quality network portal (\url{https://www.miteco.gob.es/}) and are publicly available. The analysis code, processed per-station series, and the 595-cell aggregate diagnostic tables (variance retention, Diebold--Mariano significance, exceedance, Murphy decomposition) underlying every multi-station figure are version-controlled at \url{https://github.com/fedeg-umh-es/varret-pm10-paper} under \texttt{evidence/paper\_a/}, with SHA-256 checksums and provenance recorded in \texttt{evidence/paper\_a/manifests/provenance\_manifest.csv}. The row-level prediction set (895{,}737 rows spanning all 17 stations, 5 model families, and 7 horizons) is documented by SHA-256 hash and structure in \texttt{evidence/paper\_a/row\_level/predictions\_all\_stations\_manifest.md}; it is archived locally with that checksum and prepared for release as a GitHub release asset of the same repository (available from the corresponding author on request pending that release). The Supplementary Material contains the PRISMA reporting-audit outputs and the full monitoring-station table referenced in the main text.
 
 \section*{Acknowledgments}
 The authors used a generative AI assistant for language editing and for LaTeX and reference formatting. All data processing, analysis, results, and scientific conclusions are the authors' own and were verified by the authors, who take full responsibility for the content of this paper.
 This research received no specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
 \section*{Supplementary Material}
-\input{supplementary_material.tex}
+\input{supplementary_material_ems.tex}
 
 \bibliographystyle{elsarticle-num-names}
 \bibliography{references}

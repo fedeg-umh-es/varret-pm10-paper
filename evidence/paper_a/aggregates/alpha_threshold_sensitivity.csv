@@ -1,0 +1,16 @@
+threshold,group,collapsed_cells,total_cells,collapse_rate_pct
+0.4,hgb_direct,110,119,92.4
+0.4,ridge_direct,107,119,89.9
+0.4,ML combined,217,238,91.2
+0.4,seasonal_naive,0,119,0.0
+0.4,all models,217,357,60.8
+0.5,hgb_direct,118,119,99.2
+0.5,ridge_direct,118,119,99.2
+0.5,ML combined,236,238,99.2
+0.5,seasonal_naive,0,119,0.0
+0.5,all models,236,357,66.1
+0.6,hgb_direct,119,119,100.0
+0.6,ridge_direct,119,119,100.0
+0.6,ML combined,238,238,100.0
+0.6,seasonal_naive,0,119,0.0
+0.6,all models,238,357,66.7
