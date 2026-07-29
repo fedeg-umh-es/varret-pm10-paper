@@ -132,13 +132,26 @@ dist/paper_a_ems_submission_final.zip
 Estado:
 
 ```text
-files: 34
+files: 30
 unzip test: sin errores
 complete: SÍ
-sha256: 512502e5c3ad9d410e91224609757e931b89de015fba14af98c8765bf21432dc
+sha256: d9547679e009b16a441623e341e149edde08e685895b3a283acabc5dbfa693a4
 ```
 
 El paquete debe conservarse como artefacto congelado. No debe regenerarse ni sobrescribirse sin una nueva revisión técnica completa y una justificación explícita.
+
+### Paquete anterior sustituido antes del envío (2026-07-29)
+
+```text
+Previous package superseded before submission:
+- reason: removal of four image files not referenced by any submitted TeX source
+- submission impact: none
+- manuscript content changed: no
+```
+
+El paquete anterior (34 archivos, `sha256: 512502e5c3ad9d410e91224609757e931b89de015fba14af98c8765bf21432dc`) contenía cuatro PDF de figura no citados por ningún `.tex` del paquete (`figure2_skill_variance_retention.pdf`, `figure6_station_collapse_rates.pdf`, `figure7_station_map_spain.pdf` — 8.36 MB, el mayor archivo del paquete — y `figure_skill_alpha_five_models.pdf`), confirmado mecánicamente mediante `grep` de `\includegraphics` contra los cuatro archivos `.tex` del paquete. Se retiraron por no cumplir ninguna de las condiciones que justifican su inclusión (citada en el manuscrito o suplemento; exigida por la revista como archivo independiente; parte de material suplementario declarado). También se corrigió `file_manifest.csv` (eliminando esas cuatro entradas y la línea de `graphical_abstract_source.csv`, que nunca estuvo realmente en la carpeta) y se actualizó `README.md` del paquete con una nota de este cierre.
+
+El hash anterior (`512502e5...`) queda invalidado y no debe presentarse como el artefacto final; el hash vigente es el indicado arriba (`d9547679...`). Ningún archivo de manuscrito, figura citada, tabla, cifra o dato cambió — únicamente se depuraron cuatro archivos auxiliares no referenciados.
 
 ## 11. Estado de los claims
 
