@@ -57,3 +57,6 @@ data/processed/*
 !outputs/reproduction/*.parquet
 
 airquality_datasets/**
+
+# Local frozen submission packages
+dist/
