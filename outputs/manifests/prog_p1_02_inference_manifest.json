@@ -1,0 +1,143 @@
+{
+  "task": "PROG-P1-02",
+  "project": "P1",
+  "manuscript": "predictability-bound",
+  "repository": "/Users/fede/repos/varret-pm10-paper",
+  "audit_worktree": "/Users/fede/Documents/Codex/2026-07-31/files-mentioned-by-the-user-repos/work/varret-pm10-paper-prog-p1-02",
+  "branch": "codex/prog-p1-02",
+  "commit_before": "a070f946f0f1ee33f0781fc0865000ce971af63e",
+  "commit_after": null,
+  "commit_after_note": "Recorded in the handoff because a commit cannot contain its own final hash.",
+  "working_tree_initial": "clean; main...origin/main [behind 1]",
+  "working_tree_final": "clean after atomic audit commit",
+  "python_version": "3.12.13",
+  "virtual_environment": "/Users/fede/Documents/Codex/2026-07-31/files-mentioned-by-the-user-repos/work/prog-p1-02-venv",
+  "dependencies": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "scipy": "1.18.0",
+    "statsmodels": "0.14.6",
+    "scikit-learn": "1.9.0",
+    "pytest": "9.1.1",
+    "pyyaml": "6.0.3"
+  },
+  "prediction_inputs": [
+    "outputs/metrics/predictions.csv",
+    "outputs/metrics/predictions_valencia_vivers.csv",
+    "outputs/metrics/predictions_zarra_emep.csv"
+  ],
+  "input_hashes": {
+    "outputs/metrics/predictions.csv": "915a821ca74c7d51507d8b6cd3420c8d141ec26f1478a580d9792398641b58ee",
+    "outputs/metrics/predictions_valencia_vivers.csv": "bfb21ff09652c390daf15b72cad2086fe13eacdd85d9e5e736a87e2d9b51890a",
+    "outputs/metrics/predictions_zarra_emep.csv": "601440c364f266696c8ed8e8aa4a368a8150a4da4e27a5b9a315bcca52fce1a7",
+    "outputs/metrics/skill_summary.csv": "14558edc6d7761ad927a07cedd95886d7143ad293b74fa0db475c8e50a057e4d",
+    "outputs/metrics/skill_summary_valencia_vivers.csv": "bfbb0cf3735d6ab04cbc39eb3d97ccbed6ae6e542079945e8d04ac01dd187d08",
+    "outputs/metrics/skill_summary_zarra_emep.csv": "c53ce68a9ba7218c3dececda0d69e10fa54a2f1bd8812ae76bd168c04bc7cff9",
+    "outputs/tables/variance_retention_summary.csv": "6a6905ba71489989591526f91bde979820c29bde4b4d11c0cb2b0780bdf1ea4e",
+    "outputs/tables/variance_retention_valencia_vivers.csv": "94bb0e473e7d0d918d2fbcbd6018a936f4b2794e0b2c366c2b7bc442be7535c1",
+    "outputs/tables/variance_retention_zarra_emep.csv": "8efbbbd65e0c6727a69bc6c650b7a23a41363843af8638ad4892181b48562222",
+    "config/config.yaml": "cfac944719c99506c0380a47ede0e7ecb05f5405e19369226f28e00f319203d1",
+    "config/horizons.yaml": "8b918ec6f94668bfdc4a1256361277ae7de52b4652951bdc85727933bcb3d429",
+    "configs/evaluation/rolling_origin.yaml": "f9c4cfd3d0490970c99b9541998d9a1d698bf6415e37fd6787439b9aa6896b12",
+    "requirements.txt": "b4abd6a2b71e2a2f9652121866821e3a8f04f8af7bc8527bfdf9a5855df2de30"
+  },
+  "loss_function": "squared_error for DM; RMSE and MAE for descriptive skill",
+  "comparison_baseline": "persistence",
+  "pairing_keys": [
+    "dataset",
+    "model",
+    "baseline",
+    "fold",
+    "origin_date",
+    "date",
+    "horizon"
+  ],
+  "dm": {
+    "enabled": true,
+    "alternative": "two-sided",
+    "loss_differential_sign": "persistence_squared_error_minus_model_squared_error",
+    "hac_estimator": "Bartlett/Newey-West long-run variance",
+    "hac_lag_rule": "ceil(horizon_days / minimum_positive_origin_stride_days) - 1",
+    "hln_correction": true,
+    "minimum_sample": "n > max(2, hac_lag + 1)",
+    "degenerate_statuses": [
+      "insufficient_sample",
+      "nonfinite_loss_differential",
+      "all_loss_differentials_equal",
+      "zero_long_run_variance",
+      "invalid_hac_estimate",
+      "invalid_hln_correction"
+    ]
+  },
+  "bootstrap": {
+    "enabled": true,
+    "estimand": "predicted-to-observed variance ratio alpha",
+    "type": "circular_moving_block",
+    "resampling_unit": "forecast_origin within dataset/model/horizon",
+    "block_length": null,
+    "block_length_rule": "min(n, max(horizon, ceil(n^(1/3))))",
+    "replicates": 1000,
+    "seed": 42,
+    "interval_method": "percentile",
+    "invalid_replicates": null,
+    "invalid_replicates_note": "Not measured because canonical outputs were not regenerated."
+  },
+  "multiple_testing": {
+    "family_definition": "all model-by-horizon DM hypotheses within each dataset/station",
+    "correction": "Benjamini-Hochberg FDR"
+  },
+  "hstar_logic": {
+    "relax": "not implemented in this repository",
+    "strict": "not implemented in this repository",
+    "censoring": "not implemented; paper_a.tex explicitly states no H*"
+  },
+  "yule_walker": "No executable implementation or inferential use found.",
+  "tests_executed": [
+    "Directed suite attempt 1: 20 passed, 2 failed",
+    "Directed suite attempt 2: 22 passed, 0 failed",
+    "Full suite: 28 passed, 0 failed"
+  ],
+  "tests_passed": [
+    "tests/test_temporal_inference.py",
+    "tests/test_skill.py",
+    "tests/test_variance.py",
+    "tests/test_variance_retention_schema.py",
+    "tests/test_rolling_origin.py",
+    "entire tests/ suite"
+  ],
+  "tests_failed": [],
+  "modified_files": [
+    "src/evaluation/pairing.py",
+    "scripts/01_generate_e1_rr_lags_only_predictions.py",
+    "scripts/02_generate_sarima_predictions.py",
+    "scripts/05_dm_significance.py",
+    "src/diagnostics/variance.py",
+    "tests/test_temporal_inference.py",
+    "tests/test_variance.py",
+    "tests/test_variance_retention_schema.py",
+    "docs/audits/2026-07-31_PROG-P1-02_inference-audit.md",
+    "outputs/manifests/prog_p1_02_inference_manifest.json",
+    "outputs/manifests/prog_p1_02_artifact_hashes.sha256"
+  ],
+  "generated_artifacts": [
+    "docs/audits/2026-07-31_PROG-P1-02_inference-audit.md",
+    "outputs/manifests/prog_p1_02_inference_manifest.json",
+    "outputs/manifests/prog_p1_02_artifact_hashes.sha256"
+  ],
+  "potentially_obsolete_results": [
+    "outputs/tables/variance_retention_*.csv",
+    "outputs/audit/bootstrap_alpha_audit.csv",
+    "outputs/audit/bootstrap_alpha_audit.md",
+    "outputs/metrics/dm_*.csv",
+    "outputs/tables/dm_significance_all_stations.csv",
+    "all figures and summaries consuming alpha confidence intervals or DM significance"
+  ],
+  "blockers": [
+    "The repository/manuscript identity does not match P1/predictability-bound unambiguously.",
+    "Canonical prediction inputs for the claimed 17-station analysis are absent.",
+    "Frozen variance-retention tables contain model sets incompatible with the available prediction and skill inputs.",
+    "No frozen DM outputs are available for result-level verification."
+  ],
+  "verdict": "BLOCKED_BY_LOCAL_STATE",
+  "critical_path": "PROG-P1-03_NOT_ALLOWED"
+}

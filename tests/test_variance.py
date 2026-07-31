@@ -15,6 +15,7 @@ def test_alpha_near_one_when_predicted_variability_matches_observed() -> None:
             "dataset": ["pm10_daily"] * 4,
             "model": ["test_model"] * 4,
             "horizon": [1] * 4,
+            "origin_date": pd.date_range("2024-01-01", periods=4),
             "y_true": [1.0, 2.0, 3.0, 4.0],
             "y_pred": [1.0, 2.0, 3.0, 4.0],
         }
@@ -29,6 +30,7 @@ def test_alpha_near_zero_when_predictions_are_flat() -> None:
             "dataset": ["pm10_daily"] * 4,
             "model": ["test_model"] * 4,
             "horizon": [1] * 4,
+            "origin_date": pd.date_range("2024-01-01", periods=4),
             "y_true": [1.0, 2.0, 3.0, 4.0],
             "y_pred": [2.0, 2.0, 2.0, 2.0],
         }
@@ -44,6 +46,7 @@ def test_inflation_flag_when_predicted_variance_is_too_large() -> None:
             "dataset": ["pm10_daily"] * 4,
             "model": ["test_model"] * 4,
             "horizon": [1] * 4,
+            "origin_date": pd.date_range("2024-01-01", periods=4),
             "y_true": [1.0, 2.0, 3.0, 4.0],
             "y_pred": [-2.0, 1.0, 5.0, 9.0],
         }
@@ -58,6 +61,7 @@ def test_near_ideal_flag_when_skill_positive_and_alpha_near_one() -> None:
             "dataset": ["pm10_daily"] * 4,
             "model": ["test_model"] * 4,
             "horizon": [1] * 4,
+            "origin_date": pd.date_range("2024-01-01", periods=4),
             "y_true": [1.0, 2.0, 3.0, 4.0],
             "y_pred": [1.1, 1.9, 3.1, 3.9],
         }

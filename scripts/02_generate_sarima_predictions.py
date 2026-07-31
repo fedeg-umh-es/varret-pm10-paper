@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.evaluation.pairing import pair_model_and_baseline
 from src.models.sarima_model import SarimaForecaster
 
 
@@ -123,13 +124,11 @@ def _build_skill_summary(predictions: pd.DataFrame) -> pd.DataFrame:
         if model == "persistence":
             continue
         base = baseline[(baseline["dataset"].eq(dataset)) & (baseline["horizon"].eq(horizon))]
-        merged = group.merge(
-            base[["origin_date", "date", "y_pred"]].rename(columns={"y_pred": "y_pred_baseline"}),
-            on=["origin_date", "date"],
-            how="inner",
+        merged = pair_model_and_baseline(
+            group,
+            base,
+            context=f"skill {dataset}/{model}/h={horizon}",
         )
-        if merged.empty:
-            continue
         rmse_model = _rmse(merged["y_true"], merged["y_pred"])
         rmse_baseline = _rmse(merged["y_true"], merged["y_pred_baseline"])
         mae_model = _mae(merged["y_true"], merged["y_pred"])

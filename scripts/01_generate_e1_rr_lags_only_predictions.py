@@ -38,6 +38,7 @@ if str(ROOT) not in sys.path:
 from src.models.seasonal_persistence import SeasonalPersistenceModel
 from src.models.sarima_model import SarimaForecaster
 from src.models.stl_ridge import STLRidgeForecaster
+from src.evaluation.pairing import pair_model_and_baseline
 
 
 DEFAULT_INPUT = Path("data/raw/pm10_daily.csv")
@@ -242,13 +243,11 @@ def _build_skill_summary(predictions: pd.DataFrame, baseline_model: str = "persi
             continue
 
         baseline_group = baseline[(baseline["dataset"] == dataset) & (baseline["horizon"] == horizon)]
-        merged = group.merge(
-            baseline_group[["origin_date", "date", "y_pred"]].rename(columns={"y_pred": "y_pred_baseline"}),
-            on=["origin_date", "date"],
-            how="inner",
+        merged = pair_model_and_baseline(
+            group,
+            baseline_group,
+            context=f"skill {dataset}/{model}/h={horizon}",
         )
-        if merged.empty:
-            continue
 
         rmse_model = _rmse(merged["y_true"], merged["y_pred"])
         rmse_baseline = _rmse(merged["y_true"], merged["y_pred_baseline"])

@@ -13,6 +13,7 @@ def test_variance_retention_summary_output_columns_match_contract() -> None:
             "dataset": ["e1_rr_daily"] * 4,
             "model": ["ridge_direct"] * 4,
             "horizon": [1] * 4,
+            "origin_date": pd.date_range("2024-01-01", periods=4),
             "y_true": [10.0, 20.0, 30.0, 40.0],
             "y_pred": [12.0, 18.0, 29.0, 41.0],
         }
@@ -62,6 +63,7 @@ def test_variance_retention_summary_backfills_missing_mae_skill() -> None:
             "dataset": ["e1_rr_daily"] * 4,
             "model": ["ridge_direct"] * 4,
             "horizon": [1] * 4,
+            "origin_date": pd.date_range("2024-01-01", periods=4),
             "y_true": [10.0, 20.0, 30.0, 40.0],
             "y_pred": [12.0, 18.0, 29.0, 41.0],
         }
