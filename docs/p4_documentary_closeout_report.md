@@ -2,13 +2,13 @@
 
 ## 1. Commit base and scope
 
-- Repository: `/Users/fede/repos/varret-pm10-paper`
+- Canonical Repository: `/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper`
+- Backup Repository: `/Users/fede/repos/varret-pm10-paper`
 - Documentary branch: `codex/p4-documentary-closeout`
 - Canonical producer/base commit: `f57f076078760af8a88bd87815fdf94ab0064fa3`
-- Base subject: `Reproduce and finish Paper A without temporal leakage (#5)`
-- Closeout date: 2026-08-01 (Europe/Madrid)
-- Empirical execution: none
-- P1 reactivation: no
+- Closeout commit: `390685f1f1312954ee67513f3e0db11b2670e7f9`
+- Closeout status: `P4_CLOSEOUT_BLOCKED_BY_HASH_CONTRACT`
+- P3 status: Deferred (`P3 remains deferred until P4 is validated and P2 has been closed or explicitly cleared.`)
 
 The branch was created directly from the locally available canonical commit. No
 pull, fetch, reset, rebase, merge, commit, or push was performed.
@@ -102,9 +102,37 @@ validated 22 manifest entries with zero size or SHA-256 mismatches.
 | `outputs/figures/figure2_skillvp_events.png` | `527a6cf6b16674cb47bda6af110c9c9631e28fa92ea04741b43ba48af6944c1d` |
 | `requirements-reproduction.txt` | `82462f75445db7e5af65b06cdb26cb278367438db46ce0b902f897187b3cbd06` |
 
-The SHA-256 of the manuscript's scientific numeric-token sequence from the
-abstract through the conclusion is unchanged at
-`d8a4cc5dcc24ebc7fdb942a597bbd9378e3a551c5d436544415a74e002b56e1f`.
+### Relative numerical invariance
+- Text range: Abstract through Data and Code Availability in `paper_a.tex`
+- Tokenizer pattern: `[+-]?(?:\d+\.?\d*|\.\d+)`
+- Token count: 187 tokens
+- Base commit SHA-256 (`f57f076078760af8a88bd87815fdf94ab0064fa3`): `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
+- Closeout commit SHA-256 (`390685f1f1312954ee67513f3e0db11b2670e7f9`): `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
+- Verdict: `RELATIVE_NUMERICAL_INVARIANCE_PASS` (Base and closeout commits produce 100% identical numeric-token sequences).
+
+### Expected-hash contract verification
+- Declared expected hash: `d8a4cc5dcc24ebc7fdb942a597bbd9378e3a551c5d436544415a74e002b56e1f`
+- Contract source: the declared value is asserted only in prose (the prior
+  committed closeout text and the P4 task specification). No script,
+  configuration, or manifest field in the repository computes it, so its
+  tokenizer, text range, normalization, separator, and computing commit are
+  undocumented.
+- Reproduced base/closeout hash: `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
+- Reproduction scope: the documented tokenizer `[+-]?(?:\d+\.?\d*|\.\d+)` was
+  applied to both the base and closeout `paper_a.tex` blobs across four text
+  ranges (abstract→Data and Code Availability, abstract→Conclusion,
+  abstract→end-of-abstract, whole document) and four token separators
+  (comma, newline, space, none). None of the sixteen combinations reproduce
+  the declared expected hash; the comma-joined abstract→Data and Code
+  Availability range is the combination that yields `cfd238…`.
+- Match: False
+- Verdict: `EXPECTED_HASH_CONTRACT_FAIL`. The declared expected hash is not
+  reproduced by any tested reconstruction of the documented method, and its
+  origin cannot be traced to any executable contract in the repository. Per the
+  closeout rules the observed hash is **not** substituted for the declared
+  expected hash to force a pass. This is a documentary-control failure only: it
+  does not indicate that any empirical result, figure, table, or numeric value
+  changed (see the relative-invariance result above and Section 8).
 
 ## 6. Legacy elements marked
 
@@ -158,10 +186,25 @@ or publication action has been taken in P4.
 
 ## 9. Decision
 
-`P4: DOCUMENTARILY CLOSED`
+`P4_CLOSEOUT_BLOCKED_BY_HASH_CONTRACT`
 
-The central empirical contribution is traceable to a self-contained P4 package,
-its claims are bounded to the available evidence, P1 is not a result dependency,
-and all remaining differences are documentary packaging rather than scientific
-execution. The uncompiled PDF is explicitly recorded as a packaging note, not
-an unresolved empirical or methodological dependency.
+The relocation integrity, provenance manifest (22/22 entries), scientific
+artifacts (unchanged), and relative numerical invariance all pass, and the
+central empirical contribution is traceable to a self-contained P4 package with
+claims bounded to the available evidence and no P1 result dependency. Closeout
+is nonetheless **not** validated: the declared expected numeric-token hash
+`d8a4cc…` cannot be reproduced by any tested reconstruction of the documented
+method and has no executable contract in the repository (Section 5). Because
+that external documentary control is unresolved, P4 remains blocked rather than
+closed.
+
+This block is a documentary-control issue only. It does not imply that any
+prediction, metric, event table, result table, figure, or manuscript numeric
+value changed; the relative-invariance control confirms the numeric-token
+sequence is identical between the base and closeout commits. The uncompiled PDF
+remains a packaging note, not an empirical or methodological dependency.
+
+To lift the block, either recover the exact tokenization/range/commit that
+originally produced `d8a4cc…` (documented and reproducible), or supersede the
+stale declared value with the reconstructed, reproducible `cfd238…` contract
+through a traceable documentary correction — not by silent substitution.
