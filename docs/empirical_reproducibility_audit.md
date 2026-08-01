@@ -35,6 +35,13 @@ Other inspected repositories (`P33_variance_collapse`,
 daily experiments or older EEA data, but not the claimed 2023 hourly
 LightGBM/SARIMA artifacts.
 
+The upstream repository and commit cited above are not part of the locally
+available immutable object graph. They therefore do not establish how the
+hourly rerun's SARIMA order was selected before its results were produced. The
+order is treated as a fixed diagnostic-case specification in the canonical P4
+producer, not as an upstream-selected winner. The upstream prediction artifact
+is not an input to any canonical P4 result.
+
 ## Authoritative data recovery
 
 The actual Casa de Campo series is supplied by the Ayuntamiento de Madrid, not
@@ -64,8 +71,10 @@ EEA. The reproduction uses the official 2023 annual archive:
   horizon)` rows as each candidate model.
 
 The legacy `src/data/preprocess_pm10.py` remains for historical context but is
-not called by the reproduction because its full-series normalization and
-backward fill violate this protocol.
+not called by the reproduction. Its current implementation rejects ordinary
+linear interpolation and supports an explicitly supplied training fit window;
+nevertheless, it is outside the canonical P4 producer and is not evidence for
+the transformations used by that producer.
 
 ## Canonical rerun artifacts
 

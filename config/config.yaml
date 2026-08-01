@@ -1,5 +1,14 @@
 # ============================================================================
-# Configuration for Paper A: Ghost Skill & Variance Collapse in PM10
+# LEGACY / NON-CANONICAL FOR THE HOURLY P4 MANUSCRIPT
+# ============================================================================
+# This file belongs to the historical daily P33/E1-RR pipeline. It is not read
+# by scripts/run_paper_a_empirical.py and must not be used to reproduce P4.
+# In particular, the SARIMA entry below differs from the fixed hourly P4
+# specification (1,0,1)(1,0,0)[24]. The authoritative P4 configuration is
+# executable in scripts/run_paper_a_empirical.py and recorded in
+# docs/p4_canonical_provenance_manifest.json.
+#
+# Configuration for the historical Ghost Skill & Variance Collapse workflow
 # ============================================================================
 # This config defines data paths, model hyperparameters, and evaluation settings.
 # Do NOT modify horizons here; use config/horizons.yaml instead.

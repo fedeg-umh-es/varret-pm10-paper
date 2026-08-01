@@ -1,17 +1,26 @@
-# P33 — Variance Retention and Diagnostic Skill Adjustment in Multi-Horizon PM10 Forecasting Under Rolling-Origin Evaluation
+# P4 — Variance Retention as a Diagnostic Complement to Persistence-Relative Skill in Multi-Horizon PM10 Forecasting
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20185328.svg)](https://doi.org/10.5281/zenodo.20185328)
 
-This repository is a paper-first research codebase for P33. It is designed to support a reproducible analysis of whether positive multi-horizon forecasting skill for daily PM10 under rolling-origin evaluation reflects credible operational value or instead coincides with variance collapse and plausible ghost skill.
+The canonical P4 manuscript is `paper_a.tex`. Its checked-in hourly Casa de
+Campo reproduction is identified by producer commit
+`f57f076078760af8a88bd87815fdf94ab0064fa3`, uses
+`scripts/run_paper_a_empirical.py`, and is documented in
+`docs/p4_canonical_provenance_manifest.json`.
 
-## Current Work Package
+This repository also retains historical daily P33/E1-RR pipelines and adjacent
+exploratory materials. They are preserved for traceability but are **legacy and
+non-canonical for the hourly P4 manuscript**. They must not be used to regenerate
+P4 results.
 
-The active scope is restricted to the post-evaluation of E1-RR outputs through variance retention, `alpha`, and `skill_vp` diagnostics.
+## Legacy daily P33/E1-RR work package (non-canonical for P4)
+
+The historical scope was restricted to the post-evaluation of E1-RR outputs through variance retention, `alpha`, and `skill_vp` diagnostics.
 
 Do not mix this work package with E2-MET, E3-PROB, meteorological ablations, probabilistic extensions, or new model-family exploration.
 
 See `docs/e1_rr_post_evaluation_contract.md` before running or modifying the pipeline.
 
-## Scientific Question
+## Legacy daily scientific question
 
 P33 evaluates whether a model can outperform a persistence baseline across horizons up to 7 days while still preserving enough dynamic variability to remain operationally interpretable. The central diagnostic is the joint reading of:
 
@@ -21,7 +30,7 @@ P33 evaluates whether a model can outperform a persistence baseline across horiz
 
 High skill with `alpha` near 1 supports stronger dynamic credibility. High skill with very low `alpha` is treated as a plausible ghost-skill pattern.
 
-## Scope
+## Legacy daily scope
 
 In scope:
 
@@ -42,9 +51,11 @@ Out of scope:
 - unrelated exploratory analyses
 - generic public API design
 
-## Repository Layout
+## Repository layout and legacy boundary
 
-The repository contains legacy materials from earlier work and a new minimal P33-oriented structure. The P33 pipeline lives in the following directories:
+The following directories primarily contain the legacy daily P33 pipeline and
+adjacent explorations; they are not the canonical P4 producer unless a file is
+listed in the P4 provenance manifest:
 
 - `configs/`: dataset, experiment, and evaluation configuration
 - `scripts/`: executable entry points for the paper workflow
@@ -52,7 +63,7 @@ The repository contains legacy materials from earlier work and a new minimal P33
 - `tests/`: conceptual tests for rolling-origin, skill, and variance diagnostics
 - `docs/`: protocol, data dictionary, and runbook
 
-## Data Contracts
+## Legacy daily data contracts
 
 Canonical processed dataset:
 
@@ -93,7 +104,7 @@ Required project output:
 
 - `outputs/tables/variance_retention_summary.csv`
 
-## Pipeline
+## Legacy daily pipeline
 
 1. Validate raw daily PM10 data.
 2. Build canonical processed datasets with columns `date` and `y`.
@@ -105,7 +116,7 @@ Required project output:
 8. Build the variance-retention summary table.
 9. Write a run summary referencing the final P33 output table.
 
-## Execution
+## Legacy daily execution
 
 Install dependencies:
 
@@ -121,7 +132,7 @@ Run the minimal paper pipeline:
 python scripts/run_p33_pipeline.py
 ```
 
-## Paper A empirical reproduction
+## Canonical P4 empirical reproduction
 
 The submitted case study uses the 2023 hourly Madrid Open Data archive for
 Casa de Campo (station 024, PM10 magnitude 10). The checked-in archive is
@@ -144,7 +155,10 @@ pip install -r requirements-reproduction.txt
 The SARIMA evaluation updates state at every hourly origin and can take about
 15 minutes on a laptop. Row-level prediction artifacts and their aggregate
 tables are in `outputs/reproduction/`. The recovery and discrepancy audit is
-in `docs/empirical_reproducibility_audit.md`.
+in `docs/empirical_reproducibility_audit.md`; the immutable path/hash map is in
+`docs/p4_canonical_provenance_manifest.json`.
+
+### Legacy daily diagnostic command
 
 Run the variance-retention table only:
 
@@ -164,14 +178,19 @@ Build the two submission figures and compile `paper_a.tex` with BibTeX:
 make paper
 ```
 
-The horizon-wise figure inputs are stored in
-`data/manuscript/paper_a_horizon_metrics.csv`. Event metrics are stored as the
-across-horizon ranges reported by the manuscript because the underlying hourly
-event-level predictions are not distributed in this repository.
+The canonical P4 figures read
+`outputs/reproduction/metrics_rolling_origin.csv` and
+`outputs/reproduction/events_p75_rolling_origin.csv`. Their underlying hourly
+row-level predictions are distributed in
+`outputs/reproduction/predictions_rolling_origin.parquet`; the analogous holdout
+artifacts are stored beside them.
 
 ## Notes
 
-This repository is oriented to the P33 paper workflow rather than a general-purpose forecasting package. The implementation is intentionally restrained, explicit, and auditable.
+The canonical P4 implementation is intentionally restrained, explicit, and
+auditable. Historical P33, meteorology, KGE, H*, multi-station, and model-family
+materials remain available only as non-canonical legacy context unless the P4
+provenance manifest names them.
 ## Citation
 
 If you use this software, please cite:
