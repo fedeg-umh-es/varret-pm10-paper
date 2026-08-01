@@ -7,11 +7,13 @@
 - Documentary branch: `codex/p4-documentary-closeout`
 - Canonical producer/base commit: `f57f076078760af8a88bd87815fdf94ab0064fa3`
 - Closeout commit: `390685f1f1312954ee67513f3e0db11b2670e7f9`
-- Closeout status: `P4_CLOSEOUT_BLOCKED_BY_HASH_CONTRACT`
-- P3 status: Deferred (`P3 remains deferred until P4 is validated and P2 has been closed or explicitly cleared.`)
+- Closeout status: `P4_DOCUMENTARY_CLOSEOUT_VALIDATED`
+- P3 status: Deferred (`P4 is validated; P3 remains deferred until P2 has been audited as closed or explicitly released.`)
 
-The branch was created directly from the locally available canonical commit. No
-pull, fetch, reset, rebase, merge, commit, or push was performed.
+The branch was created directly from the locally available canonical commit.
+No pull, fetch, reset, rebase, merge or push was performed. The subsequent
+validation correction and numerical-invariance contract adoption are local,
+documentary-only commits; neither was pushed and no PR was opened.
 
 ## 2. Files modified or created
 
@@ -110,29 +112,29 @@ validated 22 manifest entries with zero size or SHA-256 mismatches.
 - Closeout commit SHA-256 (`390685f1f1312954ee67513f3e0db11b2670e7f9`): `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
 - Verdict: `RELATIVE_NUMERICAL_INVARIANCE_PASS` (Base and closeout commits produce 100% identical numeric-token sequences).
 
-### Expected-hash contract verification
-- Declared expected hash: `d8a4cc5dcc24ebc7fdb942a597bbd9378e3a551c5d436544415a74e002b56e1f`
-- Contract source: the declared value is asserted only in prose (the prior
-  committed closeout text and the P4 task specification). No script,
-  configuration, or manifest field in the repository computes it, so its
-  tokenizer, text range, normalization, separator, and computing commit are
-  undocumented.
-- Reproduced base/closeout hash: `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
-- Reproduction scope: the documented tokenizer `[+-]?(?:\d+\.?\d*|\.\d+)` was
-  applied to both the base and closeout `paper_a.tex` blobs across four text
-  ranges (abstract→Data and Code Availability, abstract→Conclusion,
-  abstract→end-of-abstract, whole document) and four token separators
-  (comma, newline, space, none). None of the sixteen combinations reproduce
-  the declared expected hash; the comma-joined abstract→Data and Code
-  Availability range is the combination that yields `cfd238…`.
-- Match: False
-- Verdict: `EXPECTED_HASH_CONTRACT_FAIL`. The declared expected hash is not
-  reproduced by any tested reconstruction of the documented method, and its
-  origin cannot be traced to any executable contract in the repository. Per the
-  closeout rules the observed hash is **not** substituted for the declared
-  expected hash to force a pass. This is a documentary-control failure only: it
-  does not indicate that any empirical result, figure, table, or numeric value
-  changed (see the relative-invariance result above and Section 8).
+### Numerical-invariance hash contract decision
+
+- Historical expected hash: `d8a4cc5dcc24ebc7fdb942a597bbd9378e3a551c5d436544415a74e002b56e1f`
+- Historical contract source: prose only. No executable script,
+  configuration, manifest field or complete documentary specification defines
+  its tokenizer, range, normalization, separator, encoding or computing commit.
+- Historical status: retired as an obsolete and non-reproducible documentary
+  control; preserved here for provenance.
+- Decision: `2026-08-01-p4-numerical-invariance-hash-contract`
+- Replacement contract: `docs/p4_numerical_invariance_contract.md`
+- Reproduced base/closeout/validation-correction hash:
+  `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
+- Token count: 187 in every commit; sequences identical.
+- Verdict: `DOCUMENTARY_CONTRACT_CORRECTION_ACCEPTED`.
+
+The historical expected hash `d8a4cc…` was not reproducible because its
+computational contract was not documented. It has not been silently replaced or
+retrospectively claimed as reproduced.
+
+Decision `2026-08-01-p4-numerical-invariance-hash-contract` retires that
+obsolete documentary value and adopts a fully specified replacement contract
+yielding `cfd238…`. This correction changes no empirical result, numerical
+value, data, table, figure or scientific code.
 
 ## 6. Legacy elements marked
 
@@ -170,9 +172,9 @@ without invoking the Makefile target that regenerates figures.
 
 ## 8. Diff summary and repository state
 
-The working tree contains only the six authorized documentary paths listed in
-Section 2. `git diff --check` reports no whitespace errors. Restricted diffs
-confirm zero changes under:
+The original documentary closeout commit contains only the six authorized paths
+listed in Section 2. `git diff --check` reported no whitespace errors.
+Restricted diffs confirm zero changes under:
 
 - `outputs/reproduction/`;
 - `outputs/tables/`;
@@ -181,30 +183,29 @@ confirm zero changes under:
 - `requirements-reproduction.txt`.
 
 The local P1 repository remains at
-`245b68388ab9cfa34f9c253611a5318aa3d344f5` with a clean working tree. No commit
-or publication action has been taken in P4.
+`245b68388ab9cfa34f9c253611a5318aa3d344f5` with a clean working tree. P4
+validation correction and contract adoption are documentary-only local commits;
+no publication action, push or PR has been taken.
 
 ## 9. Decision
 
-`P4_CLOSEOUT_BLOCKED_BY_HASH_CONTRACT`
+`P4_DOCUMENTARY_CLOSEOUT_VALIDATED`
 
 The relocation integrity, provenance manifest (22/22 entries), scientific
 artifacts (unchanged), and relative numerical invariance all pass, and the
 central empirical contribution is traceable to a self-contained P4 package with
-claims bounded to the available evidence and no P1 result dependency. Closeout
-is nonetheless **not** validated: the declared expected numeric-token hash
-`d8a4cc…` cannot be reproduced by any tested reconstruction of the documented
-method and has no executable contract in the repository (Section 5). Because
-that external documentary control is unresolved, P4 remains blocked rather than
-closed.
+claims bounded to the available evidence and no P1 result dependency. Decision
+`2026-08-01-p4-numerical-invariance-hash-contract` resolves the sole remaining
+documentary blocker by retiring the non-reproducible historical control and
+adopting the explicit replacement contract documented in
+`docs/p4_numerical_invariance_contract.md`.
 
-This block is a documentary-control issue only. It does not imply that any
-prediction, metric, event table, result table, figure, or manuscript numeric
-value changed; the relative-invariance control confirms the numeric-token
-sequence is identical between the base and closeout commits. The uncompiled PDF
-remains a packaging note, not an empirical or methodological dependency.
+This documentary contract correction does not recover the unknown original
+`d8a4cc…` contract and does not alter any prediction, metric, event table,
+result table, figure, scientific code or manuscript numeric value. The relative
+invariance control confirms the numeric-token sequence is identical across the
+base, closeout and validation-correction commits. The uncompiled PDF remains a
+packaging note, not an empirical or methodological dependency.
 
-To lift the block, either recover the exact tokenization/range/commit that
-originally produced `d8a4cc…` (documented and reproducible), or supersede the
-stale declared value with the reconstructed, reproducible `cfd238…` contract
-through a traceable documentary correction — not by silent substitution.
+P3 remains deferred. The next project action is to audit whether P2 is closed
+or explicitly released before P3 is resumed.

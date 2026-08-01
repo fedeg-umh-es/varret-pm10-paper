@@ -45,22 +45,29 @@ table, or manuscript numeric value was modified.
 - Verdict: `RELATIVE_NUMERICAL_INVARIANCE_PASS`
 
 ## Expected-hash contract
-- Declared expected hash: `d8a4cc5dcc24ebc7fdb942a597bbd9378e3a551c5d436544415a74e002b56e1f`
-- Contract source: prose only — the prior committed closeout text and the P4
-  task specification. No script, configuration, or manifest field in the
-  repository computes it; tokenizer, range, normalization, separator, and
-  computing commit are undocumented.
-- Reproduced hash: `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
-- Match: No
-- Verdict: `EXPECTED_HASH_CONTRACT_FAIL`
-- Explanation: The documented tokenizer was applied to both the base and
-  closeout `paper_a.tex` blobs across four text ranges and four separators
-  (sixteen combinations). None reproduce `d8a4cc…`. The comma-joined
-  abstract→Data-and-Code range reproduces `cfd238…` consistently for both
-  commits. The declared `d8a4cc…` therefore appears to be a stale or
-  differently-scoped value with no traceable executable contract. In compliance
-  with the closeout rules, the observed hash was **not** substituted for the
-  declared expected hash to manufacture a pass.
+- Historical expected hash: `d8a4cc5dcc24ebc7fdb942a597bbd9378e3a551c5d436544415a74e002b56e1f`
+- Historical contract source: prose only — no executable script,
+  configuration, manifest field or complete specification records the range,
+  tokenizer, normalization, serialization, encoding or source commit.
+- Historical status: retired as an obsolete, non-reproducible documentary
+  control and retained only for provenance.
+- Canonical decision: `2026-08-01-p4-numerical-invariance-hash-contract`
+- Replacement contract: `docs/p4_numerical_invariance_contract.md`
+- Replacement hash: `cfd238e5832e0764f168c4633e2755c7f5ea2432cfd809c3b58ebb00da7dbbc3`
+- Token count: 187 for the base, documentary-closeout and
+  validation-correction commits.
+- Match across the three commits: Yes; token sequences and hashes are
+  identical.
+- Verdict: `DOCUMENTARY_CONTRACT_CORRECTION_ACCEPTED`
+
+The historical expected hash `d8a4cc…` was not reproducible because its
+computational contract was not documented. It has not been silently replaced or
+retrospectively claimed as reproduced.
+
+Decision `2026-08-01-p4-numerical-invariance-hash-contract` retires that
+obsolete documentary value and adopts a fully specified replacement contract
+yielding `cfd238…`. This correction changes no empirical result, numerical
+value, data, table, figure or scientific code.
 
 ## Scientific artefacts
 - Outputs changed: none (`outputs/reproduction/`, `outputs/tables/`,
@@ -76,26 +83,28 @@ table, or manuscript numeric value was modified.
   correction.
 
 ## Corrected P4 status
-- `P4_CLOSEOUT_BLOCKED_BY_HASH_CONTRACT`
-- The prior report contradicted itself (Section 1 recorded the blocked status
-  while Section 9 declared "P4: DOCUMENTARILY CLOSED"). Section 9 has been
-  corrected to the blocked verdict, and the expected-hash section now records
-  the reproduction scope, the contract-source gap, and the explicit
-  no-substitution rule.
+- `P4_DOCUMENTARY_CLOSEOUT_VALIDATED`
+- The previous blocked verdict remains part of the audit history. It is now
+  superseded by the accepted documentary contract correction, which preserves
+  the historical hash and explicitly adopts the reproducible replacement.
 
 ## P3 status
-- DEFERRED. `P3 remains deferred until P4 is validated and P2 has been closed or
-  explicitly cleared.`
+- DEFERRED. P4 is validated, but P3 remains deferred until P2 has been audited
+  as closed or explicitly released.
 
 ## Residual issues
-- The expected numeric-token hash contract is unresolved: `d8a4cc…` has no
-  reproducible definition in the repository. This is the sole item blocking P4.
 - `paper_a.pdf` was not recompiled (no LaTeX toolchain available); it does not
   yet reflect the closeout wording edits. Packaging-only, not empirical.
 - Manuscript prose was softened in the closeout commit (e.g. "operational
   usefulness" → "event-detection fidelity"; SARIMA order no longer claimed as
   "recovered from the upstream configuration"). Numbers are invariant, but a
   scientific reviewer should confirm the softened claims are acceptable.
+- The original `d8a4cc…` computational contract remains unknown. It must not be
+  described as recovered; the accepted contract is an explicit replacement.
 
 ## Final verdict
-- `P4_CLOSEOUT_BLOCKED_BY_HASH_CONTRACT`
+- `P4_DOCUMENTARY_CLOSEOUT_VALIDATED`
+
+## Next project action
+
+- Audit whether P2 is closed or explicitly released before resuming P3.
