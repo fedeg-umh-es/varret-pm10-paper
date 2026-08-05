@@ -1,0 +1,8 @@
+station,horizon,metric_continuous,metric_event,kendall_tau,kendall_pvalue,n_models,n_pairs,n_reversals,evaluation_status,reversal_classification
+Valencia-Vivers,1,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE
+Valencia-Vivers,2,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE
+Valencia-Vivers,3,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE
+Valencia-Vivers,4,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE
+Valencia-Vivers,5,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE
+Valencia-Vivers,6,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE
+Valencia-Vivers,7,skill_vs_persistence,csi,,,5,0,,NOT_EVALUABLE_NO_COMMON_CASES,NOT_EVALUABLE

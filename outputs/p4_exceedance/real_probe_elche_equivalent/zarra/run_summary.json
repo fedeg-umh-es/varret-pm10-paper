@@ -1,0 +1,25 @@
+{
+  "label": "real_probe_zarra",
+  "evidence_status": "REAL_DATA_UNVERIFIED",
+  "n_rows": 52136,
+  "n_stations": 1,
+  "n_models": 6,
+  "n_horizons": 7,
+  "n_duplicates": 0,
+  "is_aligned": false,
+  "n_misaligned_groups": 7,
+  "n_events_observed": 9216,
+  "ranking_rows": 7,
+  "classification_counts": {
+    "NOT_EVALUABLE": 7
+  },
+  "timings_s": {
+    "schema_adapt_s": 0.014102621999882103,
+    "duplicate_check_s": 0.01131820799992056,
+    "alignment_check_s": 0.2682933620001222,
+    "metrics_compute_s": 0.11806215100000372,
+    "ranking_comparison_s": 0.0026285460000963212,
+    "total_s": 0.43938757000000805
+  },
+  "output_dir": "/home/user/varret-pm10-paper/outputs/p4_exceedance/real_probe_elche_equivalent/zarra"
+}

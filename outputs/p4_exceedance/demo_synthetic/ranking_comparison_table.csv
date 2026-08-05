@@ -1,0 +1,3 @@
+station,horizon,metric_continuous,metric_event,kendall_tau,kendall_pvalue,n_models,n_pairs,n_reversals,evaluation_status,reversal_classification
+north,1,skill_vs_persistence,csi,1.0,1.0,2,1,0,EVALUATED,NO
+south,1,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES

@@ -1,0 +1,2 @@
+station,horizon,model,origin_date,target_date,horizon,fold_id,n_cases_model,n_cases_union
+demo_station,1,model_y,2022-01-04,2022-01-05,1,2022-01-04,4,5

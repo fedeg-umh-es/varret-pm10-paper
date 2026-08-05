@@ -1,0 +1,25 @@
+{
+  "label": "real_probe_valencia_vivers",
+  "evidence_status": "REAL_DATA_UNVERIFIED",
+  "n_rows": 52028,
+  "n_stations": 1,
+  "n_models": 6,
+  "n_horizons": 7,
+  "n_duplicates": 0,
+  "is_aligned": false,
+  "n_misaligned_groups": 7,
+  "n_events_observed": 9124,
+  "ranking_rows": 7,
+  "classification_counts": {
+    "NOT_EVALUABLE": 7
+  },
+  "timings_s": {
+    "schema_adapt_s": 0.015981980000105978,
+    "duplicate_check_s": 0.012226413000007597,
+    "alignment_check_s": 0.2835143859999789,
+    "metrics_compute_s": 0.12864970500004347,
+    "ranking_comparison_s": 0.0027463989999887417,
+    "total_s": 0.47082752500000424
+  },
+  "output_dir": "/home/user/varret-pm10-paper/outputs/p4_exceedance/real_probe_elche_equivalent/valencia_vivers"
+}

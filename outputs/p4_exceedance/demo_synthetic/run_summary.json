@@ -1,0 +1,26 @@
+{
+  "label": "demo_synthetic_main",
+  "evidence_status": "DEMO_SYNTHETIC",
+  "n_rows": 360,
+  "n_stations": 2,
+  "n_models": 3,
+  "n_horizons": 1,
+  "n_duplicates": 0,
+  "is_aligned": true,
+  "n_misaligned_groups": 0,
+  "n_events_observed": 60,
+  "ranking_rows": 2,
+  "classification_counts": {
+    "NO": 1,
+    "YES": 1
+  },
+  "timings_s": {
+    "schema_adapt_s": 0.0040908450000642915,
+    "duplicate_check_s": 0.0022653449998415454,
+    "alignment_check_s": 0.008173492999958398,
+    "metrics_compute_s": 0.01550908400008666,
+    "ranking_comparison_s": 0.006942716999901677,
+    "total_s": 0.04090357100017172
+  },
+  "output_dir": "/home/user/varret-pm10-paper/outputs/p4_exceedance/demo_synthetic"
+}

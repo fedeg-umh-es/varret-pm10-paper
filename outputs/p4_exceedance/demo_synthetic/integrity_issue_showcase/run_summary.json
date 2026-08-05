@@ -1,0 +1,23 @@
+{
+  "label": "demo_synthetic_integrity_issues",
+  "evidence_status": "DEMO_SYNTHETIC",
+  "n_rows": 10,
+  "n_stations": 1,
+  "n_models": 2,
+  "n_horizons": 1,
+  "n_duplicates": 2,
+  "is_aligned": false,
+  "n_misaligned_groups": 1,
+  "n_events_observed": 0,
+  "ranking_rows": 0,
+  "classification_counts": {},
+  "timings_s": {
+    "schema_adapt_s": 0.0022762049998164002,
+    "duplicate_check_s": 0.002553203000161375,
+    "alignment_check_s": 0.002918312000019796,
+    "metrics_compute_s": 0.0013179550001041207,
+    "ranking_comparison_s": 0.0005407109999850945,
+    "total_s": 0.013677432999884331
+  },
+  "output_dir": "/home/user/varret-pm10-paper/outputs/p4_exceedance/demo_synthetic/integrity_issue_showcase"
+}

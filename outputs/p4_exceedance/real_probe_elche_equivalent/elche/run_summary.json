@@ -1,0 +1,26 @@
+{
+  "label": "real_probe_elche",
+  "evidence_status": "REAL_DATA_UNVERIFIED",
+  "n_rows": 26001,
+  "n_stations": 1,
+  "n_models": 3,
+  "n_horizons": 7,
+  "n_duplicates": 0,
+  "is_aligned": true,
+  "n_misaligned_groups": 0,
+  "n_events_observed": 4138,
+  "ranking_rows": 7,
+  "classification_counts": {
+    "YES": 6,
+    "NO": 1
+  },
+  "timings_s": {
+    "schema_adapt_s": 0.011431452000124409,
+    "duplicate_check_s": 0.006984777000070608,
+    "alignment_check_s": 0.11328991499999574,
+    "metrics_compute_s": 0.05644290300006105,
+    "ranking_comparison_s": 0.019432879999840225,
+    "total_s": 0.21230020600000898
+  },
+  "output_dir": "/home/user/varret-pm10-paper/outputs/p4_exceedance/real_probe_elche_equivalent/elche"
+}

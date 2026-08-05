@@ -56,6 +56,11 @@ data/processed/*
 !outputs/reproduction/*.json
 !outputs/reproduction/*.parquet
 
+# P4 exceedance diagnostic: duplicate/alignment source tables, manifests,
+# and run summaries (DEMO_SYNTHETIC and REAL_DATA_UNVERIFIED runs).
+!outputs/p4_exceedance/
+!outputs/p4_exceedance/**
+
 airquality_datasets/**
 
 # Local frozen submission packages

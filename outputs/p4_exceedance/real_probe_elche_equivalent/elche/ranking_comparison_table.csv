@@ -1,0 +1,8 @@
+station,horizon,metric_continuous,metric_event,kendall_tau,kendall_pvalue,n_models,n_pairs,n_reversals,evaluation_status,reversal_classification
+Elche,1,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES
+Elche,2,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES
+Elche,3,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES
+Elche,4,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES
+Elche,5,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES
+Elche,6,skill_vs_persistence,csi,-1.0,1.0,2,1,1,EVALUATED,YES
+Elche,7,skill_vs_persistence,csi,1.0,1.0,2,1,0,EVALUATED,NO

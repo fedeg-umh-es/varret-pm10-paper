@@ -1,0 +1,72 @@
+{
+  "project": "P4 — Ghost Skill & Dynamic Fidelity",
+  "analysis_role": "Auxiliary exceedance and rank-reversal diagnostic",
+  "input_predictions_path": "outputs/metrics/predictions_zarra_emep.csv",
+  "input_predictions_sha256": "601440c364f266696c8ed8e8aa4a368a8150a4da4e27a5b9a315bcca52fce1a7",
+  "input_schema": {
+    "target_date_source": "date",
+    "origin_date_source": "origin_date",
+    "resolution": "daily",
+    "n_rows": 52136,
+    "notes": [
+      "No 'target_date' column found; 'date' was interpreted as the forecast target time (target_date = date)."
+    ]
+  },
+  "schema_adapter": {
+    "target_date_source": "date",
+    "origin_date_source": "origin_date",
+    "notes": [
+      "No 'target_date' column found; 'date' was interpreted as the forecast target time (target_date = date)."
+    ]
+  },
+  "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+  "producer_commit": "2398565652227dedf0e6eaf1e0765242dc37545d",
+  "dataset": "e1_rr_zarra_emep",
+  "station": "Zarra",
+  "period": null,
+  "resolution": "daily",
+  "forecast_horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "rolling_origin_protocol": null,
+  "preprocessing_protocol": null,
+  "event_threshold": "per (station,horizon) P75 of persistence y_true (see metrics_table.csv)",
+  "threshold_source": "p75_of_evaluation_period_diagnostic_only",
+  "threshold_mode": "POST_HOC_DIAGNOSTIC",
+  "block_length": null,
+  "block_length_unit": null,
+  "block_length_justification": null,
+  "random_seed": null,
+  "models": [
+    "hgb_direct",
+    "persistence",
+    "ridge_direct",
+    "sarima",
+    "seasonal_naive",
+    "stl_ridge_direct"
+  ],
+  "baselines": [
+    "persistence"
+  ],
+  "metrics_continuous": [
+    "skill_vs_persistence"
+  ],
+  "metrics_event": [
+    "csi",
+    "hit_rate",
+    "false_alarm_rate",
+    "precision",
+    "event_bias",
+    "exceedance_intensity_error"
+  ],
+  "common_case_status": "MISALIGNED",
+  "duplicate_status": "CLEAN",
+  "execution_timestamp": "2026-08-05T08:16:35.831911+00:00",
+  "execution_label": "real_probe_zarra::REAL_DATA_UNVERIFIED"
+}

@@ -1,0 +1,62 @@
+{
+  "project": "P4 — Ghost Skill & Dynamic Fidelity",
+  "analysis_role": "Auxiliary exceedance and rank-reversal diagnostic",
+  "input_predictions_path": null,
+  "input_predictions_sha256": null,
+  "input_schema": {
+    "target_date_source": "date",
+    "origin_date_source": "origin_date",
+    "resolution": "daily",
+    "n_rows": 10,
+    "notes": [
+      "No 'target_date' column found; 'date' was interpreted as the forecast target time (target_date = date)."
+    ]
+  },
+  "schema_adapter": {
+    "target_date_source": "date",
+    "origin_date_source": "origin_date",
+    "notes": [
+      "No 'target_date' column found; 'date' was interpreted as the forecast target time (target_date = date)."
+    ]
+  },
+  "producer_repository": null,
+  "producer_commit": null,
+  "dataset": "synthetic_s4_s5_showcase",
+  "station": "demo_station",
+  "period": null,
+  "resolution": "daily",
+  "forecast_horizons": [
+    1
+  ],
+  "rolling_origin_protocol": null,
+  "preprocessing_protocol": null,
+  "event_threshold": "per (station,horizon) P75 of persistence y_true (see metrics_table.csv)",
+  "threshold_source": "p75_of_evaluation_period_diagnostic_only",
+  "threshold_mode": "POST_HOC_DIAGNOSTIC",
+  "block_length": null,
+  "block_length_unit": null,
+  "block_length_justification": null,
+  "random_seed": null,
+  "models": [
+    "model_x",
+    "model_y"
+  ],
+  "baselines": [
+    "persistence"
+  ],
+  "metrics_continuous": [
+    "skill_vs_persistence"
+  ],
+  "metrics_event": [
+    "csi",
+    "hit_rate",
+    "false_alarm_rate",
+    "precision",
+    "event_bias",
+    "exceedance_intensity_error"
+  ],
+  "common_case_status": "MISALIGNED",
+  "duplicate_status": "2_DUPLICATE_ROWS",
+  "execution_timestamp": "2026-08-05T08:16:25.306582+00:00",
+  "execution_label": "demo_synthetic_integrity_issues::DEMO_SYNTHETIC"
+}
