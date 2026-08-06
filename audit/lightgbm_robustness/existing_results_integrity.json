@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-08-06T06:10:17Z",
+  "master_diagnostic_table_sha256": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6",
+  "total_rows": 595,
+  "expected_rows": 595,
+  "unique_stations": 17,
+  "stations_list": [
+    "03014002_10_M",
+    "08019004_10_M",
+    "08019028_10_M",
+    "08019043_10_M",
+    "08019045_10_M",
+    "08019052_10_M",
+    "08019054_10_M",
+    "08263007_10_M",
+    "22125001_10_M",
+    "43004005_10_M",
+    "43004006_10_M",
+    "44013007_10_M",
+    "44216001_10_M",
+    "45153999_10_M",
+    "46250043_10_M",
+    "46263999_10_M",
+    "50008001_10_M"
+  ],
+  "unique_models": 5,
+  "models_list": [
+    "hgb_direct",
+    "ridge_direct",
+    "sarima",
+    "seasonal_naive",
+    "stl_ridge_direct"
+  ],
+  "unique_horizons": 7,
+  "horizons_list": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "is_complete_grid": true,
+  "duplicates": 0,
+  "status": "PASS"
+}

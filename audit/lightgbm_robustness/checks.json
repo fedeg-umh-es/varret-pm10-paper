@@ -1,0 +1,47 @@
+{
+  "lightgbm_rows_119": {
+    "status": "PASS",
+    "reported": 119,
+    "computed": 119
+  },
+  "total_cells_714": {
+    "status": "PASS",
+    "reported": 714,
+    "computed": 714
+  },
+  "unique_keys_714": {
+    "status": "PASS",
+    "reported": 714,
+    "computed": 714
+  },
+  "stations_count_17": {
+    "status": "PASS",
+    "reported": 17,
+    "computed": 17
+  },
+  "horizons_count_7": {
+    "status": "PASS",
+    "reported": 7,
+    "computed": 7
+  },
+  "models_count_6": {
+    "status": "PASS",
+    "reported": 6,
+    "computed": 6
+  },
+  "original_595_unmodified": {
+    "status": "PASS",
+    "reported": 595,
+    "computed": 595
+  },
+  "no_duplicate_keys": {
+    "status": "PASS",
+    "reported": 0,
+    "computed": 0
+  },
+  "no_zero_denominators": {
+    "status": "PASS",
+    "reported": 0,
+    "computed": 0
+  }
+}

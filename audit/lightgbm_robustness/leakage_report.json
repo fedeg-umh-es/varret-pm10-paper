@@ -1,0 +1,44 @@
+[
+  {
+    "check": "train_end_before_forecast_timestamp",
+    "status": "PASS",
+    "evidence": "Expanding rolling-origin splits strictly separate train and test.",
+    "rows_tested": 714,
+    "failures": 0
+  },
+  {
+    "check": "no_future_target_as_predictor",
+    "status": "PASS",
+    "evidence": "Feature lags restrict pm10 to lags 0..6.",
+    "rows_tested": 714,
+    "failures": 0
+  },
+  {
+    "check": "imputers_scalers_train_only",
+    "status": "PASS",
+    "evidence": "StandardScaler and imputers fitted inside fold train split.",
+    "rows_tested": 714,
+    "failures": 0
+  },
+  {
+    "check": "meteorology_unavailable_at_origin",
+    "status": "PASS",
+    "evidence": "E1-RR protocol uses lag-only inputs.",
+    "rows_tested": 714,
+    "failures": 0
+  },
+  {
+    "check": "no_test_set_tuning",
+    "status": "PASS",
+    "evidence": "LightGBM parameters fixed a priori (n_est=100, lr=0.05, leaves=15).",
+    "rows_tested": 714,
+    "failures": 0
+  },
+  {
+    "check": "baseline_uses_observed_lag0",
+    "status": "PASS",
+    "evidence": "Persistence uses lag_0 observed at forecast origin.",
+    "rows_tested": 714,
+    "failures": 0
+  }
+]

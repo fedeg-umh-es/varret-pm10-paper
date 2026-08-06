@@ -1,0 +1,6 @@
+{
+  "total_pairs": 119,
+  "avg_pareto_front_size": 5.285714285714286,
+  "lightgbm_pareto_frequency": 109,
+  "lightgbm_pareto_pct": 91.6
+}

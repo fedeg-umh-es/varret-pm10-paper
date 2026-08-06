@@ -1,0 +1,11 @@
+{
+  "total_pairs": 119,
+  "conventional_selection_changes_from_lgb": 13,
+  "fidelity_selection_changes_from_lgb": 1,
+  "rule_decision_changes_before_lgb": 115,
+  "rule_decision_changes_after_lgb": 115,
+  "no_eligible_fidelity_before": 111,
+  "no_eligible_fidelity_after": 111,
+  "lightgbm_selected_conventional_count": 13,
+  "lightgbm_selected_fidelity_count": 1
+}

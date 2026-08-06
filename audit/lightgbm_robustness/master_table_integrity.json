@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-08-06T06:10:37Z",
+  "original_595_rows_unchanged": true,
+  "total_combined_rows": 714,
+  "lightgbm_rows_added": 119,
+  "output_file": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/analysis/master_diagnostic_table_with_lightgbm.csv",
+  "output_sha256": "a237acced08a42d4875bebc5f38e4205ace1045628a975b2b7bb76d3f8477690"
+}
