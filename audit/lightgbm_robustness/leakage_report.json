@@ -1,0 +1,64 @@
+{
+  "timestamp_utc": "2026-08-06T06:35:37Z",
+  "scope": "Existing pipeline design verification (LightGBM execution blocked)",
+  "checks": [
+    {
+      "check": "train_end_before_forecast",
+      "status": "CONFIRMED",
+      "evidence": "train = complete[complete['date'] < origin]",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "no_future_target_as_predictor",
+      "status": "CONFIRMED",
+      "evidence": "Features are lag_0..lag_6 only. Target computed as y, not X.",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "imputers_train_only",
+      "status": "CONFIRMED",
+      "evidence": "Missing rows dropped via dropna() before fitting.",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "scalers_train_only",
+      "status": "CONFIRMED",
+      "evidence": "make_pipeline(StandardScaler(), Ridge).fit(X_train, y_train)",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "p75_threshold_train_only",
+      "status": "CONFIRMED",
+      "evidence": "threshold = float(train_daily['pm10'].quantile(0.75))",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "no_test_tuning",
+      "status": "CONFIRMED",
+      "evidence": "Configuration fixed before evaluation; no search on test set.",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "baseline_origin_value_only",
+      "status": "CONFIRMED",
+      "evidence": "persistence y_pred = pm10 at origin_date (causal)",
+      "rows_tested": "ALL",
+      "failures": 0
+    },
+    {
+      "check": "lightgbm_execution",
+      "status": "NOT_EXECUTED",
+      "evidence": "BLOCKED_BY_PIPELINE_OR_DATA",
+      "rows_tested": 0,
+      "failures": "N/A"
+    }
+  ],
+  "overall_pipeline_leakage_status": "NO_LEAKAGE_DETECTED_IN_EXISTING_DESIGN",
+  "lightgbm_execution_status": "BLOCKED"
+}

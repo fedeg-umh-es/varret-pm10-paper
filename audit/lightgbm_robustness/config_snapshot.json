@@ -1,0 +1,25 @@
+{
+  "model_id": "lightgbm_direct",
+  "algorithm": "LightGBM",
+  "implementation": "lightgbm.LGBMRegressor",
+  "version": "4.7.0",
+  "strategy": "direct_per_horizon",
+  "hyperparameters": {
+    "n_estimators": 200,
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "deterministic": true,
+    "force_col_wise": true,
+    "verbose": -1,
+    "n_jobs": 1
+  },
+  "rationale": "Fixed before producing any predictions. Parameters mirror run_paper_a_empirical.py lightgbm config, itself taken from the repository's existing lgbm_model.py implementation.",
+  "tuning_method": "NONE - fixed configuration, no data-driven selection",
+  "seed": 42,
+  "registration_utc": "2026-08-06T06:34:39Z",
+  "status": "PRE_REGISTERED_BUT_BLOCKED"
+}

@@ -1,0 +1,23 @@
+{
+  "timestamp_utc": "2026-08-06T06:35:37Z",
+  "lightgbm_execution": "BLOCKED",
+  "existing_cells_verified": true,
+  "row_count_595": true,
+  "station_count_17": true,
+  "horizon_set_1_to_7": true,
+  "model_set_5": true,
+  "unique_keys_595": true,
+  "rule_a_277": true,
+  "rule_b_8": true,
+  "per_model_119": {
+    "hgb_direct": true,
+    "ridge_direct": true,
+    "sarima": true,
+    "seasonal_naive": true,
+    "stl_ridge_direct": true
+  },
+  "lightgbm_cells_119": "NOT_GENERATED",
+  "total_714_cells": "NOT_GENERATED",
+  "all_checks_pass": false,
+  "reason": "BLOCKED_BY_PIPELINE_OR_DATA"
+}

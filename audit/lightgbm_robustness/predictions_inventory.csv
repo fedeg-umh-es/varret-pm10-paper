@@ -1,0 +1,3 @@
+# Predictions Inventory — lightgbm_direct
+# Status: NOT_GENERATED — BLOCKED_BY_PIPELINE_OR_DATA
+# Expected columns: station_id,origin_date,date,horizon,fold,model,y_true,y_pred,y_persistence,p75_train

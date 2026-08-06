@@ -1,0 +1,89 @@
+{
+  "timestamp_utc": "2026-08-06T06:34:05Z",
+  "file": "evidence/paper_a/aggregates/master_diagnostic_table.csv",
+  "sha256": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6",
+  "rows": 595,
+  "integrity_status": "VERIFIED",
+  "checks": {
+    "row_count": {
+      "expected": 595,
+      "actual": 595,
+      "status": "PASS"
+    },
+    "station_count": {
+      "expected": 17,
+      "actual": 17,
+      "status": "PASS"
+    },
+    "horizon_set": {
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "actual": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "status": "PASS"
+    },
+    "model_set": {
+      "expected": [
+        "hgb_direct",
+        "ridge_direct",
+        "sarima",
+        "seasonal_naive",
+        "stl_ridge_direct"
+      ],
+      "actual": [
+        "hgb_direct",
+        "ridge_direct",
+        "sarima",
+        "seasonal_naive",
+        "stl_ridge_direct"
+      ],
+      "status": "PASS"
+    },
+    "unique_keys": {
+      "expected": 595,
+      "actual": 595,
+      "status": "PASS"
+    },
+    "per_model_119": {
+      "expected": 119,
+      "actual": {
+        "hgb_direct": 119,
+        "ridge_direct": 119,
+        "sarima": 119,
+        "seasonal_naive": 119,
+        "stl_ridge_direct": 119
+      },
+      "status": "PASS"
+    },
+    "canonical_statistics": {
+      "rule_a_count": 277,
+      "rule_b_count": 8,
+      "decision_changes": 269,
+      "skill_median": 0.13506,
+      "alpha_median": 0.254931,
+      "matches_reported_277": true,
+      "matches_reported_8": true,
+      "matches_reported_269": true,
+      "status": "PASS"
+    },
+    "file_sha256": {
+      "sha256": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6",
+      "status": "RECORDED"
+    }
+  },
+  "note": "These 595 rows must remain unmodified before and after any LightGBM integration."
+}

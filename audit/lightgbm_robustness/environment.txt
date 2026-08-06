@@ -1,0 +1,11 @@
+python: 3.11.15
+platform: Linux-6.18.5-fc-v18-x86_64-with-glibc2.39
+pandas: 3.0.5
+numpy: 2.4.6
+lightgbm: 4.7.0
+scikit-learn: 1.9.0
+scipy: 1.17.1
+repo: /home/user/varret-pm10-paper
+branch: claude/p4-lightgbm-ems-audit-rjs3ch
+head_sha: 4a49b08b041c578ec5981dc1472125b2af0a4d59
+timestamp_utc: 2026-08-06T06:34:39Z

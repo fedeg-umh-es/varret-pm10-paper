@@ -1,0 +1,25 @@
+{
+  "experiment": "P4 LightGBM robustness arm",
+  "protocol": "expanding-window rolling-origin; initial train from series start; one model per horizon",
+  "horizons_days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "stations": 17,
+  "models_would_produce": [
+    "lightgbm_direct"
+  ],
+  "features": [
+    "lag_0 through lag_6 (pm10)"
+  ],
+  "event_threshold": "P75 estimated from training window only",
+  "seed": 42,
+  "execution_status": "BLOCKED_BY_PIPELINE_OR_DATA",
+  "blocking_detail": "Raw daily PM10 time series missing for 14/17 stations. Available 3/17: pm10_daily.csv, pm10_valencia_vivers.csv, pm10_zarra_emep.csv. MITECO download blocked by proxy (403). Predictions release asset covers evaluation period only, insufficient to reconstruct full training history.",
+  "manifest_utc": "2026-08-06T06:34:39Z"
+}
