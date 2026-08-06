@@ -1,0 +1,12 @@
+journal,citation_count,reference_role,problem_space_or_method_space,recent_or_foundational,destination_signal,notes
+International Journal of Forecasting,4,Forecast accuracy & skill metrics,method_space,foundational,verification-method home,"Hyndman & Koehler (2006), Tashman (2000), Makridakis et al. (2018), Diebold (2015)"
+Environmental Modelling & Software,1,Air quality ML evaluation review,problem_space,recent,environmental-modelling home,"Chadalavada et al. (2025) - strong signal for EM&S fit"
+Atmospheric Research,1,Air quality ML forecasting review,problem_space,recent,air-quality home,"Méndez et al. (2023)"
+Monthly Weather Review,1,Forecast verification theory,method_space,foundational,verification-method home,"Murphy (1988) MSE decomposition"
+Journal of Geophysical Research: Atmospheres,1,Verification diagnostics (Taylor diagram),method_space,foundational,verification-method home,"Taylor (2001)"
+Artificial Intelligence Review,1,AI air quality review,problem_space,recent,forecasting-method home,"Tang et al. (2024)"
+Journal of Intelligent Information Systems,1,Time series ML evaluation,method_space,recent,forecasting-method home,"Cerqueira et al. (2022)"
+Computational Statistics & Data Analysis,1,Time series cross-validation,method_space,recent,verification-method home,"Bergmeir et al. (2018)"
+Journal of Business & Economic Statistics,1,Diebold-Mariano test,method_space,foundational,verification-method home,"Diebold & Mariano (1995)"
+Journal of the American Statistical Association,1,Scoring rules & evaluation,method_space,foundational,verification-method home,"Gneiting & Raftery (2007)"
+PLoS Computational Biology,1,Reproducibility practices,method_space,recent,not a credible destination,"Sandve et al. (2013)"

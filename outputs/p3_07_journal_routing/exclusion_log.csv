@@ -1,0 +1,7 @@
+journal,exclusion_reason,hard_or_soft,evidence,status
+Atmosphere (MDPI),MDPI publisher & Mandatory APC,HARD,Official MDPI policy: Gold OA only with 2400 CHF APC,EXCLUDED
+Sensors (MDPI),MDPI publisher & Mandatory APC,HARD,Official MDPI policy: Gold OA only,EXCLUDED
+Sustainability (MDPI),MDPI publisher & Mandatory APC,HARD,Official MDPI policy: Gold OA only,EXCLUDED
+International Journal of Forecasting,High desk-reject risk for applied single-domain PM10 paper,SOFT,IJF scope demands general theoretical forecasting contributions,DESELECTED
+Environmental Pollution,Scope mismatch (requires ecotoxicology/chemical impacts),SOFT,EP scope focuses on biological & chemical pollution effects,DESELECTED
+Journal of Environmental Management,Scope mismatch (requires policy/management implementation),SOFT,JEM scope focuses on management policy frameworks,DESELECTED

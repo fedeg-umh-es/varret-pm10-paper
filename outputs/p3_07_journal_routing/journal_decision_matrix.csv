@@ -1,0 +1,10 @@
+journal,thematic_fit,audience_fit,contribution_type_fit,methodological_fit,corpus_fit,reference_alignment,recent_editorial_receptivity,novelty_risk,desk_reject_risk,prestige_realism,subscription_route,mandatory_apc_risk,current_indexing,UMH_Elsevier_advantage,P3_line_coherence,overall_recommendation,notes
+Environmental Modelling & Software,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH,HIGH,LOW,LOW,HIGH,HIGH,LOW,HIGH,HIGH,HIGH,BEST_TARGET_NOW,"Premier journal for environmental model evaluation diagnostics and software workflows"
+Atmospheric Environment,HIGH,HIGH,MEDIUM,HIGH,HIGH,HIGH,HIGH,LOW,MEDIUM,HIGH,HIGH,LOW,HIGH,HIGH,HIGH,CREDIBLE_FALLBACK,"Premier journal for atmospheric air pollution studies and model evaluation"
+Air Quality Atmosphere & Health,HIGH,MEDIUM,MEDIUM,MEDIUM,HIGH,MEDIUM,HIGH,LOW,LOW,MEDIUM,HIGH,LOW,HIGH,NOT_APPLICABLE,HIGH,CREDIBLE_FALLBACK,"Good Q2 fallback for applied PM10 forecasting studies"
+Environmental Monitoring and Assessment,HIGH,MEDIUM,MEDIUM,MEDIUM,HIGH,MEDIUM,MEDIUM,LOW,LOW,MEDIUM,HIGH,LOW,HIGH,NOT_APPLICABLE,MEDIUM,FEASIBLE_FALLBACK,"Solid Q3 fallback"
+Stochastic Environmental Research and Risk Assessment,MEDIUM,MEDIUM,LOW,MEDIUM,MEDIUM,LOW,MEDIUM,MEDIUM,MEDIUM,MEDIUM,HIGH,LOW,HIGH,NOT_APPLICABLE,MEDIUM,FEASIBLE_FALLBACK,"Focused more on stochastic/spatial risk"
+Journal of Environmental Management,MEDIUM,LOW,LOW,LOW,MEDIUM,LOW,LOW,HIGH,HIGH,HIGH,HIGH,LOW,HIGH,HIGH,LOW,DO_NOT_SEND_NOW,"Requires management/policy implementation focus"
+International Journal of Forecasting,LOW,LOW,LOW,HIGH,LOW,HIGH,LOW,HIGH,HIGH,HIGH,HIGH,LOW,HIGH,HIGH,MEDIUM,DO_NOT_SEND_NOW,"Requires general forecasting theory innovation"
+Environmental Pollution,LOW,LOW,LOW,LOW,MEDIUM,LOW,LOW,HIGH,HIGH,HIGH,HIGH,LOW,HIGH,HIGH,LOW,DO_NOT_SEND_NOW,"Requires ecotoxicology/chemical impact focus"
+Atmosphere (MDPI),HIGH,HIGH,MEDIUM,MEDIUM,HIGH,LOW,MEDIUM,LOW,LOW,LOW,LOW,HIGH,HIGH,NOT_APPLICABLE,LOW,EXCLUDED_POLICY,"EXCLUDED BY POLICY: Mandatory APC / Gold OA MDPI"

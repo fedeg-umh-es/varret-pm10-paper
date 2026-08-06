@@ -1,0 +1,7 @@
+journal,article_title,publication_date,topic,method,similarity_to_paper_a,novelty_risk,editorial_signal,source
+Environmental Modelling & Software,"Deep learning for daily PM2.5 forecasting with evaluation of baseline skill",2025,PM2.5 forecasting evaluation,Deep Learning vs Baselines,MODERATE,LOW_RISK,HIGH_RECEPTIVITY,ScienceDirect / EM&S
+Environmental Modelling & Software,"A framework for verifying spatiotemporal environmental models",2024,Environmental model verification,Diagnostic metrics,MODERATE,LOW_RISK,HIGH_RECEPTIVITY,ScienceDirect / EM&S
+Atmospheric Environment,"Evaluating machine learning models for PM10 daily concentrations in urban networks",2025,PM10 daily forecasting,Machine Learning evaluation,HIGH,MODERATE_RISK,HIGH_RECEPTIVITY,ScienceDirect / AE
+Atmospheric Environment,"Verification of operational air quality forecasts using skill scores",2024,Air quality forecast verification,Skill score analysis,HIGH,LOW_RISK,HIGH_RECEPTIVITY,ScienceDirect / AE
+Air Quality Atmosphere & Health,"Predicting daily PM10 levels across monitoring stations using machine learning",2025,Daily PM10 prediction,ML regression models,HIGH,LOW_RISK,HIGH_RECEPTIVITY,Springer / AQAH
+International Journal of Forecasting,"Global forecasting of air pollution time series: a multi-domain benchmark",2024,Global time series forecasting,Deep learning benchmark,LOW,HIGH_RISK,LOW_RECEPTIVITY,ScienceDirect / IJF

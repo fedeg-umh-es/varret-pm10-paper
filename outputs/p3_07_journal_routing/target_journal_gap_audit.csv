@@ -1,0 +1,7 @@
+requirement,current_manuscript_state,target_journal_expectation,status,required_change,scientific_or_mechanical,priority
+article_type,Standard Research Article,Research Paper / Short Communication,PASS,Ensure compliance with EM&S Author Guidelines,MECHANICAL,LOW
+abstract_structure,Single paragraph ~180 words,Concise abstract highlighting model/diagnostic contribution,PASS,None (abstract already highlights verification diagnostic),NONE,NONE
+reproducibility_statement,Code repository link and reproducibility paragraph included,Explicit software/data availability section,PASS,Ensure GitHub repository link is featured in data availability statement,MECHANICAL,LOW
+formatting_style,Standard LaTeX article class,Elsevier cas-sc / elsarticle or clean single-column LaTeX,PASS,Format to EM&S template upon submission preparation,MECHANICAL,LOW
+highlights,Not included in tex source,3 to 5 bullet points (max 85 characters each),MINOR_GAP,Draft 3-5 highlights for EM&S submission system,MECHANICAL,MEDIUM
+cover_letter,Not included,Cover letter framing diagnostic contribution for environmental modellers,MINOR_GAP,Draft cover letter emphasizing forecast verification diagnostic,MECHANICAL,MEDIUM
