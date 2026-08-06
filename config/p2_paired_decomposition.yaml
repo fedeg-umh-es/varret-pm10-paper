@@ -1,0 +1,178 @@
+# P2 — Finite Linear Memory Skill Decomposition
+# Paired decomposition configuration.
+#
+# Canon:    docs/canon/P2_PROJECT_CANON.md (v2.0)
+# Contract: docs/canon/P2_PAIRED_DECOMPOSITION_CONTRACT.md (v1.0)
+# Decision: 2026-08-06-p2-finite-linear-memory-skill-decomposition
+#
+# Every value here is declared BEFORE results are inspected. Changing a value
+# after seeing results requires a decision-log entry.
+
+decision_id: 2026-08-06-p2-finite-linear-memory-skill-decomposition
+canon_version: "2.0"
+
+# --------------------------------------------------------------------------
+# Authorised empirical scope. No station, model, horizon or dataset may be
+# added here without a canon update.
+# --------------------------------------------------------------------------
+scope:
+  resolution: daily
+  horizons: [1, 2, 3, 4, 5, 6, 7]
+  p_orders: [7, 14, 21]          # mandatory sensitivity set
+  ar1_order: 1                   # AR(1) is the p = 1 case of the same projection
+  baseline_method: persistence
+  models: [ridge_direct, hgb_direct, sarima]
+  # Diagnostic-only methods. They never define L_M.
+  reference_only_methods: [seasonal_naive, stl_ridge_direct]
+
+stations:
+  - name: Elche
+    dataset_id: e1_rr_daily
+    series_path: data/raw/pm10_daily.csv
+    predictions_path: outputs/metrics/predictions.csv
+    date_column: date
+    value_column: pm10
+  - name: Valencia Vivers
+    dataset_id: e1_rr_valencia_vivers
+    series_path: data/raw/pm10_valencia_vivers.csv
+    predictions_path: outputs/metrics/predictions_valencia_vivers.csv
+    date_column: date
+    value_column: pm10
+  - name: Zarra EMEP
+    dataset_id: e1_rr_zarra_emep
+    series_path: data/raw/pm10_zarra_emep.csv
+    predictions_path: outputs/metrics/predictions_zarra_emep.csv
+    date_column: date
+    value_column: pm10
+
+# --------------------------------------------------------------------------
+# Calendar and missingness contract.
+# --------------------------------------------------------------------------
+calendar:
+  # The series is reindexed to the complete daily calendar between the first
+  # and last observed date. Missing days stay NaN and are never dropped
+  # before lag construction.
+  freq: D
+  # Sensitivity variant only. NEVER a primary estimator.
+  run_compressed_time_sensitivity: true
+
+# --------------------------------------------------------------------------
+# Train-only estimation.
+# --------------------------------------------------------------------------
+estimation:
+  # max(train_date) < origin_date, per contract section 3. The training window
+  # ends this many days BEFORE the origin. The lag vector x_t evaluated at the
+  # origin still uses observations up to and including the origin itself,
+  # exactly like persistence.
+  train_end_offset_days: 1
+  window: expanding          # expanding | rolling
+  rolling_window_days: null  # used only when window == rolling
+  # Minimum number of calendar-aligned observed pairs required for a lag to be
+  # usable. Lags below this threshold make the whole Gamma_p invalid.
+  min_pairs_per_lag: 100
+  # Minimum number of observed training values required before any reference
+  # is estimated for an origin.
+  min_train_observations: 365
+  centring: mean_of_observed_training_values
+  # gamma_hat(k) = sum_{t in V_k} (y_t - mu)(y_{t-k} - mu) / n_k
+  autocovariance_denominator: n_pairs_at_lag
+
+# --------------------------------------------------------------------------
+# Numerical validity of Gamma_p. Fail closed: no pseudo-inverse, no diagonal
+# loading, no nearest-PD repair, no silent clipping.
+# --------------------------------------------------------------------------
+numerics:
+  regularisation_policy: NONE          # the only value authorised for this run
+  min_eigenvalue_strictly_positive: true
+  max_condition_number: 1.0e+10
+  solver: numpy.linalg.solve
+
+# --------------------------------------------------------------------------
+# Paired support.
+# --------------------------------------------------------------------------
+pairing:
+  key: [station, fold_or_window_id, origin_date, target_date, horizon]
+  y_true_tolerance: 1.0e-09
+  # Principal support: global intersection across all methods and all lag
+  # orders, so the verification sample does not move when p moves.
+  principal_support: GLOBAL_COMMON
+  support_types:
+    GLOBAL_COMMON:
+      methods: [persistence, ar1, ar7, ar14, ar21, ridge_direct, hgb_direct]
+      description: >-
+        Principal support. sarima is excluded because its origin sampling
+        (--origin-step 14) is not comparable and it is absent for Elche.
+        See docs/canon/PM10_RESEARCH_DECISION_LOG.md.
+    GLOBAL_COMMON_WITH_SARIMA:
+      methods: [persistence, ar1, ar7, ar14, ar21, ridge_direct, hgb_direct, sarima]
+      description: >-
+        Secondary, separately labelled support for the two stations where
+        sarima exists. Reported with explicit case counts; never substituted
+        for GLOBAL_COMMON.
+    ORDER_SPECIFIC:
+      description: >-
+        Secondary sensitivity. For each p, the intersection across
+        persistence, ar1, ar{p} and the empirical models only.
+
+# --------------------------------------------------------------------------
+# Additive identity Delta_total = Delta_AR1 + Delta_mem + Delta_res.
+# --------------------------------------------------------------------------
+identity_check:
+  atol: 1.0e-12
+  rtol: 1.0e-10
+
+# --------------------------------------------------------------------------
+# Secondary normalised fraction pi_linear = (L_P - L_ARp) / (L_P - L_M).
+# Thresholds declared before results are inspected.
+# --------------------------------------------------------------------------
+fractions:
+  enabled: true
+  # |Delta_total| <= abs_threshold                -> denominator near zero
+  # |Delta_total| <= rel_threshold * L_P          -> denominator near zero
+  denominator_abs_threshold: 1.0e-08
+  denominator_rel_threshold: 0.01
+  # Sensitivity sweep over the relative threshold, reported alongside.
+  denominator_rel_threshold_sensitivity: [0.005, 0.01, 0.02, 0.05]
+  clip_to_unit_interval: false     # must stay false
+
+# --------------------------------------------------------------------------
+# Moving-block bootstrap over origin vectors.
+# The resampled unit is one origin carrying, jointly and intact, every
+# available (method, horizon) loss. The same blocks are applied to every
+# method. No length is marked primary.
+# --------------------------------------------------------------------------
+bootstrap:
+  enabled: true
+  n_replicates: 2000
+  seed: 20260806
+  confidence_level: 0.95
+  interval_method: percentile
+  block_lengths_origins: [7, 14, 21]
+  primary_block_length: null
+  replicate_chunk_size: 250        # memory-bounded chunking
+  store_full_replicate_matrices: false
+
+# --------------------------------------------------------------------------
+# Synthetic validation. Deterministic, seeded, independent of PM10 data.
+# --------------------------------------------------------------------------
+synthetic:
+  seed: 20260806
+  n_observations: 4000
+  n_origins: 1500
+  ar1_phi: 0.6
+  ar_q_coefficients: [0.5, -0.3, 0.25]
+  nonlinear_threshold_coefficients: [0.7, -0.4]
+  missing_fraction: 0.2
+  white_noise_tolerance: 0.05      # |Delta| / L_P tolerated as "no systematic gain"
+
+# --------------------------------------------------------------------------
+# Model selection. An oracle envelope over test MSE is prohibited.
+# --------------------------------------------------------------------------
+selection:
+  policy: DECLARED_FIXED_MODEL_LIST
+  allow_test_loss_selection: false   # must stay false
+
+outputs:
+  directory: outputs/p2_paired_decomposition
+  report_path: reports/P2_PAIRED_DECOMPOSITION_REPORT.md
+  provenance_manifest: inputs/P2_INPUT_PROVENANCE.json

@@ -1,0 +1,93 @@
+{
+  "PAIRED_SUPPORT_VALID": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/support_counts.csv"
+    ],
+    "notes": "One-to-one keys, identical y_true and target dates, and identical availability were asserted for every support before any loss was aggregated; the principal support is fixed across p."
+  },
+  "TRAIN_ONLY_VALID": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/yule_walker_diagnostics.csv",
+      "outputs/p2_paired_decomposition/autocovariance_pair_counts.parquet"
+    ],
+    "notes": "mu_hat and gamma_hat for every origin are estimated on observations ending 1 day(s) before the origin date; the lag vector at the origin is information available at the origin, exactly like persistence."
+  },
+  "NO_ORACLE_SELECTION": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/decomposition_by_station_horizon_model_p.csv"
+    ],
+    "notes": "Models come from a declared fixed list; select_evaluated_models raises if evaluated losses are passed in. No best-model envelope row exists."
+  },
+  "MSE_IDENTITY_VERIFIED": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/mse_identity_checks.csv"
+    ],
+    "notes": "378/378 cells within atol=1e-12, rtol=1e-10."
+  },
+  "MISSINGNESS_TESTS_PASS": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/missingness_sensitivity.csv"
+    ],
+    "notes": "The complete daily calendar is preserved, gaps are never dropped before lag construction, and the compressed-time estimator is reported only as a labelled sensitivity."
+  },
+  "P_SENSITIVITY_COMPLETED": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/p_sensitivity.csv"
+    ],
+    "notes": "p in [7, 14, 21] evaluated on the fixed global support and on order-specific supports, with case counts on both."
+  },
+  "BLOCK_BOOTSTRAP_COMPLETED": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/bootstrap_intervals.csv",
+      "outputs/p2_paired_decomposition/bootstrap_block_sensitivity.csv"
+    ],
+    "notes": "Block lengths [7, 14, 21] over origin vectors, 2000 replicates, seed 20260806. No length is marked primary."
+  },
+  "SYNTHETIC_VALIDATION_COMPLETED": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/synthetic_validation_summary.json"
+    ],
+    "notes": "White noise, AR(1), AR(q), nonlinear, incomplete-calendar, identity and bootstrap-pairing scenarios all executed under a fixed seed."
+  },
+  "RESULT_REPLICATES_ACROSS_MORE_THAN_ONE_STATION": {
+    "status": "PASS",
+    "evidence_paths": [
+      "outputs/p2_paired_decomposition/decomposition_by_station_horizon_model_p.csv"
+    ],
+    "notes": "A complete, identity-verified decomposition with bootstrap intervals was produced on the principal support for 3 stations: ['Elche', 'Valencia Vivers', 'Zarra EMEP']. This condition records mechanical availability across stations only; whether the substantive pattern replicates is part of NON_TRIVIAL_INTERPRETATION_FOUND."
+  },
+  "NON_TRIVIAL_INTERPRETATION_FOUND": {
+    "status": "PENDING_SCIENTIFIC_REVIEW",
+    "evidence_paths": [
+      "reports/P2_PAIRED_DECOMPOSITION_REPORT.md"
+    ],
+    "notes": "Scientific judgement reserved to the human reviewer. This pipeline cannot declare P2_PAPER_GO."
+  },
+  "_summary": {
+    "counts": {
+      "PASS": 9,
+      "FAIL": 0,
+      "BLOCKED": 0,
+      "PENDING_SCIENTIFIC_REVIEW": 1
+    },
+    "p2_paper_status": "NO-GO PENDING SCIENTIFIC REVIEW",
+    "rule": "NON_TRIVIAL_INTERPRETATION_FOUND is a human scientific judgement. P2_PAPER_GO cannot be declared by this pipeline under any combination of mechanical results."
+  },
+  "run_stamp": {
+    "code_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+    "config_sha256": "572a6a79dfaf6247292af8c946e3f621c520377d7eb449bd78e9b309f483fc6a",
+    "input_manifest_sha256": "7e61f4823860ac67fc2cf7b88c0b78031ccbd9e2a1f7bf6285099b2c126d9b06",
+    "generated_at_utc": "2026-08-06T11:21:41Z",
+    "decision_id": "2026-08-06-p2-finite-linear-memory-skill-decomposition",
+    "canon_version": "2.0"
+  },
+  "invalid_gamma_matrices": 8
+}
