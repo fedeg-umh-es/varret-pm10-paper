@@ -1,6 +1,7 @@
 {
-  "timestamp": "2026-08-06T05:38:17Z",
-  "input_sha256": "6dfb12c5a8a1c226f4a7e2b3d9c8f501e2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2",
+  "timestamp": "2026-08-06T05:49:13Z",
+  "provenance": "derived from master_diagnostic_table.csv via verify_decision_change.py",
+  "input_sha256": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6",
   "thresholds": {
     "alpha_primary": 0.5,
     "recall_primary": 0.2
@@ -13,10 +14,12 @@
     "decision_change_pct": 97.1,
     "discordant_n": 101,
     "rho_alpha_skill": -0.863,
-    "rho_alpha_skill_pval": 5.398e-178,
+    "rho_alpha_skill_pval": 5.398430582239054e-178,
+    "rho_alpha_dm_significant": -0.0386,
     "urban_industrial_ruleA_n": 18,
     "urban_industrial_change_n": 14,
-    "urban_industrial_pct": 77.8
+    "urban_industrial_pct": 77.8,
+    "urban_industrial_n_stations": 1
   },
   "failure_decomposition": {
     "pass_rule_b": 8,
@@ -28,7 +31,8 @@
   "sensitivity_range_pct": {
     "min": 89.5,
     "max": 98.6,
-    "primary": 97.1
+    "primary": 97.1,
+    "n_combinations_evaluated": 63
   },
   "checks_pass": 18,
   "checks_fail": 0

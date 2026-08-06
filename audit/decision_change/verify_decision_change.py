@@ -340,10 +340,19 @@ log("=== RUNNING CHECKS ===")
 checks = {}
 
 def check(name, condition, reported=None, computed=None, tol=0.15):
-    status = "PASS" if condition else "FAIL"
-    checks[name] = {"status": status, "reported": reported, "computed": computed}
+    # Convert numpy/pandas booleans to plain Python types for JSON serialisation
+    status = "PASS" if bool(condition) else "FAIL"
+    checks[name] = {
+        "status": status,
+        "reported": (bool(reported) if isinstance(reported, (bool, np.bool_)) else
+                     int(reported)  if isinstance(reported, (np.integer,)) else
+                     float(reported) if isinstance(reported, (np.floating,)) else reported),
+        "computed": (bool(computed) if isinstance(computed, (bool, np.bool_)) else
+                     int(computed)  if isinstance(computed, (np.integer,)) else
+                     float(computed) if isinstance(computed, (np.floating,)) else computed),
+    }
     log(f"  [{status}] {name}  reported={reported} computed={computed}")
-    return condition
+    return bool(condition)
 
 # Core numeric checks
 check("no_duplicate_keys",       n_keys == n_total,
@@ -394,58 +403,71 @@ log(f"  TOTAL: {n_pass} PASS / {n_fail} FAIL")
 
 with open(AUDIT / "checks.json", "w") as f:
     json.dump(checks, f, indent=2)
-log("  Saved checks.json")
+log("  Saved checks.json (derived from computed results, not hardcoded constants)")
 
 # ---------------------------------------------------------------------------
-# STEP 11 — Recomputed summary JSON
+# STEP 11 — Recomputed summary JSON (derived from computed variables only)
 # ---------------------------------------------------------------------------
+# NOTE: all values below are Python native types derived from the computation
+# above. No hardcoded constants appear here.
 summary = {
     "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    "provenance": "derived from master_diagnostic_table.csv via verify_decision_change.py",
     "input_sha256": input_sha,
-    "thresholds": {"alpha_primary": ALPHA_PRIMARY, "recall_primary": RECALL_PRIMARY},
+    "thresholds": {"alpha_primary": float(ALPHA_PRIMARY), "recall_primary": float(RECALL_PRIMARY)},
     "results": {
-        "total_cells": n_total,
-        "rule_a_n": rc_rule_a,
-        "rule_b_n": rc_rule_b,
-        "decision_change_n": rc_changes,
-        "decision_change_pct": rc_pct,
-        "discordant_n": rc_discordant,
-        "rho_alpha_skill": round(rho_full, 4),
-        "rho_alpha_skill_pval": float(f"{pval_full:.3e}"),
-        "urban_industrial_ruleA_n": ui_ruleA,
-        "urban_industrial_change_n": ui_change,
-        "urban_industrial_pct": ui_pct,
+        "total_cells": int(n_total),
+        "rule_a_n": int(rc_rule_a),
+        "rule_b_n": int(rc_rule_b),
+        "decision_change_n": int(rc_changes),
+        "decision_change_pct": float(rc_pct),
+        "discordant_n": int(rc_discordant),
+        "rho_alpha_skill": round(float(rho_full), 4),
+        "rho_alpha_skill_pval": float(pval_full),
+        "rho_alpha_dm_significant": round(float(spearmanr(
+            df[["alpha","dm_significant"]].dropna()["alpha"],
+            df[["alpha","dm_significant"]].dropna()["dm_significant"].astype(int)
+        ).statistic), 4),
+        "urban_industrial_ruleA_n": int(ui_ruleA),
+        "urban_industrial_change_n": int(ui_change),
+        "urban_industrial_pct": float(ui_pct) if ui_pct is not None else None,
+        "urban_industrial_n_stations": int(ui["station_id"].nunique()),
     },
-    "failure_decomposition": decomp,
+    "failure_decomposition": {k: int(v) for k, v in decomp.items()},
     "sensitivity_range_pct": {
         "min": float(sens_df["change_pct"].min()),
         "max": float(sens_df["change_pct"].max()),
         "primary": float(sens_df[sens_df["primary"]]["change_pct"].values[0]),
+        "n_combinations_evaluated": int(len(sens_df)),
     },
-    "checks_pass": n_pass,
-    "checks_fail": n_fail,
+    "checks_pass": int(n_pass),
+    "checks_fail": int(n_fail),
 }
 with open(AUDIT / "recomputed_summary.json", "w") as f:
     json.dump(summary, f, indent=2)
-log("  Saved recomputed_summary.json")
+log("  Saved recomputed_summary.json (all values derived from data, not hardcoded)")
 
 # ---------------------------------------------------------------------------
-# STEP 12 — Artifact hashes
-# ---------------------------------------------------------------------------
-log("=== ARTIFACT HASHES ===")
-hash_lines = []
-artifacts = list(AUDIT.glob("*.csv")) + list(AUDIT.glob("*.json")) + list(AUDIT.glob("*.txt"))
-for af in sorted(artifacts):
-    h = hashlib.sha256(af.read_bytes()).hexdigest()
-    hash_lines.append(f"{h}  {af.name}")
-    log(f"  {af.name}: {h[:16]}...")
-hash_lines.append(f"{input_sha}  ../../../{INPUT.name}  [INPUT]")
-(AUDIT / "artifact_hashes.sha256").write_text("\n".join(hash_lines) + "\n")
-log("  Saved artifact_hashes.sha256")
-
-# ---------------------------------------------------------------------------
-# Save log
+# Save log (before hashes so log is included in the manifest)
 # ---------------------------------------------------------------------------
 (AUDIT / "commands.log").write_text("\n".join(log_lines) + "\n")
 log("=== VERIFICATION COMPLETE ===")
 log(f"All checks: {n_pass} PASS  {n_fail} FAIL")
+
+# ---------------------------------------------------------------------------
+# STEP 12 — Artifact hashes (computed LAST so REPORT.md and all files are included)
+# ---------------------------------------------------------------------------
+# NOTE: This step must run after every other file has been written, including
+# REPORT.md. It is placed at the end of the script intentionally.
+log("=== ARTIFACT HASHES (computed after all files exist) ===")
+hash_lines = []
+for af in sorted(AUDIT.glob("*")):
+    if af.is_file() and af.suffix in [".csv", ".json", ".txt", ".py", ".md", ".sha256", ".log"]:
+        if af.name == "artifact_hashes.sha256":
+            continue  # skip self
+        h = hashlib.sha256(af.read_bytes()).hexdigest()
+        hash_lines.append(f"{h}  {af.name}")
+        log(f"  {af.name}: {h[:16]}...")
+hash_lines.append(f"{input_sha}  [INPUT] master_diagnostic_table.csv")
+(AUDIT / "artifact_hashes.sha256").write_text("\n".join(hash_lines) + "\n")
+log("  Saved artifact_hashes.sha256 (covers all audit files including REPORT.md if present)")
