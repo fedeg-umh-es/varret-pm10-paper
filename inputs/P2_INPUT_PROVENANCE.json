@@ -1,0 +1,98 @@
+{
+  "decision_id": "2026-08-06-p2-finite-linear-memory-skill-decomposition",
+  "canon_version": "2.0",
+  "generated_at_utc": "2026-08-06T11:21:41Z",
+  "execution_repository": "fedeg-umh-es/varret-pm10-paper",
+  "execution_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+  "notes": [
+    "The row-level prediction artefacts are native to the execution repository, so they are VERIFIED_LOCAL_P2 rather than VERIFIED_EXTERNAL_IMMUTABLE_INPUT; see docs/canon/PM10_RESEARCH_DECISION_LOG.md.",
+    "No artefact was copied from P4. P4 was not reachable, read, executed or modified.",
+    "No model was trained and no new dataset was opened."
+  ],
+  "artefacts": [
+    {
+      "logical_role": "daily_pm10_series",
+      "station_scope": "Elche",
+      "model_scope": "n/a",
+      "source_path": "data/raw/pm10_daily.csv",
+      "copied_path": null,
+      "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+      "producer_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+      "sha256": "5ab9cd34f6d6764d6b96fea0cdd7980878155de3f359b7db56206dfefa401726",
+      "size_bytes": 82827,
+      "schema_summary": "date,pm10 (daily, incomplete calendar preserved)",
+      "provenance_status": "VERIFIED_LOCAL_P2",
+      "allowed_use": "read-only input to the P2 paired decomposition"
+    },
+    {
+      "logical_role": "row_level_predictions",
+      "station_scope": "Elche",
+      "model_scope": "persistence,ridge_direct,hgb_direct,sarima,seasonal_naive,stl_ridge_direct",
+      "source_path": "outputs/metrics/predictions.csv",
+      "copied_path": null,
+      "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+      "producer_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+      "sha256": "915a821ca74c7d51507d8b6cd3420c8d141ec26f1478a580d9792398641b58ee",
+      "size_bytes": 2027461,
+      "schema_summary": "dataset,model,fold,origin_date,horizon,date,y_true,y_pred",
+      "provenance_status": "VERIFIED_LOCAL_P2",
+      "allowed_use": "read-only input to the P2 paired decomposition"
+    },
+    {
+      "logical_role": "daily_pm10_series",
+      "station_scope": "Valencia Vivers",
+      "model_scope": "n/a",
+      "source_path": "data/raw/pm10_valencia_vivers.csv",
+      "copied_path": null,
+      "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+      "producer_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+      "sha256": "3eabf0e518c07abc608ba434e349731e840e0c951ace4c773cc52d36594533cf",
+      "size_bytes": 42738,
+      "schema_summary": "date,pm10 (daily, incomplete calendar preserved)",
+      "provenance_status": "VERIFIED_LOCAL_P2",
+      "allowed_use": "read-only input to the P2 paired decomposition"
+    },
+    {
+      "logical_role": "row_level_predictions",
+      "station_scope": "Valencia Vivers",
+      "model_scope": "persistence,ridge_direct,hgb_direct,sarima,seasonal_naive,stl_ridge_direct",
+      "source_path": "outputs/metrics/predictions_valencia_vivers.csv",
+      "copied_path": null,
+      "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+      "producer_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+      "sha256": "bfb21ff09652c390daf15b72cad2086fe13eacdd85d9e5e736a87e2d9b51890a",
+      "size_bytes": 4606894,
+      "schema_summary": "dataset,model,fold,origin_date,horizon,date,y_true,y_pred",
+      "provenance_status": "VERIFIED_LOCAL_P2",
+      "allowed_use": "read-only input to the P2 paired decomposition"
+    },
+    {
+      "logical_role": "daily_pm10_series",
+      "station_scope": "Zarra EMEP",
+      "model_scope": "n/a",
+      "source_path": "data/raw/pm10_zarra_emep.csv",
+      "copied_path": null,
+      "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+      "producer_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+      "sha256": "f4630d0df551da201011f91d24c8811f87311c1426f256f610f140f2160259ec",
+      "size_bytes": 43550,
+      "schema_summary": "date,pm10 (daily, incomplete calendar preserved)",
+      "provenance_status": "VERIFIED_LOCAL_P2",
+      "allowed_use": "read-only input to the P2 paired decomposition"
+    },
+    {
+      "logical_role": "row_level_predictions",
+      "station_scope": "Zarra EMEP",
+      "model_scope": "persistence,ridge_direct,hgb_direct,sarima,seasonal_naive,stl_ridge_direct",
+      "source_path": "outputs/metrics/predictions_zarra_emep.csv",
+      "copied_path": null,
+      "producer_repository": "fedeg-umh-es/varret-pm10-paper",
+      "producer_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+      "sha256": "601440c364f266696c8ed8e8aa4a368a8150a4da4e27a5b9a315bcca52fce1a7",
+      "size_bytes": 4326018,
+      "schema_summary": "dataset,model,fold,origin_date,horizon,date,y_true,y_pred",
+      "provenance_status": "VERIFIED_LOCAL_P2",
+      "allowed_use": "read-only input to the P2 paired decomposition"
+    }
+  ]
+}

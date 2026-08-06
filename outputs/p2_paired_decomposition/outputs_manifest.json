@@ -1,0 +1,124 @@
+{
+  "run_stamp": {
+    "code_commit": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+    "config_sha256": "572a6a79dfaf6247292af8c946e3f621c520377d7eb449bd78e9b309f483fc6a",
+    "input_manifest_sha256": "7e61f4823860ac67fc2cf7b88c0b78031ccbd9e2a1f7bf6285099b2c126d9b06",
+    "generated_at_utc": "2026-08-06T11:21:41Z",
+    "decision_id": "2026-08-06-p2-finite-linear-memory-skill-decomposition",
+    "canon_version": "2.0"
+  },
+  "config_path": "config/p2_paired_decomposition.yaml",
+  "stations": {
+    "Elche": "2017-01-01..2024-12-31",
+    "Valencia Vivers": "2017-01-01..2024-12-31",
+    "Zarra EMEP": "2017-01-01..2024-12-30"
+  },
+  "artefacts": {
+    "losses_paired.parquet": {
+      "path": "outputs/p2_paired_decomposition/losses_paired.parquet",
+      "sha256": "d912e78ce6c27af58118b2811fc9efaf08be96dfaad0036ab13bc050240df987",
+      "rows": 143640,
+      "columns": 17,
+      "description": "Row-level paired squared errors on the principal GLOBAL_COMMON support."
+    },
+    "decomposition_by_station_horizon_model_p.csv": {
+      "path": "outputs/p2_paired_decomposition/decomposition_by_station_horizon_model_p.csv",
+      "sha256": "68633391434f3b17f9865d40e77296fe473d01624ec5c6f5eb0e6ca4e0d8c9c5",
+      "rows": 378,
+      "columns": 22,
+      "description": "Primary additive decomposition by station, horizon, model and lag order."
+    },
+    "support_counts.csv": {
+      "path": "outputs/p2_paired_decomposition/support_counts.csv",
+      "sha256": "aa6d662fecc9dee68a8381efea86c334d3943941b7e7038f389a53cb788fe24e",
+      "rows": 98,
+      "columns": 13,
+      "description": "Paired case counts by station, support type and horizon."
+    },
+    "yule_walker_diagnostics.csv": {
+      "path": "outputs/p2_paired_decomposition/yule_walker_diagnostics.csv",
+      "sha256": "85fff89c81161e93f0fcbbb0bc2de6a728b4734e2968263481191eca0b5aa6b4",
+      "rows": 17804,
+      "columns": 21,
+      "description": "Gamma_p eigen-diagnostics, rank, conditioning and solver status by station, fold and lag order (horizon-invariant by construction)."
+    },
+    "yule_walker_solver_status.parquet": {
+      "path": "outputs/p2_paired_decomposition/yule_walker_solver_status.parquet",
+      "sha256": "2194bb407f371575f99711d033eecd3a0432c9bd6c4d099ec70434bb599eb4b6",
+      "rows": 124376,
+      "columns": 12,
+      "description": "Per-horizon solver status for every fitted direct projection."
+    },
+    "autocovariance_pair_counts.parquet": {
+      "path": "outputs/p2_paired_decomposition/autocovariance_pair_counts.parquet",
+      "sha256": "78a07e443941f98cc100104494ed24b084e8dce8f431bfc3d798e60d90a85cc7",
+      "rows": 124628,
+      "columns": 11,
+      "description": "Calendar-aligned valid-pair count and gamma estimate by station, fold and lag."
+    },
+    "yule_walker_diagnostics_summary.csv": {
+      "path": "outputs/p2_paired_decomposition/yule_walker_diagnostics_summary.csv",
+      "sha256": "bad62c4664a1dee4af00fde3006ae8d9091f2c46c8dbd3deeb81b2e178f064db",
+      "rows": 20,
+      "columns": 10,
+      "description": "Counts of valid and refused Gamma_p systems by station and lag order."
+    },
+    "mse_identity_checks.csv": {
+      "path": "outputs/p2_paired_decomposition/mse_identity_checks.csv",
+      "sha256": "19bbc45652b347351f3a0b770299054257d9887e905b14d92c499563bc1bb8c7",
+      "rows": 378,
+      "columns": 19,
+      "description": "Numerical verification of Delta_total = Delta_AR1 + Delta_mem + Delta_res."
+    },
+    "bootstrap_intervals.csv": {
+      "path": "outputs/p2_paired_decomposition/bootstrap_intervals.csv",
+      "sha256": "1b847bc2e7bafc54be95118ea7e87ced1f7f88e80b2b0b7a3de59abb4266ef03",
+      "rows": 3780,
+      "columns": 23,
+      "description": "Moving-block bootstrap percentile intervals for every component and fraction."
+    },
+    "bootstrap_block_sensitivity.csv": {
+      "path": "outputs/p2_paired_decomposition/bootstrap_block_sensitivity.csv",
+      "sha256": "8a873d9ef18d98cc309b437b5a21efb3f72f4c32913b4b228b6273629ade799c",
+      "rows": 1260,
+      "columns": 22,
+      "description": "Block-length sensitivity of every bootstrap interval; no length is primary."
+    },
+    "p_sensitivity.csv": {
+      "path": "outputs/p2_paired_decomposition/p_sensitivity.csv",
+      "sha256": "cab500e3eb5c20df94dea1fbea5933482d7ddf276fa76805c968453d19afde0c",
+      "rows": 252,
+      "columns": 16,
+      "description": "Components under the fixed global support and under order-specific support."
+    },
+    "normalised_fractions_secondary.csv": {
+      "path": "outputs/p2_paired_decomposition/normalised_fractions_secondary.csv",
+      "sha256": "8c580bd075caea898c230edd611641bca577d2ce57cef5e3131857a95090a2b6",
+      "rows": 882,
+      "columns": 17,
+      "description": "Secondary pi_linear fractions with suppression status and threshold sensitivity."
+    },
+    "missingness_sensitivity.csv": {
+      "path": "outputs/p2_paired_decomposition/missingness_sensitivity.csv",
+      "sha256": "b5b89e5663577403acca68be24d0d8db709a043eb5c8f8a9a7530c25745ec451",
+      "rows": 84,
+      "columns": 19,
+      "description": "Calendar-aware versus compressed-time autocovariance estimation, same support."
+    },
+    "synthetic_validation_summary.json": {
+      "path": "outputs/p2_paired_decomposition/synthetic_validation_summary.json",
+      "sha256": "a7576f52b70fc7b085af30bcd34ca6ac74a978d0057ec3d17a1052180f76b901",
+      "rows": 7,
+      "columns": 0,
+      "description": "Deterministic seeded synthetic validation of the machinery."
+    },
+    "paper_go_gate.json": {
+      "path": "outputs/p2_paired_decomposition/paper_go_gate.json",
+      "sha256": "933917ff454b86e9d042b82cca9f03e48372c5430d3446e7af251a753ba59e0a",
+      "rows": 10,
+      "columns": 0,
+      "description": "Mechanical gate evaluation; P2_PAPER_GO is never declared here."
+    }
+  },
+  "absent_artefacts": []
+}

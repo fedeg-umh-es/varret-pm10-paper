@@ -56,6 +56,13 @@ data/processed/*
 !outputs/reproduction/*.json
 !outputs/reproduction/*.parquet
 
+# P2 — Finite Linear Memory Skill Decomposition: required traceable artefacts
+# (see docs/canon/P2_PAIRED_DECOMPOSITION_CONTRACT.md section 14).
+!outputs/p2_paired_decomposition/
+!outputs/p2_paired_decomposition/*.csv
+!outputs/p2_paired_decomposition/*.json
+!outputs/p2_paired_decomposition/*.parquet
+
 airquality_datasets/**
 
 # Local frozen submission packages
