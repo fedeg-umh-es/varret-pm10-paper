@@ -1,0 +1,37 @@
+{
+  "experiment": "P4 LightGBM robustness arm",
+  "model_id": "lightgbm_direct",
+  "purpose": "learner robustness and model-selection consequence",
+  "date_utc": "2026-08-06T06:05:36Z",
+  "branch": "codex/p4-lightgbm-ems-gap-audit",
+  "git_head": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+  "lightgbm_version": "4.6.0",
+  "stations_expected": 17,
+  "horizons_expected": 7,
+  "cells_expected": 119,
+  "existing_cells": 595,
+  "combined_cells_expected": 714,
+  "rule_a": "skill > 0 AND dm_significant",
+  "rule_b": "rule_a AND alpha >= 0.50 AND recall_p75 >= 0.20",
+  "primary_questions": [
+    "Does LightGBM reproduce positive error skill with low variance retention?",
+    "Does LightGBM change conventional model selection?",
+    "Does LightGBM change fidelity-aware model selection?",
+    "Does LightGBM reduce or increase decision discordance?"
+  ],
+  "forbidden_posthoc_actions": [
+    "test-based hyperparameter selection",
+    "threshold optimization",
+    "dropping unfavorable stations",
+    "changing existing model results",
+    "changing forecast origins",
+    "changing predictors",
+    "changing the baseline"
+  ],
+  "script_hashes": {
+    "scripts/01_generate_e1_rr_lags_only_predictions.py": "54b1ab1363a722c70ade53595e806557cd50b9a5f2a6b6220324b73a48b6bede",
+    "scripts/05_dm_significance.py": "254aa30c3505747f0c37c9d77a9a499139a15596897700551583cbbdaa31b443",
+    "scripts/09_build_comprehensive_unified_table.py": "04e4a4942dffba534cfaedb9decd8a735000a13317ac8b50424e6cefd46c0d67",
+    "scripts/15_decision_change_analysis.py": "d49ee8cb3b414231c0070f662b898c0d3a2b925b72dbddc6fc847bc6733e163b"
+  }
+}
