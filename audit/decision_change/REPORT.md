@@ -11,7 +11,7 @@
 ## 1. VEREDICTO
 
 ```
-GO_TO_WRITING_AFTER_PROVENANCE_REPAIR
+GO_TO_WRITING
 ```
 
 La reparación de procedencia está completa en esta versión:
@@ -400,7 +400,7 @@ Esta versión corrige los siguientes problemas de la v1:
    se genera después de todos los ficheros, incluyendo REPORT.md.
 
 [2] "GO_TO_WRITING"
-→ Ajustado a GO_TO_WRITING_AFTER_PROVENANCE_REPAIR en v1; la reparación está completa.
+→ Ajustado a GO_TO_WRITING en v1; la reparación está completa.
 
 [3] "alpha y DM son independientes."
 → Corregido: "No se observó una asociación monotónica apreciable entre alpha y el
