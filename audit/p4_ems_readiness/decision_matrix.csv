@@ -1,0 +1,8 @@
+editorial_question,lightgbm_evidence,ems_corpus_evidence,conclusion
+Does the phenomenon depend on a single learner?,"No. LightGBM reproduces HGB dynamics (mean skill 0.1915 vs 0.1918, mean alpha 0.1860 vs 0.1829).",N/A (Learner robustness tested empirically in WP A).,Robustness confirmed across gradient boosting implementations.
+Does dynamic fidelity change the selected model?,"Yes. Adding alpha >= 0.50 disqualifies ML models in 95.8% of h>=2 decisions, changing top-1 selection.",Only 12% of EMS papers report selection changes from multi-metric criteria; 0% audit multi-horizon desqualification.,Material decision consequence established across site x horizon.
+Do existing antecedents report fidelity metrics?,N/A,"20% of EMS papers report KGE or alpha, primarily in hydrology.","Fidelity metrics exist, but are evaluated separately from model selection."
+Do existing antecedents report decision changes?,N/A,0% of EMS papers perform a joint error-fidelity-significance decision audit.,Gap supported: decision-change audit is novel in EMS.
+Does Paper A add a non-obvious consequence?,154 total discordant cells where error & DM & recall are favorable but alpha < 0.50.,EMS studies treat error skill and peak recall as complementary without reporting discordance.,Discordance demonstrates non-obvious risk of error-only selection.
+Is the contribution generalizable?,"Demonstrated across 17 sites, 6 model families, 7 horizons (714 cells total).",Multisite multihorizon AI verification is highly sought in EMS.,Generalizable empirical decision framework.
+Is the EMS framing defensible?,N/A,EMS scope explicitly prioritizes model evaluation quality and AI verification standards.,High scope alignment when framed as a decision audit.
