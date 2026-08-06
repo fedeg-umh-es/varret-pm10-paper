@@ -1,0 +1,6 @@
+model,n_total,n_rule_a,n_discordant,pct_of_ruleA
+hgb_direct,119,111,54,48.6
+ridge_direct,119,117,43,36.8
+sarima,119,44,4,9.1
+seasonal_naive,119,5,0,0.0
+stl_ridge_direct,119,0,0,

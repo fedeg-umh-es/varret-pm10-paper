@@ -1,0 +1,2 @@
+file,sha256,rows,cols,size_bytes,nulls_skill,nulls_dm_significant,nulls_alpha,nulls_recall_p75,status
+/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/tables/master_diagnostic_table.csv,6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6,595,51,415591,0,0,0,0,OK

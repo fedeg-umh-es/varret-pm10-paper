@@ -1,0 +1,102 @@
+station_id,station_name,station_type,model,horizon,skill,alpha,recall_p75,dm_significant,n_pairs,rule_a_rc,decision_change_rc,reason_rc
+43004006_10_M,Alcanar Montecarlo,Rural Remote/Industrial,hgb_direct,1,0.103728580496874,0.376074242659997,0.4054054054054054,True,1591,True,True,collapse_only
+43004006_10_M,Alcanar Montecarlo,Rural Remote/Industrial,hgb_direct,2,0.18795894002857,0.1861569334216844,0.2297297297297297,True,1576,True,True,collapse_only
+43004006_10_M,Alcanar Montecarlo,Rural Remote/Industrial,ridge_direct,1,0.128625916508676,0.3451439989374161,0.4567567567567567,True,1591,True,True,collapse_only
+43004006_10_M,Alcanar Montecarlo,Rural Remote/Industrial,ridge_direct,2,0.204680525336187,0.1267397598758236,0.2432432432432432,True,1576,True,True,collapse_only
+43004006_10_M,Alcanar Montecarlo,Rural Remote/Industrial,sarima,1,0.1732234237266809,0.400901661898133,0.4137931034482758,True,111,True,True,collapse_only
+08019043_10_M,Barcelona L'Eixample,Urban/Traffic,hgb_direct,1,0.1021735567303114,0.427546585153835,0.4019138755980861,True,1155,True,True,collapse_only
+08019043_10_M,Barcelona L'Eixample,Urban/Traffic,hgb_direct,2,0.163238871893256,0.187087164323822,0.2403846153846154,True,1148,True,True,collapse_only
+08019043_10_M,Barcelona L'Eixample,Urban/Traffic,ridge_direct,1,0.1010158366992278,0.452494510795521,0.430622009569378,True,1155,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,hgb_direct,2,0.2092429186473708,0.1959595717602163,0.6645299145299145,True,1546,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,hgb_direct,3,0.242048725240239,0.1440520786916048,0.572961373390558,True,1539,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,hgb_direct,4,0.2573729018469566,0.1170497934823449,0.5481798715203426,True,1536,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,hgb_direct,5,0.2624578096915761,0.1003603894924744,0.4871244635193133,True,1533,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,hgb_direct,6,0.2654950040980207,0.0859820925754303,0.421505376344086,True,1529,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,hgb_direct,7,0.2660563699960706,0.0770980570668335,0.3935483870967742,True,1526,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,ridge_direct,2,0.1863445512844097,0.1596756955081631,0.4914529914529914,True,1546,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,ridge_direct,3,0.228613020293565,0.0954284219450966,0.3626609442060086,True,1539,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,ridge_direct,4,0.2459764884341624,0.0666727310557073,0.2655246252676659,True,1536,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,ridge_direct,5,0.2550826002632598,0.0517127844284953,0.2167381974248927,True,1533,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,ridge_direct,6,0.2690557962497393,0.037428969426976,0.2086021505376344,True,1529,True,True,collapse_only
+45153999_10_M,San Pablo de los Montes,Rural Remote/Background,ridge_direct,7,0.2750357126630899,0.0311837895233881,0.2279569892473118,True,1526,True,True,collapse_only
+08019028_10_M,Barcelona Pl. Universitat,Urban/Traffic,hgb_direct,2,0.1493379889837482,0.2714382781701528,0.2846975088967972,True,1426,True,True,collapse_only
+08019028_10_M,Barcelona Pl. Universitat,Urban/Traffic,hgb_direct,3,0.1872927696137173,0.2109236472030908,0.2258064516129032,True,1418,True,True,collapse_only
+08019028_10_M,Barcelona Pl. Universitat,Urban/Traffic,ridge_direct,1,0.0957226917093506,0.4782794231677706,0.5070921985815603,True,1437,True,True,collapse_only
+08019028_10_M,Barcelona Pl. Universitat,Urban/Traffic,ridge_direct,2,0.173415931794217,0.2050816290799438,0.2740213523131672,True,1426,True,True,collapse_only
+08019054_10_M,Barcelona Vall d'Hebron,Urban/Background,hgb_direct,2,0.1490533332906917,0.2676040929025354,0.3555555555555555,True,1416,True,True,collapse_only
+08019054_10_M,Barcelona Vall d'Hebron,Urban/Background,hgb_direct,3,0.1906232180478182,0.1919385476994885,0.2300319488817891,True,1406,True,True,collapse_only
+08019054_10_M,Barcelona Vall d'Hebron,Urban/Background,ridge_direct,2,0.1619833464910797,0.2148681236988795,0.2920634920634921,True,1416,True,True,collapse_only
+44216001_10_M,Teruel,Urban/Background,hgb_direct,2,0.1942345432191011,0.1506270846127895,0.3674418604651163,True,1711,True,True,collapse_only
+44216001_10_M,Teruel,Urban/Background,hgb_direct,3,0.2210488631819168,0.1069756314195129,0.2459396751740139,True,1709,True,True,collapse_only
+44216001_10_M,Teruel,Urban/Background,hgb_direct,4,0.2323564595252979,0.0877831133727737,0.2,True,1707,True,True,collapse_only
+44216001_10_M,Teruel,Urban/Background,ridge_direct,1,0.1104253459187939,0.4082926859463594,0.5757575757575758,True,1715,True,True,collapse_only
+44216001_10_M,Teruel,Urban/Background,ridge_direct,2,0.1954639461190745,0.1474327422244373,0.2883720930232558,True,1711,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,hgb_direct,1,0.0999574863552733,0.4446283854495581,0.5195729537366548,True,1731,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,hgb_direct,2,0.1586166165421074,0.2279273815595763,0.3142857142857143,True,1725,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,hgb_direct,3,0.1853038395262949,0.1793951021930146,0.2669039145907473,True,1720,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,hgb_direct,5,0.1932196696590293,0.1420174190422324,0.2014388489208633,True,1713,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,ridge_direct,1,0.100794494639045,0.4496741335183056,0.505338078291815,True,1731,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,ridge_direct,2,0.1671060445667238,0.1886691901511851,0.2892857142857143,True,1725,True,True,collapse_only
+08019052_10_M,Barcelona El Port Vell,Suburban/Industrial,ridge_direct,3,0.1964613215895463,0.1136939722155105,0.2028469750889679,True,1720,True,True,collapse_only
+50008001_10_M,Alagon,Suburban/Traffic,hgb_direct,1,0.0846597532126622,0.432872242323901,0.5439024390243903,True,1654,True,True,collapse_only
+50008001_10_M,Alagon,Suburban/Traffic,hgb_direct,2,0.1670035556514706,0.225581201831729,0.2604422604422604,True,1648,True,True,collapse_only
+50008001_10_M,Alagon,Suburban/Traffic,ridge_direct,1,0.1059603614978836,0.4175368143953776,0.5463414634146342,True,1654,True,True,collapse_only
+50008001_10_M,Alagon,Suburban/Traffic,ridge_direct,2,0.1878363144274183,0.1750717102833572,0.2604422604422604,True,1648,True,True,collapse_only
+50008001_10_M,Alagon,Suburban/Traffic,sarima,2,0.1339127840841226,0.157973594626209,0.3409090909090909,True,119,True,True,collapse_only
+50008001_10_M,Alagon,Suburban/Traffic,sarima,3,0.2550870112436245,0.1205610695719694,0.2222222222222222,True,119,True,True,collapse_only
+08019045_10_M,Barcelona Zona Universitaria,Urban/Background,hgb_direct,2,0.1507049702509407,0.2263860517111045,0.3147058823529411,True,1476,True,True,collapse_only
+08019045_10_M,Barcelona Zona Universitaria,Urban/Background,ridge_direct,1,0.0941855775586321,0.4433900563206617,0.5,True,1486,True,True,collapse_only
+08019045_10_M,Barcelona Zona Universitaria,Urban/Background,ridge_direct,2,0.1609789723725999,0.1763445609768441,0.2705882352941176,True,1476,True,True,collapse_only
+03014002_10_M,Elx-Agroalimentari,Suburban/Industrial,hgb_direct,2,0.2074180430237674,0.1637044787714371,0.3066202090592334,True,1251,True,True,collapse_only
+03014002_10_M,Elx-Agroalimentari,Suburban/Industrial,hgb_direct,3,0.2358890778091833,0.1295924754776451,0.2404181184668989,True,1241,True,True,collapse_only
+03014002_10_M,Elx-Agroalimentari,Suburban/Industrial,hgb_direct,4,0.2421463973791151,0.1194146001058735,0.2260273972602739,True,1234,True,True,collapse_only
+03014002_10_M,Elx-Agroalimentari,Suburban/Industrial,hgb_direct,5,0.2536119461106551,0.1040043978229446,0.2074829931972789,True,1228,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,hgb_direct,2,0.1944010198200222,0.1955083502333943,0.5408163265306123,True,1459,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,hgb_direct,3,0.2313148450813498,0.1340004470383874,0.473551637279597,True,1456,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,hgb_direct,4,0.2350524348857933,0.1079540983125341,0.4181360201511335,True,1456,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,hgb_direct,5,0.2158380294562084,0.0928018694326719,0.3725,True,1454,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,hgb_direct,6,0.2122987011351359,0.0793759082652726,0.36,True,1451,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,hgb_direct,7,0.2047846046271658,0.0783525631458926,0.3508771929824561,True,1449,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,1,0.0852153086153748,0.4755109408749368,0.6692506459948321,True,1463,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,2,0.1800284101493156,0.2289217304349452,0.4515306122448979,True,1459,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,3,0.2189869172535209,0.1419788223533167,0.36272040302267,True,1456,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,4,0.2246462771083498,0.1077596206531649,0.3148614609571788,True,1456,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,5,0.2077774999457512,0.0874297364441652,0.2775,True,1454,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,6,0.208160151566629,0.0783494121830458,0.27,True,1451,True,True,collapse_only
+46263999_10_M,Zarra-EMEP,Rural Remote EMEP,ridge_direct,7,0.2064613695421264,0.0677558416154959,0.2531328320802005,True,1449,True,True,collapse_only
+43004005_10_M,Alcanar Llar de Jubilats,Rural Near-city/Industrial,hgb_direct,2,0.1491276983719101,0.2203492515436525,0.3069620253164557,True,1506,True,True,collapse_only
+43004005_10_M,Alcanar Llar de Jubilats,Rural Near-city/Industrial,hgb_direct,3,0.1614387247026361,0.1571593075670126,0.2165605095541401,True,1499,True,True,collapse_only
+43004005_10_M,Alcanar Llar de Jubilats,Rural Near-city/Industrial,ridge_direct,1,0.1043771266752907,0.415793107156367,0.5047619047619047,True,1513,True,True,collapse_only
+43004005_10_M,Alcanar Llar de Jubilats,Rural Near-city/Industrial,ridge_direct,2,0.1737851287279077,0.1709816964203485,0.2911392405063291,True,1506,True,True,collapse_only
+22125001_10_M,Huesca,Urban/Traffic,hgb_direct,2,0.1466647056443955,0.266817231027285,0.2591687041564792,True,1488,True,True,collapse_only
+22125001_10_M,Huesca,Urban/Traffic,ridge_direct,1,0.0899913882371304,0.4947090084535672,0.6140776699029126,True,1499,True,True,collapse_only
+22125001_10_M,Huesca,Urban/Traffic,ridge_direct,2,0.1625051073504467,0.1926319858321604,0.295843520782396,True,1488,True,True,collapse_only
+22125001_10_M,Huesca,Urban/Traffic,sarima,3,0.1794296071239648,0.1449874713767845,0.2127659574468085,True,108,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,1,0.1775177996783613,0.2549308919802796,0.4820627802690583,True,1603,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,2,0.255330757399563,0.1790067720440561,0.3431151241534989,True,1594,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,3,0.2812110307095371,0.1722648621392002,0.3438914027149321,True,1586,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,4,0.3031680632945924,0.1639615075882175,0.3066361556064073,True,1578,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,5,0.308210842418793,0.1525465858102478,0.2702078521939954,True,1570,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,6,0.24511340003398,0.1567231404507468,0.2651162790697674,True,1561,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,hgb_direct,7,0.1973628481456341,0.1549100925947006,0.2976744186046511,True,1557,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,ridge_direct,1,0.1752973486195908,0.2217177026388803,0.4237668161434977,True,1603,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,ridge_direct,2,0.2664130977185105,0.1072560413397015,0.2505643340857788,True,1594,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,ridge_direct,3,0.2881627091350546,0.1066452379078153,0.2375565610859728,True,1586,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,ridge_direct,4,0.3088733708188462,0.1039998472269582,0.2242562929061785,True,1578,True,True,collapse_only
+44013007_10_M,Alcaniz Capuchinos,Urban/Industrial,ridge_direct,5,0.3129306888179469,0.0990128220275772,0.2124711316397228,True,1570,True,True,collapse_only
+08019004_10_M,Barcelona El Poblenou,Urban/Background,hgb_direct,1,0.0921807124535031,0.4932608970988938,0.4120171673819742,True,1354,True,True,collapse_only
+08019004_10_M,Barcelona El Poblenou,Urban/Background,hgb_direct,2,0.1415381101030542,0.228797926679686,0.2121212121212121,True,1347,True,True,collapse_only
+08019004_10_M,Barcelona El Poblenou,Urban/Background,ridge_direct,1,0.0943243775351351,0.4496270936663591,0.3948497854077253,True,1354,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,hgb_direct,1,0.0884719477668266,0.3837805239824234,0.4412698412698412,True,1453,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,hgb_direct,2,0.145078733969171,0.269557821979543,0.310126582278481,True,1439,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,hgb_direct,3,0.169206569233,0.2130680694682566,0.273015873015873,True,1429,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,hgb_direct,4,0.1836993830176825,0.1860794064516731,0.2197452229299363,True,1425,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,hgb_direct,5,0.1886994658645023,0.1731554836469667,0.2025316455696202,True,1422,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,ridge_direct,1,0.1041602467073767,0.3327788550361783,0.4571428571428571,True,1453,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,ridge_direct,2,0.1610480624057648,0.1947410232754327,0.2721518987341772,True,1439,True,True,collapse_only
+08263007_10_M,Sant Vicenc dels Horts Alaba,Suburban/Industrial,ridge_direct,3,0.1862218871144705,0.1406019449237301,0.2126984126984127,True,1429,True,True,collapse_only
+46250043_10_M,Valencia-Vivers,Urban/Residential,hgb_direct,1,0.0737028562176991,0.3983085699378004,0.5232876712328767,True,1479,True,True,collapse_only
+46250043_10_M,Valencia-Vivers,Urban/Residential,hgb_direct,2,0.1774493329506257,0.2276565180998454,0.2972222222222222,True,1470,True,True,collapse_only
+46250043_10_M,Valencia-Vivers,Urban/Residential,hgb_direct,3,0.1936365310565044,0.1743030932925223,0.2033898305084746,True,1461,True,True,collapse_only
+46250043_10_M,Valencia-Vivers,Urban/Residential,ridge_direct,1,0.0954615809187324,0.4094559265345033,0.5041095890410959,True,1479,True,True,collapse_only
+46250043_10_M,Valencia-Vivers,Urban/Residential,ridge_direct,2,0.1751919655401376,0.2039809647315113,0.2722222222222222,True,1470,True,True,collapse_only

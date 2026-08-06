@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-08-06T05:38:17Z",
+  "input_sha256": "6dfb12c5a8a1c226f4a7e2b3d9c8f501e2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2",
+  "thresholds": {
+    "alpha_primary": 0.5,
+    "recall_primary": 0.2
+  },
+  "results": {
+    "total_cells": 595,
+    "rule_a_n": 277,
+    "rule_b_n": 8,
+    "decision_change_n": 269,
+    "decision_change_pct": 97.1,
+    "discordant_n": 101,
+    "rho_alpha_skill": -0.863,
+    "rho_alpha_skill_pval": 5.398e-178,
+    "urban_industrial_ruleA_n": 18,
+    "urban_industrial_change_n": 14,
+    "urban_industrial_pct": 77.8
+  },
+  "failure_decomposition": {
+    "pass_rule_b": 8,
+    "fail_alpha_only": 101,
+    "fail_recall_only": 0,
+    "fail_both": 168,
+    "total_rule_a": 277
+  },
+  "sensitivity_range_pct": {
+    "min": 89.5,
+    "max": 98.6,
+    "primary": 97.1
+  },
+  "checks_pass": 18,
+  "checks_fail": 0
+}

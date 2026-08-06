@@ -1,0 +1,92 @@
+{
+  "no_duplicate_keys": {
+    "status": "PASS",
+    "reported": 595,
+    "computed": 595
+  },
+  "total_rows_595": {
+    "status": "PASS",
+    "reported": 595,
+    "computed": 595
+  },
+  "rule_a_n_277": {
+    "status": "PASS",
+    "reported": 277,
+    "computed": 277
+  },
+  "rule_b_n_8": {
+    "status": "PASS",
+    "reported": 8,
+    "computed": 8
+  },
+  "changes_n_269": {
+    "status": "PASS",
+    "reported": 269,
+    "computed": 269
+  },
+  "changes_pct_97_1": {
+    "status": "PASS",
+    "reported": 97.1,
+    "computed": 97.1
+  },
+  "discordant_n_101": {
+    "status": "PASS",
+    "reported": 101,
+    "computed": 101
+  },
+  "rho_alpha_skill": {
+    "status": "PASS",
+    "reported": -0.863,
+    "computed": -0.863
+  },
+  "urban_industrial_pct": {
+    "status": "PASS",
+    "reported": 77.8,
+    "computed": 77.8
+  },
+  "decomposition_adds_up": {
+    "status": "PASS",
+    "reported": 277,
+    "computed": 277
+  },
+  "recall_only_changes_zero": {
+    "status": "PASS",
+    "reported": 0,
+    "computed": 0
+  },
+  "discordant_all_ruleA": {
+    "status": "PASS",
+    "reported": true,
+    "computed": true
+  },
+  "discordant_all_recall": {
+    "status": "PASS",
+    "reported": true,
+    "computed": true
+  },
+  "discordant_all_alpha": {
+    "status": "PASS",
+    "reported": true,
+    "computed": true
+  },
+  "urban_industrial_denom_18": {
+    "status": "PASS",
+    "reported": 18,
+    "computed": 18
+  },
+  "sensitivity_min_gte_85": {
+    "status": "PASS",
+    "reported": ">=85%",
+    "computed": 89.5
+  },
+  "alpha_thresh_prespecified": {
+    "status": "PASS",
+    "reported": 0.5,
+    "computed": 0.5
+  },
+  "recall_thresh_prespecified": {
+    "status": "PASS",
+    "reported": 0.2,
+    "computed": 0.2
+  }
+}

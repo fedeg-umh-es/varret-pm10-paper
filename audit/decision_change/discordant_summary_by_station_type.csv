@@ -1,0 +1,11 @@
+station_type,n_total,n_rule_a,n_discordant,pct_of_ruleA
+Rural Near-city/Industrial,35,16,4,25.0
+Rural Remote EMEP,35,13,13,100.0
+Rural Remote/Background,35,12,12,100.0
+Rural Remote/Industrial,35,19,5,26.3
+Suburban/Industrial,105,55,19,34.5
+Suburban/Traffic,35,20,6,30.0
+Urban/Background,140,58,14,24.1
+Urban/Industrial,35,18,12,66.7
+Urban/Residential,35,15,5,33.3
+Urban/Traffic,105,51,11,21.6
