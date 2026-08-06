@@ -1,0 +1,31 @@
+## WP-B Environment
+
+Date: 2026-08-06
+Task: P4-EMS-Audit Work Package B
+Branch: claude/p4-lightgbm-ems-audit-rjs3ch
+
+### Search infrastructure
+Engine: WebSearch (Claude proxy)
+Access: outbound HTTPS via proxy (pre-configured)
+Scite API: UNAVAILABLE — quota exhausted in prior session
+Elicit API: UNAVAILABLE — requires paid subscription
+ScienceDirect direct: 403 via WebFetch (proxy blocked)
+arXiv direct: accessible via WebSearch
+HESS (EGU): accessible via WebSearch
+
+### Corpus scope
+Primary journal: Environmental Modelling & Software (ISSN 1364-8152, publisher Elsevier)
+Period: 2015-01-01 to 2026-08-06
+Secondary journals: HESS, Nature Communications, Climate Services, Hydrol. Process.
+Language: English
+Query type: Web search (not systematic Scopus/WoS review)
+
+### Limitations
+- Web search is NOT a systematic review: cannot guarantee exhaustive corpus coverage
+- Paywall access: EMS articles accessed at abstract level only (Elsevier paywall blocks full text)
+- HESS open access: full text retrieved for MFM paper
+- arXiv preprints: full text retrieved for P005
+- Nature Comms open access: full text retrieved for P004
+
+### Python/tool versions (not applicable for WP-B — no code execution)
+N/A — WP-B is a literature search and classification task

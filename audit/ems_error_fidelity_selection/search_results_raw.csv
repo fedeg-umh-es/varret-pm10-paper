@@ -1,0 +1,23 @@
+search_id,query_dim,engine,date,result_title,result_url,result_journal,result_year,relevance_score
+S01,D1,WebSearch,2026-08-06,"GCMeval – An interactive tool for evaluation and selection of climate model ensembles","https://www.sciencedirect.com/science/article/pii/S2405880720300194","Climate Services",2020,2
+S02,D1,WebSearch,2026-08-06,"Multi-model forecasting of NO2 and O3 in Abu Dhabi","https://www.nature.com/articles/s41598-026-44485-6","Scientific Reports",2026,1
+S03,D2,WebSearch,2026-08-06,"Environmental Modelling and Software 139 (2021) 104993","https://nora.nerc.ac.uk/id/eprint/529832/1/N529832JA.pdf","Environmental Modelling & Software",2021,1
+S04,D2,WebSearch,2026-08-06,"Technical assessment and evaluation of environmental models and software","https://www.sciencedirect.com/science/article/abs/pii/S1364815210002318","Environmental Modelling & Software",2010,1
+S05,D3,WebSearch,2026-08-06,"Machine learning-driven regional prediction of PM2.5 concentrations","https://dl.acm.org/doi/10.1016/j.envsoft.2025.106586","Environmental Modelling & Software",2025,2
+S06,D4,WebSearch,2026-08-06,"Evaluating Forecasts at Multiple Horizons: Extension of DM","https://onlinelibrary.wiley.com/doi/full/10.1002/for.70150","Journal of Forecasting",2026,1
+S07,D5,WebSearch,2026-08-06,"Rolling-Origin Validation Reverses Model Rankings in Multi-Step PM10 Forecasting","https://arxiv.org/abs/2603.20315","arXiv (preprint)",2026,3
+S08,D6,WebSearch,2026-08-06,"AMERICAN METEOROLOGICAL SOCIETY JUNE 2025 — oversmoothing in downscaling","https://journals.ametsoc.org/downloadpdf/view/journals/bams/106/6/BAMS-D-24-0114.1.pdf","BAMS",2025,1
+S09,D7,WebSearch,2026-08-06,"Technical assessment and evaluation of environmental models","https://www.sciencedirect.com/science/article/abs/pii/S1364815210002318","Environmental Modelling & Software",2010,1
+S10,D8,WebSearch,2026-08-06,"Friends don't let friends use Nash-Sutcliffe Efficiency (NSE) or KGE","https://www.sciencedirect.com/science/article/pii/S1364815225003494","Environmental Modelling & Software",2025,3
+S11,D8,WebSearch,2026-08-06,"Comment on Williams (2025): Friends don't let friends use NSE or KGE","https://www.sciencedirect.com/science/article/abs/pii/S1364815226000162","Environmental Modelling & Software",2026,3
+S12,D8,WebSearch,2026-08-06,"EGUsphere: High Nash Sutcliffe Efficiencies conceal poor simulations of interannual variance","https://egusphere.copernicus.org/preprints/2025/egusphere-2025-3851/","EGUsphere (preprint)",2025,2
+S13,D9,WebSearch,2026-08-06,"HESS — Introducing the Model Fidelity Metric (MFM)","https://hess.copernicus.org/articles/30/2651/2026/","Hydrology and Earth System Sciences",2026,3
+S14,D9,WebSearch,2026-08-06,"Standard assessments of climate forecast skill can be misleading","https://www.nature.com/articles/s41467-021-23771-z","Nature Communications",2021,2
+S15,D9,WebSearch,2026-08-06,"An aggregated metrics framework for multicriteria model validation using rolling origin evaluation","https://www.risk.net/node/7962347","Journal of Risk Model Validation",2022,2
+S16,D3,WebSearch,2026-08-06,"Machine learning-based forecasting of air quality index: XGBoost LightGBM SVM","https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0334252","PLoS One",2025,1
+S17,D5,WebSearch,2026-08-06,"Interpretable PM2.5 Forecasting: Comparative Study of Operational Time-Series Models","https://arxiv.org/pdf/2603.25495","arXiv (preprint)",2026,2
+S18,D7,WebSearch,2026-08-06,"Spatio-temporal Joint Modelling on Moderate and Extreme Air Pollution in Spain","https://arxiv.org/pdf/2302.06059","arXiv (preprint)",2023,1
+S19,D9,WebSearch,2026-08-06,"Performance metrics for multi-step forecasting: win-loss seasonal variance forecast stability","https://link.springer.com/article/10.1007/s10489-024-05715-4","Applied Intelligence",2024,2
+S20,D4,WebSearch,2026-08-06,"A time series forecasting based multi-criteria methodology for air quality prediction","https://www.researchgate.net/publication/354410529","unknown",2021,2
+S21,D1,WebSearch,2026-08-06,"Sensitivity analysis of environmental models: A systematic review","https://www.sciencedirect.com/science/article/pii/S1364815216300287","Environmental Modelling & Software",2016,1
+S22,D8,WebSearch,2026-08-06,"Learning with the Nash-Sutcliffe loss","https://arxiv.org/pdf/2603.00968","arXiv (preprint)",2026,1

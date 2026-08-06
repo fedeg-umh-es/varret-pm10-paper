@@ -1,0 +1,81 @@
+{
+  "scope": "All papers included regardless of access level",
+  "date": "2026-08-06",
+  "total_included": 6,
+  "ems_papers": 2,
+  "adjacent_papers": 4,
+  "access_levels": {
+    "open_access": 3,
+    "abstract_plus_search_excerpt": 1,
+    "abstract_only": 2
+  },
+  "dimensions_covered_at_least_one_paper": [
+    "A_error_criterion",
+    "D_joint_rule_partial_P003_P006",
+    "E_decision_change_partial_P004",
+    "H_rolling_origin_P005"
+  ],
+  "dimensions_with_zero_coverage": [
+    "B_variance_retention_alpha_specifically",
+    "C_recall_extremes_p75",
+    "full_D_joint_A_and_B_and_C"
+  ],
+  "dimensions_with_EMS_coverage_only": [
+    "A_error_criterion"
+  ],
+  "dimensions_absent_from_EMS": [
+    "B_variance_retention_alpha",
+    "C_recall_extremes",
+    "D_joint_rule",
+    "E_decision_change_rate",
+    "F_multi_station_10plus",
+    "G_air_quality_pm10",
+    "H_rolling_origin"
+  ],
+  "papers_summary": [
+    {
+      "paper_id": "P001",
+      "year": 2025,
+      "journal": "Environmental Modelling & Software",
+      "dimensions_covered": ["A"],
+      "ems": true
+    },
+    {
+      "paper_id": "P002",
+      "year": 2026,
+      "journal": "Environmental Modelling & Software",
+      "dimensions_covered": ["A"],
+      "ems": true
+    },
+    {
+      "paper_id": "P003",
+      "year": 2026,
+      "journal": "HESS",
+      "dimensions_covered": ["A", "B_partial_variability", "D_partial"],
+      "ems": false
+    },
+    {
+      "paper_id": "P004",
+      "year": 2021,
+      "journal": "Nature Communications",
+      "dimensions_covered": ["A", "E_partial"],
+      "ems": false
+    },
+    {
+      "paper_id": "P005",
+      "year": 2026,
+      "journal": "arXiv",
+      "dimensions_covered": ["A", "E_partial", "G", "H"],
+      "ems": false
+    },
+    {
+      "paper_id": "P006",
+      "year": 2020,
+      "journal": "Climate Services",
+      "dimensions_covered": ["A", "D_partial", "F_multi_model"],
+      "ems": false
+    }
+  ],
+  "gap_verdict": "EMS_GAP_PARTIALLY_SUPPORTED",
+  "verdict_rationale": "The specific combination of error criterion + variance retention (alpha) + recall of extremes as a joint model selection rule with quantified decision-change rates is absent from both EMS and the adjacent corpus. The closest work (MFM in HESS, P005 arXiv) addresses subsets of the gap but not the complete combination, and neither appears in EMS. The gap is partially rather than fully supported because: (1) the corpus is built from web search without full Scopus/WoS coverage; (2) the Williams 2025 debate shows EMS is actively engaging the error-vs-variability question, so the gap is adjacent to active discourse; (3) the 7-dimension gap has antecedents scattered across adjacent literature, not a complete black hole."
+}

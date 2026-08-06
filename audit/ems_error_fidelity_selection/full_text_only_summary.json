@@ -1,0 +1,55 @@
+{
+  "scope": "Papers with open-access full text or substantive excerpts retrieved via search",
+  "date": "2026-08-06",
+  "papers_with_full_access": [
+    {
+      "paper_id": "P003",
+      "title": "Introducing the Model Fidelity Metric (MFM) for robust and diagnostic land surface model evaluation",
+      "journal": "Hydrology and Earth System Sciences",
+      "year": 2026,
+      "doi": "10.5194/hess-30-2651-2026",
+      "access": "open_access",
+      "key_findings": [
+        "MFM constructed from robust statistics (median absolute deviation) and information theory",
+        "Measures three components: accuracy (error), variability (amplitude), distribution similarity",
+        "Evaluated against NSE and KGE using synthetic case studies designed to isolate failure modes",
+        "MFM is more robust than NSE/KGE in low-variability catchments and extreme cases",
+        "Applied to large-sample hydrological dataset (land surface model evaluation)"
+      ],
+      "gap_assessment": "Proposes a combined error+variability metric (B+A partially) but not C (recall of extremes), not D (joint selection rule), not E (decision-change quantification), not G (air quality), not in EMS"
+    },
+    {
+      "paper_id": "P004",
+      "title": "Standard assessments of climate forecast skill can be misleading",
+      "journal": "Nature Communications",
+      "year": 2021,
+      "doi": "10.1038/s41467-021-23771-z",
+      "access": "open_access",
+      "key_findings": [
+        "Hindcast-based skill assessments tend to overestimate real forecast skill",
+        "Model skill rankings change when moving from hindcast to real forecast settings",
+        "Bias-correction choices drive differences between apparent and real skill",
+        "El Niño-Southern Oscillation application demonstrates ranking reversals across criteria"
+      ],
+      "gap_assessment": "Documents ranking reversal (addresses E partially) but in climate context; no joint error+fidelity rule; not EMS; not air quality"
+    },
+    {
+      "paper_id": "P005",
+      "title": "Rolling-Origin Validation Reverses Model Rankings in Multi-Step PM10 Forecasting",
+      "journal": "arXiv (preprint)",
+      "year": 2026,
+      "arxiv_id": "2603.20315",
+      "access": "open_access",
+      "key_findings": [
+        "Uses 2350 daily PM10 observations 2017-2024 from southern Spain (single station)",
+        "Compares XGBoost and SARIMA against persistence under static split and rolling-origin protocol",
+        "Rolling-origin evaluation reverses rankings: XGBoost inconsistent at short/medium horizons, SARIMA positive-skilled across all horizons",
+        "Horizon-specific skill profile shown for 1-7 day ahead",
+        "Authors: Garcia Crespi, Yubero Funes, Alfosea Simon (UMH)"
+      ],
+      "gap_assessment": "Addresses H (rolling-origin), G (PM10), A (error/skill criterion), E partially (ranking reversal documented); does NOT address B (variance retention alpha), C (recall extremes), D (joint rule), F (multi-station); not yet in EMS"
+    }
+  ],
+  "full_text_gap_conclusion": "Among papers with full-text access, none combines error criterion + variance retention + recall of extremes as a unified model selection rule. P005 is the closest in domain (PM10) and methodology (rolling-origin) but lacks the joint fidelity criteria that define Paper A's contribution. P003 is closest conceptually (combined error+variability metric) but in hydrology and outside EMS.",
+  "full_text_n": 3
+}

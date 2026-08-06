@@ -1,0 +1,9 @@
+dimension_id,dimension_label,papers_covered_in_EMS,papers_covered_in_adjacent,papers_covered_total,gap_exists_in_EMS,gap_exists_overall,notes
+A,"Error criterion (skill/RMSE/DM significance) for model acceptance",2,4,6,NO,NO,"Williams 2025 and Comment cover error criterion in EMS; common in adjacent literature"
+B,"Variance retention alpha = Var(pred)/Var(true) as evaluation metric",0,1,1,YES,YES,"MFM (HESS 2026) uses variability component; alpha specifically NOT found; NSE/KGE are different formulations"
+C,"Recall of extreme events (recall_p75 or recall_p90) as model selection criterion",0,0,0,YES,YES,"No paper found in EMS or adjacent journals using recall of threshold exceedances as a model selection criterion"
+D,"Joint rule A AND B AND C as model acceptance decision",0,0,0,YES,YES,"No paper found combining error criterion + variance retention + recall of extremes as a unified selection rule"
+E,"Quantified decision-change rate when applying joint vs. error-only rule",0,1,1,YES,YES,"NatComms 2021 (P004) quantifies ranking sensitivity; decision-change % as operational metric NOT found"
+F,"Multi-station study with >=10 stations",0,2,2,YES,PARTIAL,"P005 (PM10) is single station; P006 (GCMeval) uses multi-model but not multi-station PM10"
+G,"Air quality / PM10 daily time series forecasting context in EMS",0,1,1,YES,YES,"P005 (arXiv) addresses PM10 but is not in EMS; no EMS paper addresses PM10 forecast model selection"
+H,"Rolling-origin expanding window validation protocol",0,1,1,YES,YES,"P005 (arXiv) uses rolling-origin; no EMS paper on rolling-origin in PM10 forecast comparison"

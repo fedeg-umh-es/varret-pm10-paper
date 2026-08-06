@@ -1,0 +1,8 @@
+paper_id,ems_venue,A_error_criterion,B_variance_retention_alpha,C_recall_extremes,D_joint_rule_A_and_B_and_C,E_decision_change_quantified,F_multi_station_10plus,G_air_quality_pm10,H_rolling_origin_protocol,total_dimensions_covered
+P001,YES,YES,NO,NO,NO,NO,NO,NO,NO,1
+P002,YES,YES,NO,NO,NO,NO,NO,NO,NO,1
+P003,NO,YES,YES,NO,YES,NO,NO,NO,NO,3
+P004,NO,YES,NO,NO,NO,YES,NO,NO,NO,2
+P005,NO,YES,NO,NO,NO,YES,NO,YES,YES,4
+P006,NO,YES,NO,NO,YES,NO,YES,NO,NO,3
+PAPER_A_TARGET,YES,YES,YES,YES,YES,YES,YES,YES,YES,9

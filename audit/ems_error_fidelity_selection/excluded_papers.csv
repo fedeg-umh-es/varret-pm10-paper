@@ -1,0 +1,8 @@
+paper_id,title,year,journal,doi_or_id,reason_excluded
+P007,"Machine learning-driven regional prediction of PM2.5 concentrations",2025,"Environmental Modelling & Software","10.1016/j.envsoft.2025.106586","Spatial prediction; no forecast horizon evaluation; no joint error+fidelity criteria; not model selection"
+P008,"Technical assessment and evaluation of environmental models and software (Letter)",2010,"Environmental Modelling & Software","10.1016/j.envsoft.2010.05.011","General model evaluation guidance; not forecast fidelity or model selection decision changes"
+P009,"High NSE conceals poor simulations of interannual variance (EGUsphere preprint)",2025,"EGUsphere","egusphere-2025-3851","Hydrology context; NSE critique for variance but not in forecast model selection framework; preprint"
+P010,"Aggregated metrics framework for multicriteria model validation using rolling origin",2022,"Journal of Risk Model Validation","10.21314/JRMV.2022.009","Finance/risk domain; not environmental forecasting; journal not EMS"
+P011,"Interpretable PM2.5 Forecasting: Comparative Study of Operational Time-Series Models",2026,"arXiv","arXiv:2603.25495","No joint error+fidelity criteria; comparison by RMSE/MAE only; not EMS venue"
+P012,"Performance metrics for multi-step forecasting: win-loss seasonal variance forecast stability",2024,"Applied Intelligence","10.1007/s10489-024-05715-4","General ML domain; no joint selection rule; not EMS venue"
+P013,"Sensitivity analysis of environmental models: A systematic review",2016,"Environmental Modelling & Software","10.1016/j.envsoft.2016.02.005","Sensitivity analysis of model parameters; not forecast evaluation or model selection criteria"
