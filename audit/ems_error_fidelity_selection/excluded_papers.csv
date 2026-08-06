@@ -1,0 +1,11 @@
+record_id,doi,title,year,included,exclusion_reason,access_level
+EXC_01,10.1016/j.envsoft.2016.11.002,Software framework for hydrological simulation,2016,NO,pure software framework without forecasting evaluation,METADATA_ONLY
+EXC_02,10.1016/j.envsoft.2017.09.008,Calibration of physical crop growth model,2017,NO,calibration without out-of-sample forecast,METADATA_ONLY
+EXC_03,10.1016/j.envsoft.2018.04.003,GIS visualization of soil erosion,2018,NO,GIS visualization without prediction benchmark,METADATA_ONLY
+EXC_04,10.1016/j.envsoft.2019.08.012,Systematic review of ML in hydrology,2019,NO,review paper,METADATA_ONLY
+EXC_05,10.1016/j.envsoft.2020.104610,User interface for groundwater modeling,2020,NO,GUI tool,METADATA_ONLY
+EXC_06,10.1016/j.envsoft.2021.104950,SCADA system integration for solar radiation,2021,NO,SCADA hardware focus,METADATA_ONLY
+EXC_07,10.1016/j.envsoft.2022.105280,Water use efficiency in agricultural watersheds,2022,NO,"ecohydrological balance, no time series forecast",METADATA_ONLY
+EXC_08,10.1016/j.envsoft.2023.105550,LLM agent for environmental regulation query,2023,NO,LLM NLP tool,METADATA_ONLY
+EXC_09,10.1016/j.envsoft.2024.105840,Partial least squares structural equation modeling in ecology,2024,NO,PLS-SEM survey analysis,METADATA_ONLY
+EXC_10,10.1016/j.envsoft.2025.106220,Catchment water balance modeling under climate change,2025,NO,long-term climate scenario simulation,METADATA_ONLY

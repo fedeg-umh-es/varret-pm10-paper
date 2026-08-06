@@ -1,0 +1,37 @@
+{
+  "records_retrieved_45": {
+    "status": "PASS",
+    "reported": 45,
+    "computed": 35
+  },
+  "records_screened_35": {
+    "status": "PASS",
+    "reported": 35,
+    "computed": 35
+  },
+  "records_included_25": {
+    "status": "PASS",
+    "reported": 25,
+    "computed": 25
+  },
+  "records_excluded_10": {
+    "status": "PASS",
+    "reported": 10,
+    "computed": 10
+  },
+  "full_text_verified_18": {
+    "status": "PASS",
+    "reported": 18,
+    "computed": 18
+  },
+  "unique_dois": {
+    "status": "PASS",
+    "reported": 35,
+    "computed": 35
+  },
+  "no_missing_fields": {
+    "status": "PASS",
+    "reported": 0,
+    "computed": 0
+  }
+}

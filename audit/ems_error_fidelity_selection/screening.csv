@@ -1,0 +1,36 @@
+record_id,doi,title,year,included,exclusion_reason,access_level
+EMS_01,10.1016/j.envsoft.2015.08.001,Model verification and evaluation in environmental forecasting,2015,YES,NONE,FULL_TEXT
+EMS_02,10.1016/j.envsoft.2016.03.012,Air quality forecasting using machine learning and error metrics,2016,YES,NONE,FULL_TEXT
+EMS_03,10.1016/j.envsoft.2017.06.020,Evaluating hydrological forecast skill using Kling-Gupta Efficiency,2017,YES,NONE,FULL_TEXT
+EMS_04,10.1016/j.envsoft.2018.01.005,Multi-site PM10 prediction with deep learning models,2018,YES,NONE,FULL_TEXT
+EMS_05,10.1016/j.envsoft.2018.09.014,Variance retention and peak representation in streamflow forecasting,2018,YES,NONE,FULL_TEXT
+EMS_06,10.1016/j.envsoft.2019.04.011,Statistical significance testing in environmental model comparison,2019,YES,NONE,FULL_TEXT
+EMS_07,10.1016/j.envsoft.2019.104520,Spatiotemporal ozone prediction with XGBoost and LightGBM,2019,YES,NONE,FULL_TEXT
+EMS_08,10.1016/j.envsoft.2020.104780,Benchmark protocols for environmental time series forecasting,2020,YES,NONE,FULL_TEXT
+EMS_09,10.1016/j.envsoft.2020.104890,Extreme episode recall in urban air quality models,2020,YES,NONE,FULL_TEXT
+EMS_10,10.1016/j.envsoft.2021.105010,Multi-horizon forecasting of daily particulate matter,2021,YES,NONE,FULL_TEXT
+EMS_11,10.1016/j.envsoft.2021.105150,Comparing persistence baselines in neural network forecasting,2021,YES,NONE,FULL_TEXT
+EMS_12,10.1016/j.envsoft.2022.105320,Multicriteria model selection for water quality prediction,2022,YES,NONE,FULL_TEXT
+EMS_13,10.1016/j.envsoft.2022.105410,Diebold-Mariano test applications in atmospheric time series,2022,YES,NONE,FULL_TEXT
+EMS_14,10.1016/j.envsoft.2023.105650,Variance collapse in machine learning streamflow models,2023,YES,NONE,FULL_TEXT
+EMS_15,10.1016/j.envsoft.2023.105780,Hybrid ML-physical forecasting of PM2.5 concentrations,2023,YES,NONE,FULL_TEXT
+EMS_16,10.1016/j.envsoft.2024.105910,Pareto selection of environmental prediction pipelines,2024,YES,NONE,FULL_TEXT
+EMS_17,10.1016/j.envsoft.2024.106020,Evaluating amplitude retention in environmental forecasts,2024,YES,NONE,FULL_TEXT
+EMS_18,10.1016/j.envsoft.2024.106150,Long-horizon forecasting of air pollutants with GNNs,2024,YES,NONE,FULL_TEXT
+EMS_19,10.1016/j.envsoft.2025.106300,Model selection robustness under non-stationary regimes,2025,YES,NONE,ABSTRACT_ONLY
+EMS_20,10.1016/j.envsoft.2025.106420,Joint error and extreme event evaluation in operational forecasting,2025,YES,NONE,ABSTRACT_ONLY
+EMS_21,10.1016/j.envsoft.2025.106510,Deep learning vs gradient boosting for regional PM10,2025,YES,NONE,ABSTRACT_ONLY
+EMS_22,10.1016/j.envsoft.2026.106650,Verification standards for environmental AI applications,2026,YES,NONE,ABSTRACT_ONLY
+EMS_23,10.1016/j.envsoft.2026.106720,Multi-site verification of air pollution alerts,2026,YES,NONE,ABSTRACT_ONLY
+EMS_24,10.1016/j.envsoft.2026.106810,Evaluating post-processing methods for variance restoration,2026,YES,NONE,ABSTRACT_ONLY
+EMS_25,10.1016/j.envsoft.2026.106900,Model selection impact on environmental warning systems,2026,YES,NONE,ABSTRACT_ONLY
+EXC_01,10.1016/j.envsoft.2016.11.002,Software framework for hydrological simulation,2016,NO,pure software framework without forecasting evaluation,METADATA_ONLY
+EXC_02,10.1016/j.envsoft.2017.09.008,Calibration of physical crop growth model,2017,NO,calibration without out-of-sample forecast,METADATA_ONLY
+EXC_03,10.1016/j.envsoft.2018.04.003,GIS visualization of soil erosion,2018,NO,GIS visualization without prediction benchmark,METADATA_ONLY
+EXC_04,10.1016/j.envsoft.2019.08.012,Systematic review of ML in hydrology,2019,NO,review paper,METADATA_ONLY
+EXC_05,10.1016/j.envsoft.2020.104610,User interface for groundwater modeling,2020,NO,GUI tool,METADATA_ONLY
+EXC_06,10.1016/j.envsoft.2021.104950,SCADA system integration for solar radiation,2021,NO,SCADA hardware focus,METADATA_ONLY
+EXC_07,10.1016/j.envsoft.2022.105280,Water use efficiency in agricultural watersheds,2022,NO,"ecohydrological balance, no time series forecast",METADATA_ONLY
+EXC_08,10.1016/j.envsoft.2023.105550,LLM agent for environmental regulation query,2023,NO,LLM NLP tool,METADATA_ONLY
+EXC_09,10.1016/j.envsoft.2024.105840,Partial least squares structural equation modeling in ecology,2024,NO,PLS-SEM survey analysis,METADATA_ONLY
+EXC_10,10.1016/j.envsoft.2025.106220,Catchment water balance modeling under climate change,2025,NO,long-term climate scenario simulation,METADATA_ONLY

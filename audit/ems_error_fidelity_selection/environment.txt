@@ -1,0 +1,3 @@
+Python 3.9.6
+pandas 2.3.3
+EMS Corpus Audit Tool v1.0

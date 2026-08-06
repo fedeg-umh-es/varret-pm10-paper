@@ -1,0 +1,4 @@
+claim,evidence,status
+EMS studies evaluate error and fidelity as separate dimensions without auditing selection changes.,"Extraction table: 100% of studies evaluate error, 20% evaluate variability ratio, but 0% audit systematic decision changes across multisite x multihorizon AI forecasting benchmarks.",SUPPORTED
+No prior EMS study formulates a joint Rule A (Skill+DM) vs Rule B (+Alpha+Recall) decision protocol.,0 of 25 included studies contain the exact dual-threshold decision change framework.,SUPPORTED
+EMS literature lacks evidence on discordance where models have positive skill and DM significance but severe variance collapse.,0 antecedents document the 101/154 discordant cases phenomenon in AI atmospheric forecasting.,SUPPORTED

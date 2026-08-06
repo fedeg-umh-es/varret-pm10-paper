@@ -1,0 +1,16 @@
+{
+  "q1_error_only_metrics": "13/18",
+  "q2_variability_amplitude_metrics": "4/18",
+  "q3_extreme_event_metrics": "2/18",
+  "q4_reported_by_horizon": "3/18",
+  "q5_persistence_baseline": "5/18",
+  "q6_statistical_comparison_dm": "3/18",
+  "q7_joint_error_fidelity_rule": "2/18",
+  "q8_fidelity_changes_ranking": "2/18",
+  "q9_fidelity_changes_selected_model": "2/18",
+  "q10_quantifies_operational_consequence": "1/18",
+  "q11_antecedent_101_discordant_cases": "0/18",
+  "q12_antecedent_rule_a_to_rule_b": "0/18",
+  "q13_antecedent_variance_ratio_alpha": "4/18",
+  "q14_antecedent_resolves_exact_gap": "0/18"
+}
