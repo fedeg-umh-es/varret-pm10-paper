@@ -1,0 +1,56 @@
+{
+  "experiment": "P4 LightGBM robustness arm",
+  "model_id": "lightgbm_direct",
+  "purpose": "learner robustness and model-selection consequence",
+  "stations_expected": 17,
+  "horizons_expected": 7,
+  "cells_expected": 119,
+  "existing_cells": 595,
+  "combined_cells_expected": 714,
+  "rule_a": "skill > 0 AND dm_significant",
+  "rule_b": "rule_a AND alpha >= 0.50 AND recall_p75 >= 0.20",
+  "primary_questions": [
+    "Does LightGBM reproduce positive error skill with low variance retention?",
+    "Does LightGBM change conventional model selection?",
+    "Does LightGBM change fidelity-aware model selection?",
+    "Does LightGBM reduce or increase decision discordance?"
+  ],
+  "forbidden_posthoc_actions": [
+    "test-based hyperparameter selection",
+    "threshold optimization",
+    "dropping unfavorable stations",
+    "changing existing model results",
+    "changing forecast origins",
+    "changing predictors",
+    "changing the baseline"
+  ],
+  "preregistration_utc": "2026-08-06T06:32:37Z",
+  "branch": "claude/p4-lightgbm-ems-audit-rjs3ch",
+  "head_sha": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+  "script_sha256": {
+    "script_01_generate_predictions": "54b1ab1363a722c70ade53595e806557cd50b9a5f2a6b6220324b73a48b6bede",
+    "script_02_generate_sarima": "7b0c7736458d5debc5382fbe59a22fb05dda94c74938ab4bdd73b60bab84db78",
+    "script_05_dm_significance": "254aa30c3505747f0c37c9d77a9a499139a15596897700551583cbbdaa31b443",
+    "script_07_variance_retention": "30d6023b9b12de28084dbdab9d76d293c8f69aebcfa0ecaed35fdbf9686ffb5d",
+    "script_09_comprehensive_table": "04e4a4942dffba534cfaedb9decd8a735000a13317ac8b50424e6cefd46c0d67",
+    "script_15_decision_change": "d49ee8cb3b414231c0070f662b898c0d3a2b925b72dbddc6fc847bc6733e163b"
+  },
+  "lightgbm_version": "4.7.0",
+  "python_version": "3.11.15",
+  "lightgbm_config_fixed_before_predictions": {
+    "n_estimators": 200,
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "deterministic": true,
+    "force_col_wise": true,
+    "verbose": -1,
+    "n_jobs": 1
+  },
+  "preregistration_status": "COMPLETE",
+  "blocking_status": "BLOCKED_BY_PIPELINE_OR_DATA",
+  "blocking_reason": "Raw PM10 time series data is available for only 3 of 17 stations (pm10_daily.csv -> 03014002_10_M, pm10_valencia_vivers.csv -> 46250043_10_M, pm10_zarra_emep.csv -> 46263999_10_M). The remaining 14 stations (08019004, 08019028, 08019043, 08019045, 08019052, 08019054, 08263007, 22125001, 43004005, 43004006, 44013007, 44216001, 45153999, 50008001) have no raw data in data/raw/. The predictions_all_stations.csv release asset (SHA-256: 2551b3a2...) covers only the evaluation period 2020-2024; models were trained on data from 2017 onwards (pre-evaluation history). Reconstructing the time series from predictions alone would underrepresent the training set used by the original models, violating the immutable experimental contract (same folds, same origins, same training windows)."
+}
