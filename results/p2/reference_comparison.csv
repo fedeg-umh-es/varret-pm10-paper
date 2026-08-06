@@ -1,0 +1,22 @@
+station,horizon,best_model,best_model_skill,ar1_reference_skill,yw_linear_reference_skill,best_exceeds_ar1,best_exceeds_yw,hybrid_materially_differs_from_yw,insufficient_pairs,regularized_solution,interpretation_status,notes
+Elche,1,ridge_direct,0.1068243052570685,0.103856457765517,0.11227499379359818,True,False,,False,False,VALID,
+Elche,2,ridge_direct,0.2264146319696041,0.2376271796386873,0.2286460590641607,False,False,,False,False,VALID,
+Elche,3,ridge_direct,0.2578848238331962,0.264295960185289,0.26563234868128227,False,False,,False,False,VALID,
+Elche,4,ridge_direct,0.2715063488548955,0.2822189573387709,0.2866022267576597,False,False,,False,False,VALID,
+Elche,5,ridge_direct,0.2781987813347364,0.2893975662296614,0.29391060529083246,False,False,,False,False,VALID,
+Elche,6,ridge_direct,0.2800379270533902,0.2883826650068477,0.2931565023001217,False,False,,False,False,VALID,
+Elche,7,ridge_direct,0.2717268157502217,0.2771316876771531,0.2817119068768186,False,False,,False,False,VALID,
+Valencia Vivers,1,ridge_direct,0.0954615809187324,0.15231687770651858,0.16224879717628327,False,False,,False,False,VALID,
+Valencia Vivers,2,hgb_direct,0.1774493329506257,0.2255443799483815,0.24280837173558412,False,False,,False,False,VALID,
+Valencia Vivers,3,ridge_direct,0.2036271928039161,0.24089003933753272,0.26964125389897453,False,False,,False,False,VALID,
+Valencia Vivers,4,ridge_direct,0.224281046700267,0.25748308155517585,0.28690217520040007,False,False,,False,False,VALID,
+Valencia Vivers,5,ridge_direct,0.2415127594814469,0.27916204543206724,0.30508313904114415,False,False,,False,False,VALID,
+Valencia Vivers,6,ridge_direct,0.243808200468329,0.2739015766080629,0.29960159203782877,False,False,,False,False,VALID,
+Valencia Vivers,7,ridge_direct,0.2528761794349226,0.27939376587869524,0.30329156327883977,False,False,,False,False,VALID,
+Zarra EMEP,1,sarima,0.1461155756160355,0.08390758905564721,0.1072555079062697,True,True,,False,False,VALID,best_exceeds_yw does not imply non-linearity; see mathematical contract for list of alternative explanations.
+Zarra EMEP,2,hgb_direct,0.1944010198200222,0.21119948491173157,0.20598894285477942,False,False,,False,False,VALID,
+Zarra EMEP,3,hgb_direct,0.2313148450813498,0.2518065332796309,0.2664234533104073,False,False,,False,False,VALID,
+Zarra EMEP,4,sarima,0.2495542186014008,0.26415126773687736,0.2882849554828174,False,False,,False,False,VALID,
+Zarra EMEP,5,sarima,0.3270361752893018,0.28582640419566374,0.312934565823079,True,True,,False,False,VALID,best_exceeds_yw does not imply non-linearity; see mathematical contract for list of alternative explanations.
+Zarra EMEP,6,sarima,0.3003059777732562,0.2937735751728525,0.3217198217128876,True,False,,False,False,VALID,
+Zarra EMEP,7,ridge_direct,0.2064613695421264,0.3131939677259613,0.3395586384460555,False,False,,False,False,VALID,

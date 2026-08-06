@@ -1,0 +1,106 @@
+station,horizon,model,skill,is_best,eligible_for_best
+Elche,1,hgb_direct,0.0545432047835262,False,True
+Elche,1,ridge_direct,0.1068243052570685,True,True
+Elche,1,sarima,-0.0460140053356599,False,True
+Elche,1,seasonal_naive,-0.5820662647666237,False,False
+Elche,1,stl_ridge_direct,-1.28855624225073,False,False
+Elche,2,hgb_direct,0.2074180430237674,False,True
+Elche,2,ridge_direct,0.2264146319696041,True,True
+Elche,2,sarima,-0.0070258483928693,False,True
+Elche,2,seasonal_naive,-0.1912908811513025,False,False
+Elche,2,stl_ridge_direct,-0.747120424710628,False,False
+Elche,3,hgb_direct,0.2358890778091833,False,True
+Elche,3,ridge_direct,0.2578848238331962,True,True
+Elche,3,sarima,0.2339225517747595,False,True
+Elche,3,seasonal_naive,-0.1141022420372301,False,False
+Elche,3,stl_ridge_direct,-0.6248225401105085,False,False
+Elche,4,hgb_direct,0.2421463973791151,False,True
+Elche,4,ridge_direct,0.2715063488548955,True,True
+Elche,4,sarima,0.2479131466958791,False,True
+Elche,4,seasonal_naive,-0.0732680967064896,False,False
+Elche,4,stl_ridge_direct,-0.5566452254443988,False,False
+Elche,5,hgb_direct,0.2536119461106551,False,True
+Elche,5,ridge_direct,0.2781987813347364,True,True
+Elche,5,sarima,0.127818294381531,False,True
+Elche,5,seasonal_naive,-0.0561755911083006,False,False
+Elche,5,stl_ridge_direct,-0.5291724152501194,False,False
+Elche,6,hgb_direct,0.2508762662428327,False,True
+Elche,6,ridge_direct,0.2800379270533902,True,True
+Elche,6,sarima,0.08973280811703,False,True
+Elche,6,seasonal_naive,-0.0173186221478531,False,False
+Elche,6,stl_ridge_direct,-0.4975317643858783,False,False
+Elche,7,hgb_direct,0.2378516414402605,False,True
+Elche,7,ridge_direct,0.2717268157502217,True,True
+Elche,7,sarima,0.2217535084576362,False,True
+Elche,7,seasonal_naive,0.0,False,False
+Elche,7,stl_ridge_direct,-0.4921674853675131,False,False
+Valencia Vivers,1,hgb_direct,0.0737028562176991,False,True
+Valencia Vivers,1,ridge_direct,0.0954615809187324,True,True
+Valencia Vivers,1,sarima,-0.0003945639331983,False,True
+Valencia Vivers,1,seasonal_naive,-0.4438639354608544,False,False
+Valencia Vivers,1,stl_ridge_direct,-1.8736892893431936,False,False
+Valencia Vivers,2,hgb_direct,0.1774493329506257,True,True
+Valencia Vivers,2,ridge_direct,0.1751919655401376,False,True
+Valencia Vivers,2,sarima,0.0834838533052333,False,True
+Valencia Vivers,2,seasonal_naive,-0.1360530432519417,False,False
+Valencia Vivers,2,stl_ridge_direct,-1.2860808095729626,False,False
+Valencia Vivers,3,hgb_direct,0.1936365310565044,False,True
+Valencia Vivers,3,ridge_direct,0.2036271928039161,True,True
+Valencia Vivers,3,sarima,0.0721950437874847,False,True
+Valencia Vivers,3,seasonal_naive,-0.0674372924665198,False,False
+Valencia Vivers,3,stl_ridge_direct,-1.1474680904284966,False,False
+Valencia Vivers,4,hgb_direct,0.2098397119173544,False,True
+Valencia Vivers,4,ridge_direct,0.224281046700267,True,True
+Valencia Vivers,4,sarima,0.0819500730133631,False,True
+Valencia Vivers,4,seasonal_naive,-0.0274306035024072,False,False
+Valencia Vivers,4,stl_ridge_direct,-1.0642590297717889,False,False
+Valencia Vivers,5,hgb_direct,0.2272714588000408,False,True
+Valencia Vivers,5,ridge_direct,0.2415127594814469,True,True
+Valencia Vivers,5,sarima,0.0983651097829665,False,True
+Valencia Vivers,5,seasonal_naive,0.0067135953802639,False,False
+Valencia Vivers,5,stl_ridge_direct,-0.9795753624667698,False,False
+Valencia Vivers,6,hgb_direct,0.2271196289010981,False,True
+Valencia Vivers,6,ridge_direct,0.243808200468329,True,True
+Valencia Vivers,6,sarima,0.0745176164127247,False,True
+Valencia Vivers,6,seasonal_naive,0.0036071155015449,False,False
+Valencia Vivers,6,stl_ridge_direct,-0.9851565128204168,False,False
+Valencia Vivers,7,hgb_direct,0.2324995866841183,False,True
+Valencia Vivers,7,ridge_direct,0.2528761794349226,True,True
+Valencia Vivers,7,sarima,0.0879552510145857,False,True
+Valencia Vivers,7,seasonal_naive,0.0,False,False
+Valencia Vivers,7,stl_ridge_direct,-0.9766908202120924,False,False
+Zarra EMEP,1,hgb_direct,0.0576745356631105,False,True
+Zarra EMEP,1,ridge_direct,0.0852153086153748,False,True
+Zarra EMEP,1,sarima,0.1461155756160355,True,True
+Zarra EMEP,1,seasonal_naive,-0.7016714016935104,False,False
+Zarra EMEP,1,stl_ridge_direct,-1.243273564187279,False,False
+Zarra EMEP,2,hgb_direct,0.1944010198200222,True,True
+Zarra EMEP,2,ridge_direct,0.1800284101493156,False,True
+Zarra EMEP,2,sarima,0.0782767753261056,False,True
+Zarra EMEP,2,seasonal_naive,-0.2256678692312941,False,False
+Zarra EMEP,2,stl_ridge_direct,-0.6772051326064006,False,False
+Zarra EMEP,3,hgb_direct,0.2313148450813498,True,True
+Zarra EMEP,3,ridge_direct,0.2189869172535209,False,True
+Zarra EMEP,3,sarima,0.0876360349409425,False,True
+Zarra EMEP,3,seasonal_naive,-0.099388999661014,False,False
+Zarra EMEP,3,stl_ridge_direct,-0.5039775306055656,False,False
+Zarra EMEP,4,hgb_direct,0.2350524348857933,False,True
+Zarra EMEP,4,ridge_direct,0.2246462771083498,False,True
+Zarra EMEP,4,sarima,0.2495542186014008,True,True
+Zarra EMEP,4,seasonal_naive,-0.0723208467300837,False,False
+Zarra EMEP,4,stl_ridge_direct,-0.4473887200197133,False,False
+Zarra EMEP,5,hgb_direct,0.2158380294562084,False,True
+Zarra EMEP,5,ridge_direct,0.2077774999457512,False,True
+Zarra EMEP,5,sarima,0.3270361752893018,True,True
+Zarra EMEP,5,seasonal_naive,-0.0301146774267071,False,False
+Zarra EMEP,5,stl_ridge_direct,-0.3732407032105855,False,False
+Zarra EMEP,6,hgb_direct,0.2122987011351359,False,True
+Zarra EMEP,6,ridge_direct,0.208160151566629,False,True
+Zarra EMEP,6,sarima,0.3003059777732562,True,True
+Zarra EMEP,6,seasonal_naive,-0.0069080095242777,False,False
+Zarra EMEP,6,stl_ridge_direct,-0.3430493175813982,False,False
+Zarra EMEP,7,hgb_direct,0.2047846046271658,False,True
+Zarra EMEP,7,ridge_direct,0.2064613695421264,True,True
+Zarra EMEP,7,sarima,0.1495592589263198,False,True
+Zarra EMEP,7,seasonal_naive,0.0,False,False
+Zarra EMEP,7,stl_ridge_direct,-0.3157186396243172,False,False

@@ -1,0 +1,51 @@
+{
+  "p2_workflow_version": "1.0.0",
+  "timestamp": "2026-08-06T09:51:33Z",
+  "elapsed_seconds": 0.87,
+  "source_repository": "fedeg-umh-es/varret-pm10-paper",
+  "worktree": "/home/user/varret-pm10-paper",
+  "branch": "claude/p2-predictability-bound-ldvcbi",
+  "commit_base": "4a49b08b041c578ec5981dc1472125b2af0a4d59",
+  "snapshot_p4_provenance": "390685f1f1312954ee67513f3e0db11b2670e7f9",
+  "snapshot_p4_note": "Mac-local reference; protected commits verified on origin/claude/p4-lightgbm-ems-audit-rjs3ch",
+  "stations": [
+    "elche",
+    "valencia_vivers",
+    "zarra_emep"
+  ],
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "p_order": 14,
+  "skill_definition": "Skill_RMSE = 1 - RMSE_model / RMSE_persistence",
+  "persistence_definition": "lag-1: forecast = last observed value for all h",
+  "missingness_policy": "NaN preserved on calendar grid; valid-pair estimation for autocovariances",
+  "solver": "scipy.linalg.solve (assume_a='sym')",
+  "regularization_policy": "ridge with tol_reg=1e-8 * mean_diag only if primary solve fails",
+  "tests_passed": true,
+  "blockers": [],
+  "outputs": [
+    "input_inventory.csv",
+    "input_provenance.md",
+    "input_hashes.sha256",
+    "elche_h1_h7.csv",
+    "valencia_vivers_h1_h7.csv",
+    "zarra_emep_h1_h7.csv",
+    "p2_reference_table.csv",
+    "acf_pair_counts.csv",
+    "covariance_diagnostics.csv",
+    "model_selection_audit.csv",
+    "reference_comparison.csv",
+    "run_manifest.json",
+    "environment.txt",
+    "commands.log",
+    "artifact_hashes.sha256",
+    "REPORT.md"
+  ]
+}

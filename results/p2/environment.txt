@@ -1,0 +1,5 @@
+python=3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]
+platform=Linux-6.18.5-fc-v18-x86_64-with-glibc2.39
+numpy=2.4.6
+pandas=3.0.5
+scipy=1.17.1
