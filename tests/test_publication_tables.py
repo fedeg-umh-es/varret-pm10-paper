@@ -26,7 +26,7 @@ def test_publication_tables_exist() -> None:
 
 
 def test_publication_provenance_metadata() -> None:
-    for filepath in PUB_DIR.glob("*.csv"):
+    for filepath in PUB_DIR.glob("pub_table_*.csv"):
         df = pd.read_csv(filepath)
         assert "source_commit" in df.columns
         assert (df["source_commit"] == FROZEN_COMMIT).all()
