@@ -1,16 +1,14 @@
-"""
-Preprocess PM10: imputation, detrending, normalization
-========================================================
-All statistics fitted on data available at each point in time.
-Leakage-free: future data never used to transform past data.
-"""
+from __future__ import annotations
 
 import pandas as pd
 import numpy as np
 import json
 from pathlib import Path
 import argparse
-import yaml
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 
 def impute_series(series: pd.Series, method: str = "forward_fill") -> pd.Series:
