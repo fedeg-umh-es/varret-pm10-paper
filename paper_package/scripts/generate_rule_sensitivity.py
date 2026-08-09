@@ -4,6 +4,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
+from matplotlib.patches import Rectangle
 
 ROOT = Path(__file__).resolve().parents[2]
 CANONICAL = ROOT / "outputs/tables/master_diagnostic_table.csv"
@@ -34,8 +35,7 @@ def main() -> None:
     lines = [
         r"\begin{table}[ht]",
         r"\centering",
-        r"\caption{Deterministic sensitivity of Rule B around the primary thresholds. Each cell reports retained Rule-B eligible cells and, in parentheses, the percentage of Rule-A cells that change status. The 595 canonical diagnostic rows are reused; no forecasts are recomputed.}",
-        r"\label{tab:rule_sensitivity}",
+        r"\textbf{Supplementary Table S3.} Each cell reports retained Rule-B eligible cells and, in parentheses, the percentage of Rule-A cells that change status. The 595 canonical diagnostic rows are reused; no forecasts are recomputed.\par\smallskip",
         r"\begin{tabular}{lrrr}",
         r"\toprule",
         r"$\alpha$ threshold $\backslash$ recall threshold & 0.10 & 0.20 & 0.30 \\",
@@ -61,6 +61,8 @@ def main() -> None:
     for i in range(3):
         for j in range(3):
             ax.text(j, i, f"{pivot.iloc[i, j]:.1f}%", ha="center", va="center", fontsize=9)
+    ax.add_patch(Rectangle((0.5, 0.5), 1.0, 1.0, fill=False,
+                           edgecolor="#333333", linewidth=1.4, zorder=3))
     fig.colorbar(im, ax=ax, label="Rule-A cells changing (%)")
     fig.tight_layout()
     OUT_FIGURE.parent.mkdir(parents=True, exist_ok=True)
@@ -69,13 +71,13 @@ def main() -> None:
 
     report = f"""# Rule-B threshold sensitivity
 
-Source: existing `audit/decision_change/rule_b_sensitivity.csv`, verified against the frozen 595-row canonical table.
+Source: existing `audit/decision_change/rule_b_sensitivity.csv`, verified against the canonical 595-row table.
 
 Primary thresholds: alpha = 0.50 and P75 recall = 0.20. Primary result: Rule A = 277, Rule B = 8, changes = 269, change proportion = 97.1%.
 
 The displayed neighbourhood uses alpha thresholds {{0.40, 0.50, 0.60}} and P75-recall thresholds {{0.10, 0.20, 0.30}}. Across these nine combinations, the proportion of Rule-A cells changing ranges from {sub.change_pct.min():.1f}% to {sub.change_pct.max():.1f}%; retained Rule-B cells range from {sub.pass_b.max()} to {sub.pass_b.min()}. The qualitative conclusion that fidelity materially changes eligibility persists, so the sensitivity verdict is **ROBUST** within this deterministic neighbourhood.
 
-This is a post-evaluation audit of frozen rows, not a forecasting experiment, threshold optimisation, or claim of universal threshold validity.
+This is a post-evaluation sensitivity analysis of existing rows, not a forecasting experiment, threshold optimisation, or claim of universal threshold validity.
 """
     OUT_REPORT.write_text(report, encoding="utf-8")
     print(f"Sensitivity PASS: {sub.change_pct.min():.1f}%--{sub.change_pct.max():.1f}%")

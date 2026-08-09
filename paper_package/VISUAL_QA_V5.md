@@ -1,6 +1,6 @@
 # Visual QA V5
 
-The final PDF was rendered page by page with Poppler at 120 dpi and each
+The V5.1 PDF was rendered page by page with Poppler at 120 dpi and each
 page was inspected. Scientific figures were also rendered independently
 at higher resolution before the PDF review.
 
@@ -14,8 +14,9 @@ at higher resolution before the PDF review.
 | 6 | Table 2 and Figure 3 | Decision table and sensitivity heatmap are readable and remain in Results. | — | None | PASS |
 | 7 | Discussion | No Results floats appear after the Discussion heading. | — | None | PASS |
 | 8 | Conclusions and declarations | No clipping, isolated heading, or broken hyperlink. | — | None | PASS |
-| 9 | Supplementary Table S1 and references | Station table and references are readable. | — | None | PASS |
-| 10 | Supplementary Tables S2--S3 | Supplementary tables are complete and legible at their intended scale. | — | None | PASS |
+| 9 | References | The bibliography is contiguous and complete. | — | None | PASS |
+| 10 | Supplementary Table S1 | Station table is complete and readable. | — | None | PASS |
+| 11 | Supplementary Tables S2--S3 | Supplementary tables are complete and legible at their intended scale. | — | None | PASS |
 
 ## Figure gates
 
@@ -31,6 +32,8 @@ at higher resolution before the PDF review.
 
 `RESULT_FLOATS_AFTER_DISCUSSION_HEADING = 0`
 
+`SUPPLEMENT_REFERENCE_INTERLEAVING = 0`
+
 `FIGURE_2_VISUAL_QA = PASS`
 
-`VISUAL_QA_V5 = PASS`
+`VISUAL_QA_V5_1 = PASS`

@@ -40,7 +40,7 @@
 \input{sections/abstract.tex}
 
 \begin{keyword}
-PM$_{10}$ forecasting \sep model eligibility \sep dynamic fidelity \sep forecast evaluation \sep variance retention \sep rolling-origin audit
+PM$_{10}$ forecasting \sep model eligibility \sep dynamic fidelity \sep forecast evaluation \sep variance retention \sep rolling-origin evaluation
 \end{keyword}
 
 \end{frontmatter}
@@ -59,18 +59,20 @@ PM$_{10}$ forecasting \sep model eligibility \sep dynamic fidelity \sep forecast
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 \section*{Data and Software Availability}
-The analysis repository is maintained at \url{https://github.com/fedeg-umh-es/varret-pm10-paper}. The canonical aggregate diagnostic table, provenance manifest, reproducible table and figure generators, and documented reconstruction limitations are included in the repository package. The empirical evidence identifies 17 Spanish MITECO/EMEP monitoring stations and contains 595 station--model--horizon rows. The repository must be synchronised with the final submission commit before an EMS submission; no external DOI is asserted here.
+The analysis repository is maintained at \url{https://github.com/fedeg-umh-es/varret-pm10-paper}. The canonical aggregate diagnostic table, provenance manifest, reproducible table and figure generators, and documented reconstruction limitations are included in the repository package. The empirical evidence identifies 17 Spanish MITECO/EMEP monitoring stations and contains 595 station--model--horizon rows. The repository must be synchronised with the final submission commit before an EMS submission; no external DOI is asserted here.\par
+\texttt{FINAL\_REPOSITORY\_SYNC\_REQUIRED = YES}.
 
 \section*{Acknowledgments}
-The authors used a generative AI assistant for language editing, code/document assistance, and \LaTeX\ formatting. No data, forecasts, empirical results, scientific conclusions, or submitted artwork were generated or altered by generative AI. All data processing, analysis, results, and scientific conclusions are the authors' own and were verified by the authors, who take full responsibility for the content of this paper.
+The authors used a generative AI assistant for language editing, code/document assistance, and \LaTeX\ formatting. No data, forecasts, empirical results, scientific conclusions, or submitted artwork were generated or altered by generative AI. Scientific figures are deterministic plots generated from the analysed data with conventional plotting software; no generative-image tool was used. All data processing, analysis, results, and scientific conclusions are the authors' own and were verified by the authors, who take full responsibility for the content of this paper.
 This research received no specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
-
-\section*{Supplementary Material}
-\input{supplementary/supplementary_material_ems.tex}
 
 {\footnotesize
 \bibliographystyle{elsarticle-num-names}
 \bibliography{references}
 }
+
+\clearpage
+\section*{Supplementary Material}
+\input{supplementary/supplementary_material_ems.tex}
 
 \end{document}

@@ -31,7 +31,7 @@ BibTeX (`elsarticle-num-names.bst`)
 Environmental Modelling & Software (Elsevier)
 
 ## Page count (local compilation)
-10 pages, including supplementary material.
+11 pages, including supplementary material.
 
 Before submission, extract and compile the archive from a clean directory.
 The local revision is not claimed to be publicly available until the

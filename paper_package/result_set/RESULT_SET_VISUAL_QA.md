@@ -9,7 +9,7 @@ the narrative rewrite. No MAJOR or BLOCKING issue remains.
 | Figure 2 candidate A | Five panels show clustering and formal contours without labels over points | MINOR | Select as final | PASS |
 | Figure 2 candidate B | Readable but summary panel adds a second descriptive layer and is less direct | MINOR | Remove as redundant | PASS |
 | Figure 2 final | No overlap or clipped labels; shaded geometry differs from formal contours | MINOR | Freeze candidate A | PASS |
-| Figure 3 | Heatmap labels and primary cell are readable | MINOR | Keep deterministic heatmap | PASS |
+| Figure 3 | Heatmap labels and outlined primary cell are readable | MINOR | Keep deterministic heatmap with primary-cell outline | PASS |
 | Table 1 | Compact but legible at manuscript size | MINOR | Keep editable LaTeX | PASS |
 | Table 2 | Total row makes 277 -> 8 and 269 visible | MINOR | Keep editable LaTeX | PASS |
 | Sensitivity table | Retained counts add information beyond heatmap percentages | MINOR | Move to Supplementary Table S3 | PASS |

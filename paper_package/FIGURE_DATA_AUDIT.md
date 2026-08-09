@@ -23,3 +23,6 @@ eligibility bar chart, and unused legacy figures are also excluded.
 `FIGURE_2_VISUAL_QA = PASS`: the final file uses five common-axis facets
 and a sixth key cell; formal discordance is shown with open contours and
 is distinguished from the shaded positive-skill/low-alpha region.
+
+Figure 3 additionally outlines the primary $α=0.50$, P75-recall $=0.20$
+cell without changing the plotted sensitivity values.

@@ -1,4 +1,4 @@
-# P4 EMS presentation V5 build report
+# P4 EMS presentation V5.1 build report
 
 ## Canonical evidence
 
@@ -22,13 +22,13 @@ v5 submission archive.
 - Abstract: 139 lexical tokens in PDF text extraction, below the 150-word limit.
 - Result-set freeze: PASS; figures and tables were inspected before the
   localized presentation edits.
-- LaTeX compilation: PASS, 10 pages, no errors, undefined citations,
+- LaTeX compilation: PASS, 11 pages, no errors, undefined citations,
   undefined references, missing figures, or missing tables.
 - Visual QA: PASS; `FIGURE_2_VISUAL_QA = PASS`, with no Results floats
-  after the Discussion heading.
+  after the Discussion heading and no Supplementary/References interleaving.
 - PIER audit: PASS; no global prose rewrite was performed.
 - Narrative SKIP test: PASS.
-- Overleaf v5 archive validation: PASS (`unzip -t`).
-- Independent Overleaf v5 compilation: PASS, 10 pages.
+- Overleaf v5.1 archive validation: PASS (`unzip -t`).
+- Independent Overleaf v5.1 compilation: PASS, 11 pages.
 
 Author prose review remains required; no push is performed by this task.
