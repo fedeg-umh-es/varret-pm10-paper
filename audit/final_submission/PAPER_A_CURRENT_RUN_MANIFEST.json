@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.1-audit-candidate",
+  "status": "CANDIDATE_ONLY_GRADE_A_NOT_RECOVERED",
+  "created": "2026-08-10",
+  "purpose": "Document only the evidence and protocol fields verified during Grade-A recovery; not a publication manifest.",
+  "repository": "fedeg-umh-es/varret-pm10-paper",
+  "local_branch": "codex/p4-lightgbm-ems-gap-audit",
+  "local_head": "3d1b43567d916b46d48dff933f780b8e6b92b7bb",
+  "public_refs": {
+    "current_branch_public_head": "12fb7bb8446f8f606dc2f75bb689a4561a61178c",
+    "evidence_tag": "paper-a-row-level-evidence-v1",
+    "evidence_tag_commit": "4e3a97adb21fb43f3dade44fb50554bb15a48173",
+    "row_level_release_asset": "https://github.com/fedeg-umh-es/varret-pm10-paper/releases/download/paper-a-row-level-evidence-v1/predictions_all_stations.csv",
+    "row_level_asset_sha256": "2551b3a2acf549e94cd92e39386b96aca2358cca41fed7f85c933d35c77ef823"
+  },
+  "benchmark": {
+    "stations": {"value": 17, "status": "verified_from_public_metadata_and_aggregate"},
+    "models": {"value": ["hgb_direct", "ridge_direct", "sarima", "seasonal_naive", "stl_ridge_direct"], "status": "verified_from_canonical_aggregate"},
+    "horizons": {"value": [1, 2, 3, 4, 5, 6, 7], "status": "verified_from_row_level_and_aggregate"},
+    "cells": {"value": 595, "status": "verified_from_canonical_aggregate"},
+    "lightgbm_rows": {"value": 0, "status": "verified"}
+  },
+  "validation": {
+    "rolling_origin": {"value": "five expanding folds", "status": "manuscript/provenance claim not reconciled to public row-level release"},
+    "persistence": {"value": "last causally available observed PM10 value at origin", "status": "verified in historical generator code; not exactly recoverable for all released SARIMA rows"},
+    "sarima_configuration": {"value": null, "status": "not asserted; conflicting historical configurations remain unresolved"},
+    "alpha": {"value": "Var(y_pred)/Var(y_true), ddof=0 over matched rows", "status": "verified from audit and public reconstruction documentation"},
+    "p75_recall": {"value": "train/history-derived P75 exceedance recall", "status": "code and aggregate present; full numerical reconciliation pending"},
+    "dm_hln": {"value": "DM with HLN correction", "status": "procedure present in script; full current-chain reconciliation pending"},
+    "bh_family": {"value": "per-dataset family in scripts/05_dm_significance.py", "status": "verified in code; current aggregate chain not independently rerun"},
+    "rule_a": {"value": "skill > 0 AND dm_significant", "status": "verified in local decision script; public row-level chain incomplete"},
+    "rule_b": {"value": "Rule A AND alpha >= 0.50 AND recall_p75 >= 0.20", "status": "verified in local decision script; public row-level chain incomplete"},
+    "formal_discordance": {"value": "Rule A AND recall_p75 >= 0.20 AND alpha < 0.50", "status": "verified in local decision script; public row-level chain incomplete"}
+  },
+  "artifacts": {
+    "predictions_row_level": {"path": "public release asset", "status": "partial_for_current_claim"},
+    "station_metadata": {"path": "evidence/paper_a/metadata/station_metadata.csv", "status": "verified"},
+    "master_diagnostic_table": {"path": "evidence/paper_a/aggregates/master_diagnostic_table.csv", "sha256": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6", "status": "verified_aggregate_only"},
+    "variance_retention": {"path": "evidence/paper_a/aggregates/variance_retention_all_stations.csv", "status": "verified"},
+    "dm": {"path": "evidence/paper_a/aggregates/dm_significance_all_stations.csv", "status": "present_not_independently_reconciled"},
+    "events": {"path": "evidence/paper_a/aggregates/exceedance_all_stations.csv", "status": "present_not_independently_reconciled"},
+    "decision_script": {"path": "scripts/15_decision_change_analysis.py", "status": "local_only_at_current_public_state; consumes aggregate table"},
+    "run_manifest": {"path": "outputs/reproduction/run_manifest_rolling_origin.json", "status": "conflicting_older_protocol"}
+  },
+  "grade_a_blockers": [
+    "SARIMA-aligned persistence evidence for all 119 cells is missing.",
+    "The public run manifest does not describe the current daily five-model, seven-horizon benchmark.",
+    "No complete public end-to-end row-level-to-Rule-A/B reproduction chain is available.",
+    "Public DM and event aggregates were not independently reconciled in the consolidation."
+  ]
+}
