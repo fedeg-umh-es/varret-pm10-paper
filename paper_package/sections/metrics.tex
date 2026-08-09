@@ -1,19 +1,22 @@
-\section{Metrics}
+\section{Verification Metrics and Statistical Procedures}
 \label{sec:metrics}
 
-\subsection{Persistence-relative skill}
-For matched forecast--observation pairs, persistence-relative RMSE skill is
+\subsection{Error and baseline-relative skill}
+For matched forecast--observation pairs, RMSE is the square root of mean squared forecast error. Persistence-relative skill is
 \begin{equation}
 \mathrm{Skill}=1-\frac{\mathrm{RMSE}_{model}}{\mathrm{RMSE}_{persistence}}.
 \end{equation}
-Positive values indicate lower RMSE than persistence; they do not by themselves establish dynamic fidelity.
+Positive skill indicates lower RMSE than persistence; it does not establish dynamic fidelity.
 
-\subsection{Variance retention}
-The canonical diagnostic is the predicted-to-observed variance ratio
+\subsection{Variance retention and event recall}
+The canonical dynamic diagnostic is the predicted-to-observed variance ratio
 \begin{equation}
 \alpha=\frac{\operatorname{Var}(\hat y)}{\operatorname{Var}(y)},
 \end{equation}
-with population variances ($\mathrm{ddof}=0$) over the matched cell pairs. Thus $\alpha=0.50$ means that one half of the observed variance is retained; it is not a standard-deviation ratio. The canonical implementation also computes descriptive percentile-bootstrap intervals with $B=1000$ resamples and seed 42.
+computed with population variances ($\mathrm{ddof}=0$) over matched cell pairs. It is a variance ratio, not a standard-deviation ratio. P75 recall is the proportion of observed P75 exceedances correctly identified by the forecast, with the threshold estimated from the corresponding training window.
 
-\subsection{Significance and event sensitivity}
-The Diebold--Mariano loss differential uses squared-error loss against persistence. The implementation applies the Harvey--Leybourne--Newbold small-sample correction with horizon-dependent autocovariance truncation and adjusts valid p-values using Benjamini--Hochberg within each dataset. P75 recall is the proportion of observed P75 exceedances correctly forecast as exceedances, using thresholds estimated from the corresponding training window. These diagnostics are used jointly in Rule B; none is presented as a universal replacement for error metrics.
+\subsection{Diebold--Mariano testing and multiplicity}
+The loss differential compares squared errors from the candidate forecast and persistence. The two-sided Diebold--Mariano statistic uses the Harvey--Leybourne--Newbold small-sample correction and horizon-dependent autocovariance truncation. Benjamini--Hochberg adjustment is applied within each dataset to the valid model--horizon p-values before the significance flag is defined at 0.05. This family definition is important because the 595 cells share data and are not treated as independent tests in a single inferential population.
+
+\subsection{Bootstrap uncertainty}
+The canonical variance diagnostic includes descriptive percentile-bootstrap intervals computed with 1,000 resamples and seed 42. These intervals describe uncertainty around cell-level alpha estimates; they are not used to optimise Rule-B thresholds and are not interpreted as population-level inference over the structured grid.

@@ -21,7 +21,7 @@ BibTeX (`elsarticle-num-names.bst`)
 - `references.bib`
 - `sections/` (modular section files)
 - `tables/` (LaTeX table files)
-- `figures/` (PDF figures)
+- `figures/` (PDF figures used by `main.tex`)
 - `supplementary/` (supplementary material)
 
 ## Known non-blocking warnings
@@ -31,4 +31,8 @@ BibTeX (`elsarticle-num-names.bst`)
 Environmental Modelling & Software (Elsevier)
 
 ## Page count (local compilation)
-10 pages
+10 pages.
+
+Before submission, extract and compile the archive from a clean directory.
+The local revision is not claimed to be publicly available until the
+repository is synchronised with the submission commit.

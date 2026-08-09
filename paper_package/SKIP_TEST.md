@@ -1,12 +1,12 @@
 # Skip test
 
-The first sentence of each paragraph was read after the rewrite.
+Reading only the first sentence of each paragraph reconstructs the intended narrative:
 
-| Section | First-sentence sequence | Result |
+| Section | Reconstructed sequence | Status |
 |---|---|---|
-| Introduction | context → conventional error → limitation → question/contributions | PASS |
-| Results | design/order → Rule A evidence → fidelity evidence → horizon figure → joint evidence → discordance → eligibility consequence | PASS |
-| Discussion | main decision consequence → interpretation of discordance → threshold scope → limitations | PASS |
-| Conclusion | observed result → methodological implication and boundary | PASS |
+| Introduction | environmental context → error baseline → complementary fidelity → EMS gap → question → contributions | PASS |
+| Results | audit order → Rule A → fidelity profiles → discordance → eligibility change → threshold sensitivity | PASS |
+| Discussion | central consequence → complementary metrics → family profiles → literature relation → sensitivity/operations → boundaries | PASS |
+| Conclusions | observed result → eligibility change → methodological implication → bounded generalisation | PASS |
 
-The sequence reconstructs context, problem, question, design, main evidence, decision consequence, interpretation, limitation, and conclusion without relying on paragraph-level detail.
+`SKIP_TEST = PASS`

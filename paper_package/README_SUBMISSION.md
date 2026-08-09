@@ -1,0 +1,20 @@
+# EMS submission package
+
+This package contains the revised Paper A manuscript for possible submission to *Environmental Modelling & Software*.
+
+## Scientific scope
+
+The paper audits whether adding dynamic-fidelity requirements to persistence-relative error eligibility changes the set of passing cells in a daily PM10 benchmark. The empirical source is the frozen 595-row canonical table: 17 stations, five model families, and seven horizons. No additional forecasts or models are included.
+
+## Included production outputs
+
+- `main.tex` and modular sections;
+- diagnostic, decision, specification, and sensitivity tables;
+- three primary vector figures;
+- supplementary station metadata;
+- `references.bib` and Elsevier class/style files;
+- `TRACEABILITY.md`, `REFERENCE_AUDIT.md`, `RULE_THRESHOLD_SENSITIVITY.md`, and `VISUAL_QA.md`.
+
+## Submission caveat
+
+The repository contains the canonical evidence and reproducibility records. Before submission, the public repository must be synchronised with the final accepted commit and any data-deposition identifier must be confirmed. No Zenodo DOI is asserted in this package.

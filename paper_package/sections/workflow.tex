@@ -1,6 +1,8 @@
-\section{Evidence and Reproducibility}
+\section{Evidence Governance and Reproducibility}
 \label{sec:workflow}
 
-All reported counts and summaries are derived from the canonical 595-row table. Its SHA-256 is recorded in the provenance manifest. The table contains exactly five model labels. Reproducible table and figure generators are included in the package, and the numerical claim-to-source map is provided in the accompanying traceability file.
+The empirical analysis is governed by a frozen 595-row diagnostic table whose SHA-256 is recorded in the provenance manifest. The table contains the complete five-model, 17-station, seven-horizon grid and is the sole source for the numerical results, tables, and primary figures in this manuscript.
 
-The audit is intentionally descriptive. Counts are reported over a structured station--model--horizon grid, and the shared stations and time series mean that the 595 cells must not be interpreted as 595 independent replicates. Historical synthetic or quarantined material is outside the empirical evidence used here.
+Reproducibility is separated into two layers. The scientific layer defines the forecast task, validation controls, metrics, eligibility rules, and limitations in the sections above. The computational layer preserves source tables, provenance records, deterministic table and figure generators, and a claim-level traceability matrix in the repository package. The final submission archive contains only LaTeX inputs and figures needed for compilation; internal audit material remains outside that archive.
+
+The sensitivity analysis is a deterministic transformation of the frozen rows. It changes neither forecasts nor thresholds used for the primary result. Its purpose is to show how the eligibility consequence behaves in a prespecified neighbourhood of the operational thresholds.

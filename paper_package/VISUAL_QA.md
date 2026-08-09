@@ -1,22 +1,29 @@
 # Visual QA
 
-Final document: `paper_package/main.pdf`  
-Renderer: `pdftoppm -png -r 120`  
-Pages inspected: 9
+PDF inspected: `paper_package/main.pdf`
 
-| Page | Issue | Severity | Action |
-|---:|---|---|---|
-| 1 | Title, abstract, introduction start | NONE | Passed |
-| 2 | Introduction, framework, benchmark start | NONE | Passed |
-| 3 | Benchmark, metrics, evidence section | NONE | Passed |
-| 4 | Horizon figure and results/table start | NONE | Passed |
-| 5 | Scatter figure, discordance, discussion start | NONE | Passed |
-| 6 | Decision table, discussion, conclusions | NONE | Passed |
-| 7 | Eligibility figure, declarations, supplement start | NONE | Passed |
-| 8 | Supplementary reporting table and figure | NONE | Passed |
-| 9 | Station table and complete references | NONE | Passed |
+Result: PASS. All 10 pages were rendered at 120 dpi and inspected. No
+MAJOR or BLOCKING issues remain.
 
-No clipped tables, missing figures, unreadable captions, margin overflows,
-or undefined-reference artefacts were observed. The previous nearly empty
-references continuation page was removed by scoping the bibliography to a
-smaller font. Final verdict: `VISUAL_QA_PASS`.
+`FIGURE_2_VISUAL_QA = PASS`
+
+| Page | Element | Issue | Severity | Action | Final status |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | Title, abstract, introduction | No clipping or margin issue | MINOR | None | PASS |
+| 2 | Introduction, gap, rules | Equations and references legible | MINOR | None | PASS |
+| 3 | Methods opening | No clipping or excessive whitespace | MINOR | None | PASS |
+| 4 | Model specification table, metrics | Compact table remains readable; no overfull content | MINOR | None | PASS |
+| 5 | Table 2, Results, Table 1 | Tables and captions legible | MINOR | None | PASS |
+| 6 | Figure 1, Results, Discussion | Figure readable and placed before later discussion | MINOR | None | PASS |
+| 7 | Figure 2, Discussion | No text overlap; shaded region and formal contours are distinct | MINOR | None | PASS |
+| 8 | Table 3, sensitivity table, conclusions | Tables and conclusion readable; no major float displacement | MINOR | None | PASS |
+| 9 | Figure 3, availability, supplement entry | Sensitivity figure legible; no figure after Conclusions | MINOR | None | PASS |
+| 10 | Supplementary station table, references | Table and references fit within margins | MINOR | None | PASS |
+
+Figure 2 checks:
+
+- shaded region denotes only positive skill with alpha below 0.50;
+- black open contours identify the 101 formal discordant cells;
+- legend does not obscure the dense lower-right cloud;
+- Skill = 0 and alpha = 0.50 reference lines are visible;
+- no labels are superimposed on the critical point cloud.

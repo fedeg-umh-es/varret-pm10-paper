@@ -1,43 +1,29 @@
-# REFERENCE AUDIT
+# Reference audit
 
-Generated: 2026-08-09
+Generated during the P4 pre-submission revision from the local bibliography and manuscript sources. No new literature search was performed.
 
-## References present in references.bib
+## Citation integrity
 
-See references.bib (174 lines, 22 entries verified).
+- Cited keys were checked against `paper_package/references.bib`.
+- The planned compilation must produce zero undefined citations.
+- The EMS gap is bounded to the audited corpus and is worded as limited evidence on explicit joint eligibility consequences, not as absence from the whole literature.
 
-## References cited in manuscript
+## References used for the argument
 
-All citations resolved after bibtex pass. Final compilation: 0 undefined citations.
+- Forecast accuracy and persistence-relative comparison: Hyndman and Koehler (2006).
+- Predictive-accuracy testing: Diebold and Mariano (1995), Harvey et al. (1997).
+- Point-forecast verification and complementary dimensions: Gneiting (2011), Jolliffe and Stephenson (2012).
+- Temporal validation: Tashman (2000), Bergmeir et al. (2018).
+- Air-quality forecasting context: Mendez et al. (2023), Tang et al. (2024), Chadalavada et al. (2025).
 
-Key citations verified against bib file:
-- who2021 — WHO air quality guidelines
-- wilks2011 — Wilks statistical methods
-- hyndman2006 — Hyndman & Koehler MASE
-- gneiting2011 — Gneiting & Katzfuss probabilistic forecasting
-- murphy1988 — Murphy decomposition
-- harvey1997 — Harvey Leybourne Newbold DM correction
-- diebold1995 — Diebold Mariano
-- sandve2013 — Sandve reproducibility
-- mendez2023, tang2024, chadalavada2025 — PM ML reviews
-- makridakis2018, cerqueira2020 — forecasting evaluation
-- tashman2000, kaufman2012 — temporal validation
-- jolliffe2012 — forecast verification
-- bergmeir2018 — time series CV
-- taylor2001 — Taylor diagram
+## EMS corpus audit
 
-## Missing bib entries
+The repository contains a separate EMS audit of 45 retrieved, 35 screened, and 25 included records from 2015--2026, with full-text and abstract-only strata. That audit supports the bounded gap statement. The older 486-abstract reporting block is not part of the canonical Paper-A evidence chain and is excluded from the manuscript and Overleaf package; its source artefacts remain outside the package.
 
-None detected (0 undefined citations in final log).
+## DOI policy
 
-## Unused bib entries
+No Zenodo DOI is asserted. Any repository deposition or public release must be confirmed separately before submission.
 
-Not audited at entry level; bibtex warnings not present.
+## LightGBM policy
 
-## References requiring verification
-
-- Zenodo DOI 10.5281/zenodo.18675211 (concept) and 10.5281/zenodo.19125915 (release) — referenced in manuscript. Must be confirmed against actual Zenodo deposition before submission.
-
-## LightGBM contamination
-
-0 LightGBM references in references.bib or in manuscript sections.
+No LightGBM reference or empirical claim appears in the manuscript package.

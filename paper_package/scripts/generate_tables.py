@@ -60,7 +60,7 @@ RMSE skill; $\alpha$ is variance retention; DM sig.\ counts BH-adjusted
 Diebold--Mariano cells significant at $p<0.05$; Rule A: skill $>0$ and DM significant;
 Rule B: Rule A and $\alpha\geq0.5$ and recall$_{P75}\geq0.20$; Discordant: Rule A,
 recall$\geq0.20$, and $\alpha<0.5$. Medians and means computed over all cells per model.
-Cells are not independent (shared stations and series).}
+Cells are not independent (shared stations and series); the central tendency columns are medians and the remaining columns are counts.}
 \label{tab:model_summary}
 \begin{tabular}{lrrrrrrrrr}
 \toprule

@@ -1,19 +1,19 @@
-\section{Decision Audit Framework}
+\section{Eligibility Audit Framework}
 \label{sec:framework}
 
-We compare two eligibility rules applied after forecast evaluation. The rules do not retrain models or create a new ranking objective; they audit how a stated requirement changes the set of eligible cells.
+The analysis applies two post-evaluation filters to every station--model--horizon cell. They do not produce a final winner for each station and horizon; they quantify how many cells pass a conventional error screen and how many remain after adding dynamic-fidelity requirements.
 
 \subsection{Error-based eligibility: Rule A}
-For each station--model--horizon cell,
 \begin{equation}
 \textbf{Rule A:}\qquad \mathrm{Skill}>0 \quad\mathrm{and}\quad \mathrm{DM}_{BH}\ \text{significant}.
 \end{equation}
-Skill is persistence-relative RMSE skill. The significance flag is based on the two-sided Harvey--Leybourne--Newbold modified Diebold--Mariano comparison with Benjamini--Hochberg adjustment, as implemented in \texttt{scripts/05\_dm\_significance.py} \cite{diebold1995,harvey1997}.
+Skill is persistence-relative RMSE skill. The significance flag comes from a two-sided Harvey--Leybourne--Newbold modified Diebold--Mariano comparison with Benjamini--Hochberg adjustment. The multiplicity family is verified in the implementation as the valid model--horizon comparisons within each dataset; it is not one pooled family across all 595 cells \cite{diebold1995,harvey1997}.
 
 \subsection{Fidelity-aware eligibility: Rule B}
 \begin{equation}
 \textbf{Rule B:}\qquad \text{Rule A}\quad\mathrm{and}\quad \alpha\geq0.50\quad\mathrm{and}\quad \mathrm{Recall}_{P75}\geq0.20.
 \end{equation}
-The two thresholds are operational criteria chosen for this audit. They are not estimated optima, universal standards, or claims about acceptable performance in other applications. A decision change is a cell that satisfies Rule A but not Rule B.
+The thresholds are operational criteria for this audit. They are not estimated optima, universal standards, or regulatory recommendations. A changed cell satisfies Rule A but fails at least one Rule-B condition.
 
-We also define a descriptive discordant case as a Rule-A cell with $\mathrm{Recall}_{P75}\geq0.20$ and $\alpha<0.50$. This isolates cells that pass the error and episode-sensitivity checks while failing the variance-retention check.
+\subsection{Formal discordance}
+A formal discordant cell satisfies Rule A, has $\mathrm{Recall}_{P75}\geq0.20$, and has $\alpha<0.50$. This definition is stricter than the two-dimensional region of positive skill and low alpha shown in Figure~\ref{fig:skill_alpha}; the latter does not itself include the DM and recall conditions.
