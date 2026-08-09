@@ -23,8 +23,8 @@ Primary empirical source: `outputs/tables/master_diagnostic_table.csv`. SHA-256:
 | SARIMA collapse | 110/119 | SARIMA subset | alpha<.50 | VERIFIED |
 | Pooled rho(alpha,skill) | -0.863 | all canonical cells | Spearman correlation | VERIFIED; descriptive only |
 | Bootstrap | B=1000, seed 42 | alpha diagnostics | canonical implementation | VERIFIED |
-| Sensitivity range | 91.3--98.2% changes | 3x3 neighbourhood | existing `rule_b_sensitivity.csv`, filtered to alpha .40/.50/.60 and recall .10/.20/.30 | VERIFIED |
-| Abstract word count | 138 | final abstract | LaTeX-stripped word count | VERIFIED |
+| Sensitivity range | 91.3--98.2% changes | 3x3 neighbourhood | existing `rule_b_sensitivity.csv`, filtered to alpha .40/.50/.60 and recall .10/.20/.30; displayed in Figure 3 and Supplementary Table S3 | VERIFIED |
+| Abstract word count | 139 | final abstract | PDF text extraction, lexical-token count; below 150-word limit | VERIFIED |
 
 ## Rule definitions
 
@@ -32,7 +32,7 @@ Rule A is positive persistence-relative RMSE skill and significant BH-adjusted D
 
 ## Provenance boundaries
 
-The empirical integrity verifier returned 16/16 PASS. The structured cells share stations and time series and are not independent replicates. Historical synthetic material and the separate 486-abstract reporting block are outside the revised manuscript evidence chain.
+The empirical integrity verifier returned 16/16 PASS. The structured cells share stations and time series and are not independent replicates. Historical synthetic material and the separate 486-abstract reporting block are outside the revised manuscript evidence chain. Full model specifications are reported in Supplementary Table S2; exact sensitivity counts are reported in Supplementary Table S3.
 
 `UNTRACEABLE_MAIN_TEXT_NUMBERS = 0`: every quantitative claim retained
 in the manuscript maps to the canonical table or verified deterministic

@@ -37,21 +37,27 @@ def save(fig: plt.Figure, name: str) -> None:
 def figure_horizon_profiles(df: pd.DataFrame) -> None:
     """Figure 1: median skill and alpha by horizon."""
     summary = df.groupby(["model", "horizon"], as_index=False).agg(skill=("skill", "median"), alpha=("alpha", "median"))
-    fig, axes = plt.subplots(1, 2, figsize=(7.4, 3.5), sharex=True)
+    fig, axes = plt.subplots(1, 2, figsize=(8.0, 3.5), sharex=True,
+                             gridspec_kw={"wspace": 0.28})
     for model in MODELS:
         sub = summary[summary.model == model]
         axes[0].plot(sub.horizon, sub.skill, marker="o", ms=3, lw=1.5, color=COLORS[model], label=LABELS[model])
         axes[1].plot(sub.horizon, sub.alpha, marker="o", ms=3, lw=1.5, color=COLORS[model], label=LABELS[model])
-    axes[0].axhline(0, color="0.35", lw=0.8)
-    axes[1].axhline(0.5, color="0.35", ls="--", lw=0.8, label=r"$\alpha=0.50$")
+    axes[0].axhline(0, color="0.35", lw=0.8, ls="--")
+    axes[1].axhline(0.5, color="0.35", ls="--", lw=0.8)
     axes[0].set_ylabel("Median persistence-relative skill")
-    axes[1].set_ylabel(r"Median variance retention $\alpha$")
+    axes[1].set_ylabel(r"Median variance retention $\alpha$", labelpad=8)
     for ax in axes:
         ax.set_xlabel("Horizon (days)")
+        ax.set_xticks(range(1, 8))
+        ax.set_xlim(1, 7)
         ax.grid(alpha=0.2)
-    axes[0].legend(frameon=False, fontsize=7, loc="best")
-    axes[1].legend(frameon=False, fontsize=7, loc="best")
-    fig.suptitle("Horizon-wise error and fidelity profiles", y=1.02)
+    axes[0].text(0.02, 0.96, "(a)", transform=axes[0].transAxes, fontweight="bold")
+    axes[1].text(0.02, 0.96, "(b)", transform=axes[1].transAxes, fontweight="bold")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, fontsize=7, ncol=5,
+               loc="upper center", bbox_to_anchor=(0.5, 0.98))
+    fig.subplots_adjust(left=0.09, right=0.98, bottom=0.23, top=0.84, wspace=0.28)
     save(fig, "figure1_horizon_profiles")
 
 

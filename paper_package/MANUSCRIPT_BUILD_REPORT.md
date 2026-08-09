@@ -1,9 +1,9 @@
-# P4 result-set-first narrative rebuild report
+# P4 EMS presentation V5 build report
 
 ## Canonical evidence
 
 - Integrity: 16/16 PASS.
-- Source: frozen `master_diagnostic_table.csv`.
+- Source: canonical `master_diagnostic_table.csv`.
 - Rows/models/stations/horizons: 595 / 5 / 17 / 7.
 - LightGBM empirical rows: 0.
 - Primary eligibility: Rule A 277, Rule B 8, changes 269, 97.1%.
@@ -15,19 +15,20 @@ No models, forecasts, stations, datasets, folds, canonical thresholds, or
 new literature searches were added. The result set was assembled and
 visually inspected before narrative editing. The 486-abstract reporting
 block and the AI-assisted graphical abstract draft are excluded from the
-v4 submission archive.
+v5 submission archive.
 
 ## Final validation
 
-- Abstract: 138 words under the repository's LaTeX-stripped word count.
-- Result-set freeze: PASS; candidate Figure 2 designs were inspected
-  before narrative editing.
+- Abstract: 139 lexical tokens in PDF text extraction, below the 150-word limit.
+- Result-set freeze: PASS; figures and tables were inspected before the
+  localized presentation edits.
 - LaTeX compilation: PASS, 10 pages, no errors, undefined citations,
   undefined references, missing figures, or missing tables.
-- Visual QA: PASS; `FIGURE_2_VISUAL_QA = PASS`.
-- PIER audit: PASS.
+- Visual QA: PASS; `FIGURE_2_VISUAL_QA = PASS`, with no Results floats
+  after the Discussion heading.
+- PIER audit: PASS; no global prose rewrite was performed.
 - Narrative SKIP test: PASS.
-- Overleaf v4 archive validation: PASS (`unzip -t`).
-- Independent Overleaf v4 compilation: PASS, 10 pages.
+- Overleaf v5 archive validation: PASS (`unzip -t`).
+- Independent Overleaf v5 compilation: PASS, 10 pages.
 
 Author prose review remains required; no push is performed by this task.

@@ -12,8 +12,8 @@ the narrative rewrite. No MAJOR or BLOCKING issue remains.
 | Figure 3 | Heatmap labels and primary cell are readable | MINOR | Keep deterministic heatmap | PASS |
 | Table 1 | Compact but legible at manuscript size | MINOR | Keep editable LaTeX | PASS |
 | Table 2 | Total row makes 277 -> 8 and 269 visible | MINOR | Keep editable LaTeX | PASS |
-| Sensitivity table | Retained counts add information beyond heatmap percentages | MINOR | Keep in main text | PASS |
-| Model specification | Dense but readable and explicit about unrecoverable details | MINOR | Keep as reproducibility table | PASS |
+| Sensitivity table | Retained counts add information beyond heatmap percentages | MINOR | Move to Supplementary Table S3 | PASS |
+| Model specification | Dense but readable and explicit about unrecoverable details | MINOR | Move to Supplementary Table S2 | PASS |
 
 `FIGURE_2_VISUAL_QA = PASS`
 

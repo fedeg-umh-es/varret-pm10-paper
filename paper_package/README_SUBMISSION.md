@@ -4,12 +4,12 @@ This package contains the revised Paper A manuscript for possible submission to 
 
 ## Scientific scope
 
-The paper audits whether adding dynamic-fidelity requirements to persistence-relative error eligibility changes the set of passing cells in a daily PM10 benchmark. The empirical source is the frozen 595-row canonical table: 17 stations, five model families, and seven horizons. No additional forecasts or models are included.
+The paper audits whether adding dynamic-fidelity requirements to persistence-relative error eligibility changes the set of passing cells in a daily PM10 benchmark. The empirical source is the canonical 595-row table: 17 stations, five model families, and seven horizons. No additional forecasts or models are included.
 
 ## Included production outputs
 
 - `main.tex` and modular sections;
-- diagnostic, decision, specification, and sensitivity tables;
+- diagnostic and decision tables in the main text, with specification and sensitivity tables in the supplementary material;
 - three primary vector figures;
 - supplementary station metadata;
 - `references.bib` and Elsevier class/style files;

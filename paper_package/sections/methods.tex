@@ -1,0 +1,118 @@
+\section{Methods}
+\label{sec:methods}
+
+The study evaluates a benchmark of daily PM$_{10}$ point forecasts
+and audits how eligibility changes when dynamic-fidelity requirements are
+added to an error-based screen. The analysis is post-evaluation: it does
+not refit models or optimise a forecasting procedure.
+
+\subsection{Data and forecasting task}
+
+The evaluation dataset comprises daily PM$_{10}$ series from 17 Spanish
+monitoring stations identified in MITECO/EMEP metadata. The stations span
+urban, traffic, industrial, suburban, and rural settings. The recovered
+station package does not establish one defensible common calendar endpoint
+for the complete set, so we report verified station coverage and daily
+resolution rather than infer a period label. The unit of analysis is a
+station--model--horizon cell; the grid contains 17 stations, five model
+families, and seven horizons, giving 595 structured cells. These cells
+share stations and underlying series and are not independent replicates.
+
+The task is direct multi-step daily point forecasting at horizons
+$h=1,\ldots,7$. Evaluation follows five expanding rolling-origin folds in
+chronological order. At each origin, information that became available
+after that origin was excluded from fitting, feature construction,
+preprocessing, threshold estimation, and verification inputs. Missing
+verification targets were excluded rather than fabricated. Exact per-fold
+row counts and one complete train/test calendar are not recoverable from
+the aggregate release and are not asserted.
+
+\subsection{Forecasting models and persistence reference}
+
+The benchmark contains five model families: direct Histogram Gradient
+Boosting (HGB), direct Ridge regression, fixed-order SARIMA, seasonal
+naive, and STL+Ridge. HGB and Ridge produce direct forecasts for each
+horizon. SARIMA is treated as a recursive statistical family, seasonal
+naive as a seasonal carry-forward reference, and STL+Ridge as a
+decomposition/regression hybrid. Full verified model-specification details
+and reconstruction limits are reported in Supplementary Table S2.
+
+Exact HGB, Ridge, and STL settings are not recoverable from the released
+provenance. Historical SARIMA records conflict; we therefore do not infer
+an exact order and report only the fixed-order family description supported
+by the evaluation package. This limits reconstruction detail but does not
+alter the aggregate diagnostics.
+
+Persistence supplies the operational comparator. It is evaluated on the
+same matched forecast cases as each candidate, so positive skill means that
+the candidate reduces RMSE relative to persistence on the relevant cell.
+
+\subsection{Evaluation metrics}
+
+For matched forecast--observation pairs, RMSE is the square root of mean
+squared forecast error. Persistence-relative skill is
+
+\begin{equation}
+\mathrm{Skill}=1-\frac{\mathrm{RMSE}_{\mathrm{model}}}
+{\mathrm{RMSE}_{\mathrm{persistence}}}.
+\label{eq:skill}
+\end{equation}
+
+Positive skill indicates lower RMSE than persistence; it does not by
+itself establish dynamic fidelity. The primary dynamic diagnostic is the
+predicted-to-observed variance ratio,
+
+\begin{equation}
+\alpha=\frac{\operatorname{Var}(\hat y)}{\operatorname{Var}(y)},
+\label{eq:alpha}
+\end{equation}
+
+computed with population variances over matched cell pairs. P75 recall is
+the proportion of observed P75 exceedances correctly identified by the
+forecast, using a threshold estimated from the corresponding training
+window.
+
+\subsection{Eligibility rules and statistical testing}
+
+The analysis applies two post-evaluation filters to every
+station--model--horizon cell. They quantify cell eligibility; they do not
+select one final winner for each station and horizon.
+
+\begin{equation}
+\textbf{Rule A:}\qquad \mathrm{Skill}>0\quad\text{and}\quad
+\mathrm{DM}_{BH}\ \text{significant}.
+\label{eq:rule-a}
+\end{equation}
+
+The two-sided Diebold--Mariano comparison uses the
+Harvey--Leybourne--Newbold small-sample correction and horizon-dependent
+autocovariance truncation. Benjamini--Hochberg adjustment is applied to
+valid model--horizon p-values within each dataset before significance is
+assigned at $p<0.05$.
+
+\begin{equation}
+\textbf{Rule B:}\qquad \text{Rule A}\quad\text{and}\quad
+\alpha\geq0.50\quad\text{and}\quad \mathrm{Recall}_{P75}\geq0.20.
+\label{eq:rule-b}
+\end{equation}
+
+The alpha and P75-recall thresholds are operational criteria for this
+audit, not estimated optima, universal standards, or regulatory
+recommendations. Formal error--fidelity discordance is narrower than the
+geometric region in Figure~\ref{fig:skill_alpha}: a cell must pass Rule A,
+have P75 recall of at least 0.20, and have $\alpha<0.50$.
+
+\subsection{Threshold sensitivity and reproducibility}
+
+The threshold analysis is a deterministic transformation of the analysis
+rows. It changes neither forecasts nor the primary thresholds. We evaluate
+the prespecified neighbourhood $\alpha\in\{0.40,0.50,0.60\}$ and
+$\mathrm{Recall}_{P75}\in\{0.10,0.20,0.30\}$ to assess whether the
+eligibility consequence persists; this is not a threshold-optimisation
+search.
+
+The canonical diagnostic table is the sole numerical source for the
+manuscript's results and primary figures. Deterministic generators,
+provenance records, and claim-level traceability are retained in the
+repository package, while detailed model specification and sensitivity
+tables are provided in Supplementary Material.

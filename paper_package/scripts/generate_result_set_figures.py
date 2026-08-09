@@ -11,6 +11,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "outputs/tables/master_diagnostic_table.csv"
 OUT = ROOT / "paper_package/result_set/figures"
+OUT_MAIN = ROOT / "paper_package/figures"
 
 
 def load_data() -> pd.DataFrame:
@@ -63,7 +64,8 @@ def candidate_a(df: pd.DataFrame) -> Path:
         ax.set_ylim(limits[2], limits[3])
         ax.grid(True, color="#e6e6e6", linewidth=0.5)
         ax.tick_params(labelsize=8)
-    axes[5].axis("off")
+    key = axes[5]
+    key.axis("off")
     axes[3].set_xlabel("Persistence-relative RMSE skill", fontsize=9)
     axes[4].set_xlabel("Persistence-relative RMSE skill", fontsize=9)
     axes[0].set_ylabel("Variance retention $\\alpha$", fontsize=9)
@@ -73,12 +75,14 @@ def candidate_a(df: pd.DataFrame) -> Path:
         Line2D([0], [0], marker="o", color="black", markerfacecolor="none", linestyle="None",
                label="Formal discordance (n=101)"),
     ]
-    fig.legend(handles=handles, loc="lower center", ncol=2, frameon=False, fontsize=8,
-               bbox_to_anchor=(0.5, 0.005))
+    key.legend(handles=handles, loc="center", ncol=1, frameon=False, fontsize=9,
+               handlelength=2.2, labelspacing=1.4, borderaxespad=0.0)
     fig.suptitle("Error--fidelity structure by model family", fontsize=13, y=0.99)
-    fig.tight_layout(rect=(0, 0.06, 1, 0.96))
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
     out = OUT / "figure2_candidate_a_faceted.pdf"
     fig.savefig(out, bbox_inches="tight")
+    fig.savefig(OUT / "figure2_skill_alpha.pdf", bbox_inches="tight")
+    fig.savefig(OUT_MAIN / "figure2_skill_alpha.pdf", bbox_inches="tight")
     plt.close(fig)
     return out
 
