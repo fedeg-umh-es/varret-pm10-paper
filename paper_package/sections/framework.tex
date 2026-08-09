@@ -1,0 +1,26 @@
+\section{Post-Evaluation Diagnostic Framework}
+
+The post-evaluation framework is organised around three complementary questions:
+
+\textbf{Skill:} Does the model beat persistence? In this manuscript, skill is defined relative to persistence under RMSE, so positive \(\mathrm{Skill}(h)\) indicates lower RMSE than persistence at the same horizon \(h\) \cite{hyndman2006,tashman2000}.
+
+\textbf{Variance retention:} Does the forecast retain observed variability? The variance-retention ratio \(\alpha(h)=\operatorname{Var}(\hat{y})/\operatorname{Var}(y)\) is interpreted post-evaluation; low \(\alpha(h)\) indicates variability shrinkage consistent with smoothed trajectories, which can complicate operational interpretation even when RMSE skill is positive.
+
+\textbf{Skill$_{VP}$:} What compact auxiliary summary helps read both together? Skill$_{VP}$ is reported only as a bounded diagnostic auxiliary alongside \(\mathrm{Skill}(h)\) and \(\alpha(h)\), not as a replacement for standard accuracy metrics.
+
+\begin{table}[ht]
+\centering
+\caption{Interpretive template for joint reading of persistence-relative skill and variance retention. Rows distinguish positive from negative skill; columns distinguish retained from collapsed variance. The template is a diagnostic aid, not a decision rule.}
+\label{tab:interpretive}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}}
+\hline
+ & $\alpha(h) \geq 0.8$ (retained) & $\alpha(h) < 0.5$ (collapsed) \\
+\hline
+Skill$(h) > 0$ & \textbf{Desirable case.} Model improves over persistence and preserves observed variability. Forecasts are more credible under both diagnostics. & \textbf{Skill--fidelity decoupling.} Model reduces RMSE but dampens day-to-day fluctuations. Forecasts track the mean level but may under-represent episode amplitude. \\[6pt]
+Skill$(h) \leq 0$ & \textbf{No improvement with preserved dynamics.} Model does not outperform persistence despite retaining variance. Forecasts reproduce variability but are not more accurate. & \textbf{Worst case.} Model is both less accurate than persistence and smoothed. No evident operational value under these two diagnostics. \\
+\hline
+\end{tabular}
+\end{table}
+
+The boundaries $\alpha = 0.8$ and $\alpha = 0.5$ are diagnostic conventions adopted in this study; they are not derived from a formal loss criterion.
+

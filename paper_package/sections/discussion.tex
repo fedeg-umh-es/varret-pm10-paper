@@ -1,0 +1,33 @@
+\section{Discussion}
+
+\subsection{Positive skill does not imply dynamic fidelity}
+Daily PM$_{10}$ forecasting exhibits a skill--fidelity trade-off: persistence-relative RMSE skill can be positive while point-forecast trajectories retain only a small fraction of observed day-to-day variability. In this study, HGB direct and Ridge direct attain positive RMSE skill in all cells and are significantly better than persistence in most cells under the BH-adjusted DM test; yet, both collapse variance in 118/119 cells (99.2\%) (Table~\ref{tab:five_model_diagnostic_summary}).
+
+\subsection{Variance collapse is not restricted to machine learning}
+Including SARIMA shows that variance collapse is not an architectural defect unique to direct ML. SARIMA retains a positive median skill (0.208) but collapses in 110/119 cells (92.4\%), indicating that the skill–fidelity tension can arise in classical statistical baselines as well as in machine-learning models when evaluated against persistence.
+
+\subsection{Variance preservation is not sufficient for usefulness}
+Seasonal naive preserves variance (0/119 collapsed cells; median $\alpha \approx 1.000$) but has a slightly negative median skill ($-0.026$) and a high median FAR (0.822). STL+Ridge preserves or inflates variance in all cells (median $\alpha = 1.399$) and shows very high exceedance recall, but its median RMSE skill is strongly negative ($-1.107$) and it exhibits high false-alarm rates (median FAR 0.896). Preserving amplitude is therefore necessary but not sufficient: variability must also be forecast-relevant and not dominated by false alarms.
+
+\subsection{Implications for operational PM$_{10}$ forecasting}
+RMSE skill, variance retention, and exceedance behaviour expose different failure modes. Positive baseline-relative RMSE skill can coexist with variance collapse and trajectory smoothing, whereas variance preservation can coexist with weak RMSE skill and high false-alarm rates. Interpreting daily PM$_{10}$ point forecasts therefore requires reading baseline-relative accuracy alongside variance retention and operational exceedance checks, rather than treating any single summary as a universal score.
+
+\section{Implications for Forecast Evaluation Practice}
+Minimum reporting practices can substantially improve interpretability in PM forecasting evaluation: (i) report persistence-relative RMSE skill so that gains are anchored to an operational baseline; (ii) report horizon-wise performance rather than only aggregate scores; (iii) disclose temporal validation design and train-only preprocessing boundaries to support deployment-like credibility; and (iv) when point trajectories are interpreted operationally, report variance retention or another trajectory-fidelity diagnostic as a complementary post-evaluation output.
+
+\section{Limitations}
+
+This study is intentionally limited in scope.
+The empirical evidence covers 17 MITECO stations at the daily temporal scale;
+transfer to other pollutants, temporal resolutions, or national networks is
+not assessed.
+The five-model comparison is diagnostic rather than exhaustive; the models are intended to reveal failure modes under a common rolling-origin protocol, not to establish a definitive leaderboard.
+The model set spans two direct lag-feature ML forecasters (HGB direct, Ridge direct), a sparse classical statistical baseline (SARIMA), a decomposition-based variant (STL+Ridge), and a seasonal naive reference; other architectures, covariate-rich designs, and probabilistic forecasters may exhibit different variance-retention behaviour.
+SARIMA is used as a sparse statistical baseline; its results should not be interpreted as the best attainable SARIMA performance under extensive manual specification.
+Exceedance diagnostics are included as compact operational checks, not as a full event-classification benchmark.
+Skill$_{VP}$ is not proposed as a general-purpose replacement for RMSE or as a
+new standard verification score; it is a simple diagnostic auxiliary whose value
+lies in making the skill–fidelity decoupling explicit at each horizon.
+The collapse threshold $\alpha = 0.5$ is operationally motivated but not derived
+from a formal loss criterion. It should be interpreted as a diagnostic convention rather than a universal physical boundary. Threshold-sensitivity results for the five-model experiment (Figure~\ref{fig:threshold_sensitivity}) support the same qualitative conclusion across reasonable perturbations around $\alpha = 0.5$.
+

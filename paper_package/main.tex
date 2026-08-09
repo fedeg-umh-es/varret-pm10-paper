@@ -1,0 +1,77 @@
+\documentclass[3p,times,single-column]{elsarticle}
+
+% Encoding and fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\renewcommand{\ttdefault}{lmtt}
+
+% Layout and tables
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{pdflscape}
+
+% Math and graphics
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% Links
+\usepackage{hyperref}
+
+\journal{Environmental Modelling \& Software}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Variance Retention: A Forecast-Verification Diagnostic for\\Skilful-but-Smoothed Point Forecasts of Daily PM$_{10}$}
+
+\author[1]{Federico Garc\'ia Crespi\corref{cor1}}
+\ead{fedeg@umh.es}
+
+\author[2]{Julio Alberto Ramos Mart\'inez}
+\ead{j.ramos@umh.es}
+
+\cortext[cor1]{Corresponding author}
+\affiliation[1]{organization={Department of Computer Engineering, Universidad Miguel Hern\'andez},city={Elche},country={Spain}}
+\affiliation[2]{organization={Department of Statistics, Mathematics and Computer Science, Universidad Miguel Hern\'andez},city={Elche},country={Spain}}
+
+\input{sections/abstract.tex}
+
+\begin{keyword}
+forecast verification \sep deterministic point forecasts \sep PM$_{10}$ forecasting \sep rolling-origin evaluation \sep persistence baseline \sep variance retention \sep exceedance diagnostics
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/introduction.tex}
+\input{sections/background.tex}
+\input{sections/framework.tex}
+\input{sections/casestudy.tex}
+\input{sections/metrics.tex}
+\input{sections/workflow.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusions.tex}
+
+\section*{CRediT author statement}
+\textbf{Federico Garc\'ia Crespi:} Conceptualisation, Data curation, Formal analysis, Investigation, Methodology, Software, Validation, Visualisation, Writing -- original draft, Writing -- review \& editing. \textbf{Julio Alberto Ramos Mart\'inez:} Conceptualisation, Supervision, Writing -- review \& editing.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data Availability Statement}
+Raw daily PM$_{10}$ observations were obtained from the MITECO Spanish national air-quality network portal (\url{https://www.miteco.gob.es/}) and are publicly available. The analysis code, processed per-station series, and the 595-cell aggregate diagnostic tables (variance retention, Diebold--Mariano significance, exceedance, Murphy decomposition) underlying every multi-station figure are version-controlled at \url{https://github.com/fedeg-umh-es/varret-pm10-paper} under \texttt{evidence/paper\_a/}, with SHA-256 checksums and provenance recorded in \texttt{evidence/paper\_a/manifests/provenance\_manifest.csv}. The row-level prediction set (895{,}737 rows spanning all 17 stations, 5 model families, and 7 horizons) is available as a versioned GitHub release asset of the same repository (tag \texttt{paper-a-row-level-evidence-v1}), with its SHA-256 checksum reported in \texttt{evidence/paper\_a/row\_level/predictions\_all\_stations\_manifest.md} and in the release notes.
+
+\section*{Acknowledgments}
+The authors used a generative AI assistant for language editing and for \LaTeX\ and reference formatting. All data processing, analysis, results, and scientific conclusions are the authors' own and were verified by the authors, who take full responsibility for the content of this paper.
+This research received no specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\section*{Supplementary Material}
+\input{supplementary/supplementary_material_ems.tex}
+
+\bibliographystyle{elsarticle-num-names}
+\bibliography{references}
+
+\end{document}

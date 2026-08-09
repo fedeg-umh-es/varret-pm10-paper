@@ -1,0 +1,30 @@
+\section{Case Study and Experimental Setting}
+
+The case study uses daily PM$_{10}$ observations from 17 monitoring stations in the Spanish MITECO national air-quality network. The station set is intentionally heterogeneous in site type (industrial, traffic, urban/background, residential, and rural/remote), spans multiple autonomous communities (including the Comunitat Valenciana, Catalunya, Arag\'on, and Castilla-La Mancha), and covers the 2017--2024 period, with observational coverage ranging from 80.4\% to 98.5\%.
+
+Three stations are described in detail as representative examples of the three environmental types.
+
+\begin{itemize}
+  \item \textbf{Elx-Agroalimentari} (ES0446A): suburban/industrial station; 44\,m a.s.l.; 2,350 observed daily values (80.4\% coverage, 2017--2024).
+  \item \textbf{Valencia-Vivers} (ES1619A): urban/residential station; 11\,m a.s.l.; 2,679 observed daily values (91.7\% coverage, 2017--2024).
+  \item \textbf{Zarra-EMEP} (ES0012R): rural remote EMEP station; 855\,m a.s.l.; 2,804 observed daily values (96.0\% coverage, 2017--2024).
+\end{itemize}
+
+Meteorological covariates (temperature, relative humidity, wind speed,
+and wind direction) are available for Elx-Agroalimentari only but are
+deliberately excluded from all experiments: the study intentionally employs a lags-only design to isolate the autoregressive signal.
+
+Each series was reindexed to a complete daily calendar before lag
+construction. Dates with missing PM$_{10}$ values, missing lagged
+predictors, or unavailable verification targets after horizon alignment
+were excluded by listwise deletion. No interpolation or imputation was
+applied.
+
+The objective is not to maximise predictive accuracy, but to create a transparent evaluation setting in which persistence-relative skill, horizon-wise behaviour, and variance retention can be inspected jointly.
+
+Five diagnostic comparators are evaluated. HGB direct and Ridge direct are direct lag-feature ML forecasters. SARIMA is included as a sparse classical statistical baseline. STL+Ridge is a decomposition-based variant used to test whether explicit seasonal separation can preserve trajectory variability. Seasonal naive is included as a variance-preserving seasonal reference. These models are not used as a leaderboard of optimised forecasting systems, but as diagnostic contrasts for separating baseline-relative accuracy from trajectory fidelity.
+
+Forecasts are evaluated for horizons \(h=1,\dots,7\) using rolling-origin (time-series) evaluation with a mandatory persistence baseline, and the analysis focuses on point forecasts. When preprocessing is applicable (e.g., scaling), transformations are fitted on the training window only and then applied to the corresponding test window to reduce leakage risk \cite{bergmeir2018,kaufman2012}.
+
+A lags-only design is intentionally restrictive: if positive skill appears even in this controlled setting, the variance-retention diagnostic can reveal whether the improvement is accompanied by retained forecast variability or by systematically smoothed trajectories.
+

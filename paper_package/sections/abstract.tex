@@ -1,0 +1,8 @@
+\begin{abstract}
+
+Verification of deterministic air-quality forecasts relies heavily on persistence-relative RMSE skill, yet a forecast can be certified as skilful while its trajectory is dynamically over-smoothed. We introduce variance retention as a complementary verification diagnostic and quantify this skill--fidelity tension in a rolling-origin multi-horizon evaluation ($h=1,\ldots,7$) over 17 heterogeneous stations from the Spanish MITECO monitoring network, using persistence as an explicit baseline.
+
+Five model families are compared: two direct lag-only machine-learning forecasters (HGB direct and Ridge direct), a classical statistical baseline (SARIMA), a variance-preserving reference (seasonal naive), and a decomposition-based control (STL+Ridge). Direct HGB and Ridge achieve positive RMSE skill in all station--horizon cells and are frequently significantly better than persistence under BH-adjusted Diebold--Mariano tests, yet they exhibit near-universal variance collapse ($\alpha<0.5$) in 118/119 cells each. SARIMA partially reproduces the same pattern, collapsing in 110/119 cells. Seasonal naive preserves variance but does not improve RMSE on median, whereas STL+Ridge preserves or inflates variance and attains high exceedance recall at the cost of poor RMSE skill and many false alarms.
+
+The results show that maximising RMSE skill alone is insufficient for operational use: performance must be diagnosed jointly in terms of baseline-relative accuracy, dynamic fidelity (variance retention), and event-detection behaviour.
+\end{abstract}

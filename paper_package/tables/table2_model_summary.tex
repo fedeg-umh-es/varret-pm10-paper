@@ -1,0 +1,17 @@
+\begin{table}[ht]
+\centering
+\caption{Per-model diagnostic summary across 595 station--model--horizon cells (17 stations $\times$ 5 models $\times$ 7 horizons). Skill is persistence-relative RMSE skill; $\alpha$ is variance retention; DM sig.\ counts BH-adjusted Diebold--Mariano cells significant at $p<0.05$; Rule A: skill $>0$ and DM significant; Rule B: Rule A and $\alpha\geq0.5$ and recall$_{P75}\geq0.20$; Discordant: Rule A, recall$\geq0.20$, and $\alpha<0.5$. Medians computed over all cells per model. Cells are not independent observations.}
+\label{tab:model_summary}
+\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & $n$ & Med.\ Skill & Med.\ $\alpha$ & Collapse & DM sig. & Rule A & Rule B & Discordant \\
+\midrule
+HGB direct & 119 & 0.205 & 0.151 & 118/119 & 111/119 & 111/119 & 1/119 & 54 \\
+Ridge direct & 119 & 0.219 & 0.087 & 118/119 & 117/119 & 117/119 & 1/119 & 43 \\
+SARIMA & 119 & 0.208 & 0.095 & 110/119 & 44/119 & 44/119 & 1/119 & 4 \\
+Seasonal naive & 119 & -0.026 & 1.000 & 0/119 & 39/119 & 5/119 & 5/119 & 0 \\
+STL+Ridge & 119 & -1.107 & 1.399 & 0/119 & 119/119 & 0/119 & 0/119 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
