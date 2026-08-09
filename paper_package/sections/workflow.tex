@@ -1,8 +1,23 @@
-\section{Evidence Governance and Reproducibility}
+\section{Evidence governance and reproducibility}
 \label{sec:workflow}
 
-The empirical analysis is governed by a frozen 595-row diagnostic table whose SHA-256 is recorded in the provenance manifest. The table contains the complete five-model, 17-station, seven-horizon grid and is the sole source for the numerical results, tables, and primary figures in this manuscript.
+The empirical analysis is governed by a frozen 595-row diagnostic table
+whose SHA-256 is recorded in the provenance manifest. That table contains
+the complete five-model, 17-station, seven-horizon grid and is the sole
+source for the numerical results, tables, and scientific figures in this
+manuscript. The result-set manifest records the role and provenance of each
+displayed element.
 
-Reproducibility is separated into two layers. The scientific layer defines the forecast task, validation controls, metrics, eligibility rules, and limitations in the sections above. The computational layer preserves source tables, provenance records, deterministic table and figure generators, and a claim-level traceability matrix in the repository package. The final submission archive contains only LaTeX inputs and figures needed for compilation; internal audit material remains outside that archive.
+Reproducibility has two layers. The scientific layer defines the forecast
+task, temporal validation, metrics, eligibility rules, and limitations. The
+computational layer preserves source tables, deterministic generators,
+integrity checks, and claim-level traceability. Internal audit material is
+not required to compile the manuscript and is excluded from the submission
+archive.
 
-The sensitivity analysis is a deterministic transformation of the frozen rows. It changes neither forecasts nor thresholds used for the primary result. Its purpose is to show how the eligibility consequence behaves in a prespecified neighbourhood of the operational thresholds.
+The threshold analysis is a deterministic transformation of the frozen
+rows. It changes neither forecasts nor the primary thresholds. Its purpose
+is to test whether the eligibility consequence persists in the prespecified
+neighbourhood $\alpha\in\{0.40,0.50,0.60\}$ and
+$\mathrm{Recall}_{P75}\in\{0.10,0.20,0.30\}$; it is not a threshold-optimisation
+exercise.

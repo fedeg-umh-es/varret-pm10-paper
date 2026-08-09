@@ -24,6 +24,7 @@ Primary empirical source: `outputs/tables/master_diagnostic_table.csv`. SHA-256:
 | Pooled rho(alpha,skill) | -0.863 | all canonical cells | Spearman correlation | VERIFIED; descriptive only |
 | Bootstrap | B=1000, seed 42 | alpha diagnostics | canonical implementation | VERIFIED |
 | Sensitivity range | 91.3--98.2% changes | 3x3 neighbourhood | existing `rule_b_sensitivity.csv`, filtered to alpha .40/.50/.60 and recall .10/.20/.30 | VERIFIED |
+| Abstract word count | 138 | final abstract | LaTeX-stripped word count | VERIFIED |
 
 ## Rule definitions
 

@@ -1,17 +1,52 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Environmental forecasting supports decisions that depend on both expected error and the timing or amplitude of changing conditions. A candidate forecast is therefore commonly compared with a meaningful reference forecast, rather than judged only by an isolated error value. Persistence-relative skill provides such a comparison for daily time series, while formal predictive-accuracy tests can assess whether an observed loss difference is statistically distinguishable from the reference \cite{hyndman2006,diebold1995}.
+Environmental forecasts are evaluated because decisions depend on future
+conditions, not only on the average size of past errors. For daily
+pollution forecasts, the amplitude of episodes, the spread of a predicted
+trajectory, and sensitivity to elevated values may matter alongside point
+accuracy. A useful evaluation therefore needs to compare a candidate with
+a meaningful reference and to describe the properties of the forecast that
+the error summary does not capture.
 
-These error-based summaries are necessary but not exhaustive. A point forecast may reduce average squared error by attenuating fluctuations, particularly when the future is uncertain. Lower error can therefore coexist with a forecast trajectory whose variance or episode amplitude is smaller than that of the observations. Forecast verification distinguishes accuracy, association, calibration, and related properties because no single summary answers all of these questions \cite{gneiting2011,jolliffe2012}.
+Error-based evaluation provides an essential starting point. RMSE measures
+point-forecast error, while persistence-relative skill asks whether a
+candidate improves on a simple operational comparator. Predictive-accuracy
+tests can assess whether the loss difference is statistically
+distinguishable from that comparator \cite{hyndman2006,diebold1995,harvey1997}.
+These tools are necessary for an eligibility decision, but they do not
+answer every verification question.
 
-The distinction matters when evaluation results are converted into eligibility decisions. A cell that improves on persistence under RMSE may remain unsuitable for a decision that requires sensitivity to elevated pollution or preservation of dynamic spread. Variance and event diagnostics are established complements to error measures; they are not introduced here as new metrics. The unresolved practical issue is whether adding explicit fidelity requirements to an error-based eligibility rule materially changes the set of cells that pass.
+A forecast can reduce squared error by attenuating fluctuations. Its error
+can therefore improve while its variance or exceedance behaviour departs
+from the observations. Forecast verification treats accuracy, association,
+calibration, and related properties as complementary dimensions
+\cite{gneiting2011,jolliffe2012}; temporal validation likewise matters when
+the evaluation is intended to respect deployment order
+\cite{tashman2000,bergmeir2018}. Variance retention and event recall are
+used here in that established complementary sense, not proposed as new
+metrics.
 
-The EMS audit motivating this study supports a deliberately bounded gap. Existing environmental forecasting studies commonly evaluate predictive error and, less consistently, dynamic-fidelity dimensions, while evidence remains limited on whether explicitly combining these dimensions in an eligibility rule materially changes decisions across sites, model families, and forecast horizons. This statement describes the audited corpus; it does not claim that no such study exists elsewhere.
+The practical problem begins when several diagnostics are converted into a
+single eligibility decision. It is not enough to report that fidelity and
+error are different. The consequential question is whether the set of
+forecasts judged acceptable changes when dynamic fidelity becomes an
+explicit requirement alongside error-based skill.
 
-We ask: \emph{Does incorporating dynamic-fidelity criteria alongside conventional error-based statistical evaluation materially alter model eligibility in multi-step daily PM$_{10}$ forecasting?} We answer with a post-evaluation audit of a fixed multi-station benchmark. The contributions are:
-\begin{enumerate}
-    \item an empirical audit of error--fidelity discordance;
-    \item a characterisation of its variation across model families and horizons; and
-    \item a quantification of how explicit fidelity requirements alter eligibility.
-\end{enumerate}
+The EMS audit motivating this study supports a deliberately bounded gap.
+Existing environmental forecasting studies commonly evaluate predictive
+error and, less consistently, dynamic-fidelity dimensions, while evidence
+remains limited on whether explicitly combining these dimensions in an
+eligibility rule materially changes decisions across sites, model families,
+and forecast horizons. This statement describes the audited corpus; it does
+not claim that no such study exists elsewhere.
+
+We address that question with a post-evaluation audit of a fixed benchmark
+of daily PM$_{10}$ forecasts from 17 Spanish monitoring stations, five model
+families, and seven horizons assessed with five expanding rolling-origin
+folds. We first identify cells eligible under persistence-relative error
+skill, then add explicit variance-retention and P75-recall requirements,
+and finally test whether the decision consequence persists across the
+prespecified threshold neighbourhood. The contribution is the quantified
+decision audit and its bounded evaluation-design implication, not a new
+metric or a universal eligibility framework.

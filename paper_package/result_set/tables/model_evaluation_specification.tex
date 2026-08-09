@@ -1,0 +1,17 @@
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\textbf{Model evaluation specification.} Reconstructed from the frozen evidence and repository configuration. ``Not recoverable'' denotes a detail not established by the canonical provenance; it is not inferred from model names.\par\smallskip
+\begin{tabular}{@{}p{2.15cm}p{2.25cm}p{2.25cm}p{2.05cm}p{2.25cm}p{2.45cm}@{}}
+\toprule
+Model & Inputs & Forecast strategy & Fold fitting & Verified configuration & Known limitation \\
+\midrule
+HGB direct & Direct lag-based predictors; complete feature list not recoverable & One direct forecast per horizon & Fit within rolling-origin training data & Family label and 7-horizon evaluation verified & Exact hyperparameters not recoverable from frozen provenance \\
+Ridge direct & Direct lag-based predictors; complete feature list not recoverable & One direct forecast per horizon & Fit within rolling-origin training data & Family label and 7-horizon evaluation verified & Exact regularisation and feature list not recoverable \\
+SARIMA & Daily PM$_{10}$ series & Recursive statistical forecast & Fit within rolling-origin training data & Fixed-order SARIMA family verified & Historical configuration records conflict; exact order omitted \\
+Seasonal naive & Historical seasonal observations & Seasonal carry-forward baseline & No parameter fitting beyond training history & Family label and 7-horizon evaluation verified & Seasonal period details not recoverable from canonical table \\
+STL+Ridge & Decomposition and regression inputs & Hybrid decomposition/regression forecast & Fit within rolling-origin training data & Family label and 7-horizon evaluation verified & Exact STL and Ridge settings not recoverable \\
+\bottomrule
+\end{tabular}
+\end{table}

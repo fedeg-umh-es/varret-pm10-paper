@@ -1,18 +1,55 @@
-\section{Methods: Empirical Benchmark}
+\section{Methods: empirical benchmark}
 \label{sec:casestudy}
 
-\subsection{Data and study population}
-The frozen empirical evidence comprises daily PM$_{10}$ series from 17 heterogeneous Spanish monitoring stations identified in the MITECO/EMEP metadata. The station metadata represents urban, traffic, industrial, suburban, and rural settings. The canonical evidence does not establish a single defensible calendar endpoint for the complete recovered station set; consequently, the manuscript reports the verified station coverage and daily resolution without inventing a period label.
+The study evaluates a fixed benchmark of daily PM$_{10}$ point forecasts.
+The unit of analysis is a station--model--horizon cell, and the analysis
+is deliberately post-evaluation: it audits how eligibility changes when
+dynamic-fidelity requirements are added to an error-based screen. This
+design keeps the empirical question separate from any attempt to optimise
+a forecasting model.
 
-The unit of analysis is a station--model--horizon cell. The complete grid contains 17 stations, five empirical model families, and seven horizons, giving 595 rows. Each row summarises matched out-of-sample diagnostics for one model at one station and horizon. Shared stations, time series, and model families mean that these rows are structured cells, not independent replicates.
+\subsection{Data, forecast task and validation}
 
-\subsection{Forecast task and validation}
-The task is direct multi-step daily point forecasting at horizons $h=1,\ldots,7$. Evaluation follows five expanding rolling-origin folds in chronological order. Information available after an origin is excluded from fitting, feature construction, preprocessing, threshold estimation, and verification inputs for that origin. Missing verification targets are excluded rather than fabricated. The frozen aggregate does not recover exact per-fold row counts or a single complete train/test calendar, so those details are not asserted.
+The frozen evidence comprises daily PM$_{10}$ series from 17 Spanish
+monitoring stations identified in MITECO/EMEP metadata. The stations span
+urban, traffic, industrial, suburban, and rural settings. The recovered
+station package does not establish one defensible common calendar endpoint
+for the complete set, so we report the verified station coverage and daily
+resolution rather than infer a period label. The complete grid contains
+17 stations, five empirical model families, and seven forecast horizons,
+giving 595 structured rows. These rows share stations and underlying time
+series; they are evaluation cells, not independent replicates.
 
-\subsection{Leakage controls}
-The protocol requires train-only treatment of quantities estimated within a split. This includes preprocessing statistics, event thresholds, and model fitting. P75 thresholds are estimated from the corresponding training window rather than from verification outcomes. Persistence is evaluated on the same matched forecast cases used for candidate-model comparisons. The available provenance supports these controls, but does not support additional claims about unrecorded feature or hyperparameter details.
+The task is direct multi-step daily point forecasting at horizons
+$h=1,\ldots,7$. Evaluation follows five expanding rolling-origin folds in
+chronological order. For each origin, information that became available
+after the origin was excluded from fitting, feature construction,
+preprocessing, threshold estimation, and verification inputs. Missing
+verification targets were excluded rather than fabricated. The frozen
+aggregate does not recover exact per-fold row counts or one complete
+train/test calendar, and those details are therefore not asserted.
 
-\subsection{Model families}
-The five empirical model labels are direct Histogram Gradient Boosting (HGB), direct Ridge regression, fixed-order SARIMA, seasonal naive, and STL+Ridge. HGB and Ridge are direct horizon-specific forecasters; SARIMA is a recursive statistical family; seasonal naive is a seasonal carry-forward reference; and STL+Ridge is a decomposition/regression hybrid. The verified and unresolved configuration details are consolidated in the model evaluation specification above.
+\subsection{Forecasting models and reference forecast}
+
+The benchmark contains five empirical model families: direct Histogram
+Gradient Boosting (HGB), direct Ridge regression, fixed-order SARIMA,
+seasonal naive, and STL+Ridge. HGB and Ridge produce direct forecasts for
+each horizon. SARIMA is treated as a recursive statistical family,
+seasonal naive as a seasonal carry-forward reference, and STL+Ridge as a
+decomposition/regression hybrid. The model evaluation specification table
+records the inputs and the
+configuration details that can be verified from the frozen provenance.
+
+Exact HGB, Ridge, and STL settings are not recoverable from the frozen
+release. Historical SARIMA records also conflict; accordingly, we do not
+invent an exact order and describe only the fixed-order family supported by
+the evaluation package. This limitation affects reconstruction detail,
+not the frozen aggregate diagnostics reported here.
+
+Persistence supplies the operational comparator. It is evaluated on the
+same matched forecast cases as each candidate model, so positive skill means
+that the candidate reduces RMSE relative to persistence on the relevant
+cell. The comparator is a reference for the eligibility audit, not a claim
+that persistence is the only meaningful baseline.
 
 \input{tables/model_evaluation_specification.tex}

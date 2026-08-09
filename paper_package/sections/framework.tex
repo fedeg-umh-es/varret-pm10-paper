@@ -1,19 +1,42 @@
-\section{Eligibility Audit Framework}
+\section{Eligibility rules and decision audit}
 \label{sec:framework}
 
-The analysis applies two post-evaluation filters to every station--model--horizon cell. They do not produce a final winner for each station and horizon; they quantify how many cells pass a conventional error screen and how many remain after adding dynamic-fidelity requirements.
+The analysis applies two post-evaluation filters to every station--model--
+horizon cell. They quantify how many cells pass a conventional error
+screen and how many remain when selected dynamic properties are made
+explicit. The filters do not choose one final winner for each station and
+horizon; they audit cell eligibility.
 
 \subsection{Error-based eligibility: Rule A}
+
 \begin{equation}
-\textbf{Rule A:}\qquad \mathrm{Skill}>0 \quad\mathrm{and}\quad \mathrm{DM}_{BH}\ \text{significant}.
+\textbf{Rule A:}\qquad \mathrm{Skill}>0\quad\text{and}\quad
+\mathrm{DM}_{BH}\ \text{significant}.
+\label{eq:rule-a}
 \end{equation}
-Skill is persistence-relative RMSE skill. The significance flag comes from a two-sided Harvey--Leybourne--Newbold modified Diebold--Mariano comparison with Benjamini--Hochberg adjustment. The multiplicity family is verified in the implementation as the valid model--horizon comparisons within each dataset; it is not one pooled family across all 595 cells \cite{diebold1995,harvey1997}.
+
+Skill is persistence-relative RMSE skill. The significance flag is based
+on a two-sided Harvey--Leybourne--Newbold modified Diebold--Mariano
+comparison, with Benjamini--Hochberg adjustment applied to the valid
+model--horizon comparisons within each dataset. The multiplicity family is
+therefore defined by the comparison structure, not by treating all 595
+cells as independent tests.
 
 \subsection{Fidelity-aware eligibility: Rule B}
-\begin{equation}
-\textbf{Rule B:}\qquad \text{Rule A}\quad\mathrm{and}\quad \alpha\geq0.50\quad\mathrm{and}\quad \mathrm{Recall}_{P75}\geq0.20.
-\end{equation}
-The thresholds are operational criteria for this audit. They are not estimated optima, universal standards, or regulatory recommendations. A changed cell satisfies Rule A but fails at least one Rule-B condition.
 
-\subsection{Formal discordance}
-A formal discordant cell satisfies Rule A, has $\mathrm{Recall}_{P75}\geq0.20$, and has $\alpha<0.50$. This definition is stricter than the two-dimensional region of positive skill and low alpha shown in Figure~\ref{fig:skill_alpha}; the latter does not itself include the DM and recall conditions.
+\begin{equation}
+\textbf{Rule B:}\qquad \text{Rule A}\quad\text{and}\quad
+\alpha\geq0.50\quad\text{and}\quad \mathrm{Recall}_{P75}\geq0.20.
+\label{eq:rule-b}
+\end{equation}
+
+The alpha and P75-recall thresholds are operational criteria for this
+audit. They were not estimated as optimal values and are not proposed as
+universal standards or regulatory recommendations. A changed cell passes
+Rule A but fails at least one Rule-B condition.
+
+Formal error--fidelity discordance is defined more narrowly than the
+two-dimensional region shown in Figure~\ref{fig:skill_alpha}: a cell must
+pass Rule A, have P75 recall of at least 0.20, and have $\alpha<0.50$.
+This distinction is necessary because positive skill and low alpha alone
+do not establish the formal discordance definition.

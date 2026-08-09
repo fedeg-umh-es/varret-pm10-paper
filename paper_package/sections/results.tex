@@ -1,48 +1,89 @@
 \section{Results}
 \label{sec:results}
 
-The results follow the eligibility audit: error-based eligibility, dynamic fidelity, formal discordance, the primary eligibility consequence, and deterministic threshold sensitivity. Table~\ref{tab:model_summary} reports model-level medians and counts; Table~\ref{tab:decision_rule} reports the primary rule comparison.
+The results move from conventional error eligibility to the dynamic
+properties of those eligible cells, then to the decision consequence of
+combining both requirements. This order matters: the reduction from 277
+to 8 cells is meaningful only after the two dimensions have been shown to
+disagree.
 
-\subsection{Error-based eligibility}
-Rule A identifies 277 eligible cells: 111 HGB, 117 Ridge, 44 SARIMA, 5 seasonal naive, and 0 STL+Ridge. These are eligibility counts within the benchmark, not population rankings and not evidence that one model is the final winner for every station and horizon.
+\subsection{Error skill and dynamic fidelity diverge across model families}
+
+Rule A identifies a substantial set of cells that improve on persistence:
+111 HGB, 117 Ridge, 44 SARIMA, 5 seasonal-naive, and no STL+Ridge cells.
+These are eligibility counts within the benchmark, not population rankings
+and not evidence that one model is the final winner for every station and
+horizon. Table~\ref{tab:model_summary} gives the corresponding family
+medians and significance counts.
 
 \input{tables/table2_model_summary.tex}
 
-\subsection{Dynamic-fidelity behaviour}
-Variance collapse ($\alpha<0.50$) occurs in 118/119 HGB cells, 118/119 Ridge cells, and 110/119 SARIMA cells. Seasonal naive has 0/119 collapsed cells, while STL+Ridge has 0/119 collapsed cells and a median alpha above one. Figure~\ref{fig:horizon_profiles} shows how the median skill and alpha profiles vary with horizon. These are descriptive patterns within the evaluated benchmark and do not establish an architectural or causal mechanism.
+The families that contribute most of the error-eligible cells also occupy
+the low-alpha part of the diagnostic space. Alpha is below 0.50 in 118 of
+119 HGB cells, 118 of 119 Ridge cells, and 110 of 119 SARIMA cells. By
+contrast, seasonal naive has no low-alpha cells, while STL+Ridge also has
+none but contributes no Rule-A cells. Figure~\ref{fig:horizon_profiles}
+shows how these contrasts persist or evolve from horizon 1 through 7: skill
+and retained variance are not interchangeable summaries of forecast
+quality. The patterns are descriptive and do not establish an
+architectural or causal mechanism.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.98\linewidth]{figures/figure1_horizon_profiles.pdf}
-\caption{Median persistence-relative skill and median variance retention by horizon and model family. Each point summarises the 17 station cells at that horizon.}
+\caption{Median persistence-relative RMSE skill and median variance retention by forecast horizon and model family. Each point summarises the 17 station cells at that horizon; the reference lines mark zero skill and $\alpha=0.50$.}
 \label{fig:horizon_profiles}
 \end{figure}
 
-\subsection{Error--fidelity discordance}
-Figure~\ref{fig:skill_alpha} shows the joint diagnostic. Across all 595 cells, Spearman correlation between alpha and skill is $\rho=-0.863$. This pooled association is descriptive and partly reflects differences among model-family profiles; it should not be interpreted as a homogeneous relationship within every family or horizon.
+\subsection{Error--fidelity discordance appears within the error-eligible space}
 
-There are 101 formal discordant cells: 54 HGB, 43 Ridge, and 4 SARIMA. They satisfy Rule A, have P75 recall of at least 0.20, and have $\alpha<0.50$. Thus, within this benchmark, positive error eligibility and adequate P75 recall can coexist with low retained variance.
+The cell-level diagnostic makes the family contrast more precise. Figure~\ref{fig:skill_alpha}
+places persistence-relative skill against variance retention using common
+axes for the five families. The shaded area marks only positive skill with
+$\alpha<0.50$; the open contours mark the stricter formal discordance
+definition, which also requires Rule A and P75 recall of at least 0.20.
+
+There are 101 formal discordant cells: 54 HGB, 43 Ridge, and 4 SARIMA.
+Thus, positive error eligibility and adequate P75 recall can coexist with
+low retained variance in identifiable station--model--horizon cells. The
+pooled Spearman association between alpha and skill is $\rho=-0.863$, but
+this is descriptive: it partly reflects the separation among model-family
+profiles visible in the facets and should not be read as a homogeneous
+within-family law.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.88\linewidth]{figures/figure2_skill_alpha.pdf}
-\caption{Persistence-relative RMSE skill versus canonical variance retention $\alpha$ across 595 cells. The shaded region represents only positive skill with $\alpha<0.50$; it is not the formal discordance definition. Black open contours identify the 101 cells that additionally satisfy Rule A and P75 recall $\geq0.20$.}
+\includegraphics[width=0.98\linewidth]{figures/figure2_skill_alpha.pdf}
+\caption{Persistence-relative RMSE skill versus variance retention $\alpha$ across 595 station--model--horizon cells, shown in common-axis facets by model family. The shaded region denotes only positive skill with $\alpha<0.50$; it is not the formal discordance definition. Open black contours identify the 101 cells that additionally satisfy Rule A and P75 recall $\geq0.20$. Dashed lines mark Skill $=0$ and $\alpha=0.50$.}
 \label{fig:skill_alpha}
 \end{figure}
 
-\subsection{Effect on model eligibility}
-Adding the fidelity requirements changes eligibility from 277 cells under Rule A to 8 under Rule B: HGB 111$\rightarrow$1, Ridge 117$\rightarrow$1, SARIMA 44$\rightarrow$1, seasonal naive 5$\rightarrow$5, and STL+Ridge 0$\rightarrow$0. The 269 changed cells are 269/277 = 97.1\% of Rule-A eligible cells.
+\subsection{Fidelity requirements materially change model eligibility}
+
+The joint evidence changes the decision set when fidelity is made an
+explicit requirement. Rule B retains one HGB, one Ridge, one SARIMA, five
+seasonal-naive, and no STL+Ridge cells, compared with 277 cells under Rule
+A. The total therefore falls from 277 to 8, with 269 cells changing status;
+269/277 is 97.1\% of the Rule-A eligible cells. Table~\ref{tab:decision_rule}
+puts that transition at the centre of the comparison.
+
+The natural objection is that this consequence may depend on one
+operational threshold pair. The deterministic sensitivity audit addresses
+that objection without refitting forecasts. Across $\alpha$ thresholds of
+0.40, 0.50, and 0.60 and P75-recall thresholds of 0.10, 0.20, and 0.30,
+91.3--98.2\% of Rule-A cells change status. The primary point remains 8
+retained cells and 97.1\% changed. Figure~\ref{fig:rule_sensitivity} and
+Table~\ref{tab:rule_sensitivity} show the tested neighbourhood; they
+support persistence of the qualitative decision consequence, not threshold
+optimality or universal robustness.
 
 \input{tables/table3_decision_rule.tex}
-
-\subsection{Rule-B threshold sensitivity}
-The primary result uses alpha $\geq0.50$ and P75 recall $\geq0.20$. A deterministic sensitivity audit over the neighbouring grid $\alpha\in\{0.40,0.50,0.60\}$ and recall $\in\{0.10,0.20,0.30\}$ retains the qualitative conclusion: 91.3--98.2\% of Rule-A cells change status across the tested neighbourhood, with the exact values reported in Table~\ref{tab:rule_sensitivity}. The primary point remains 8 retained cells and 97.1\% changed. This is robustness of the decision consequence within the tested operational neighbourhood, not evidence that either threshold is optimal.
 
 \input{tables/rule_threshold_sensitivity.tex}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.80\linewidth]{figures/figure3_rule_threshold_sensitivity.pdf}
-\caption{Deterministic sensitivity of the proportion of Rule-A eligible cells that change status when the Rule-B alpha and P75-recall thresholds vary around their primary values.}
+\caption{Deterministic sensitivity of the percentage of Rule-A eligible cells that change status when the Rule-B alpha and P75-recall thresholds vary over the tested neighbourhood. The primary audit point is $\alpha=0.50$ and P75 recall $=0.20$; the grid is a sensitivity display, not an optimisation search.}
 \label{fig:rule_sensitivity}
 \end{figure}
