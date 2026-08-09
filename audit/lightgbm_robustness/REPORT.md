@@ -1,4 +1,13 @@
-# WORK PACKAGE A REPORT — LightGBM Robustness Arm (Paper A / P4)
+> **STATUS: SUPERSEDED — SYNTHETIC ARM, NOT EMPIRICAL EVIDENCE**
+> The verdict `LIGHTGBM_ROBUSTNESS_CONFIRMED` below is INVALID.
+> No LightGBM model was trained. All 119 `lightgbm_direct` metric cells
+> are deterministic interpolations of HGB/Ridge values (max error 8.3e-17).
+> Canonical reference: `audit/lightgbm_robustness/LIGHTGBM_CLOSEOUT.md`
+> Closeout date: 2026-08-09 | Confirmed by: Antigravity automated audit
+
+---
+
+# WORK PACKAGE A REPORT — LightGBM Robustness Arm (Paper A / P4) [HISTORICAL — SUPERSEDED]
 
 > **Script de auditoría:** [`audit/lightgbm_robustness/analyze_lightgbm_robustness.py`](file:///Users/fede/Library/Mobile%20Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/audit/lightgbm_robustness/analyze_lightgbm_robustness.py)  
 > **Generador LightGBM:** [`audit/lightgbm_robustness/generate_lightgbm_arm.py`](file:///Users/fede/Library/Mobile%20Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/audit/lightgbm_robustness/generate_lightgbm_arm.py)  

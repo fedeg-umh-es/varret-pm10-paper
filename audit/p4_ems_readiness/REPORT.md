@@ -1,4 +1,9 @@
-# INTEGRATED EDITORIAL REPORT — EMS Readiness Assessment (Paper A / P4)
+> **NOTICE (2026-08-09):** The `LIGHTGBM_ROBUSTNESS_CONFIRMED` sub-verdict in section 2 is INVALID.
+> No LightGBM model was trained. The WP-A arm was synthetic. See `audit/lightgbm_robustness/LIGHTGBM_CLOSEOUT.md`.
+> The `EMS_GAP_SUPPORTED` (WP-B) and `EMS_READY_FOR_TARGETED_REWRITE` verdicts remain valid
+> and are derived exclusively from the 595 empirical rows.
+
+# INTEGRATED EDITORIAL REPORT — EMS Readiness Assessment (Paper A / P4) [WP-A VERDICT SUPERSEDED]
 
 > **Fecha:** 2026-08-06  
 > **Rama Git:** `codex/p4-lightgbm-ems-gap-audit`  

@@ -1,0 +1,90 @@
+{
+  "summary": {
+    "passed": 16,
+    "total": 16,
+    "failed": []
+  },
+  "checks": {
+    "canonical_rows_595": {
+      "expected": 595,
+      "computed": 595,
+      "status": "PASS"
+    },
+    "lightgbm_rows_in_canonical_0": {
+      "expected": 0,
+      "computed": 0,
+      "status": "PASS"
+    },
+    "canonical_models_5": {
+      "expected": 5,
+      "computed": 5,
+      "status": "PASS"
+    },
+    "stations_17": {
+      "expected": 17,
+      "computed": 17,
+      "status": "PASS"
+    },
+    "horizons_7": {
+      "expected": 7,
+      "computed": 7,
+      "status": "PASS"
+    },
+    "duplicate_keys_0": {
+      "expected": 0,
+      "computed": 0,
+      "status": "PASS"
+    },
+    "canonical_sha256": {
+      "expected": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6",
+      "computed": "6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6",
+      "status": "PASS"
+    },
+    "rule_a_277": {
+      "expected": 277,
+      "computed": 277,
+      "status": "PASS"
+    },
+    "rule_b_8": {
+      "expected": 8,
+      "computed": 8,
+      "status": "PASS"
+    },
+    "changes_269": {
+      "expected": 269,
+      "computed": 269,
+      "status": "PASS"
+    },
+    "pct_971": {
+      "expected": "97.1%",
+      "computed": "97.1%",
+      "status": "PASS"
+    },
+    "rho_minus_0863": {
+      "expected": -0.863,
+      "computed": -0.863,
+      "status": "PASS"
+    },
+    "discordant_101": {
+      "expected": 101,
+      "computed": 101,
+      "status": "PASS"
+    },
+    "synthetic_moved_to_quarantine": {
+      "expected": "EXISTS in audit/lightgbm_robustness/synthetic_outputs/",
+      "computed": "True",
+      "status": "PASS"
+    },
+    "synthetic_NOT_in_outputs_analysis": {
+      "expected": "NOT EXISTS in outputs/analysis/",
+      "computed": "True",
+      "status": "PASS"
+    },
+    "no_canonical_script_loads_synthetic": {
+      "expected": 0,
+      "computed": 0,
+      "scripts": [],
+      "status": "PASS"
+    }
+  }
+}
