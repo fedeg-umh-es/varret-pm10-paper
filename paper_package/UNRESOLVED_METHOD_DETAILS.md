@@ -16,3 +16,7 @@ Generated for the P4 pre-submission revision. Unresolved details are omitted fro
 | Exact Zenodo DOI | NOT_FOUND | No DOI is asserted. |
 
 Machine-readable status flag: `SARIMA_CONFIGURATION_CONFLICTING`.
+
+`SARIMA_LIMITATION_ACCEPTABLE_FOR_SUBMISSION = YES`: the manuscript
+states the conflict, omits an unsupported exact order, and limits the
+claim to the verified fixed-order family description.

@@ -9,4 +9,6 @@ Reading only the first sentence of each paragraph reconstructs the intended narr
 | Discussion | central consequence → complementary metrics → family profiles → literature relation → sensitivity/operations → boundaries | PASS |
 | Conclusions | observed result → eligibility change → methodological implication → bounded generalisation | PASS |
 
-`SKIP_TEST = PASS`
+`SKIP_TEST = PASS`. The environmental model-evaluation implication is
+explicit in Discussion and the benchmark-specific magnitude remains
+bounded.

@@ -1,9 +1,9 @@
 # Visual QA
 
-PDF inspected: `paper_package/main.pdf`
+PDF inspected: `paper_package/main.pdf` after the final scope-gate
+compilation. All 10 pages were rendered at 120 dpi and inspected.
 
-Result: PASS. All 10 pages were rendered at 120 dpi and inspected. No
-MAJOR or BLOCKING issues remain.
+Result: PASS. No MAJOR or BLOCKING issues remain.
 
 `FIGURE_2_VISUAL_QA = PASS`
 
@@ -13,11 +13,11 @@ MAJOR or BLOCKING issues remain.
 | 2 | Introduction, gap, rules | Equations and references legible | MINOR | None | PASS |
 | 3 | Methods opening | No clipping or excessive whitespace | MINOR | None | PASS |
 | 4 | Model specification table, metrics | Compact table remains readable; no overfull content | MINOR | None | PASS |
-| 5 | Table 2, Results, Table 1 | Tables and captions legible | MINOR | None | PASS |
-| 6 | Figure 1, Results, Discussion | Figure readable and placed before later discussion | MINOR | None | PASS |
+| 5 | Table 1 and Results | Diagnostic table and captions legible | MINOR | None | PASS |
+| 6 | Figure 1, sensitivity text, Discussion | Figure readable and correctly placed | MINOR | None | PASS |
 | 7 | Figure 2, Discussion | No text overlap; shaded region and formal contours are distinct | MINOR | None | PASS |
-| 8 | Table 3, sensitivity table, conclusions | Tables and conclusion readable; no major float displacement | MINOR | None | PASS |
-| 9 | Figure 3, availability, supplement entry | Sensitivity figure legible; no figure after Conclusions | MINOR | None | PASS |
+| 8 | Table 2, Table 3, conclusions | Tables and conclusion readable; no major float displacement | MINOR | None | PASS |
+| 9 | Figure 3, declarations, availability | Sensitivity figure legible; no figure after Conclusions | MINOR | None | PASS |
 | 10 | Supplementary station table, references | Table and references fit within margins | MINOR | None | PASS |
 
 Figure 2 checks:

@@ -18,3 +18,9 @@ The paper audits whether adding dynamic-fidelity requirements to persistence-rel
 ## Submission caveat
 
 The repository contains the canonical evidence and reproducibility records. Before submission, the public repository must be synchronised with the final accepted commit and any data-deposition identifier must be confirmed. No Zenodo DOI is asserted in this package.
+
+`PRE_SUBMISSION_REPOSITORY_SYNC_REQUIRED = YES`.
+
+The graphical abstract is not included in the submission archive. It must
+be created manually by the authors from the textual specification in
+`GRAPHICAL_ABSTRACT_SPEC.md`.

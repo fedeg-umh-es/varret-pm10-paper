@@ -32,3 +32,8 @@ Rule A is positive persistence-relative RMSE skill and significant BH-adjusted D
 ## Provenance boundaries
 
 The empirical integrity verifier returned 16/16 PASS. The structured cells share stations and time series and are not independent replicates. Historical synthetic material and the separate 486-abstract reporting block are outside the revised manuscript evidence chain.
+
+`UNTRACEABLE_MAIN_TEXT_NUMBERS = 0`: every quantitative claim retained
+in the manuscript maps to the canonical table or verified deterministic
+sensitivity artifact above. Unresolved methodological details are
+documented separately and are not used as unsupported numerical claims.

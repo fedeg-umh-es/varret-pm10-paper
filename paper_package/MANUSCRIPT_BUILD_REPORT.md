@@ -1,4 +1,4 @@
-# P4 EMS pre-submission revision build report
+# P4 EMS final scope-gate build report
 
 ## Canonical evidence
 
@@ -9,22 +9,23 @@
 - Primary eligibility: Rule A 277, Rule B 8, changes 269, 97.1%.
 - Formal discordance: 101 (54 HGB, 43 Ridge, 4 SARIMA).
 
-## Scope controls
+## Scope and production controls
 
-No models, forecasts, stations, datasets, folds, or canonical thresholds
-were changed. The only additional analysis is deterministic Rule-B
-sensitivity from the existing canonical audit artifact. The 486-abstract
-reporting block was removed from the Paper-A manuscript because it
-introduces a separate provenance line.
+No models, forecasts, stations, datasets, folds, canonical thresholds, or
+new literature searches were added. The only additional analysis remains
+the deterministic Rule-B sensitivity from the existing canonical audit
+artifact. The 486-abstract reporting block and the AI-assisted graphical
+abstract draft are excluded from the v3 submission archive.
 
-## Production status
+## Final validation
 
 - Abstract: 90 words under the repository's LaTeX-stripped word count.
 - LaTeX compilation: PASS, 10 pages, no errors, undefined citations,
   undefined references, missing figures, or missing tables.
 - Visual QA: PASS; `FIGURE_2_VISUAL_QA = PASS`.
-- Overleaf v2 archive validation: PASS (`unzip -t`).
-- Independent Overleaf v2 compilation: PASS, 10 pages.
+- Overleaf v3 archive validation: PASS (`unzip -t`).
+- Independent Overleaf v3 compilation: PASS, 10 pages.
 
-Current scientific verdict target:
-`MANUSCRIPT_PACKAGE_READY_WITH_DOCUMENTED_LIMITATIONS`.
+Author actions remain: manually create the graphical abstract, synchronise
+the public repository with the final submission version, and obtain final
+author approval.
