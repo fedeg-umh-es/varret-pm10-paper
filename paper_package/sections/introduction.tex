@@ -1,25 +1,15 @@
 \section{Introduction}
+\label{sec:introduction}
 
-Daily PM$_{10}$ forecasts support a short-horizon interpretation in air-quality management and public-health communication, where decisions are sensitive to near-term changes as well as average error \cite{who2021,wilks2011}. In operational settings, however, usefulness depends not only on average error but also on whether forecasts reproduce meaningful day-to-day changes and identify episodes.
+Daily PM$_{10}$ forecasts support air-quality monitoring and short-term public-health decisions. Forecast verification therefore has to distinguish genuine predictive improvement from performance that is attractive only under an aggregate error score.
 
-In multi-horizon settings, persistence-relative RMSE skill is a necessary summary because it tests whether a model improves over an explicit operational baseline \cite{hyndman2006}. However, point-forecast accuracy summaries remain incomplete for decision support \cite{gneiting2011}: a model can be significantly skilful in RMSE while producing trajectories that are dynamically over-smoothed.
+Conventional evaluation usually begins with a reference forecast and a scale-dependent error measure. Persistence-relative skill is useful because it asks whether a candidate improves on a simple, operationally interpretable comparator, while Diebold--Mariano testing provides a formal comparison of forecast losses \cite{hyndman2006,diebold1995}. These tools are necessary for model comparison, but they do not describe the dynamic spread of the forecast trajectory.
 
-To address this gap, we introduce variance retention as a post-evaluation diagnostic layer to read dynamic fidelity alongside RMSE-based skill in a rolling-origin daily PM$_{10}$ study. We complement the joint skill–fidelity reading with (i) bootstrap intervals for the variance-retention ratio $\alpha$, (ii) threshold-sensitivity checks for the collapse convention, (iii) BH-adjusted Diebold–Mariano tests against persistence, (iv) exceedance diagnostics for episode sensitivity and false alarms, and (v) a Murphy decomposition to connect the empirical patterns to forecast verification theory \cite{murphy1988}.
+A point forecast can reduce RMSE by attenuating fluctuations. Such attenuation may be acceptable for some decisions, but it can also reduce the amplitude of pollution episodes and make a forecast appear preferable under error criteria while failing a complementary fidelity check. Forecast verification literature treats accuracy, association, and other dimensions as related but non-equivalent properties \cite{gneiting2011,jolliffe2012}. The practical question is consequently not whether error metrics should be discarded, but whether adding a transparent dynamic-fidelity audit changes which model cells remain eligible.
 
-We further ask whether the skill–fidelity tension is specific to direct lag-only ML forecasters or also appears in classical statistical and decomposition-based alternatives.
-
-\paragraph{Contributions.} This paper contributes to forecast-verification
-practice, not to forecasting methodology or atmospheric-process understanding.
-Specifically: (i) we formalise \emph{variance retention} $\alpha(h)$ as a
-bounded, post-hoc verification diagnostic that complements persistence-relative
-skill by exposing amplitude collapse in deterministic point forecasts, together
-with an interpretive skill--retention template (Table~\ref{tab:interpretive});
-(ii) across 17 heterogeneous PM$_{10}$ stations and five model families, we show
-that statistically significant RMSE gains over persistence (BH-adjusted
-Diebold--Mariano) routinely coexist with near-universal variance collapse and
-degraded event detection, and we connect this pattern to a Murphy decomposition
-of mean squared error; and (iii) we distil a minimum set of reporting practices
-for verifying deterministic air-quality forecasts. The claims are deliberately
-bounded to the evaluated setting and are not offered as a general theory of
-forecast skill.
-
+This study asks: \emph{Does incorporating dynamic-fidelity criteria alongside conventional error-based statistical evaluation materially alter model-selection decisions in multi-step PM$_{10}$ forecasting?} We answer with a post-evaluation decision audit of a fixed empirical benchmark. The contributions are limited to three points:
+\begin{enumerate}
+    \item an empirical audit of error--fidelity discordance;
+    \item a description of its variation by model family and horizon; and
+    \item a quantification of how an explicit fidelity requirement changes eligibility.
+\end{enumerate}

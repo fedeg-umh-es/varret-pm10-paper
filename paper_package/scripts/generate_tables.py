@@ -68,7 +68,16 @@ Model & $n$ & Median Skill & Median $\alpha$ & Collapse & DM sig. & Rule A & Rul
 \midrule
 """
 for _, row in table2_df.iterrows():
-    tex2 += f"{row['Model']} & {row['Cells']} & {row['Median Skill']} & {row['Median $\\alpha$']} & {row['Collapse ($\\alpha<0.5$)']} & {row['DM sig.']} & {row['Rule A']} & {row['Rule B']} & {row['Discordant']} \\\\\n"
+    model = row['Model']
+    cells = row['Cells']
+    skill = row['Median Skill']
+    alpha = row['Median $\\alpha$']
+    collapse = row['Collapse ($\\alpha<0.5$)']
+    dm = row['DM sig.']
+    rule_a = row['Rule A']
+    rule_b = row['Rule B']
+    discordant = row['Discordant']
+    tex2 += f"{model} & {cells} & {skill} & {alpha} & {collapse} & {dm} & {rule_a} & {rule_b} & {discordant} \\\\\n"
 
 tex2 += r"""\bottomrule
 \end{tabular}

@@ -1,19 +1,12 @@
-# FIGURE DATA AUDIT
+# Figure data audit
 
-Generated: 2026-08-09
+All primary figures were regenerated locally from `outputs/tables/master_diagnostic_table.csv` with `paper_package/scripts/generate_figures.py`. The script asserts 595 rows, the five canonical models, no duplicate station--model--horizon keys, and zero excluded model rows.
 
-| Figure | File | Source | Rows | Models | Script |
-| ------ | ---- | ------ | ---: | ------ | ------ |
-| Fig. 3 (skill profiles) | figure3_skill_profiles.pdf | master_diagnostic_table.csv | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. 4 (alpha profiles) | figure4_alpha_profiles.pdf | master_diagnostic_table.csv | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. 5 (skill-alpha scatter) | figure5_scatter_skill_alpha.pdf | master_diagnostic_table.csv | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. threshold sensitivity | figure_threshold_sensitivity.pdf | master_diagnostic_table.csv | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. exceedance recall | figure_exceedance_recall.pdf | master_diagnostic_table.csv | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. Murphy decomposition | figure_murphy_decomposition.pdf | master_diagnostic_table.csv | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. station map | station_map_ml_only_collapse_rate.pdf | master_diagnostic_table.csv + station metadata | 595 | all 5 | submission_package/ems (pre-generated) |
-| Fig. 1 (reporting gap) | figure1_reporting_gap_audit.pdf | EMS corpus audit | N/A | N/A | submission_package/ems (pre-generated) |
+| Figure | Source | Rows | Models | Script |
+|---|---|---:|---|---|
+| Figure 1: Skill versus alpha | `outputs/tables/master_diagnostic_table.csv` | 595 | 5 | `paper_package/scripts/generate_figures.py::figure_skill_alpha` |
+| Figure 2: Horizon-wise behaviour | `outputs/tables/master_diagnostic_table.csv` | 595 | 5 | `paper_package/scripts/generate_figures.py::figure_horizon_profiles` |
+| Figure 3: Rule A versus Rule B | `outputs/tables/master_diagnostic_table.csv` | 595 | 5 | `paper_package/scripts/generate_figures.py::figure_eligibility` |
+| Supplementary reporting audit | EMS corpus audit artefacts | N/A | N/A | pre-existing audited artefact |
 
-## LightGBM contamination check
-
-All figures use only 5 empirical models from master_diagnostic_table.csv (595 rows).
-lightgbm_direct: 0 rows used in any figure.
+The three primary PDFs are vector outputs and are the only empirical figures included by the main text.

@@ -1,38 +1,35 @@
-# TRACEABILITY
+# Paper A numerical traceability
 
-Generated: 2026-08-09
-Source: outputs/tables/master_diagnostic_table.csv
-SHA-256: 6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6
+Primary source: `outputs/tables/master_diagnostic_table.csv`.
+SHA-256: `6dfb12c5a8a1c2263ecfad71e441cd2af6f451c9b73ba9049b1986eaeee62af6`.
+All counts below were recomputed locally from the canonical table; no synthetic arm is used.
 
-| Manuscript claim | Value | Source | Calculation |
-| --- | --- | --- | --- |
-| Median skill HGB direct | 0.205 | master_diagnostic_table.csv | df[model].skill.median() |
-| Median alpha HGB direct | 0.151 | master_diagnostic_table.csv | df[model].alpha.median() |
-| alpha<0.5 HGB direct | 118/119 | master_diagnostic_table.csv | (df[model].alpha<0.5).sum() |
-| DM sig HGB direct | 111/119 | master_diagnostic_table.csv | df[model].dm_significant.sum() |
-| Median skill Ridge direct | 0.219 | master_diagnostic_table.csv | df[model].skill.median() |
-| Median alpha Ridge direct | 0.087 | master_diagnostic_table.csv | df[model].alpha.median() |
-| alpha<0.5 Ridge direct | 118/119 | master_diagnostic_table.csv | (df[model].alpha<0.5).sum() |
-| DM sig Ridge direct | 117/119 | master_diagnostic_table.csv | df[model].dm_significant.sum() |
-| Median skill SARIMA | 0.208 | master_diagnostic_table.csv | df[model].skill.median() |
-| Median alpha SARIMA | 0.095 | master_diagnostic_table.csv | df[model].alpha.median() |
-| alpha<0.5 SARIMA | 110/119 | master_diagnostic_table.csv | (df[model].alpha<0.5).sum() |
-| DM sig SARIMA | 44/119 | master_diagnostic_table.csv | df[model].dm_significant.sum() |
-| Median skill Seasonal naive | -0.026 | master_diagnostic_table.csv | df[model].skill.median() |
-| Median alpha Seasonal naive | 1.0 | master_diagnostic_table.csv | df[model].alpha.median() |
-| alpha<0.5 Seasonal naive | 0/119 | master_diagnostic_table.csv | (df[model].alpha<0.5).sum() |
-| DM sig Seasonal naive | 39/119 | master_diagnostic_table.csv | df[model].dm_significant.sum() |
-| Median skill STL+Ridge | -1.107 | master_diagnostic_table.csv | df[model].skill.median() |
-| Median alpha STL+Ridge | 1.399 | master_diagnostic_table.csv | df[model].alpha.median() |
-| alpha<0.5 STL+Ridge | 0/119 | master_diagnostic_table.csv | (df[model].alpha<0.5).sum() |
-| DM sig STL+Ridge | 119/119 | master_diagnostic_table.csv | df[model].dm_significant.sum() |
-| Rule A total | 277 | master_diagnostic_table.csv | (skill>0) & dm_significant |
-| Rule B total | 8 | master_diagnostic_table.csv | Rule A & alpha>=0.5 & recall_p75>=0.20 |
-| Decision changes | 269 | master_diagnostic_table.csv | Rule A - Rule B |
-| Decision change proportion | 97.1% | master_diagnostic_table.csv | changes/rule_a*100 |
-| Spearman rho(alpha,skill) | -0.863 | master_diagnostic_table.csv | spearmanr(alpha,skill) |
-| Discordant cases | 101 | master_diagnostic_table.csv | Rule A & recall>=0.20 & alpha<0.5 |
-| Total cells | 595 | master_diagnostic_table.csv | len(df) |
-| Models | 5 | master_diagnostic_table.csv | df.model.nunique() |
-| Stations | 17 | master_diagnostic_table.csv | df.station_id.nunique() |
-| Horizons | 7 | master_diagnostic_table.csv | df.horizon.nunique() |
+| Claim | Value | Subset | Calculation / script | Status |
+|---|---:|---|---|---|
+| Diagnostic rows | 595 | all rows | `len(df)`; integrity verifier | VERIFIED |
+| Stations | 17 | `station_id` | `nunique()` | VERIFIED |
+| Models | 5 | `model` | `nunique()`; exact model set check | VERIFIED |
+| Horizons | 7 | `horizon` | `nunique()`; values 1--7 | VERIFIED |
+| LightGBM rows | 0 | `model` | exact exclusion check | VERIFIED |
+| Rule A | 277 | all cells | `skill > 0 & dm_significant` | VERIFIED |
+| Rule B | 8 | all cells | Rule A & `alpha >= .50` & `recall_p75 >= .20` | VERIFIED |
+| Decision changes | 269 | Rule-A cells | `277 - 8` | VERIFIED |
+| Change proportion | 97.1% | Rule-A cells | `269 / 277 * 100` | VERIFIED |
+| Spearman rho(alpha, skill) | -0.863 | all cells | `scipy.stats.spearmanr(alpha, skill)` | VERIFIED |
+| Discordant cells | 101 | Rule A & recall P75 >= .20 & alpha < .50 | boolean count | VERIFIED |
+| HGB Rule A -> B | 111 -> 1 | HGB | grouped boolean counts | VERIFIED |
+| Ridge Rule A -> B | 117 -> 1 | Ridge | grouped boolean counts | VERIFIED |
+| SARIMA Rule A -> B | 44 -> 1 | SARIMA | grouped boolean counts | VERIFIED |
+| Seasonal naive Rule A -> B | 5 -> 5 | seasonal naive | grouped boolean counts | VERIFIED |
+| STL+Ridge Rule A -> B | 0 -> 0 | STL+Ridge | grouped boolean counts | VERIFIED |
+| HGB collapse | 118/119 | HGB | `alpha < .50` count | VERIFIED |
+| Ridge collapse | 118/119 | Ridge | `alpha < .50` count | VERIFIED |
+| SARIMA collapse | 110/119 | SARIMA | `alpha < .50` count | VERIFIED |
+
+## Definitions used in the paper
+
+`alpha` is the canonical variance ratio `Var(y_pred)/Var(y_true)` with `ddof=0`; it is not a standard-deviation ratio. Table 2 uses median skill and median alpha, plus counts for collapse, DM significance, Rule A, Rule B, and discordance. Table 3 uses counts and arithmetic changes. Figure 2 uses median skill and alpha by model and horizon.
+
+## Provenance boundary
+
+The canonical integrity verifier returned 16/16 PASS. Historical quarantine and audit documents may mention synthetic material for forensic traceability, but no such rows, statistics, or claims enter the manuscript, tables, figures, supplementary text, or final Overleaf ZIP.

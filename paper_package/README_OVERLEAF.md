@@ -25,11 +25,10 @@ BibTeX (`elsarticle-num-names.bst`)
 - `supplementary/` (supplementary material)
 
 ## Known non-blocking warnings
-- `Mismatched LaTeX support files detected` — version mismatch between local elsarticle.cls and TeX Live; does NOT affect output. Overleaf should compile cleanly with its own version.
-- `Token not allowed in a PDF string` (hyperref math in captions) — cosmetic only, does not affect PDF.
+- Hyperref may report cosmetic math-token warnings for section metadata; these do not affect the PDF.
 
 ## Journal
 Environmental Modelling & Software (Elsevier)
 
 ## Page count (local compilation)
-17 pages
+10 pages

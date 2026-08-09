@@ -1,6 +1,6 @@
-\section{Reproducible Workflow}
+\section{Evidence and Reproducibility}
+\label{sec:workflow}
 
-The five-model evaluation produces a unified station$\times$model$\times$horizon table with 595 rows (17 stations $\times$ 5 models $\times$ 7 horizons) containing persistence-relative RMSE skill, variance retention $\alpha$, Skill$_{VP}$, and bootstrap confidence intervals (\texttt{alpha\_ci\_low}, \texttt{alpha\_ci\_high}). Repository scripts regenerate all manuscript tables and figures from the underlying forecast outputs, enabling inspection of post-evaluation assumptions (horizon structure, baseline definition, and preprocessing boundaries) and reproducible recomputation of the diagnostic layer \cite{sandve2013}.
+All reported counts and summaries are derived from the canonical 595-row table. Its SHA-256 is recorded in the provenance manifest. The table contains exactly five model labels. Reproducible table and figure generators are included in the package, and the numerical claim-to-source map is provided in the accompanying traceability file.
 
-Reproducibility here is intended to support the auditability of the evaluation workflow rather than introduce a new forecasting architecture: readers can re-run the study and examine how persistence-relative skill, horizon-wise behaviour, and variance retention interact.
-
+The audit is intentionally descriptive. Counts are reported over a structured station--model--horizon grid, and the shared stations and time series mean that the 595 cells must not be interpreted as 595 independent replicates. Historical synthetic or quarantined material is outside the empirical evidence used here.

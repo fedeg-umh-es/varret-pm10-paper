@@ -1,26 +1,19 @@
-\section{Post-Evaluation Diagnostic Framework}
+\section{Decision Audit Framework}
+\label{sec:framework}
 
-The post-evaluation framework is organised around three complementary questions:
+We compare two eligibility rules applied after forecast evaluation. The rules do not retrain models or create a new ranking objective; they audit how a stated requirement changes the set of eligible cells.
 
-\textbf{Skill:} Does the model beat persistence? In this manuscript, skill is defined relative to persistence under RMSE, so positive \(\mathrm{Skill}(h)\) indicates lower RMSE than persistence at the same horizon \(h\) \cite{hyndman2006,tashman2000}.
+\subsection{Error-based eligibility: Rule A}
+For each station--model--horizon cell,
+\begin{equation}
+\textbf{Rule A:}\qquad \mathrm{Skill}>0 \quad\mathrm{and}\quad \mathrm{DM}_{BH}\ \text{significant}.
+\end{equation}
+Skill is persistence-relative RMSE skill. The significance flag is based on the two-sided Harvey--Leybourne--Newbold modified Diebold--Mariano comparison with Benjamini--Hochberg adjustment, as implemented in \texttt{scripts/05\_dm\_significance.py} \cite{diebold1995,harvey1997}.
 
-\textbf{Variance retention:} Does the forecast retain observed variability? The variance-retention ratio \(\alpha(h)=\operatorname{Var}(\hat{y})/\operatorname{Var}(y)\) is interpreted post-evaluation; low \(\alpha(h)\) indicates variability shrinkage consistent with smoothed trajectories, which can complicate operational interpretation even when RMSE skill is positive.
+\subsection{Fidelity-aware eligibility: Rule B}
+\begin{equation}
+\textbf{Rule B:}\qquad \text{Rule A}\quad\mathrm{and}\quad \alpha\geq0.50\quad\mathrm{and}\quad \mathrm{Recall}_{P75}\geq0.20.
+\end{equation}
+The two thresholds are operational criteria chosen for this audit. They are not estimated optima, universal standards, or claims about acceptable performance in other applications. A decision change is a cell that satisfies Rule A but not Rule B.
 
-\textbf{Skill$_{VP}$:} What compact auxiliary summary helps read both together? Skill$_{VP}$ is reported only as a bounded diagnostic auxiliary alongside \(\mathrm{Skill}(h)\) and \(\alpha(h)\), not as a replacement for standard accuracy metrics.
-
-\begin{table}[ht]
-\centering
-\caption{Interpretive template for joint reading of persistence-relative skill and variance retention. Rows distinguish positive from negative skill; columns distinguish retained from collapsed variance. The template is a diagnostic aid, not a decision rule.}
-\label{tab:interpretive}
-\begin{tabular}{>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{5.5cm}}
-\hline
- & $\alpha(h) \geq 0.8$ (retained) & $\alpha(h) < 0.5$ (collapsed) \\
-\hline
-Skill$(h) > 0$ & \textbf{Desirable case.} Model improves over persistence and preserves observed variability. Forecasts are more credible under both diagnostics. & \textbf{Skill--fidelity decoupling.} Model reduces RMSE but dampens day-to-day fluctuations. Forecasts track the mean level but may under-represent episode amplitude. \\[6pt]
-Skill$(h) \leq 0$ & \textbf{No improvement with preserved dynamics.} Model does not outperform persistence despite retaining variance. Forecasts reproduce variability but are not more accurate. & \textbf{Worst case.} Model is both less accurate than persistence and smoothed. No evident operational value under these two diagnostics. \\
-\hline
-\end{tabular}
-\end{table}
-
-The boundaries $\alpha = 0.8$ and $\alpha = 0.5$ are diagnostic conventions adopted in this study; they are not derived from a formal loss criterion.
-
+We also define a descriptive discordant case as a Rule-A cell with $\mathrm{Recall}_{P75}\geq0.20$ and $\alpha<0.50$. This isolates cells that pass the error and episode-sensitivity checks while failing the variance-retention check.
