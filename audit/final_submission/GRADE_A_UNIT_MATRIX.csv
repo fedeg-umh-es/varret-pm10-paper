@@ -1,0 +1,596 @@
+station,model,horizon,y_true,y_pred,baseline,origin,target,fold,p75_train_support,exact_support,metric_chain_available,grade_a_candidate,reason_if_not,evidence_source
+03014002_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,1,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,2,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,3,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,4,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,5,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,6,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,sarima,7,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,1,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,2,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,3,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,4,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,5,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,6,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,seasonal_naive,7,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,1,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,2,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,3,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,4,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,5,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,6,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+03014002_10_M,stl_ridge_direct,7,YES,NO,YES,YES,YES,YES,YES,NO,NO,NO,No preserved row-level y_pred for this model at this station,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions.csv
+08019004_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019004_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019028_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019043_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019045_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019052_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08019054_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+08263007_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+22125001_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004005_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+43004006_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44013007_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+44216001_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+45153999_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+46250043_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,sarima,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46250043_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_valencia_vivers.csv
+46263999_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,sarima,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+46263999_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,YES,YES,YES,YES,,/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper/outputs/metrics/predictions_zarra_emep.csv
+50008001_10_M,hgb_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,hgb_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,hgb_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,hgb_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,hgb_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,hgb_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,hgb_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,1,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,2,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,3,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,4,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,5,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,6,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,sarima,7,YES,YES,NO,YES,YES,YES,NO,NO,NO,NO,SARIMA-aligned persistence support missing; full observed training support also unavailable,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,seasonal_naive,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,1,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,2,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,3,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,4,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,5,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,6,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
+50008001_10_M,stl_ridge_direct,7,YES,YES,YES,YES,YES,YES,NO,NO,NO,NO,No preserved full observed training series for exact train-derived P75 support,public release paper-a-row-level-evidence-v1
