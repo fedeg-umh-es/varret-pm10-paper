@@ -4,11 +4,17 @@
   "source_forecast_artifacts": [
     {
       "path": "/Users/fede/repos/P2_Operational_Meteorology/results/e2_met_madrid_pm10/predictions/predictions_all_models.csv",
+      "repository": "fedeg-umh-es/P1_PM10_Meteorology_Hstar",
+      "repository_role": "public-mirror source forecast artefact",
+      "repository_relative_path": "results/e2_met_madrid_pm10/predictions/predictions_all_models.csv",
       "sha256": "e4a7edd656385df4f160176f0952a410848dc456cd5842981f191124189ea85c",
       "scope": "Madrid Casa de Campo, all models and horizons"
     },
     {
       "path": "/Users/fede/repos/P2_Operational_Meteorology/results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+      "repository": "fedeg-umh-es/P1_PM10_Meteorology_Hstar",
+      "repository_role": "public-mirror source forecast artefact",
+      "repository_relative_path": "results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
       "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e",
       "scope": "Eight Irish stations, all models and horizons"
     }
@@ -48,6 +54,27 @@
     "serra_dm_q0_cell_level.csv": "16c1b69b1d93525b0bf64d6ee2975a1459a50762538f883b0d2c018f4579003d",
     "serra_dm_auto_nw_cell_level.csv": "58de17f83ba33918a1e100019ff5a8177270089bfa2f2a1a70d066d59aa01863",
     "serra_fig3_dm_inferential_landscape.png": "1ee798448f4f240f58b8c4d06551d63d98ba56a0daaf0f9e0a1c49fec9793187",
-    "serra_table_s1_dm_full.tex": "67dcf69bc470fb3d81063996fb10b087d49e9c2ca5e500b0e378672cec5c163a"
+    "serra_table_s1_dm_full.tex": "67dcf69bc470fb3d81063996fb10b087d49e9c2ca5e500b0e378672cec5c163a",
+    "ESM_1.tex": "1d24e5711e869b4dc1f9835f0eeb3177ad23ee3da8b5e110262d90c2431d236e",
+    "ESM_1.pdf": "a25375f6720d727666dc3a254bac72e2b74087f10fe44985c6c52fa3ce246c68"
+  },
+  "output_repository_relative_paths": {
+    "serra_dm_paired_loss_ledger.csv": "serra_dm_paired_loss_ledger.csv",
+    "serra_dm_q0_cell_level.csv": "serra_dm_q0_cell_level.csv",
+    "serra_dm_auto_nw_cell_level.csv": "serra_dm_auto_nw_cell_level.csv",
+    "serra_fig3_dm_inferential_landscape.png": "serra_fig3_dm_inferential_landscape.png",
+    "serra_table_s1_dm_full.tex": "serra_table_s1_dm_full.tex",
+    "ESM_1.tex": "ESM_1.tex",
+    "ESM_1.pdf": "ESM_1.pdf"
+  },
+  "generation_scripts": {
+    "figure3": {
+      "repository_relative_path": "scripts/generate_serra_fig3.py",
+      "sha256": "5d7547f1f60412932e398a4e033909639e9b03dd17e85e91a763c6c78d44318f"
+    },
+    "online_resource_1": {
+      "repository_relative_path": "scripts/generate_serra_esm1.py",
+      "sha256": "435e2503ec00a5341d9b9df301be1a9ab4308fa8c5ae0a0bfbf1eb5c182593a9"
+    }
   }
 }

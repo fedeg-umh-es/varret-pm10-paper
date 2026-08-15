@@ -305,6 +305,8 @@ persistence is:
   \label{eq:skill}
 \end{equation}
 where the RMSEs are computed over all forecast origins in the evaluation period.
+The definition used throughout the skill-curve analysis is given in
+Eq.~\ref{eq:skill}.
 Positive $S_m(h)$ indicates that model $m$ outperforms persistence at horizon
 $h$.
 
@@ -445,8 +447,8 @@ specifications, while the small set of local signals is more sensitive to
 that choice.
 
 The complete cell-level inferential landscape is shown in
-Figure~\ref{fig:dm_landscape}; the corresponding numerical ledger is provided
-in Supplementary Table~\ref{tab:s1_dm_full}.
+Figure~\ref{fig:dm_landscape}; the complete numerical results are provided
+in Online Resource 1.
 
 \begin{figure*}[t]
   \centering
@@ -586,11 +588,6 @@ Mean $\Delta H^*_{\text{strict}}$ & \multicolumn{4}{c}{$+1.000$~h} & \multicolum
 
 \input{serra_table_t2_dm_q0.tex}
 \input{serra_table_t3_dm_auto_nw.tex}
-\begingroup
-\setcounter{table}{0}
-\renewcommand{\thetable}{S\arabic{table}}
-\input{serra_table_s1_dm_full.tex}
-\endgroup
 
 \FloatBarrier
 

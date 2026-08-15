@@ -1,0 +1,89 @@
+\documentclass[10pt]{article}
+\usepackage[landscape,margin=0.8cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.98}
+\begin{document}
+\begin{center}
+{\Large\bfseries When descriptive forecast-horizon gains do not imply global evidence\\[2pt]
+of incremental meteorological predictability: a multi-site PM10 study\par}
+\vspace{4pt}
+{\normalsize Stochastic Environmental Research and Risk Assessment\par}
+{\normalsize Federico García Crespí\par}
+{\small Departamento de Ingeniería de Computadores, Universidad Miguel Hernández de Elche, Elche, Spain\par}
+{\small ORCID: \href{https://orcid.org/0000-0002-7129-7791}{0000-0002-7129-7791}; corresponding email: \texttt{fedeg@umh.es}\par}
+\vspace{8pt}
+{\Large\bfseries Online Resource 1\par}
+\vspace{3pt}
+Complete site--horizon DM--HLN results for the fixed paired loss-differential ledger.
+\end{center}
+\noindent\textbf{Definitions and multiplicity.} The paired loss differential is
+$d_t=L_{\mathrm{lags}}-L_{\mathrm{lags+meteorology}}$, so positive statistics favour the lags + meteorology information set.
+The primary specification uses $q_{\mathrm{overlap}}=0$; the sensitivity uses the fixed Bartlett/Newey--West bandwidth
+$q=\lfloor4(n/100)^{2/9}\rfloor$. The global Bonferroni family contains 36 planned comparisons, and
+Benjamini--Hochberg adjustment is applied across the four horizons within each station. No cell survives global
+Bonferroni correction. Non-significance is not evidence of equivalence.
+\vspace{6pt}
+\tiny
+\renewcommand{\tablename}{Online Resource}
+\begin{longtable}{@{}p{3.45cm}rrr rrrrr rrrrrr@{}}
+\caption{Complete cell-level inferential results.}\label{tab:online_resource_1}\\
+\toprule
+Site & $h$ & $n$ & \multicolumn{5}{c}{Primary $q_{\mathrm{overlap}}=0$} & \multicolumn{6}{c}{Automatic Newey--West}\\
+ & & & DM--HLN & $p$ & $p_{\mathrm{Bonf}}$ & $p_{\mathrm{BH}}$ & BH & $q$ & DM--HLN & $p$ & $p_{\mathrm{Bonf}}$ & $p_{\mathrm{BH}}$ & BH\\
+\midrule
+\endfirsthead
+\toprule
+Site & $h$ & $n$ & \multicolumn{5}{c}{Primary $q_{\mathrm{overlap}}=0$} & \multicolumn{6}{c}{Automatic Newey--West}\\
+ & & & DM--HLN & $p$ & $p_{\mathrm{Bonf}}$ & $p_{\mathrm{BH}}$ & BH & $q$ & DM--HLN & $p$ & $p_{\mathrm{Bonf}}$ & $p_{\mathrm{BH}}$ & BH\\
+\midrule
+\endhead
+\midrule
+\multicolumn{14}{r@{}}{Continued on next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
+Madrid Casa de Campo & 1 & 354 & 1.16901717167 & 0.243185513423 & 1 & 0.461127872171 & No & 5 & 1.09444286438 & 0.274507007573 & 1 & 0.499712256018 & No \\\
+Madrid Casa de Campo & 6 & 356 & -0.0501284771506 & 0.960048198833 & 1 & 0.960048198833 & No & 5 & -0.0502606382815 & 0.959942956776 & 1 & 0.959942956776 & No \\\
+Madrid Casa de Campo & 12 & 346 & 2.65199344286 & 0.0083712676589 & 0.30136563572 & 0.0334850706356 & Yes & 5 & 2.45461931349 & 0.0145966537132 & 0.525479533676 & 0.0583866148529 & No \\\
+Madrid Casa de Campo & 24 & 354 & 0.943940024099 & 0.345845904128 & 1 & 0.461127872171 & No & 5 & 0.888672640586 & 0.374784192014 & 1 & 0.499712256018 & No \\\
+Birr (Co. Offaly) & 1 & 211 & 2.68182334315 & 0.00790448604525 & 0.284561497629 & 0.031617944181 & Yes & 4 & 2.76482664258 & 0.00620211969451 & 0.223276309002 & 0.024808478778 & Yes \\\
+Birr (Co. Offaly) & 6 & 212 & -0.549510966919 & 0.583235962218 & 1 & 0.583235962218 & No & 4 & -0.532490924927 & 0.594946325488 & 1 & 0.594946325488 & No \\\
+Birr (Co. Offaly) & 12 & 212 & 0.889722415746 & 0.374628228749 & 1 & 0.583235962218 & No & 4 & 0.805852206852 & 0.421235321327 & 1 & 0.594946325488 & No \\\
+Birr (Co. Offaly) & 24 & 212 & 0.709758952342 & 0.478637240291 & 1 & 0.583235962218 & No & 4 & 0.717731243685 & 0.473716890067 & 1 & 0.594946325488 & No \\\
+Dublin Airport & 1 & 145 & 1.63629890787 & 0.103960822112 & 1 & 0.41584328845 & No & 4 & 2.06763867474 & 0.0404637959258 & 1 & 0.161855183703 & No \\\
+Dublin Airport & 6 & 145 & -0.272343290744 & 0.785748193811 & 1 & 0.785748193811 & No & 4 & -0.280021116996 & 0.779863152556 & 1 & 0.779863152556 & No \\\
+Dublin Airport & 12 & 145 & -0.442456464142 & 0.658822789151 & 1 & 0.785748193811 & No & 4 & -0.435781764352 & 0.663647630671 & 1 & 0.779863152556 & No \\\
+Dublin Airport & 24 & 145 & 0.791336911172 & 0.4300489168 & 1 & 0.785748193811 & No & 4 & 1.0368665915 & 0.301536043364 & 1 & 0.603072086728 & No \\\
+Dundalk (Co. Louth) & 1 & 151 & 1.11683202723 & 0.265851901536 & 1 & 0.37932160474 & No & 4 & 1.13751543125 & 0.25713663346 & 1 & 0.319920528826 & No \\\
+Dundalk (Co. Louth) & 6 & 152 & 0.916937270381 & 0.360637671982 & 1 & 0.37932160474 & No & 4 & 0.997907784974 & 0.319920528826 & 1 & 0.319920528826 & No \\\
+Dundalk (Co. Louth) & 12 & 153 & 0.881717781539 & 0.37932160474 & 1 & 0.37932160474 & No & 4 & 1.13209696598 & 0.259376459853 & 1 & 0.319920528826 & No \\\
+Dundalk (Co. Louth) & 24 & 152 & 1.44794605704 & 0.149705275419 & 1 & 0.37932160474 & No & 4 & 1.34571761301 & 0.180410726124 & 1 & 0.319920528826 & No \\\
+Pearse St. Dublin & 1 & 212 & 1.84652176009 & 0.066217009037 & 1 & 0.0882893453827 & No & 4 & 1.87250686726 & 0.0625197018369 & 1 & 0.0833596024492 & No \\\
+Pearse St. Dublin & 6 & 212 & 2.65868458856 & 0.00844602734838 & 0.304056984542 & 0.0337841093935 & Yes & 4 & 2.94898656562 & 0.00354760341693 & 0.127713723009 & 0.0141904136677 & Yes \\\
+Pearse St. Dublin & 12 & 212 & 1.87089930681 & 0.0627433356344 & 1 & 0.0882893453827 & No & 4 & 2.51309318992 & 0.0127154842108 & 0.457757431589 & 0.0254309684216 & Yes \\\
+Pearse St. Dublin & 24 & 212 & 0.897446999464 & 0.370503297296 & 1 & 0.370503297296 & No & 4 & 0.923197738495 & 0.356958657325 & 1 & 0.356958657325 & No \\\
+Ringsend Dublin & 1 & 212 & 1.23326014644 & 0.218850848114 & 1 & 0.842040952723 & No & 4 & 1.22664694816 & 0.221322349742 & 1 & 0.782338913659 & No \\\
+Ringsend Dublin & 6 & 212 & -0.227336153603 & 0.820382482283 & 1 & 0.924552049737 & No & 4 & -0.197206527154 & 0.843855758549 & 1 & 0.93579706645 & No \\\
+Ringsend Dublin & 12 & 212 & 0.806225655438 & 0.421020476362 & 1 & 0.842040952723 & No & 4 & 0.859265039691 & 0.391169456829 & 1 & 0.782338913659 & No \\\
+Ringsend Dublin & 24 & 212 & 0.0948146258121 & 0.924552049737 & 1 & 0.924552049737 & No & 4 & 0.0806495962773 & 0.93579706645 & 1 & 0.93579706645 & No \\\
+Edenderry (Co. Offaly) & 1 & 208 & 0.339187278463 & 0.734812504307 & 1 & 0.775205969578 & No & 4 & 0.335712343794 & 0.737427809091 & 1 & 0.806936687333 & No \\\
+Edenderry (Co. Offaly) & 6 & 211 & -1.09901609547 & 0.273019413515 & 1 & 0.775205969578 & No & 4 & -1.27485113322 & 0.203770651136 & 1 & 0.806936687333 & No \\\
+Edenderry (Co. Offaly) & 12 & 211 & 0.285939959313 & 0.775205969578 & 1 & 0.775205969578 & No & 4 & 0.244688328193 & 0.806936687333 & 1 & 0.806936687333 & No \\\
+Edenderry (Co. Offaly) & 24 & 210 & 0.797665284604 & 0.425970086924 & 1 & 0.775205969578 & No & 4 & 0.7202692372 & 0.472164006214 & 1 & 0.806936687333 & No \\\
+Henry St. Limerick & 1 & 211 & 0.917485000076 & 0.359941046441 & 1 & 0.479921395255 & No & 4 & 0.817116492146 & 0.414787897338 & 1 & 0.553050529784 & No \\\
+Henry St. Limerick & 6 & 211 & -1.24178037355 & 0.215702715614 & 1 & 0.456770694829 & No & 4 & -1.40751577817 & 0.160752949782 & 1 & 0.462213206051 & No \\\
+Henry St. Limerick & 12 & 210 & 0.470496603328 & 0.638490888815 & 1 & 0.638490888815 & No & 4 & 0.44596391138 & 0.656084967302 & 1 & 0.656084967302 & No \\\
+Henry St. Limerick & 24 & 211 & 1.20805352336 & 0.228385347415 & 1 & 0.456770694829 & No & 4 & 1.20099341271 & 0.231106603025 & 1 & 0.462213206051 & No \\\
+Portlaoise (Co. Laois) & 1 & 212 & 1.22101525263 & 0.223442872238 & 1 & 0.363908377209 & No & 4 & 1.2050672449 & 0.229527144141 & 1 & 0.376582394821 & No \\\
+Portlaoise (Co. Laois) & 6 & 212 & -1.09920494905 & 0.272931282907 & 1 & 0.363908377209 & No & 4 & -1.07761334803 & 0.282436796115 & 1 & 0.376582394821 & No \\\
+Portlaoise (Co. Laois) & 12 & 212 & 1.66861164386 & 0.0966775319893 & 1 & 0.363908377209 & No & 4 & 1.85432754749 & 0.065087759069 & 1 & 0.260351036276 & No \\\
+Portlaoise (Co. Laois) & 24 & 212 & 0.679846930458 & 0.497346576424 & 1 & 0.497346576424 & No & 4 & 0.703695267802 & 0.482398379991 & 1 & 0.482398379991 & No \\\
+\end{longtable}
+\end{document}
