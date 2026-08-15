@@ -74,18 +74,19 @@ scheme with 24-h spacing between forecast origins and horizons $h=1,\ldots,24$. 
 incremental comparison pairs direct multi-horizon XGBoost models using pollutant lags
 with the same learner augmented by meteorological observations available at the
 forecast origin (an observational information-set experiment rather than the use of
-future NWP forecasts).  In Madrid, meteorology yields a pronounced descriptive change
+future numerical weather prediction (NWP) forecasts).  In Madrid, meteorology yields a pronounced descriptive change
 in the skill profile, increasing the strict longest-contiguous positive
 persistence-relative skill horizon from 9 to 17~h (+8~h), while the relaxed
 last-positive-skill horizon increases from 15 to 17~h (+2~h).  Yet in 36 dimensionally
-corrected DM-HLN comparisons at $h\in\{1,6,12,24\}$, no test survives global Bonferroni
+corrected comparisons using the Diebold--Mariano test with Harvey--Leybourne--Newbold
+correction (DM-HLN) at $h\in\{1,6,12,24\}$, no test survives global Bonferroni
 correction under either the overlap-based specification ($q_{\text{overlap}}=0$; 0/36)
 or a fixed automatic Newey--West sensitivity allowing positive-lag dependence (0/36).
 The evidence therefore supports a clear descriptive horizon extension at some sites,
 but no site--horizon comparison survives global multiplicity control under either
 audited dependence specification; only limited within-station signals remain.}
 
-\keywords{PM10, rolling-origin evaluation, persistence-relative skill, forecast horizon, Diebold--Mariano test, multiplicity, Newey--West}
+\keywords{PM10, rolling-origin evaluation, persistence-relative skill, forecast horizon, Diebold--Mariano test, multiplicity}
 
 \begin{document}
 
@@ -171,9 +172,9 @@ nine sites over the training and evaluation periods.  Concentrations are
 generally low to moderate, with training-period means ranging from
 11.3~\si{\micro\gram\per\cubic\metre} (Portlaoise) to
 19.1~\si{\micro\gram\per\cubic\metre} (Dublin Airport), and Madrid at
-18.4~\si{\micro\gram\per\cubic\metre}.  The 95th percentile values indicate
-that episode concentrations above 40~\si{\micro\gram\per\cubic\metre} occur
-at most stations, underscoring the relevance of medium-horizon forecasting.
+18.4~\si{\micro\gram\per\cubic\metre}.  The training-period 95th percentile
+exceeds 40~\si{\micro\gram\per\cubic\metre} at four of nine sites: Madrid,
+Dublin Airport, Ringsend Dublin, and Edenderry.
 Data completeness is high: missing rates are below 2\% at all
 sites during both periods.
 
@@ -226,7 +227,7 @@ by 24~h.  The number of valid evaluated origins varied by site according to data
 availability.
 The mandatory minimum training window is 8\,760 observations (one year), so
 origins in early 2023 draw on three years of history.  This protocol prevents
-any form of look-ahead bias.  Model configurations and feature sets used in the
+look-ahead from future observations in the rolling-origin evaluation.  Model configurations and feature sets used in the
 evaluation were held fixed across evaluation origins; no origin-level tuning or
 cross-validation was performed.
 
@@ -564,10 +565,9 @@ The author conceived the study, designed the methodology, performed the analyses
 \subsection*{Data availability}
 The public GitHub repository \url{https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar}
 contains the versioned analysis code, the processed and regenerated study
-artifacts archived there, figure-generation support, and run metadata for the
-underlying meteorology experiment.  The final overlap-based and automatic
-Newey--West inferential tables reported in this manuscript are not yet mirrored
-in that repository; repository alignment is therefore required before submission.
+artifacts archived there, figure-generation support, run metadata, and the
+final overlap-based and automatic Newey--West inferential tables reported in
+this manuscript for the underlying meteorology experiment.
 The Irish station evaluations were regenerated from recovered source datasets
 using the versioned analysis pipeline. The row-level predictions from the
 originally executed Irish computational run were not retained; therefore, the
