@@ -1,0 +1,20 @@
+% T3 — Fixed automatic Newey--West HAC sensitivity (frozen results)
+\begin{table}[t]
+\centering
+\small
+\caption{Fixed automatic Newey--West sensitivity analysis for DM-HLN inference.
+The HAC bandwidth is set by $q_{\text{auto}}=\lfloor 4\,(n/100)^{2/9}\rfloor$, allowing positive-lag autocovariances in the loss-differential sequence.  Global Bonferroni is applied across the 36 planned tests; BH is applied within each station (4 horizons) as a local sensitivity analysis.}
+\label{tab:dm_auto_nw}
+\begin{tabular}{p{0.40\columnwidth}p{0.50\columnwidth}}
+\toprule
+Specification & Value \\
+\midrule
+Planned comparisons (sites $\times$ horizons) & $9\times 4 = 36$ \\
+Valid tests & 36/36 \\
+Raw $p<0.05$ & 5 \\
+Global Bonferroni significant & 0/36 \\
+Station-wise BH significant (count) & 3 \\
+Station-wise BH identities & Birr ($h=1$); Pearse St.\ Dublin ($h=6$); Pearse St.\ Dublin ($h=12$) \\
+\bottomrule
+\end{tabular}
+\end{table}

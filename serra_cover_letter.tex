@@ -1,0 +1,150 @@
+% cover_letter.tex
+% Cover letter for submission to
+% Stochastic Environmental Research and Risk Assessment
+% Compile: pdflatex serra_cover_letter.tex
+
+\documentclass[9pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage[skip=2pt]{parskip}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=blue
+}
+
+\pagestyle{empty}
+
+\begin{document}
+\small
+
+\noindent
+Dear Editor-in-Chief,
+
+\bigskip
+
+I am pleased to submit the manuscript
+
+\begin{quote}
+\textbf{``When descriptive forecast-horizon gains do not imply global evidence
+of incremental meteorological predictability: a multi-site PM$_{10}$ study''}
+\end{quote}
+
+for consideration for publication in
+\textit{Stochastic Environmental Research and Risk Assessment}.
+
+The manuscript is original, has not been published previously, and is not
+currently under consideration by another journal.
+
+\bigskip
+
+A recurring difficulty in environmental forecasting is that a result that
+looks convincing descriptively may support a much narrower conclusion once
+the source of the improvement is examined statistically. This is particularly
+relevant in multi-horizon forecasting. A model may outperform persistence over
+a longer sequence of lead times after new predictors are added, yet the longer
+skill horizon does not by itself establish that those predictors contribute
+incremental predictive information. Our manuscript examines this distinction
+for hourly PM$_{10}$ forecasting and asks a deliberately focused question:
+when meteorological observations extend persistence-relative forecast skill,
+how much evidence supports attributing that extension to the additional
+meteorological information?
+
+We study Madrid Casa de Campo and eight monitoring stations in Ireland using
+an expanding-window rolling-origin evaluation over January--July 2023.
+Forecasts are issued once per day for horizons from 1 to 24 hours. Persistence
+and SARIMA provide temporal reference models, while the controlled
+information-set comparison uses the same direct XGBoost learner first with
+lagged PM$_{10}$ and then with the addition of meteorological observations
+available at the forecast origin. This paired design allows the descriptive
+effect of the added information to be examined without changing the learner.
+It also keeps the interpretation deliberately retrospective: the
+meteorological inputs are observations available at forecast issuance, not
+future numerical weather prediction forecasts.
+
+The empirical results initially suggest a strong meteorological benefit in
+Madrid. Under the primary definition of the useful forecast horizon---the
+longest contiguous run of positive skill relative to persistence---the horizon
+increases from 9 to 17 hours when meteorological observations are added, an
+8-hour extension. The corresponding relaxed last-positive-skill horizon,
+however, increases from 15 to 17 hours, a 2-hour change. The contrast becomes
+still less straightforward across Ireland. Five of the eight stations already
+reach the 24-hour evaluation boundary with the lags-only model, leaving little
+observable room for the strict horizon to extend further. These results make
+the descriptive story interesting, but they also make clear why the number of
+additional ``useful'' hours cannot by itself answer the attribution question.
+
+That question produces the main inferential turning point of the paper. Across
+the 36 planned station--horizon comparisons, all tests are valid under the
+dimensionally corrected overlap-based DM-HLN specification, but none survives
+global Bonferroni correction. Limited within-station signals remain under
+station-wise false-discovery-rate control. We then address the most immediate
+statistical objection: although the 24-hour spacing between forecast origins
+implies no mechanically required positive-lag covariance from overlapping
+forecast errors for the tested horizons, residual serial dependence in the
+loss differential may still be present. A fixed automatic Newey--West
+sensitivity analysis allows for such positive-lag dependence. The family-wise
+result remains the same---again, no comparison survives global Bonferroni
+correction---although the identities of the limited local signals are not
+identical across the two specifications.
+
+For us, this distinction between the descriptive and inferential results is
+the main value of the study. The Madrid skill extension remains a genuine
+empirical feature of the forecasts; the inferential analysis does not make it
+disappear. Rather, it changes what can reasonably be claimed from it.
+Persistence-relative horizon gains, local evidence of forecast differences,
+and family-wise support for incremental predictive information are different
+levels of evidence. Treating them as interchangeable can make an environmental
+forecasting result appear more general than the evaluation actually supports.
+
+We believe this question is well suited to
+\textit{Stochastic Environmental Research and Risk Assessment} because it
+concerns not only predictive performance but the stochastic structure and
+statistical interpretation of environmental forecasts. The comparison is
+conducted under temporal dependence, across multiple sites and horizons, and
+against persistence---a demanding reference when environmental concentrations
+are strongly autocorrelated. The study also illustrates a practical
+methodological consequence of the evaluation design: when forecast horizons
+are expressed in physical hours but forecast origins are more widely spaced,
+the dependence parameters used for forecast-comparison inference must be
+defined on the loss-differential sequence rather than transferred mechanically
+from physical time.
+
+The manuscript therefore does not argue that meteorology is generally
+uninformative, nor that a particular forecasting architecture is universally
+superior. Its contribution is more specific: in this multi-site PM$_{10}$
+experiment, substantial descriptive horizon gains can coexist with limited
+family-wise evidence for attributing those gains to the added meteorological
+information, and that global conclusion persists under a fixed sensitivity to
+additional serial dependence. We believe that this provides a useful framework
+for interpreting horizon-dependent performance claims in environmental
+forecasting more generally, while keeping the empirical conclusions bounded by
+the evaluated sites, period, information sets, and 24-hour forecast range.
+
+Code, processed research materials, and figure-generation resources associated
+with the study are made available through the project repository described in
+the manuscript.
+
+Thank you for considering this manuscript for publication in
+\textit{Stochastic Environmental Research and Risk Assessment}. I would be
+grateful for the opportunity to have the work considered by the journal's
+editors and reviewers.
+
+\bigskip
+
+Yours sincerely,
+
+\bigskip\bigskip
+
+\noindent
+Federico García Crespí\\
+Universidad Miguel Hernández de Elche\\
+\href{mailto:fedeg@umh.es}{fedeg@umh.es}
+
+\end{document}

@@ -1,0 +1,21 @@
+% T2 — Primary corrected overlap-based q_overlap = 0 DM-HLN inference (frozen results)
+\begin{table}[t]
+\centering
+\small
+\caption{Primary DM-HLN inference under the dimensionally coherent overlap-based specification.
+Forecast origins are spaced by 24~h, so for physical horizons $h\in\{1,6,12,24\}$ the loss-differential horizon in sequence steps is $h_{\text{DM}}=\lceil h/24\rceil=1$ and the mechanically induced overlap bandwidth is $q_{\text{overlap}}=\max(0,h_{\text{DM}}-1)=0$ for all tests.  $q_{\text{overlap}}=0$ removes mechanically required overlap dependence but does not imply independence.
+Global Bonferroni is applied across the 36 planned site--horizon tests; Benjamini--Hochberg (BH) is applied within each station (4 horizons) as a local sensitivity analysis.}
+\label{tab:dm_q0}
+\begin{tabular}{p{0.40\columnwidth}p{0.50\columnwidth}}
+\toprule
+Specification & Value \\
+\midrule
+Planned comparisons (sites $\times$ horizons) & $9\times 4 = 36$ \\
+Valid tests & 36/36 \\
+Raw $p<0.05$ & 3 \\
+Global Bonferroni significant & 0/36 \\
+Station-wise BH significant (count) & 3 \\
+Station-wise BH identities & Birr ($h=1$); Madrid ($h=12$); Pearse St.\ Dublin ($h=6$) \\
+\bottomrule
+\end{tabular}
+\end{table}

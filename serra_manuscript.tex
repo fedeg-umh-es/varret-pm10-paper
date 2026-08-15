@@ -1,0 +1,596 @@
+%=====================================================================
+% manuscript_main.tex
+% Target journal: Stochastic Environmental Research and Risk Assessment (SERRA)
+% Springer Nature LaTeX template: sn-jnl, two-column iicol layout
+% Compile: pdflatex -> bibtex -> pdflatex -> pdflatex
+%=====================================================================
+
+\documentclass[pdflatex,sn-basic,iicol]{sn-jnl}
+
+%---------------------------------------------------------------------
+% Packages
+%---------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{enumitem}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{adjustbox}
+\usepackage{lineno}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdfborder={0 0 0}
+}
+
+%---------------------------------------------------------------------
+% Macros
+%---------------------------------------------------------------------
+
+\newcommand{\PMten}{\ensuremath{\mathrm{PM}_{10}}}
+
+% Layout tuning for the Springer Nature iicol two-column format.
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+
+%---------------------------------------------------------------------
+% Title page
+%---------------------------------------------------------------------
+
+\title[Descriptive horizon gains vs global inferential support in \PMten{} forecasting]
+{When descriptive forecast-horizon gains do not imply global evidence
+of incremental meteorological predictability: a multi-site \PMten{} study}
+
+% Author details for submission.
+\author*[1]{\fnm{Federico} \sur{García Crespí}}\email{fedeg@umh.es}
+\affil*[1]{\orgdiv{Departamento de Ingeniería de Computadores},
+  \orgname{Universidad Miguel Hernández de Elche},
+  \orgaddress{\city{Elche}, \country{Spain}}}
+
+\abstract{Improvements over persistence are often reported as extended forecast skill at
+longer horizons, but such descriptive gains need not imply correspondingly strong
+statistical support that an added information set contributes incremental predictive
+signal.  We evaluate hourly \PMten{} forecasts at nine sites (Madrid Casa de Campo and
+eight Irish stations) over January--July 2023 using an expanding-window rolling-origin
+scheme with 24-h spacing between forecast origins and horizons $h=1,\ldots,24$.  The
+incremental comparison pairs direct multi-horizon XGBoost models using pollutant lags
+with the same learner augmented by meteorological observations available at the
+forecast origin (an observational information-set experiment rather than the use of
+future NWP forecasts).  In Madrid, meteorology yields a pronounced descriptive change
+in the skill profile, increasing the strict longest-contiguous positive
+persistence-relative skill horizon from 9 to 17~h (+8~h), while the relaxed
+last-positive-skill horizon increases from 15 to 17~h (+2~h).  Yet in 36 dimensionally
+corrected DM-HLN comparisons at $h\in\{1,6,12,24\}$, no test survives global Bonferroni
+correction under either the overlap-based specification ($q_{\text{overlap}}=0$; 0/36)
+or a fixed automatic Newey--West sensitivity allowing positive-lag dependence (0/36).
+The evidence therefore supports a clear descriptive horizon extension at some sites,
+but no site--horizon comparison survives global multiplicity control under either
+audited dependence specification; only limited within-station signals remain.}
+
+\keywords{PM10, rolling-origin evaluation, persistence-relative skill, forecast horizon, Diebold--Mariano test, multiplicity, Newey--West}
+
+\begin{document}
+
+\maketitle
+\linenumbers
+
+\section{Introduction}
+\label{sec:intro}
+% ─────────────────────────────────────────────────────────────────────────────
+
+Forecast usefulness in air quality is inherently horizon-dependent: a model that
+improves near-term accuracy may offer little advantage later, and the practical value of
+an hourly \PMten{} forecast depends on how long it remains better than a simple
+persistence reference.  Persistence is therefore more than a baseline convenience: it
+sets a demanding yardstick for whether a forecasting system adds information beyond the
+most recent observation, in a setting where concentrations are shaped by emissions and
+meteorologically driven transport and mixing \citep{Seinfeld2006, Kumar2016}.
+
+Reported improvements from meteorological covariates complicate interpretation because
+pollutant history already reflects some of the same processes.  When meteorology is
+added to a data-driven model, an observed reduction in error may represent genuinely
+incremental information, or it may reflect a re-expression of structure already present
+in the lagged \PMten{} signal, with the balance varying by site and by lead time.
+Accordingly, performance gains documented across the literature span a wide range of
+designs and outcomes \citep{Mendez2023, Pak2018, Bai2018, AnsariQuaff2025}.
+
+This motivates an interpretive gap that is often left implicit: extending the range of
+horizons over which a model outperforms persistence is descriptively meaningful, but it
+does not by itself resolve how strongly that extension can be attributed to the added
+meteorological information once sampling uncertainty and multiple comparisons are taken
+into account.
+
+We study this issue in a nine-site hourly \PMten{} experiment (Madrid Casa de Campo and
+an eight-station Irish network) evaluated over January--July 2023 with an
+expanding-window rolling-origin design.  Persistence and SARIMA provide reference
+benchmarks, and the incremental comparison pairs direct multi-horizon XGBoost models
+based on pollutant lags with the same learner augmented by meteorological observations
+available at the forecast origin.  Horizon-wise performance is summarised
+descriptively through persistence-relative RMSE skill curves and horizon descriptors
+$H^*$, while inferential attribution is assessed with DM-HLN tests \citep{Diebold1995,
+Harvey1997} at $h\in\{1,6,12,24\}$ under global multiplicity control across the 36
+planned site--horizon comparisons.
+
+Against this design, the results show that sizeable horizon extensions can arise in a
+way that looks compelling descriptively, yet provide weak family-wise global evidence
+for incremental meteorological predictability once the planned inferential family is
+accounted for.  At the same time, the family-wise conclusion is unchanged when residual
+positive-lag dependence is allowed through a fixed automatic Newey--West sensitivity,
+clarifying which aspects of the evidence are global and stable and which remain local
+and specification-sensitive.
+
+\section{Data}
+\label{sec:data}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Madrid}
+
+Hourly \PMten{} concentrations and concurrent meteorological measurements were
+obtained for Madrid Casa de Campo from the Madrid City Council open-data portal.
+The station is classified as an urban-background site on the western edge of
+the city, away from major point sources, and is representative of citywide
+background conditions.  The study period spans January 2020 through July 2023;
+records with missing \PMten{} or meteorological data were flagged and excluded
+from model training and evaluation on a per-origin basis.  Seven meteorological
+variables were retained: precipitation (\textit{rain}), temperature
+(\textit{temp}), relative humidity (\textit{rhum}), mean sea-level pressure
+(\textit{msl}), wind speed (\textit{wdsp}), wind direction (\textit{wddir}),
+and solar radiation.
+
+\subsection{Ireland}
+
+Hourly \PMten{} concentrations and meteorological covariates were obtained from
+the Irish Environmental Protection Agency (EPA) monitoring network.  Eight
+stations distributed across Ireland were selected on the basis of data
+completeness over the study window (January 2020 -- July 2023):
+Birr (Co.\ Offaly), Dublin Airport, Dundalk (Co.\ Louth), Pearse Street
+Dublin, Ringsend Dublin, Edenderry (Co.\ Offaly), Henry Street Limerick, and
+Portlaoise (Co.\ Laois).  Meteorological variables were extracted from the nearest
+mapped EPA synoptic station for each monitoring site.
+
+Table~\ref{tab:descriptive} summarises the basic \PMten{} statistics for all
+nine sites over the training and evaluation periods.  Concentrations are
+generally low to moderate, with training-period means ranging from
+11.3~\si{\micro\gram\per\cubic\metre} (Portlaoise) to
+19.1~\si{\micro\gram\per\cubic\metre} (Dublin Airport), and Madrid at
+18.4~\si{\micro\gram\per\cubic\metre}.  The 95th percentile values indicate
+that episode concentrations above 40~\si{\micro\gram\per\cubic\metre} occur
+at most stations, underscoring the relevance of medium-horizon forecasting.
+Data completeness is high: missing rates are below 2\% at all
+sites during both periods.
+
+\begin{table*}[!t]
+\centering
+\caption{Descriptive statistics of hourly \PMten{}
+  (\si{\micro\gram\per\cubic\metre}) for all nine sites.
+  Training: 2020--2022; evaluation: Jan--Jul 2023.
+  $n$: valid hourly observations; miss: missing rate (\%).}
+\label{tab:descriptive}
+\small
+\begin{adjustbox}{max width=0.98\textwidth}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+ & \multicolumn{4}{c}{Training (2020--2022)} & \multicolumn{4}{c}{Evaluation (2023)} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+Station & $n$ & Mean & SD & P95 & $n$ & Mean & SD & P95 \\
+\midrule
+Madrid              & 25\,630 & 18.4 & 20.0 & 42.0 & 4\,988 & 15.9 & 12.3 & 34.6 \\
+\midrule
+Birr                & 20\,372 & 12.8 & 12.5 & 31.4 & 5\,085 & 13.2 & 11.3 & 31.2 \\
+Dublin Airport      & 21\,958 & 19.1 & 16.1 & 46.9 & 3\,504 & 15.7 & 10.9 & 34.3 \\
+Dundalk             & 21\,938 & 11.4 &  8.6 & 24.3 & 3\,658 & 13.1 & 10.2 & 30.7 \\
+Pearse St.\ Dublin  & 17\,009 & 13.0 &  9.9 & 30.2 & 5\,088 & 15.4 & 10.1 & 33.3 \\
+Ringsend Dublin     & 21\,949 & 15.6 & 16.1 & 41.9 & 5\,087 & 14.0 & 13.1 & 36.7 \\
+Edenderry           & 11\,526 & 17.8 & 19.8 & 48.8 & 5\,029 & 15.9 & 16.0 & 38.5 \\
+Henry St.\ Limerick & 13\,128 & 13.0 & 12.1 & 30.8 & 5\,052 & 11.9 &  8.6 & 27.2 \\
+Portlaoise          & 21\,958 & 11.3 &  9.7 & 27.5 & 5\,088 & 10.9 &  7.9 & 25.1 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Methods}
+\label{sec:methods}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Backtesting protocol}
+
+We adopt a rolling-origin expanding-window backtesting scheme to preserve
+prospective temporal information flow and strict separation between training
+and evaluation data.  For each forecast origin $t$, the training window covers
+all available observations up to (but not including) $t$; no future information
+is used at any point.  The forecast origin advances in daily strides of 24~h,
+producing one $h = 1, \ldots, 24$ forecast vector per day.
+
+The evaluation period was 1 January--31 July 2023, with forecast origins spaced
+by 24~h.  The number of valid evaluated origins varied by site according to data
+availability.
+The mandatory minimum training window is 8\,760 observations (one year), so
+origins in early 2023 draw on three years of history.  This protocol prevents
+any form of look-ahead bias.  Model configurations and feature sets used in the
+evaluation were held fixed across evaluation origins; no origin-level tuning or
+cross-validation was performed.
+
+\subsection{Model specifications}
+
+\subsubsection{Persistence.}
+The persistence model predicts $\hat{y}_{t+h} = y_t$ for all $h$.  It serves
+as the denominator benchmark for the skill score.
+
+\paragraph{SARIMA.}
+We fit a SARIMA(1,0,1)(1,0,0)$_{24}$ model at each origin using the
+\textit{statsmodels} implementation of exact maximum likelihood.  To avoid
+numerical instability of the Kalman filter on very long training windows, the
+training series is truncated to the most recent 17\,520 observations
+(approximately two calendar years) at each origin.  Multi-step-ahead forecasts
+are generated by iterating the fitted state-space model forward.  SARIMA is
+treated as a univariate statistical reference; it does not receive
+meteorological inputs.
+
+\paragraph{XGBoost --- lags only.}
+A separate XGBoost regressor \citep{Chen2016} is trained for each horizon
+$h \in \{1, \ldots, 24\}$ (the \emph{direct} multi-horizon strategy).  The
+feature set consists of eight lagged \PMten{} values
+($y_{t-1}, y_{t-2}, y_{t-3}, y_{t-6}, y_{t-12}, y_{t-24}, y_{t-48},
+y_{t-168}$) and four calendar indicators (hour of day, day of week, month,
+Julian day).  Hyperparameters are fixed across all origins and horizons
+(Table~\ref{tab:xgb_params}) to ensure fair comparison; no origin-level
+cross-validation is performed.
+
+\paragraph{XGBoost --- lags + meteorology.}
+Identical to the lags-only model except that the meteorological variables
+measured at time $t$ are appended to the feature vector (seven for Madrid, nine for the Irish stations).  This is an
+\emph{observational} setup in which meteorological information is available at
+the moment of forecast issuance.  Madrid uses concurrent station observations,
+whereas the Irish covariates come from the nearest mapped EPA synoptic station.
+Because observed meteorological values are used
+rather than numerical weather prediction (NWP) forecasts, the reported skill
+scores should not be interpreted as operational performance with NWP inputs (see Section~\ref{sec:discussion}).
+
+\begin{table}[t]
+\centering
+\small
+\caption{Fixed XGBoost hyperparameters used for all models and horizons.}
+\label{tab:xgb_params}
+\begin{tabular}{ll}
+\toprule
+Parameter & Value \\
+\midrule
+Number of estimators & 300 \\
+Maximum tree depth & 4 \\
+Learning rate & 0.05 \\
+Row subsampling & 0.90 \\
+Column subsampling & 0.90 \\
+Objective & \texttt{reg:squarederror} \\
+Random seed & 42 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evaluation metrics}
+
+\subsubsection{Skill score.}
+For each model $m$ and horizon $h$, the RMSE skill score relative to
+persistence is:
+\begin{equation}
+  S_m(h) = 1 - \frac{\mathrm{RMSE}_m(h)}{\mathrm{RMSE}_{\text{pers}}(h)},
+  \label{eq:skill}
+\end{equation}
+where the RMSEs are computed over all forecast origins in the evaluation period.
+Positive $S_m(h)$ indicates that model $m$ outperforms persistence at horizon
+$h$.
+
+\paragraph{Useful forecast horizon \texorpdfstring{$H^*$}{H*}.}
+We report two descriptive persistence-relative horizon summaries based on the sign of
+$S_m(h)$ over $h\in\{1,\ldots,24\}$:
+\begin{itemize}
+  \item \textbf{$H^*_{\text{strict}}$ (primary)}: the length of the longest \emph{contiguous} run of horizons with $S_m(h)>0$.
+  \item \textbf{$H^*_{\text{relax}}$ (secondary)}: the last horizon $h$ for which $S_m(h)>0$.
+\end{itemize}
+$H^*$ is a descriptor of the skill-curve sign pattern and is not itself a hypothesis
+test.
+
+\paragraph{Diebold--Mariano test (DM-HLN), dependence specification, and multiplicity.}
+Incremental meteorological information is assessed inferentially via horizon-wise
+Diebold--Mariano tests \citep{Diebold1995} with the Harvey--Leybourne--Newbold
+finite-sample correction \citep{Harvey1997} (DM-HLN), comparing squared-error losses of
+XGBoost (lags only) versus XGBoost (lags + meteorology) at physical horizons
+$h\in\{1,6,12,24\}$.
+
+Because forecasts are issued once per day (24-h origin spacing), the loss-differential
+sequence advances in daily steps rather than in physical hours.  We therefore define
+$h_{\text{DM}}=\lceil h/24\rceil$ as the horizon expressed in loss-differential steps.
+For $h\in\{1,6,12,24\}$, $h_{\text{DM}}=1$ for all tests, so the mechanically induced
+overlap bandwidth is $q_{\text{overlap}}=\max(0,h_{\text{DM}}-1)=0$.  This
+overlap-based choice removes the \emph{mechanically required} positive-lag covariance
+from overlapping multi-step forecast errors, but it does not imply that loss
+differentials are independent or that residual dependence cannot exist.
+
+To address potential positive-lag dependence not induced mechanically by overlap, we
+also report a fixed automatic Newey--West sensitivity analysis \citep{NeweyWest1987}
+using the bandwidth rule $q_{\text{auto}}=\lfloor 4\,(n/100)^{2/9}\rfloor$.
+
+The primary inferential family comprises the 36 planned site--horizon comparisons
+(9 sites $\times$ 4 horizons), controlled with global Bonferroni correction.  As a
+within-station sensitivity analysis addressing a narrower inferential scope, we also
+apply Benjamini--Hochberg false-discovery-rate control separately within each station
+(4 horizons per station).
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Results}
+\label{sec:results}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{Madrid---substantial descriptive horizon extension}
+
+Madrid offers the clearest visual contrast between the two XGBoost information sets.
+Figure~\ref{fig:madrid_skill} shows that the lags-only model is persistence-superior only
+over a limited portion of the 24-h range, whereas the meteorology-augmented model
+maintains positive persistence-relative skill further into the day.  Summarising this
+pattern with the primary strict descriptor, the longest-contiguous positive-skill run
+increases from $H^*_{\text{strict}}=9$~h (lags only) to $H^*_{\text{strict}}=17$~h (lags +
+meteorology), a strict extension of +8~h.  The relaxed descriptor highlights a more
+modest change at the tail: $H^*_{\text{relax}}$ increases from 15 to 17~h (+2~h).  Reporting
+both values is useful because they summarise different aspects of the same skill
+profile---continuity versus the last isolated horizon with $S(h)>0$---and, in turn,
+frame how compelling the descriptive horizon gain appears before any formal attribution.
+
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{serra_fig1_madrid_skill_curves.png}
+  \caption{Madrid Casa de Campo (Jan--Jul 2023): persistence-relative RMSE skill
+    $S_m(h)=1-\mathrm{RMSE}_m(h)/\mathrm{RMSE}_{\text{pers}}(h)$ over physical horizons
+    $h=1,\ldots,24$~h.  Positive values indicate lower RMSE than persistence.
+    Blue solid: XGBoost (lags only).  Red dashed: XGBoost (lags + meteorology, using
+    meteorological observations available at the forecast origin).  Green dotted:
+    SARIMA(1,0,1)(1,0,0)$_{24}$.  Horizontal line: $S=0$.}
+  \label{fig:madrid_skill}
+\end{figure*}
+
+\subsection{Cross-site heterogeneity and limited observable headroom}
+
+The Irish network presents a different descriptive geometry.  In many panels of
+Figure~\ref{fig:ireland_skill}, persistence-relative skill remains positive for much of
+$h=1,\ldots,24$ under the lags-only specification, so a strict horizon descriptor often
+reaches the design boundary even before meteorology is added.  Consistent with this
+limited headroom, the mean strict horizon increases from 21.875 to 22.875~h (mean
+increment +1.000~h), and five of eight stations already attain
+$H^*_{\text{strict}}=24$~h with lags only.  Across both information sets, 11
+station/condition cases reach $H^*_{\text{strict}}=24$~h, so several strict horizons are
+right-censored by $H_{\max}=24$ rather than indicating a natural predictability limit.
+
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{serra_fig2_ireland_skill_by_station.png}
+  \caption{Ireland (Jan--Jul 2023): persistence-relative RMSE skill
+    $S_m(h)=1-\mathrm{RMSE}_m(h)/\mathrm{RMSE}_{\text{pers}}(h)$ over physical horizons
+    $h=1,\ldots,24$~h for eight stations (one panel per station).  Blue solid:
+    XGBoost (lags only).  Red dashed: XGBoost (lags + meteorology, using meteorological
+    observations available at the forecast origin).  Horizontal line: $S=0$.
+    Stations with $H^*_{\text{strict}}=24$ reach the 24-h evaluation boundary.}
+  \label{fig:ireland_skill}
+\end{figure*}
+
+Table~\ref{tab:ireland_hstar} provides the corresponding station-level horizon summaries.
+Taken together, the Madrid and Ireland profiles suggest that ``hours gained'' is not a
+stable descriptive object across sites, motivating a shift from visual horizon
+extensions to inferential support for incremental meteorological information.
+
+\subsection{Descriptive gains do not scale to family-wise global support}
+
+The paired loss-differential comparisons provide that inferential layer.  Under the
+primary dimensionally coherent overlap-based DM-HLN specification
+($q_{\text{overlap}}=0$), all 36 planned station--horizon tests are valid
+(Table~\ref{tab:dm_q0}).  While three comparisons yield raw $p<0.05$, none survives the
+global Bonferroni correction across the 36-test family (0/36).  At a narrower scope,
+station-wise Benjamini--Hochberg control retains three local signals (Birr at $h=1$,
+Madrid at $h=12$, and Pearse St.\ Dublin at $h=6$).  These outcomes are compatible:
+local signals can coexist with the absence of family-wise rejection, and 0/36 under the
+global correction should not be interpreted as equivalence or proof of no effect.
+
+\subsection{Global conclusion remains unchanged under fixed automatic Newey--West sensitivity}
+
+The overlap-based choice $q_{\text{overlap}}=0$ addresses dependence mechanically induced
+by forecast overlap under 24-h origin spacing, but it does not preclude residual
+positive-lag dependence in the loss differentials.  Table~\ref{tab:dm_auto_nw} therefore
+reports a fixed automatic Newey--West sensitivity.  The global picture is unchanged:
+again, no comparison survives global Bonferroni correction (0/36).  Three within-station
+Benjamini--Hochberg signals remain, but their identities are not identical.  Birr at
+$h=1$ and Pearse St.\ Dublin at $h=6$ are retained under both specifications; Madrid at
+$h=12$ appears only under the overlap-based specification, whereas Pearse St.\ Dublin at
+$h=12$ appears under the automatic Newey--West sensitivity.
+
+The evidence thus separates cleanly by scale: the family-wise global conclusion is
+stable across the two audited dependence specifications, while the limited local signals
+are more sensitive to that choice.
+
+\section{Discussion}
+\label{sec:discussion}
+% ─────────────────────────────────────────────────────────────────────────────
+
+The descriptive evidence initially points in different directions depending on the
+site.  In Madrid, adding meteorological observations reshapes the horizon-wise skill
+profile enough to extend the strict positive-skill run from 9 to 17~h, a change that is
+hard to ignore when viewed against persistence.  Yet the relaxed summary moves from 15
+to 17~h, reminding us that even within a single site the apparent magnitude of a
+``horizon extension'' depends on which descriptive question $H^*$ is asked to answer.
+
+The Irish network adds a second layer of qualification.  Many lags-only skill curves
+remain positive throughout most of the evaluated range, so the strict descriptor often
+reaches $H_{\max}=24$ before meteorology is introduced.  The mean strict horizon still
+increases, but only from 21.875 to 22.875~h (+1.000~h), and with five of eight lags-only
+cases already at the boundary (11 station/condition cases at $H^*_{\text{strict}}=24$ in
+total).  In this setting, small observed changes in $H^*$ are consistent with limited
+observable headroom rather than with a definitive absence of incremental information.
+
+Once the comparison is moved from descriptive summaries to paired loss-differential
+inference, the scale of the evidential claim becomes explicit.  Under the primary
+corrected DM-HLN specification ($q_{\text{overlap}}=0$), none of the 36 planned tests
+survives global Bonferroni correction, even though a small number of within-station
+Benjamini--Hochberg signals remain.  The absence of family-wise rejection should not be
+read as equivalence; rather, it bounds what can be supported as a multi-site,
+multi-horizon attribution of the descriptive gains to the added meteorological
+information.
+
+The dependence specification is the most immediate statistical pressure point for this
+conclusion.  Because $q_{\text{overlap}}=0$ removes only dependence mechanically induced
+by overlapping multi-step forecast errors, residual serial dependence in the
+loss-differential sequence remains a plausible concern.  The fixed automatic
+Newey--West sensitivity addresses that concern without tuning to outcomes.  It leaves
+the family-wise global result unchanged (again 0/36 after global Bonferroni), while the
+identity of the limited local signals shifts across specifications, tempering any
+strong claim of local stability.
+
+The evaluation geometry also carries a methodological lesson: when forecast origins are
+spaced differently from physical horizons, DM-HLN/HAC parameters must be expressed in
+loss-differential sequence steps rather than transferred mechanically from hours.
+
+Within these bounds, the study supports a restrained interpretation.  Meteorological
+covariates are origin-time observations rather than future NWP forecasts; the 24-h
+horizon limit censors $H^*$ for several stations; and the evidence is specific to the
+nine sites, the January--July 2023 evaluation window, and the evaluated XGBoost design.
+The automatic Newey--West analysis is a fixed sensitivity rather than an exhaustive
+dependence model, and descriptive improvements do not provide causal attribution.
+Taken together, the results argue for keeping descriptive horizon extension, local
+inferential signals, and family-wise global evidence as distinct levels of support
+when interpreting incremental information in environmental forecasting.
+
+\section{Conclusions}
+\label{sec:conclusions}
+% ─────────────────────────────────────────────────────────────────────────────
+
+The evidence in this nine-site \PMten{} study is easiest to read when descriptive
+horizon summaries and inferential attribution are kept separate.  Descriptively, the
+Madrid skill profile changes markedly when meteorological observations are added,
+extending the strict longest-contiguous positive-skill horizon from 9 to 17~h (with a
+smaller relaxed change from 15 to 17~h), while the Irish network exhibits heterogeneous
+and frequently boundary-limited behaviour within $H_{\max}=24$.
+
+When the same lags-only versus lags+meteorology comparison is assessed through the 36
+planned, dimensionally corrected DM-HLN tests, no comparison survives global Bonferroni
+correction under either the overlap-based specification ($q_{\text{overlap}}=0$) or the
+fixed automatic Newey--West sensitivity.  The global conclusion is therefore stable to
+this bounded dependence treatment, even though the identities of the limited local BH
+signals are not.
+
+For multi-horizon environmental forecasting studies, the implication is bounded: a
+compelling extension of persistence-relative skill can be descriptively substantial,
+yet still fall short of supporting a family-wise global attribution to incremental
+meteorological predictability under the planned inferential family.
+
+% ---------------------------------------------------------------------
+% Full tables retained in the manuscript (no separate supplementary file)
+% ---------------------------------------------------------------------
+\FloatBarrier
+
+\begin{table*}[!t]
+\centering
+\caption{Ireland station-level $H^*$ (hours) by model and criterion.
+  $H^*_{\text{strict}}$ is the primary longest-contiguous positive-skill horizon;
+  $H^*_{\text{relax}}$ is the secondary last-positive-skill horizon.  Entries of 24 for
+  $H^*_{\text{strict}}$ indicate reaching the 24-h evaluation boundary ($H_{\max}=24$).}
+\label{tab:ireland_hstar}
+\small
+\begin{adjustbox}{max width=0.96\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Station &
+\multicolumn{2}{c}{XGBoost (lags only)} &
+\multicolumn{2}{c}{XGBoost (lags + met.)} &
+\multicolumn{2}{c}{SARIMA} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+& Strict & Relax & Strict & Relax & Strict & Relax \\
+\midrule
+Birr (Co.\ Offaly)      & 24 & 24 & 24 & 24 & 16 & 24 \\
+Dublin Airport          & 22 & 24 & 23 & 24 & 24 & 24 \\
+Dundalk (Co.\ Louth)    & 24 & 24 & 24 & 24 & 18 & 24 \\
+Pearse St.\ Dublin      & 24 & 24 & 24 & 24 & 17 & 23 \\
+Ringsend Dublin         & 24 & 24 & 24 & 24 &  9 & 20 \\
+Edenderry (Co.\ Offaly) & 16 & 24 & 16 & 24 &  9 & 21 \\
+Henry St.\ Limerick     & 17 & 24 & 24 & 24 &  4 & 17 \\
+Portlaoise (Co.\ Laois) & 24 & 24 & 24 & 24 & 17 & 17 \\
+\midrule
+Mean                    & 21.875 & 24.0 & 22.875 & 24.0 & 14.3 & 21.3 \\
+Mean $\Delta H^*_{\text{strict}}$ & \multicolumn{4}{c}{$+1.000$~h} & \multicolumn{2}{c}{---} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+\input{serra_table_t2_dm_q0.tex}
+\input{serra_table_t3_dm_auto_nw.tex}
+
+\FloatBarrier
+
+% Bibliography
+% ─────────────────────────────────────────────────────────────────────────────
+\bibliography{serra_references}
+
+
+\FloatBarrier
+
+\section*{Statements and Declarations}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection*{Funding}
+No funds, grants, or other support were received for conducting this study or
+preparing this manuscript.
+
+\subsection*{Competing interests}
+The author has no relevant financial or non-financial interests to disclose.
+
+\subsection*{Author contributions}
+The author conceived the study, designed the methodology, performed the analyses, developed the software, interpreted the results, and wrote and approved the manuscript.
+
+\subsection*{Data availability}
+The public GitHub repository \url{https://github.com/fedeg-umh-es/P1_PM10_Meteorology_Hstar}
+contains the versioned analysis code, the processed and regenerated study
+artifacts archived there, figure-generation support, and run metadata for the
+underlying meteorology experiment.  The final overlap-based and automatic
+Newey--West inferential tables reported in this manuscript are not yet mirrored
+in that repository; repository alignment is therefore required before submission.
+The Irish station evaluations were regenerated from recovered source datasets
+using the versioned analysis pipeline. The row-level predictions from the
+originally executed Irish computational run were not retained; therefore, the
+reported Irish results correspond to the documented regeneration rather than
+recovery of the original prediction files. Raw source data are available from
+the Madrid City Council and the Irish Environmental Protection Agency under
+their respective open-data terms.
+
+\subsection*{Ethics approval and consent to participate}
+Not applicable. The study used environmental monitoring data and involved no
+human participants or animals.
+
+\subsection*{Consent for publication}
+Not applicable.
+
+\subsection*{Acknowledgements}
+The author thanks the Madrid City Council and the Irish Environmental Protection
+Agency for providing open-access air-quality and meteorological data.
+
+
+
+\FloatBarrier
+
+% ─────────────────────────────────────────────────────────────────────────────
+
+\end{document}
