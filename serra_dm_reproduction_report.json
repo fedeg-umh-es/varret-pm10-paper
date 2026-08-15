@@ -1,0 +1,54 @@
+{
+  "reproduction_path": "EXISTING_ROW_LEVEL_EVIDENCE",
+  "support": {
+    "ledger_rows": 7672,
+    "cells": 36,
+    "support_identical_q0_auto_nw": true,
+    "all_cells_valid": true
+  },
+  "q0": {
+    "valid": 36,
+    "raw_lt_005": 3,
+    "bonferroni_reject": 0,
+    "bh_station_reject": 3,
+    "bh_identities": [
+      {
+        "site": "Madrid Casa de Campo",
+        "horizon": 12
+      },
+      {
+        "site": "Birr (Co. Offaly)",
+        "horizon": 1
+      },
+      {
+        "site": "Pearse St. Dublin",
+        "horizon": 6
+      }
+    ],
+    "exact_match_frozen": true
+  },
+  "auto_nw": {
+    "valid": 36,
+    "raw_lt_005": 5,
+    "bonferroni_reject": 0,
+    "bh_station_reject": 3,
+    "bh_identities": [
+      {
+        "site": "Birr (Co. Offaly)",
+        "horizon": 1
+      },
+      {
+        "site": "Pearse St. Dublin",
+        "horizon": 6
+      },
+      {
+        "site": "Pearse St. Dublin",
+        "horizon": 12
+      }
+    ],
+    "exact_match_frozen": true
+  },
+  "obsolete_q_h_minus_1_used": false,
+  "hard_gate": "PASS",
+  "source_loss_ledger_sha256": "3e58bc5fedf11a2c56274470529c44421b071346771af16fb8b5de490e07a10b"
+}

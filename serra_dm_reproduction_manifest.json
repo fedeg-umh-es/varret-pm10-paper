@@ -1,0 +1,53 @@
+{
+  "reproduction_mode": "EXISTING_ROW_LEVEL_EVIDENCE",
+  "generated_at_utc": "2026-08-15T18:00:05.576278+00:00",
+  "source_forecast_artifacts": [
+    {
+      "path": "/Users/fede/repos/P2_Operational_Meteorology/results/e2_met_madrid_pm10/predictions/predictions_all_models.csv",
+      "sha256": "e4a7edd656385df4f160176f0952a410848dc456cd5842981f191124189ea85c",
+      "scope": "Madrid Casa de Campo, all models and horizons"
+    },
+    {
+      "path": "/Users/fede/repos/P2_Operational_Meteorology/results/e2_met_ireland_pm10_regenerated/predictions/predictions_all_models.csv",
+      "sha256": "e8b262e0812da8c1243afcded5d621dcbed51d6dae56dc07a3fe9069c9484d8e",
+      "scope": "Eight Irish stations, all models and horizons"
+    }
+  ],
+  "pairing_keys": [
+    "source_station",
+    "origin",
+    "forecast_timestamp/target_date",
+    "horizon",
+    "condition/model"
+  ],
+  "pairing_validation": "one-to-one lags_only/lags_meteo merge; identical y_true retained; no positional matching",
+  "loss_definition": "squared error; d_t = L_lags - L_lags+meteo; positive values favour lags+meteorology",
+  "dm_hln_formula": {
+    "h_dm": "ceil(h/24)=1",
+    "hln_factor": "sqrt((n+1-2*h_dm+h_dm*(h_dm-1)/n)/n)",
+    "p_value": "two-sided Student t with n-1 df"
+  },
+  "dependence_rules": {
+    "q_overlap": "0",
+    "q_auto": "floor(4*(n/100)^(2/9))",
+    "auto_kernel": "Bartlett/Newey-West"
+  },
+  "multiplicity": {
+    "global_bonferroni": "36 tests",
+    "station_bh": "4 horizons within each station"
+  },
+  "software": {
+    "python": "3.x",
+    "pandas": "2.3.3",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.4"
+  },
+  "output_sha256": {
+    "serra_dm_paired_loss_ledger.csv": "3e58bc5fedf11a2c56274470529c44421b071346771af16fb8b5de490e07a10b",
+    "serra_dm_q0_cell_level.csv": "16c1b69b1d93525b0bf64d6ee2975a1459a50762538f883b0d2c018f4579003d",
+    "serra_dm_auto_nw_cell_level.csv": "58de17f83ba33918a1e100019ff5a8177270089bfa2f2a1a70d066d59aa01863",
+    "serra_fig3_dm_inferential_landscape.png": "1ee798448f4f240f58b8c4d06551d63d98ba56a0daaf0f9e0a1c49fec9793187",
+    "serra_table_s1_dm_full.tex": "67dcf69bc470fb3d81063996fb10b087d49e9c2ca5e500b0e378672cec5c163a"
+  }
+}

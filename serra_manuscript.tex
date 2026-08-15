@@ -444,6 +444,23 @@ The global conclusion is therefore stable across the two audited dependence
 specifications, while the small set of local signals is more sensitive to
 that choice.
 
+The complete cell-level inferential landscape is shown in
+Figure~\ref{fig:dm_landscape}; the corresponding numerical ledger is provided
+in Supplementary Table~\ref{tab:s1_dm_full}.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{serra_fig3_dm_inferential_landscape.png}
+  \caption{Cell-level DM--HLN inferential landscape for the 36 planned
+  site--horizon comparisons. Positive statistics favour the lags + meteorology
+  information set, whereas negative statistics favour lags only. Both panels
+  use the same symmetric colour scale. Open circles mark raw $p<0.05$ and
+  stars mark station-wise Benjamini--Hochberg retention. No cell survives
+  global Bonferroni correction (0/36); non-marked cells should not be
+  interpreted as evidence of equivalence.}
+  \label{fig:dm_landscape}
+\end{figure*}
+
 \section{Discussion}
 \label{sec:discussion}
 % ─────────────────────────────────────────────────────────────────────────────
@@ -569,6 +586,11 @@ Mean $\Delta H^*_{\text{strict}}$ & \multicolumn{4}{c}{$+1.000$~h} & \multicolum
 
 \input{serra_table_t2_dm_q0.tex}
 \input{serra_table_t3_dm_auto_nw.tex}
+\begingroup
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\input{serra_table_s1_dm_full.tex}
+\endgroup
 
 \FloatBarrier
 
