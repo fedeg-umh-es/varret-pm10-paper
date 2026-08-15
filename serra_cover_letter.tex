@@ -27,9 +27,7 @@
 \noindent
 Dear Editor-in-Chief,
 
-\bigskip
-
-I am pleased to submit the manuscript
+I am pleased to submit my manuscript
 
 \begin{quote}
 \textbf{``When descriptive forecast-horizon gains do not imply global evidence
@@ -41,8 +39,6 @@ for consideration for publication in
 
 The manuscript is original, has not been published previously, and is not
 currently under consideration by another journal.
-
-\bigskip
 
 A recurring difficulty in environmental forecasting is that a result that
 looks convincing descriptively may support a much narrower conclusion once
@@ -57,8 +53,8 @@ how much evidence supports attributing that extension to the additional
 meteorological information?
 
 We study Madrid Casa de Campo and eight monitoring stations in Ireland using
-an expanding-window rolling-origin evaluation over January--July 2023.
-Forecasts are issued once per day for horizons from 1 to 24 hours. Persistence
+an expanding-window rolling-origin evaluation over January--July 2023, with
+forecast origins spaced by 24 hours and horizons from 1 to 24 hours. Persistence
 and SARIMA provide temporal reference models, while the controlled
 information-set comparison uses the same direct XGBoost learner first with
 lagged PM$_{10}$ and then with the addition of meteorological observations
@@ -74,9 +70,10 @@ longest contiguous run of positive skill relative to persistence---the horizon
 increases from 9 to 17 hours when meteorological observations are added, an
 8-hour extension. The corresponding relaxed last-positive-skill horizon,
 however, increases from 15 to 17 hours, a 2-hour change. The contrast becomes
-still less straightforward across Ireland. Five of the eight stations already
-reach the 24-hour evaluation boundary with the lags-only model, leaving little
-observable room for the strict horizon to extend further. These results make
+still less straightforward across Ireland: the mean strict horizon changes
+from 21.875 to 22.875 hours (+1.000 hour), and five of the eight stations
+already reach the 24-hour evaluation boundary with the lags-only model, leaving
+little observable room for the strict horizon to extend further. These results make
 the descriptive story interesting, but they also make clear why the number of
 additional ``useful'' hours cannot by itself answer the attribution question.
 
@@ -92,7 +89,9 @@ loss differential may still be present. A fixed automatic Newey--West
 sensitivity analysis allows for such positive-lag dependence. The family-wise
 result remains the same---again, no comparison survives global Bonferroni
 correction---although the identities of the limited local signals are not
-identical across the two specifications.
+identical across the two specifications. The complete cell-level results are
+supplied as Online Resource 1, alongside the main-text DM-HLN inferential
+landscape (Figure 3).
 
 For us, this distinction between the descriptive and inferential results is
 the main value of the study. The Madrid skill extension remains a genuine
@@ -136,11 +135,9 @@ Thank you for considering this manuscript for publication in
 grateful for the opportunity to have the work considered by the journal's
 editors and reviewers.
 
-\bigskip
-
 Yours sincerely,
 
-\bigskip\bigskip
+\vspace{6pt}
 
 \noindent
 Federico García Crespí\\

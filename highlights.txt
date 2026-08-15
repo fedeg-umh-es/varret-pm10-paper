@@ -1,4 +1,4 @@
-Error eligibility and dynamic fidelity answer different verification questions
-Fidelity criteria changed eligibility for 269 of 277 Rule-A cells
-The audit covers 17 stations, five model families, and seven horizons
-Threshold sensitivity supports the qualitative eligibility consequence
+Descriptive PM10 horizon gains need not imply incremental predictability
+Madrid strict skill horizon extends from 9 to 17 h (+8 h)
+Ireland is heterogeneous and often right-censored at the 24-h boundary
+Global 0/36 inference is stable under automatic Newey--West sensitivity
