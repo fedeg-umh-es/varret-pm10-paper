@@ -30,6 +30,10 @@
 \usepackage{lineno}
 \usepackage{hyperref}
 
+% The local sn-jnl class exposes \orcid{<URL>} but its optional logo asset
+% is not included in this repository; retain the class hyperlink metadata.
+\renewcommand{\orcidlogo}{}
+
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
@@ -60,7 +64,7 @@
 of incremental meteorological predictability: a multi-site \PMten{} study}
 
 % Author details for submission.
-\author*[1]{\fnm{Federico} \sur{García Crespí}}\email{fedeg@umh.es}
+\author*[1]{\fnm{Federico} \sur{García Crespí}\orcid{https://orcid.org/0000-0002-7129-7791}}\email{fedeg@umh.es}
 \affil*[1]{\orgdiv{Departamento de Ingeniería de Computadores},
   \orgname{Universidad Miguel Hernández de Elche},
   \orgaddress{\city{Elche}, \country{Spain}}}
