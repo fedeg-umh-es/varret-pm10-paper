@@ -14,7 +14,7 @@ point-forecast error, while persistence-relative skill asks whether a
 candidate improves on a simple operational comparator. Predictive-accuracy
 tests can assess whether the loss difference is statistically
 distinguishable from that comparator \cite{hyndman2006,diebold1995,harvey1997}.
-These tools are necessary for an eligibility decision, but they do not
+These tools are necessary for a stated screening decision, but they do not
 answer every verification question.
 
 A forecast can reduce squared error by attenuating fluctuations. Its error
@@ -28,10 +28,13 @@ used here in that established complementary sense, not proposed as new
 metrics.
 
 The practical problem begins when several diagnostics are converted into a
-single eligibility decision. It is not enough to report that fidelity and
-error are different. The consequential question is whether the set of
-forecasts judged acceptable changes when dynamic fidelity becomes an
-explicit requirement alongside error-based skill.
+single screening decision. It is not enough to report that fidelity and error
+are different. The question examined here is whether the set of
+station--model--horizon cells passing a stated error screen changes when
+dynamic fidelity is added as an explicit requirement alongside error-based
+skill. In this paper, ``model eligibility'' refers only to that
+post-evaluation heuristic cell screen; it is not a model ranking, a top-1
+selection rule, an operational acceptance criterion, or a deployment rule.
 
 Existing environmental forecasting studies commonly evaluate predictive
 error and, less consistently, dynamic-fidelity dimensions
@@ -44,9 +47,10 @@ a claim about the entire literature.
 We address that question with a post-evaluation analysis of a benchmark
 of daily PM$_{10}$ forecasts from 17 Spanish monitoring stations, five model
 families, and seven horizons assessed with five expanding rolling-origin
-folds. We first identify cells eligible under persistence-relative error
+folds. We first identify cells passing the persistence-relative error
 skill, then add explicit variance-retention and P75-recall requirements,
 and finally test whether the decision consequence persists across the
 prespecified threshold neighbourhood. The contribution is the quantified
-decision consequence and its bounded evaluation-design implication, not a new
-metric or a universal eligibility framework.
+change in this cell-level screening set and its bounded evaluation-design
+implication, not a new metric, a model-selection method, or a universal
+eligibility framework.

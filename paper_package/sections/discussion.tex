@@ -8,13 +8,14 @@ improved on persistence and forecasts that also reproduced the selected
 dynamic properties of the observed PM$_{10}$ series. Rule A admitted 277
 cells, but adding the stated alpha and P75-recall requirements left 8; the
 101 formal discordant cells show why the change is not merely a difference
-between family-level averages. Error skill and dynamic fidelity can
-therefore lead an evaluation toward different eligibility decisions.
+between family-level averages. Error skill and dynamic fidelity can therefore
+lead to different cell-level screening outcomes under the stated rules.
 
-The thresholds are operational criteria for this analysis, and the 595
-cells share stations and underlying series. The 97.1\% figure therefore
-describes the proportion of Rule-A cells that changed in this benchmark; it
-is not a population rate.
+The thresholds are study-specific heuristic screening conventions, and the
+595 cells share stations and underlying series. The 97.1\% figure therefore
+describes the proportion of cells passing Rule A that changed under Rule B in
+this benchmark; it is not a population rate or an operational acceptance
+rate.
 
 RMSE remains an appropriate and necessary measure of point-forecast error.
 The analysis does not reject it. Rather, it separates the question of error
@@ -22,8 +23,8 @@ magnitude from the question of whether a forecast retains the variance and
 exceedance behaviour that may matter for a particular use. A forecast can
 reduce many squared errors while attenuating its trajectory, while another
 can retain spread but mistime or mis-size events. Treating those properties
-as complementary requirements makes the reason for a cell's eligibility
-decision more explicit.
+as complementary diagnostics makes the reason for a cell's screening status
+more explicit.
 
 The model-family profiles reinforce this interpretation without identifying
 a causal architectural mechanism. HGB, Ridge, and SARIMA contribute many
@@ -33,7 +34,7 @@ STL+Ridge avoids low alpha at the point-estimate level but has poor
 persistence-relative skill and contributes no Rule-A cells. Different
 evaluation dimensions consequently reward different forecast properties,
 and a family that looks favourable on one dimension need not be favourable
-on the joint eligibility question.
+under the joint cell-screening rule.
 
 \subsection{Interpretation, transferability and limits}
 
@@ -45,11 +46,11 @@ forecast verification are all established practices
 Air-quality forecasting reviews likewise show why error summaries remain a
 central part of environmental model assessment
 \cite{mendez2023,tang2024,chadalavada2025}. The narrower contribution here
-is to quantify the decision consequence of placing explicit dynamic-fidelity
-conditions after conventional error-based eligibility across a structured
-multi-station, multi-family, multi-horizon benchmark.
+is to quantify the cell-level screening consequence of placing explicit
+dynamic-fidelity conditions after a conventional error screen across a
+structured multi-station, multi-family, multi-horizon benchmark.
 
-Because the 97.1\% result depends on operational cut-offs, a
+Because the 97.1\% result depends on study-specific cut-offs, a
 moderate change in those cut-offs could in principle remove the apparent
 decision consequence. It does not disappear across the evaluated 3 x 3
 neighbourhood: 91.3--98.2\% of Rule-A cells change status. This supports a
@@ -57,15 +58,14 @@ robust qualitative conclusion within the tested neighbourhood, not the
 optimality of alpha 0.50 or P75 recall 0.20 and not universal robustness of
 Rule B.
 
-The transferable insight is methodological rather than empirical:
-environmental model-evaluation conclusions may change when
+The bounded methodological implication from this PM$_{10}$ case is that
+evaluation conclusions in analogous forecasting studies may change when
 baseline-relative error performance and preservation of decision-relevant
-dynamics are treated as distinct requirements. That principle may be
-useful when forecasts inform episode detection, threshold decisions, or
-amplitude-sensitive planning, but this benchmark does not measure the
-value of any specific intervention. The 97.1\% change, the 277-to-8
-transition, and the family-specific collapse rates remain properties of
-this PM$_{10}$ case.
+dynamics are treated as distinct diagnostic requirements. This benchmark does
+not establish a universal rule, measure the value of any specific
+intervention, or demonstrate operational deployment utility. The 97.1\%
+change, the 277-to-8 transition, and the family-specific collapse rates remain
+properties of this PM$_{10}$ case.
 
 The analysis concerns daily
 PM$_{10}$ from 17 Spanish monitoring stations, five model families, seven
