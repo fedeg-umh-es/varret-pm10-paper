@@ -1,0 +1,53 @@
+{
+  "project": "P3",
+  "task": "AURORA_GOVERNANCE_CLOSURE",
+  "audit_date": "2026-08-16",
+  "mode": "RECOVER-OR-AMEND",
+  "status": "PARK",
+  "active_repository": "P4_Ghost_Skill_Dynamic_Fidelity",
+  "active_branch": "codex/p4-documentary-closeout",
+  "active_head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "read_only_scientific_scope": true,
+  "forecasting_run": false,
+  "metrics_recomputed": false,
+  "large_datasets_downloaded": false,
+  "manuscript_modified": false,
+  "overleaf_modified": false,
+  "historical_recovery": {
+    "e1": "NOT_FOUND",
+    "phase_a_d": "PARTIAL",
+    "station_independence": "NOT_VERIFIED",
+    "cams_cycle_stability": "NOT_VERIFIED",
+    "aurora_next": "DEFERRED_UNVERIFIED_IN_REPOSITORY",
+    "p0_p1_p2_to_phase_a_d_mapping": "NOT_VERIFIED",
+    "missing_governance_recovery": "PARTIAL"
+  },
+  "new_governance_amendment": {
+    "required": true,
+    "created": true,
+    "id": "P3_AURORA_GOVERNANCE_AMENDMENT_01",
+    "is_historical_reconstruction": false,
+    "new_scientific_hypothesis": false,
+    "activation_gates": ["G0_PRODUCT_IDENTITY", "G1_DATA_ACCESS_AND_PROVENANCE", "G2_STATION_ELIGIBILITY", "G3_TEMPORAL_CYCLE_VALIDITY", "G4_MINIMUM_SCIENTIFIC_COMPARISON"]
+  },
+  "canonical_state": {
+    "product": "Aurora Air Pollution",
+    "version": "NOT_FROZEN",
+    "current_p3_relation": "COMPLEMENTARY",
+    "aurora_novelty_verified": "NO",
+    "aurora_experiment_authorized": "NO",
+    "aurora_status": "GOVERNANCE_READY_BUT_NOVELTY_UNVERIFIED"
+  },
+  "outputs": [
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_CLOSURE.md",
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_AMENDMENT_01.md",
+    "p4_v2/manifests/p3_aurora_governance_closure_manifest.json",
+    "p4_v2/manifests/p3_aurora_governance_amendment_01_manifest.json"
+  ],
+  "output_sha256": {
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_CLOSURE.md": "6086a59a3918977ccd565d2fe0502c7c736237e4604e7d95aa4e2568fc951751",
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_AMENDMENT_01.md": "e078028486e037b2d05c2c996abcd34ab84990e82b21a0bd957311990bb533bf"
+  },
+  "next_minimum_action": "Review and approve Amendment 01; do not execute Aurora until G0-G3 are evidenced and the dedicated novelty kill test is at least MODERATE.",
+  "manuscript_update_authorized": false
+}

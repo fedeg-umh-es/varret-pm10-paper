@@ -1,0 +1,140 @@
+{
+  "project": "P3",
+  "task": "AURORA_MISSING_GOVERNANCE_RECOVERY",
+  "audit_date": "2026-08-16",
+  "active_repository": "P4_Ghost_Skill_Dynamic_Fidelity",
+  "active_branch": "codex/p4-documentary-closeout",
+  "active_head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "read_only": true,
+  "scientific_execution": false,
+  "forecasting_run": false,
+  "metrics_recomputed": false,
+  "manuscript_modified": false,
+  "overleaf_modified": false,
+  "access_failures": [],
+  "repositories": [
+    {
+      "name": "aurora-pm-station-corrector",
+      "url": "https://github.com/fedeg-umh-es/aurora-pm-station-corrector.git",
+      "refs_inspected": {
+        "main": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+        "experiments/incremental-skill-v1": "350ec76078f5e476ac04a46040ba233e225ff6d8",
+        "claude/aurora-pm-station-corrector-2hg6vo": "cadc95a2f94e57758edeccc66925a70b98cb90c3"
+      },
+      "role": "primary Aurora governance and infrastructure source"
+    },
+    {
+      "name": "e2-met-validation",
+      "url": "https://github.com/fedeg-umh-es/e2-met-validation.git",
+      "head": "f83a0c19c636c08a470dccefef4dcc94bd4557b0",
+      "role": "targeted auxiliary search; no Aurora governance recovered"
+    },
+    {
+      "name": "pm10-research-audits",
+      "url": "https://github.com/fedeg-umh-es/pm10-research-audits.git",
+      "head": "64a77138c11d3c3d6ff22a068d74015347ad0438",
+      "role": "targeted cross-project governance and access source"
+    }
+  ],
+  "source_artifacts": [
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "docs/registered_protocol.md",
+      "sha256": "9bd613aa4e79b1a21ae9378d4949c132a9e07650069c6a8c6812a4ece8177083",
+      "role": "Phase A registration, A-D gates, scientific and provenance contract"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "configs/experiment_registered.yaml",
+      "sha256": "64e0a50d3bfebd02cf3bbad5556d4e635e37d294821af9dad0d72706161783f1",
+      "role": "registered question, models, conditions and phase gates"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "configs/station_eligibility.yaml",
+      "sha256": "35cc9ad147c5928070220b6ecf96c3eda2052f8eb8c7b3075ba68a2c91ddcc79",
+      "role": "P1 station eligibility specification"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "configs/hindcast_single_cycle.yaml",
+      "sha256": "a72803b14575e1c4d5271c7b8e772c9f60213c12c6aad64b24809d348759ab76",
+      "role": "P2 single-cycle specification"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "docs/data_contract.md",
+      "sha256": "c04698e00085b924b07e9399c087c16784cb163a38ebdfbed68d57d25b944279",
+      "role": "cycle, availability, spatial and provenance contract"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "docs/claim_boundaries.md",
+      "sha256": "f9f83b5a883f05e606c075717094108797f885a5bbf4a95fc7360dddad9daff7",
+      "role": "claim, dependency and no-results boundaries"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "results/local_validation/validation-manifest.txt",
+      "sha256": "fc491a8f560d54c0bd9d3bce7d8d648b7b42f0fbed76d76ce7438cf6712cf784",
+      "role": "P0 local validation evidence"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "results/local_validation/pytest-phase-p0.txt",
+      "sha256": "d5d5d9d7698205067a352f930c2be6c5b47a524b48eafb508e2fe23fa1ac7dc4",
+      "role": "55 passing local tests; infrastructure only"
+    },
+    {
+      "repository": "aurora-pm-station-corrector",
+      "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+      "path": "configs/aurora15_meteo.yaml",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "empty product-conflation stub; excluded from evidence"
+    },
+    {
+      "repository": "pm10-research-audits",
+      "commit": "64a77138c11d3c3d6ff22a068d74015347ad0438",
+      "path": "audits/2026-07-25/REMOTE_UNLOCK_MASTER_REPORT.md",
+      "sha256": "ab69ea985c3ce036b90ce9b8cb79f49a3b45c20aa610408944e795a002a83b0a",
+      "role": "targeted P1/P2/P3 cross-project governance context"
+    },
+    {
+      "repository": "pm10-research-audits",
+      "commit": "64a77138c11d3c3d6ff22a068d74015347ad0438",
+      "path": "audits/2026-07-25/P2_REMOTE_UNLOCK_AUDIT.md",
+      "sha256": "3ed6786fd735b7aba055f1e1bec75b2644164bf63b43da57bceb8941e942013d",
+      "role": "targeted operational-meteorology governance context"
+    }
+  ],
+  "canonical_state": {
+    "aurora_product": "Aurora Air Pollution",
+    "aurora_version": "NOT_FROZEN",
+    "aurora_p0": "PARTIAL",
+    "aurora_p1": "PARTIAL",
+    "aurora_p2": "PARTIAL",
+    "e1_status": "NOT_FOUND",
+    "station_independence_required": "NOT_VERIFIED",
+    "cams_cycle_stability_required": "NOT_VERIFIED",
+    "aurora_next_status": "DEFERRED_UNVERIFIED_IN_REPOSITORY",
+    "phase_a_d_governance": "PARTIAL",
+    "current_p3_relation": "COMPLEMENTARY",
+    "new_aurora_gate": "PARTIALLY_REDUNDANT",
+    "previous_aurora_state_recovered": "PARTIAL",
+    "aurora_experiment_authorized": "NO"
+  },
+  "outputs": [
+    "p4_v2/docs/P3_AURORA_MISSING_GOVERNANCE_RECOVERY.md",
+    "p4_v2/manifests/p3_aurora_missing_governance_recovery_manifest.json"
+  ],
+  "next_minimum_action": "Recover or explicitly approve the missing E1 and Phase A-D decision artifacts before any Aurora gate or experiment.",
+  "manuscript_update_authorized": false
+}

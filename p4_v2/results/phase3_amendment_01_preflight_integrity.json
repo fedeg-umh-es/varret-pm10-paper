@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "source_path": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+  "source_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+  "reconciliation_manifest_sha256": "310735c862eef8a22fe102ca6a73ff5539270d9d0f0f11060cf0882cfe0bf93c",
+  "original_preregistration_sha256": "eb83863ce375e4a07f03b344779a854d90de01d0bde67c9d55de122f403c9146",
+  "original_preregistration_manifest_sha256": "b893fbef27af84014f9a29b1b660790ca8329633568a4c25127e0ce359c69291",
+  "amendment_document_sha256": "a954fc31db352509296f1d45143f2f962cd2b435e0f3ba17d4ad61750e37d0bd",
+  "amendment_manifest_sha256": "28a366d1b03478cf8f36910b0b355f7e24ba6081b734b0db9378e5a9ffd630f5",
+  "row_count": 3412754,
+  "schema": {
+    "station_id": "object",
+    "condition": "object",
+    "model": "object",
+    "fold": "int32",
+    "refit_block": "int32",
+    "origin": "datetime64[ns]",
+    "target_time": "datetime64[ns]",
+    "horizon": "int16",
+    "y_true": "float64",
+    "y_pred": "float64",
+    "y_persistence": "float64",
+    "event_threshold_p75": "float64",
+    "run_id": "object",
+    "protocol_hash": "object",
+    "source_panel_hash": "object"
+  },
+  "schema_fingerprint": "14fbb3c7e28d8043f88b03bc3a3d479be439b16b1751e0bc1f240c34b81043ae",
+  "station_count": 323,
+  "model_count": 2,
+  "models": [
+    "sarima",
+    "xgboost_direct"
+  ],
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "cell_count": 4522,
+  "historical_declared_cell_count": 4536,
+  "corrected_station_count": 323,
+  "corrected_cell_count": 4522,
+  "excluded_station": "50297039_10_49",
+  "exclusion_reason": "ZERO_PRIMARY_COMMON_SUPPORT",
+  "support_key_count": 1706377,
+  "duplicate_prediction_keys": 0,
+  "duplicate_support_keys": 0,
+  "condition_values": [
+    "lags_only"
+  ],
+  "protocol_hashes": [
+    "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516"
+  ],
+  "source_panel_hashes": [
+    "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27"
+  ],
+  "canonical_P3_PROJECT_CANON": "NOT_FOUND; current P3 preregistration manifest used as controlling governance artifact",
+  "common_support_pairing": "PASS",
+  "y_true_identity_across_models": "PASS",
+  "persistence_identity_across_models": "PASS",
+  "threshold_provenance": "PASS",
+  "leakage_relevant_schema_consistency": "PASS"
+}

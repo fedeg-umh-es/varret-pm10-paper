@@ -1,0 +1,52 @@
+{
+  "PROJECT": "P3",
+  "CONDITION": "lags_only",
+  "amendment_id": "P3_SCIENTIFIC_GATE_PREREGISTRATION_AMENDMENT_01",
+  "amendment_type": "pre-analysis integrity correction",
+  "original_preregistration": {
+    "path": "p4_v2/docs/P3_SCIENTIFIC_GATE_PREREGISTRATION.md",
+    "sha256": "eb83863ce375e4a07f03b344779a854d90de01d0bde67c9d55de122f403c9146",
+    "preserved_unchanged": true
+  },
+  "amendment_document": {
+    "path": "p4_v2/docs/P3_SCIENTIFIC_GATE_PREREGISTRATION_AMENDMENT_01.md",
+    "sha256": "a954fc31db352509296f1d45143f2f962cd2b435e0f3ba17d4ad61750e37d0bd"
+  },
+  "PREVIOUS_STATIONS_EXPECTED": 324,
+  "CORRECTED_STATIONS_EXPECTED": 323,
+  "PREVIOUS_CELLS_EXPECTED": 4536,
+  "CORRECTED_CELLS_EXPECTED": 4522,
+  "EXCLUDED_STATION": "50297039_10_49",
+  "EXCLUSION_REASON": "ZERO_PRIMARY_COMMON_SUPPORT",
+  "SCIENTIFIC_RESULTS_INSPECTED_BEFORE_AMENDMENT": false,
+  "source_rows": 3412754,
+  "station_reconciliation": {
+    "frozen_panel_stations": 324,
+    "primary_parquet_stations": 323,
+    "primary_common_support_stations": 323,
+    "executed_only_sensitivity_presence_excluded_station": true,
+    "excluded_station_keys_intersection": 0,
+    "excluded_station_expected_cells": 14,
+    "excluded_station_reconstructable_cells": 0
+  },
+  "cell_reconciliation": {
+    "formula": "323 x 2 models x 7 horizons",
+    "expected_remaining_cells": 4522,
+    "reconciled_remaining_cells": 4522,
+    "duplicate_cells": 0,
+    "unreconciled_cells": 0,
+    "all_remaining_combinations_exact": true
+  },
+  "evidence_hashes": {
+    "station_panel_frozen_csv": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27",
+    "station_panel_manifest": "f05d78c062fbdf4f7a8d30b57815893ecb19d411f8d5b7a52eee6d6bbd1a3924",
+    "primary_predictions": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+    "executed_only_sensitivity_predictions": "634441fe799d4eee0c93f4f2b109d3ac8fceab629b79d84a7021c01836d1a4cf",
+    "support_reconciliation_by_station": "d53d0b28cf81f2b0ae2a1ae56b7cc7ec75a556f0c16e2f3caaa9652e9baabf72",
+    "support_reconciliation_manifest": "310735c862eef8a22fe102ca6a73ff5539270d9d0f0f11060cf0882cfe0bf93c"
+  },
+  "scientific_results_computed": false,
+  "phase3_scientific_execution_authorized": true,
+  "manuscript_update_authorized": false,
+  "status": "PREFLIGHT_FAMILY_CORRECTED_BEFORE_SCIENTIFIC_ANALYSIS"
+}

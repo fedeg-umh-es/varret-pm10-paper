@@ -1,0 +1,131 @@
+{
+  "project": "P3",
+  "line": "F — Forecasting & Operational Predictability",
+  "task": "P3-F1_SINGLE_ORIGIN_GFS_OPERATIONAL_PROVENANCE_PILOT",
+  "status": "FAIL",
+  "scope": {
+    "pollutant": "PM10 only",
+    "region": "Madrid",
+    "condition": "lags_meteo_operational",
+    "forecasting_executed": false,
+    "scientific_execution_performed": false,
+    "metrics_computed": false,
+    "manuscript_update_authorized": false,
+    "aurora_used": false,
+    "reanalysis_used": false
+  },
+  "canonicality": {
+    "p3_project_canon_path": "NOT_FOUND at audited repository paths",
+    "protocol_source": "p4_v2/docs/P3_MULTISTATION_PROTOCOL_FREEZE.md",
+    "panel_source": "p4_v2/data/processed/station_panel_frozen.csv",
+    "primary_origin_source": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+    "primary_predictions_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+    "panel_sha256": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27"
+  },
+  "selected_origin": {
+    "station": "28079024_10_47",
+    "station_code": "28079024",
+    "station_name": "Casa de Campo",
+    "origin": "2020-12-31T00:00:00Z",
+    "timezone": "UTC",
+    "target_horizons_days": [1, 2, 3, 4, 5, 6, 7],
+    "target_times": [
+      "2021-01-01T00:00:00Z",
+      "2021-01-02T00:00:00Z",
+      "2021-01-03T00:00:00Z",
+      "2021-01-04T00:00:00Z",
+      "2021-01-05T00:00:00Z",
+      "2021-01-06T00:00:00Z",
+      "2021-01-07T00:00:00Z"
+    ],
+    "primary_rows_verified": 14,
+    "selection_rule": "earliest Madrid origin in canonical primary support"
+  },
+  "station_mapping": {
+    "source_url": "https://datos.madrid.es/dataset/212629-0-estaciones-control-aire/resource/212629-0-estaciones-control-aire-csv/download/212629-0-estaciones-control-aire-csv.csv",
+    "source_sha256": "2c84ca974088a6d5de13509489196ddefeee83fcae4999798b00603aa951cd1b",
+    "latitude": 40.419358,
+    "longitude": -3.747345,
+    "mapping_rule": "nearest grid cell, fixed before PM performance inspection",
+    "grid_cell": null,
+    "distance_km": null,
+    "status": "PARTIAL"
+  },
+  "candidate_cycles": [
+    {
+      "init_time": "2020-12-30T00:00:00Z",
+      "cycle": "00Z",
+      "archive_day": "202012/20201230",
+      "product_identifier": "NCEI model-gfs-004-files candidate",
+      "catalog_entry_observed": "GFS Grid 3 fct:000/fct:003/fct:006",
+      "required_leads_for_targets": [48, 72, 96, 120, 144, 168, 192],
+      "availability_status": "UNKNOWN",
+      "required_files_status": "NOT_FOUND"
+    },
+    {
+      "init_time": "2020-12-30T06:00:00Z",
+      "cycle": "06Z",
+      "archive_day": "202012/20201230",
+      "product_identifier": "NCEI model-gfs-004-files candidate",
+      "catalog_entry_observed": "GFS Grid 3 fct:000/fct:003/fct:006",
+      "required_leads_for_targets": [42, 66, 90, 114, 138, 162, 186],
+      "availability_status": "UNKNOWN",
+      "required_files_status": "NOT_FOUND"
+    },
+    {
+      "init_time": "2020-12-30T12:00:00Z",
+      "cycle": "12Z",
+      "archive_day": "202012/20201230",
+      "product_identifier": "NCEI model-gfs-004-files candidate",
+      "catalog_entry_observed": "GFS Grid 3 fct:000/fct:003/fct:006",
+      "required_leads_for_targets": [36, 60, 84, 108, 132, 156, 180],
+      "availability_status": "UNKNOWN",
+      "required_files_status": "NOT_FOUND"
+    },
+    {
+      "init_time": "2020-12-30T18:00:00Z",
+      "cycle": "18Z",
+      "archive_day": "202012/20201230",
+      "product_identifier": "NCEI model-gfs-004-files candidate",
+      "catalog_entry_observed": "GFS Grid 3 fct:000/fct:003/fct:006",
+      "required_leads_for_targets": [30, 54, 78, 102, 126, 150, 174],
+      "availability_status": "UNKNOWN",
+      "required_files_status": "NOT_FOUND",
+      "selection": "latest pre-origin candidate"
+    }
+  ],
+  "lead_derivation": {
+    "formula": "forecast_lead_hours = target_time - init_time",
+    "selected_cycle": "2020-12-30T18:00:00Z",
+    "required_leads_hours": [30, 54, 78, 102, 126, 150, 174],
+    "valid_time_rule": "GFS_valid_time == PM_target_time",
+    "required_file_http_statuses": {
+      "f030": 404,
+      "f054": 404,
+      "f078": 404,
+      "f102": 404,
+      "f126": 404,
+      "f150": 404,
+      "f174": 404
+    }
+  },
+  "gate": {
+    "RAW_FILE_TRACEABILITY": "FAIL",
+    "SOURCE_PROVENANCE": "FAIL",
+    "INIT_CYCLE_PROVENANCE": "PASS",
+    "AVAILABILITY_PROVENANCE": "FAIL",
+    "LATENCY_PROVENANCE": "FAIL",
+    "VALID_LEAD_PROVENANCE": "FAIL",
+    "TEMPORAL_ALIGNMENT": "FAIL",
+    "SPATIAL_ALIGNMENT": "PARTIAL",
+    "LEAKAGE_AUDIT": "NOT_ASSESSABLE",
+    "SINGLE_ORIGIN_OPERATIONAL_PROVENANCE": "FAIL"
+  },
+  "artifacts": {
+    "provenance_table": "p4_v2/results/p3f1_single_origin_gfs_provenance.csv",
+    "provenance_table_sha256": "acaf9e67390d1cf2d8cdc07a07c023d3d5c9f458003163caa1077ccf2a6baede",
+    "provenance_document": "p4_v2/docs/P3_F1_SINGLE_ORIGIN_GFS_PROVENANCE_PILOT.md",
+    "provenance_document_sha256": "0695f8fcd966389ddb28fd355ee29fac9e43a704f089aec16f9546e3fdc9c0a6"
+  },
+  "next_action": "Obtain one traceable archived-as-issued GFS Grid 004 0.5-degree required-lead file, starting with f030 for the selected 2020-12-30 18Z cycle, with a verifiable pre-origin availability timestamp or conservative bound"
+}

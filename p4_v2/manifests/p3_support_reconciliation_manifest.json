@@ -1,0 +1,135 @@
+{
+  "DOCUMENTED_ONLY_KEYS": 3561,
+  "MODEL_ROWS_PER_PRIMARY_KEY": 2,
+  "PRIMARY_PREDICTION_ROWS": 3412754,
+  "PRIMARY_SUPPORT_KEYS": 1706377,
+  "PRIMARY_SUPPORT_PAIRING_GATE": "PASS",
+  "SENSITIVITY_SUPPORT_KEYS": 185036,
+  "UNEXPLAINED_SUPPORT_KEYS": 0,
+  "artifacts": {
+    "original_predictions": {
+      "path": "p4_v2/results/predictions_row_level_lags_only.parquet",
+      "sha256": "c9391485b212c48225065a7366655dd493f04eee88508cce39c48f9bc9192fc1"
+    },
+    "original_protocol_manifest": {
+      "path": "p4_v2/manifests/p3_multistation_protocol_manifest.json",
+      "sha256": "8c457ddf94891f410d317bcfd4361842723777e0f214e68ccae45a1d21beb328"
+    },
+    "primary_predictions": {
+      "path": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+      "sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296"
+    },
+    "reconciliation_freeze_document": {
+      "path": "p4_v2/docs/P3_SUPPORT_RECONCILIATION_FREEZE.md",
+      "sha256": "1328cc94b630f84e68a2ce0be934c5ecb74511565427ec5841fbb5c7733233f0"
+    },
+    "sensitivity_predictions": {
+      "path": "p4_v2/results/predictions_row_level_lags_only_sensitivity.parquet",
+      "sha256": "77bced487eee802b21f8b42ab554db294529a6a58fb831c463558011eb018e10"
+    },
+    "station_panel_manifest": {
+      "path": "p4_v2/manifests/station_panel_manifest.json",
+      "sha256": "f05d78c062fbdf4f7a8d30b57815893ecb19d411f8d5b7a52eee6d6bbd1a3924"
+    },
+    "support_documented_only_by_station_v1": {
+      "path": "p4_v2/results/support_documented_only_by_station_v1.csv",
+      "sha256": "b85c7631ee4c8f70f82a78f24e2d935055654f1c1e898aede0bb84767f50b9d6"
+    },
+    "support_documented_only_missing": {
+      "path": "p4_v2/results/support_documented_only_missing.csv",
+      "sha256": "c66aa44bd4420055f7f01ede784f557e74826903d605f693a456853ceabc8b77"
+    },
+    "support_executed_only_by_horizon_v1": {
+      "path": "p4_v2/results/support_executed_only_by_horizon_v1.csv",
+      "sha256": "d527f90648d2084de33f7f81e2695f4bf1e27b678dbf64ab691a8eaf2e91d55c"
+    },
+    "support_executed_only_by_origin_year_v1": {
+      "path": "p4_v2/results/support_executed_only_by_origin_year_v1.csv",
+      "sha256": "69470b926a0c6720f07d3fdcaafb6c275c9e51dcf56fde8c4d153be99635a55c"
+    },
+    "support_executed_only_by_station_v1": {
+      "path": "p4_v2/results/support_executed_only_by_station_v1.csv",
+      "sha256": "3500055178696a5420b64b0b7f34717cbbd18d7cc0fe5db30219e9981d285276"
+    },
+    "support_executed_only_sensitivity": {
+      "path": "p4_v2/results/support_executed_only_sensitivity.parquet",
+      "sha256": "634441fe799d4eee0c93f4f2b109d3ac8fceab629b79d84a7021c01836d1a4cf"
+    },
+    "support_primary_intersection": {
+      "path": "p4_v2/results/support_primary_intersection.parquet",
+      "sha256": "8610ae949e517a6a3ff9152c1faf82390490896a88623cb54252d9c35728d7de"
+    },
+    "support_reconciliation_by_station": {
+      "path": "p4_v2/results/support_reconciliation_by_station.csv",
+      "sha256": "d53d0b28cf81f2b0ae2a1ae56b7cc7ec75a556f0c16e2f3caaa9652e9baabf72"
+    }
+  },
+  "condition": "lags_only",
+  "created_at_utc": "2026-08-16T15:33:39Z",
+  "documented_only_keys": 3561,
+  "integrity": {
+    "prediction_values_modified": false,
+    "primary_duplicate_model_rows": 0,
+    "primary_duplicate_support_keys": 0,
+    "primary_shared_metadata_mismatch_keys": 0,
+    "primary_support_pairing_gate": "PASS",
+    "protocol_modified": false,
+    "scientific_metrics_calculated": false,
+    "source_data_modified": false,
+    "station_panel_modified": false
+  },
+  "key_fields": [
+    "station_id",
+    "condition",
+    "fold",
+    "origin",
+    "target_time",
+    "horizon"
+  ],
+  "manifest_type": "P3 support reconciliation freeze",
+  "model_not_in_support_key": true,
+  "model_rows_per_primary_key": 2,
+  "phase_boundary": {
+    "case_a_b_c_d_defined_here": false,
+    "case_b_existence_gate_defined_here": false,
+    "scientific_metrics_authorized_for_later_phase": true,
+    "train_only_mean_baseline_constructed_here": false
+  },
+  "primary_prediction_rows": 3412754,
+  "primary_support_keys": 1706377,
+  "primary_support_label": "conservative_intersection",
+  "project": "P3",
+  "reason_counts_B_only": {
+    "first_post_empty_block": 3632,
+    "historical_nan_block_numbering_divergence": 3561,
+    "later_post_empty_block": 177843
+  },
+  "sensitivity_support_keys": 185036,
+  "source_hashes_before": {
+    "p3_multistation_protocol_manifest.json": "8c457ddf94891f410d317bcfd4361842723777e0f214e68ccae45a1d21beb328",
+    "pm10_daily_canonical.parquet": "1d4fbf031ecece900803303944d0d15e64e5bbe22260823ea57e3f6bcb2f8a34",
+    "predictions_row_level_lags_only.parquet": "c9391485b212c48225065a7366655dd493f04eee88508cce39c48f9bc9192fc1",
+    "station_panel_frozen.csv": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27",
+    "station_panel_manifest.json": "f05d78c062fbdf4f7a8d30b57815893ecb19d411f8d5b7a52eee6d6bbd1a3924"
+  },
+  "station_profile": {
+    "A_zero_stations": [
+      "50297039_10_49"
+    ],
+    "max_finite_inflation_pct": 3164.6341463414633,
+    "max_finite_inflation_station": "46250046_10_46",
+    "stations_affected_by_B_only": 67,
+    "stations_unaffected": 257,
+    "top10_share_pct": 26.8428846278562
+  },
+  "support_partitions": {
+    "A_historically_documented_theoretical": 1709938,
+    "A_intersection_B_conservative_intersection": 1706377,
+    "A_only_documented_only_nonexecuted": 3561,
+    "B_executed_textual_rule": 1891413,
+    "B_only_executed_only_sensitivity": 185036,
+    "unexplained_support_keys": 0
+  },
+  "technical_namespace": "p4_v2",
+  "unexplained_support_keys": 0
+}

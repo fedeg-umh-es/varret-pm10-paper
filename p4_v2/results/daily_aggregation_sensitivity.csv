@@ -1,0 +1,6 @@
+daily_completeness_threshold,minimum_valid_hours,station_days_remaining,stations_remaining,station_days_with_value
+0.75,18,503850,415,503850
+0.8,20,499545,415,499545
+0.9,22,487968,415,487968
+0.95,23,473799,415,473799
+1.0,24,453842,415,453842

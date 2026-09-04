@@ -1,0 +1,72 @@
+{
+  "generated_at_utc": "2026-08-16T08:19:35Z",
+  "input_years": [
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "pm10_code_observed": "10",
+  "station_count_union": 415,
+  "station_count_definition": "distinct original PUNTO_MUESTREO PM10 sampling-point IDs",
+  "station_code_count_union": 411,
+  "candidate_station_count_under_proposed_contract": 308,
+  "valid_hourly_rows_written": 12121940,
+  "daily_rows_written": 515783,
+  "source_schemas_identical": true,
+  "quality_flag_field_in_source": false,
+  "imputation_performed": false,
+  "forecasting_performed": false,
+  "forecast_metrics_computed": false,
+  "source_stats_by_year": {
+    "2020": {
+      "rows": 123865,
+      "hour_cells": 2972760,
+      "blank_hour_cells": 63095,
+      "valid_hour_cells": 2909665,
+      "bad_width_rows": 0,
+      "bad_date_rows": 0,
+      "bad_numeric_cells": 0,
+      "station_ids": 355
+    },
+    "2021": {
+      "rows": 128792,
+      "hour_cells": 3091008,
+      "blank_hour_cells": 62563,
+      "valid_hour_cells": 3028445,
+      "bad_width_rows": 0,
+      "bad_date_rows": 0,
+      "bad_numeric_cells": 0,
+      "station_ids": 375
+    },
+    "2022": {
+      "rows": 130335,
+      "hour_cells": 3128040,
+      "blank_hour_cells": 65082,
+      "valid_hour_cells": 3062958,
+      "bad_width_rows": 0,
+      "bad_date_rows": 0,
+      "bad_numeric_cells": 0,
+      "station_ids": 371
+    },
+    "2023": {
+      "rows": 132791,
+      "hour_cells": 3186984,
+      "blank_hour_cells": 66112,
+      "valid_hour_cells": 3120872,
+      "bad_width_rows": 0,
+      "bad_date_rows": 0,
+      "bad_numeric_cells": 0,
+      "station_ids": 379
+    }
+  },
+  "daily_thresholds_audited": [
+    0.75,
+    0.8,
+    0.9,
+    0.95,
+    1.0
+  ],
+  "data_gate": "WARNING",
+  "data_gate_reason": "MITECO supports reproducible hourly/daily extraction, but the proposed station contract and missingness/time-origin decisions require explicit review before forecasting."
+}

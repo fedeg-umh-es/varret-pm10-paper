@@ -1,0 +1,31 @@
+{
+  "manifest_type": "P4-v2 frozen station panel manifest",
+  "created_at_utc": "2026-08-16T08:28:43Z",
+  "producer_script": "p4_v2/phase0b_freeze.py",
+  "git_head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "station_id_field": "PUNTO_MUESTREO",
+  "pollutant": "PM10",
+  "daily_rule": "arithmetic mean of valid hourly PM10 observations belonging to the MITECO UTC source calendar day; usable iff n_valid_hours >= 18; no imputation",
+  "thresholds": {
+    "min_valid_hours_per_day": 18,
+    "min_usable_years": 3,
+    "min_usable_days_per_year": 300,
+    "min_total_coverage": 0.75,
+    "coverage_denominator": "inclusive UTC calendar days from first to last source-supported date per station"
+  },
+  "station_count_total_pm10_series": 415,
+  "station_count_frozen": 324,
+  "excluded_station_count": 91,
+  "identity_audit": {
+    "unique_punto_muestreo": 415,
+    "unique_provincia_municipio_estacion": 411,
+    "point_to_multiple_station_codes": 0,
+    "station_code_to_multiple_points": 4,
+    "unstable_point_ids": 0
+  },
+  "raw_data_manifest_sha256": "0e1d30ac728e04b01688c4d1b8485d1562345342e8c66bb6a0151f5713a2e555",
+  "canonical_daily_parquet_sha256": "1d4fbf031ecece900803303944d0d15e64e5bbe22260823ea57e3f6bcb2f8a34",
+  "frozen_panel_sha256": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27",
+  "exclusion_ledger_sha256": "3c4c1823cb8666cad3b74f460612a799ad2dfc7f1d2fccf25fbc9c0e788dda02",
+  "inclusion_contract_sha256": "813e09009131e48d7ae4a2304597c2485211583a07f19c6b66fc2f15c5ab01f0"
+}

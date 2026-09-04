@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "run_id": "p3_lags_only_20260816T090216Z",
+  "protocol_hash": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+  "station_ids": [
+    "01022001_10_47",
+    "01036004_10_47",
+    "01051001_10_49"
+  ],
+  "rows": 39278,
+  "schema_ok": true,
+  "timestamps_ok": true,
+  "persistence_alignment_ok": true,
+  "condition_ok": true,
+  "protocol_hash_ok": true,
+  "duplicate_keys": 0,
+  "checkpoint_files": [
+    "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P4_Ghost_Skill_Dynamic_Fidelity/p4_v2/results/smoke_test/prediction_shards/station_01022001_10_47.parquet",
+    "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P4_Ghost_Skill_Dynamic_Fidelity/p4_v2/results/smoke_test/prediction_shards/station_01036004_10_47.parquet",
+    "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P4_Ghost_Skill_Dynamic_Fidelity/p4_v2/results/smoke_test/prediction_shards/station_01051001_10_49.parquet"
+  ],
+  "failures": [],
+  "scientific_metrics_calculated": false,
+  "created_at_utc": "2026-08-16T09:05:07Z"
+}

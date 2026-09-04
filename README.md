@@ -1,3 +1,6 @@
+> [!WARNING]
+> **REPOSITORIO ARCHIVADO / LEGACY:** Este repositorio ha sido consolidado en [`../varret-pm10-paper`](file:///Users/fede/Library/Mobile%20Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/varret-pm10-paper). Ver [`README_ARCHIVED.md`](README_ARCHIVED.md) para más detalles.
+
 # P4 — Variance Retention as a Diagnostic Complement to Persistence-Relative Skill in Multi-Horizon PM10 Forecasting
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20185328.svg)](https://doi.org/10.5281/zenodo.20185328)
 

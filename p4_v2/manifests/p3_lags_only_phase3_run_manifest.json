@@ -1,0 +1,39 @@
+{
+  "PROJECT": "P3",
+  "CONDITION": "lags_only",
+  "status": "BLOCKED_PRE_EXECUTION_CELL_COUNT_MISMATCH",
+  "git_commit": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "source_parquet": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+  "source_parquet_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+  "source_rows": 3412754,
+  "preregistration_document": "p4_v2/docs/P3_SCIENTIFIC_GATE_PREREGISTRATION.md",
+  "preregistration_sha256": "eb83863ce375e4a07f03b344779a854d90de01d0bde67c9d55de122f403c9146",
+  "preregistration_manifest": "p4_v2/manifests/p3_scientific_gate_preregistration_manifest.json",
+  "preregistration_manifest_sha256": "b893fbef27af84014f9a29b1b660790ca8329633568a4c25127e0ce359c69291",
+  "reconciliation_manifest": "p4_v2/manifests/p3_support_reconciliation_manifest.json",
+  "reconciliation_manifest_sha256": "310735c862eef8a22fe102ca6a73ff5539270d9d0f0f11060cf0882cfe0bf93c",
+  "cells_expected": 4536,
+  "cells_analyzed": 0,
+  "station_count_source": 323,
+  "station_count_panel": 324,
+  "missing_stations": [
+    "50297039_10_49"
+  ],
+  "exclusions": [],
+  "failures": [
+    "Primary common-support parquet contains 323 stations, while frozen cell family expects 324 stations and 4536 station-model-horizon cells."
+  ],
+  "scientific_metrics_executed": false,
+  "manuscript_modified": false,
+  "overleaf_modified": false,
+  "new_experiments_run": false,
+  "predictions_regenerated": false,
+  "timestamp_utc": "2026-08-16T16:45:35.602180+00:00",
+  "software": {
+    "python": "3.9.6",
+    "pandas": "2.3.3",
+    "numpy": "2.0.2",
+    "platform": "macOS-26.6.1-arm64-arm-64bit",
+    "machine": "arm64"
+  }
+}

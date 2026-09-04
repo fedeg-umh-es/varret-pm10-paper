@@ -1,0 +1,73 @@
+{
+  "project": "P3",
+  "task": "AURORA_PRIOR_ART_COLLISION_NOVELTY_KILL_TEST",
+  "audit_date": "2026-08-16",
+  "mode": "SCIENTIFIC_GAP_AUDIT",
+  "read_only_scientific_scope": true,
+  "aurora_experiment_authorized": false,
+  "forecasting_run": false,
+  "metrics_calculated": false,
+  "overleaf_modified": false,
+  "primary_question": "Do the gridded advantages of atmospheric foundation models survive when PM10 and PM2.5 forecasts are evaluated at European monitoring stations against persistence, local models, amplitude and event diagnostics?",
+  "sources": [
+    {
+      "study_id": "A",
+      "citation": "Li, Chen and Yao (2026), Evaluation of the Aurora foundation model for multi-pollutant air quality forecasting over China",
+      "url": "https://www.frontiersin.org/journals/environmental-science/articles/10.3389/fenvs.2026.1882322/full",
+      "evidence_level": "FULL_TEXT_VERIFIED",
+      "sha256": null
+    },
+    {
+      "study_id": "B",
+      "citation": "Li, Chen, Huang and Xu (2026), Global and regional performance of the Aurora foundation model for surface PM2.5 prediction",
+      "url": "https://hg.iap.ac.cn/paper/211.html",
+      "evidence_level": "BIBLIOGRAPHIC_RECORD_AND_TASK_DETAILS; FULL_TEXT_NOT_RETRIEVED",
+      "sha256": null
+    },
+    {
+      "study_id": "C",
+      "citation": "Castillo-Miranda et al. (2025), Air quality in the Metropolitan Zone of the Valley of Puebla: Comparative evaluation of CAMS and persistence forecasts",
+      "url": "https://www.revistascca.unam.mx/atm/index.php/atm/article/view/53408",
+      "full_text_url": "https://www.scielo.org.mx/pdf/atm/v39/0187-6236-atm-39-53408.pdf",
+      "evidence_level": "ABSTRACT_AND_PDF_SEARCH_RESULT_VERIFIED",
+      "sha256": null
+    },
+    {
+      "study_id": "D",
+      "citation": "Bodnar et al. (2025), A foundation model for the Earth system",
+      "url": "https://www.nature.com/articles/s41586-025-09005-y",
+      "evidence_level": "FULL_TEXT_PAGE_VERIFIED",
+      "sha256": null
+    }
+  ],
+  "results": {
+    "aurora_old_primary_gap": "DEAD",
+    "a1_grid_to_station": "DEAD",
+    "a2_peak_hotspot_smoothing": "DEAD",
+    "a3_independent_station_evaluation": "DEAD",
+    "a4_european_station_evaluation": "DEAD",
+    "a5_operational_system_comparison": "DEAD",
+    "a6_persistence_comparison": "WEAK",
+    "a7_local_model_comparison": "MODERATE",
+    "a8_error_event_rank_reversal": "MODERATE",
+    "a9_same_support_decision_change": "WEAK",
+    "local_model_comparison_gap": "OPEN",
+    "same_support_gap": "PARTIAL",
+    "europe_adds_scientific_friction": "NO",
+    "negative_result_informative": "YES",
+    "desk_screen_class": "WEAK",
+    "gap_strength": "WEAK",
+    "portfolio_decision": "PARK"
+  },
+  "outputs": [
+    "p4_v2/docs/P3_AURORA_NOVELTY_COLLISION_GATE.md",
+    "p4_v2/results/p3_aurora_prior_art_collision_table.csv",
+    "p4_v2/manifests/p3_aurora_novelty_collision_manifest.json"
+  ],
+  "output_sha256": {
+    "p4_v2/docs/P3_AURORA_NOVELTY_COLLISION_GATE.md": "3bf7ede67c42d788d70f38f30c2dfcdd3ab663b89256309250ea722d2324e380",
+    "p4_v2/results/p3_aurora_prior_art_collision_table.csv": "899a2a2c60ff3e026abd42d278eab9352ad968e5012aaa77e9f0ab067ebcc4fe"
+  },
+  "next_minimum_action": "Keep Aurora parked; any future revival must define a narrower local-model preference question and pass dedicated full prior-art verification.",
+  "manuscript_update_authorized": false
+}

@@ -1,0 +1,124 @@
+{
+  "project": "P3",
+  "task": "GFS_GRID004_ORIGIN_LEVEL_PROVENANCE_PILOT",
+  "status": "FAIL",
+  "scope_guard": {
+    "pollutant": "PM10 only",
+    "region": "Madrid",
+    "aurora_used": false,
+    "legacy_elche_used": false,
+    "forecasting_executed": false,
+    "pm_performance_metrics_computed": false,
+    "overleaf_modified": false
+  },
+  "git": {
+    "head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+    "branch": "codex/p4-documentary-closeout"
+  },
+  "p3_inputs": {
+    "panel_path": "p4_v2/data/processed/station_panel_frozen.csv",
+    "panel_sha256": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27",
+    "primary_predictions_path": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+    "primary_predictions_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+    "station_id": "28079008_10_47",
+    "station_code": "28079008",
+    "canonical_origin_utc": "2021-03-30T00:00:00Z",
+    "origin_rows_verified": 14,
+    "horizons_verified": [1, 2, 3, 4, 5, 6, 7]
+  },
+  "station_mapping_source": {
+    "url": "https://datos.madrid.es/dataset/212629-0-estaciones-control-aire/resource/212629-0-estaciones-control-aire-csv/download/212629-0-estaciones-control-aire-csv.csv",
+    "sha256": "2c84ca974088a6d5de13509489196ddefeee83fcae4999798b00603aa951cd1b",
+    "record": {
+      "CODIGO": "28079008",
+      "LATITUD": 40.421553,
+      "LONGITUD": -3.682316,
+      "PM10": "X"
+    },
+    "mapping_rule": "nearest grid point, specified before any PM performance analysis",
+    "mapping_status": "deterministic_for_observed_grid_only"
+  },
+  "gfs_candidate": {
+    "requested_product": "NCEP GFS Grid 004 (0.5 degree)",
+    "archive_catalog": "https://www.ncei.noaa.gov/thredds/catalog/model-gfs-004-files/catalog.html",
+    "cycle_utc": "2021-03-29T18:00:00Z",
+    "historical_run_type": "ARCHIVED_AS_ISSUED",
+    "retained_artifact": "p4_v2/data/raw/gfs_grid004_origin_pilot/gfs_3_20210329_1800_006.grb2",
+    "retained_artifact_url": "https://www.ncei.noaa.gov/thredds/fileServer/model-gfs-004-files/202103/20210329/gfs_3_20210329_1800_006.grb2",
+    "retained_artifact_size_bytes": 45639657,
+    "retained_artifact_sha256": "6853feda5caee01e1486f4983236f2375d5d720d3362ea0f3117858e0b9f06fb",
+    "catalog_title": "GFS Grid 3 2021-03-29 18:00 UTC fct:006.grb2",
+    "grib_metadata": {
+      "project": "Global Forecast System 003",
+      "centre": "kwbc",
+      "data_date": 20210329,
+      "data_time": 1800,
+      "forecast_time_hours": 6,
+      "valid_time": "2021-03-30T00:00:00Z",
+      "grid_type": "regular_ll",
+      "Ni": 360,
+      "Nj": 181,
+      "latitude_first_degree": 90.0,
+      "longitude_first_degree": 0.0,
+      "i_increment_degree": 1.0,
+      "j_increment_degree": 1.0,
+      "messages": 743,
+      "distinct_short_names": 102
+    },
+    "identity_reconciliation": "FAIL: parent catalogue is model-gfs-004, but the archived artifact identifies itself as GFS 003 on a 1-degree grid"
+  },
+  "lead_inventory": {
+    "required_leads_hours": [30, 54, 78, 102, 126, 150, 174],
+    "required_targets_utc": [
+      "2021-03-31T00:00:00Z",
+      "2021-04-01T00:00:00Z",
+      "2021-04-02T00:00:00Z",
+      "2021-04-03T00:00:00Z",
+      "2021-04-04T00:00:00Z",
+      "2021-04-05T00:00:00Z",
+      "2021-04-06T00:00:00Z"
+    ],
+    "observed_archive_files": ["fct:000", "fct:003", "fct:006"],
+    "required_lead_http_statuses": {
+      "030": 404,
+      "054": 404,
+      "078": 404,
+      "102": 404,
+      "126": 404,
+      "150": 404,
+      "174": 404
+    },
+    "assignment_table": "p4_v2/results/p3_gfs_grid004_origin_assignment.csv",
+    "assignment_table_sha256": "1d9858f12aee56d647bdca6d7bb0119fee3b8cf8d515023a75e6309eec4438e8",
+    "temporal_alignment": "FAIL"
+  },
+  "availability": {
+    "contract": "availability_time <= canonical P3 origin time",
+    "origin_time": "2021-03-30T00:00:00Z",
+    "conservative_bound": "cycle + 3 hours 05 minutes, from prior P3 source-selection audit",
+    "bound_result": "2021-03-29T21:05:00Z <= origin",
+    "exact_dissemination_timestamp_in_grib": false,
+    "availability_provenance": "PARTIAL",
+    "latency_provenance": "PARTIAL"
+  },
+  "gate": {
+    "source_provenance": "FAIL",
+    "init_cycle_provenance": "PASS",
+    "valid_lead_provenance": "FAIL",
+    "availability_provenance": "PARTIAL",
+    "madrid_feasibility": "PASS",
+    "ireland_feasibility": "FAIL_OUT_OF_SCOPE_NO_ACTIVE_P3_IRELAND_PANEL",
+    "spatial_alignment": "PARTIAL",
+    "three_condition_contrast": "NOT_FEASIBLE",
+    "availability_as_scientific_factor": "NO",
+    "operational_meteorology_provenance": "FAIL",
+    "p3_status": "PARK"
+  },
+  "generated_artifacts": {
+    "pilot_document": "p4_v2/docs/P3_GFS_GRID004_ORIGIN_LEVEL_PROVENANCE_PILOT.md",
+    "pilot_document_sha256": "5f357097e6b5481729582d18eaca893b92055d7699d4896051dff1d9f11ea20e",
+    "assignment_table": "p4_v2/results/p3_gfs_grid004_origin_assignment.csv",
+    "retained_grib": "p4_v2/data/raw/gfs_grid004_origin_pilot/gfs_3_20210329_1800_006.grb2"
+  },
+  "next_minimum_action": "Locate a verifiable archived-as-issued 0.5-degree GFS Grid 004 run with f030-f174 coverage for an active Madrid P3 origin, without changing the P3 panel or origin convention"
+}

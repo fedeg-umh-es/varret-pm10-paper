@@ -1,0 +1,74 @@
+{
+  "PROJECT": "P3",
+  "CONDITION": "lags_only",
+  "SOURCE_ROWS": 3412754,
+  "CELLS_EXPECTED": 4536,
+  "CELLS_ANALYZED": 0,
+  "ERROR_SKILL_ANALYSIS": "FAIL",
+  "BOOTSTRAP_INFERENCE": "FAIL",
+  "BH_CORRECTION": "FAIL",
+  "DYNAMIC_FIDELITY_ANALYSIS": "FAIL",
+  "EVENT_ANALYSIS": "FAIL",
+  "XGBOOST_SARIMA_COMPARISON": "FAIL",
+  "RANK_DISCORDANCE_ANALYSIS": "FAIL",
+  "GHOST_SKILL_CANDIDATE_GENERATION": "FAIL",
+  "GHOST_SKILL_ADJUDICATION": "FAIL",
+  "SKILL_POSITIVE_CELLS": null,
+  "FIDELITY_DEGRADED_CELLS": null,
+  "RANK_REVERSAL_CASES": null,
+  "GHOST_SKILL_CANDIDATES": null,
+  "GHOST_SKILL_CONFIRMED": null,
+  "GHOST_SKILL_NOT_ADJUDICABLE": null,
+  "GHOST_SKILL_EXISTENCE_GATE": "FAIL",
+  "GLOBAL_SCIENTIFIC_ANALYSIS": "FAIL",
+  "MANUSCRIPT_UPDATE_AUTHORIZED": "NO",
+  "analysis_started": false,
+  "failure": {
+    "status": "FAIL",
+    "failure_type": "PRE_EXECUTION_CELL_COUNT_MISMATCH",
+    "failure_reason": "Primary common-support parquet contains 323 stations, while frozen cell family expects 324 stations and 4536 station-model-horizon cells.",
+    "canonical_source": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+    "primary_support": {
+      "source_rows": 3412754,
+      "source_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+      "expected_source_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+      "source_hash_match": true,
+      "panel_station_count": 324,
+      "source_station_count": 323,
+      "missing_panel_stations": [
+        "50297039_10_49"
+      ],
+      "extra_source_stations": [],
+      "cells_expected": 4536,
+      "cells_observed": 4522,
+      "cells_implied_by_observed_stations": 4522,
+      "models": [
+        "sarima",
+        "xgboost_direct"
+      ],
+      "horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "missing_station_support_evidence": "support_reconciliation_by_station.csv records keys_intersection=0 and keys_A=0 for 50297039_10_49; it is present only in executed-only sensitivity support.",
+    "analysis_started": false,
+    "scientific_metrics_computed": false,
+    "bootstrap_executed": false,
+    "bh_executed": false,
+    "dynamic_fidelity_executed": false,
+    "event_analysis_executed": false,
+    "rank_discordance_executed": false,
+    "ghost_skill_executed": false,
+    "timestamp_utc": "2026-08-16T16:45:35.562639+00:00"
+  },
+  "generated_source_tables": [],
+  "generated_manifests": [
+    "p4_v2/results/phase3_preflight_integrity.json"
+  ]
+}

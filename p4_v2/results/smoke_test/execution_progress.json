@@ -1,0 +1,61 @@
+{
+  "run_id": "p3_lags_only_20260816T090216Z",
+  "protocol_hash": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+  "stations": {
+    "01022001_10_47": {
+      "status": "complete",
+      "station_id": "01022001_10_47",
+      "expected_keys": 6948,
+      "completed_keys": 13896,
+      "model_status": {
+        "xgboost_direct": "complete",
+        "sarima": "complete"
+      },
+      "checksum": "9c43114f85dcd75d6f0204e7eb3d4c54f9dea4a910fe70b682f5a36b4a7a872d",
+      "failure_ledger_checksum": "1c4b4f6ee4f9298952942fa0f9f40688786914604fccb1b3d6bd4f240d9694af",
+      "failure_count": 122,
+      "folds": 40,
+      "execution_timestamp": "2026-08-16T09:03:14Z",
+      "elapsed_seconds": 57.795,
+      "protocol_hash": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+      "run_id": "p3_lags_only_20260816T090216Z"
+    },
+    "01036004_10_47": {
+      "status": "complete",
+      "station_id": "01036004_10_47",
+      "expected_keys": 6356,
+      "completed_keys": 12712,
+      "model_status": {
+        "xgboost_direct": "complete",
+        "sarima": "complete"
+      },
+      "checksum": "d015b462706ecb70b7fa48843dad9f9a93c5ba7f3514114ff6ae9e0c80431200",
+      "failure_ledger_checksum": "261ac136e29a4643eca74aa68a710628d8c1f4c4c5185649ee99fa3e98c6cb11",
+      "failure_count": 112,
+      "folds": 36,
+      "execution_timestamp": "2026-08-16T09:04:09Z",
+      "elapsed_seconds": 55.123,
+      "protocol_hash": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+      "run_id": "p3_lags_only_20260816T090216Z"
+    },
+    "01051001_10_49": {
+      "status": "complete",
+      "station_id": "01051001_10_49",
+      "expected_keys": 6335,
+      "completed_keys": 12670,
+      "model_status": {
+        "xgboost_direct": "complete",
+        "sarima": "complete"
+      },
+      "checksum": "9f0e8cf13fb9c639122cff9e22128aedb5119c8488536e5b1403e714ee7b7d60",
+      "failure_ledger_checksum": "6d2fa86a425512a68486eae4ee2a180eccd7482567da0ca8dab710c1a3b6d94f",
+      "failure_count": 217,
+      "folds": 40,
+      "execution_timestamp": "2026-08-16T09:05:07Z",
+      "elapsed_seconds": 57.876,
+      "protocol_hash": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+      "run_id": "p3_lags_only_20260816T090216Z"
+    }
+  },
+  "source_panel_hash": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27"
+}

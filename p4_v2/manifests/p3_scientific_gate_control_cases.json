@@ -1,0 +1,34 @@
+{
+  "PROJECT": "P3",
+  "CONDITION": "lags_only",
+  "purpose": "logical validation of the frozen three-component ghost-skill adjudication rule",
+  "uses_real_benchmark_results": false,
+  "cases": [
+    {
+      "id": "CONTROL_1",
+      "positive_error_skill": true,
+      "material_dynamic_fidelity_degradation": false,
+      "scientifically_relevant_consequence": false,
+      "event_representation": "preserved",
+      "expected_result": "NOT_GHOST_SKILL"
+    },
+    {
+      "id": "CONTROL_2",
+      "positive_error_skill": true,
+      "material_dynamic_fidelity_degradation": true,
+      "scientifically_relevant_consequence": true,
+      "event_representation": "relevant_loss",
+      "expected_result": "GHOST_SKILL_CANDIDATE / DIAGNOSIS_SUPPORTED"
+    },
+    {
+      "id": "CONTROL_3",
+      "positive_error_skill": false,
+      "material_dynamic_fidelity_degradation": true,
+      "scientifically_relevant_consequence": true,
+      "event_representation": "not_adjudicative_without_positive_skill",
+      "expected_result": "NOT_GHOST_SKILL"
+    }
+  ],
+  "logic": "ghost-skill diagnosis requires positive error-based skill AND material dynamic-fidelity degradation AND a scientifically interpretable consequence",
+  "validation_result": "PASS"
+}

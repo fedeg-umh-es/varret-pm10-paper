@@ -1,0 +1,42 @@
+{
+  "project": "P3",
+  "amendment_id": "P3_AURORA_GOVERNANCE_AMENDMENT_01",
+  "amendment_type": "NEW_GOVERNANCE_AMENDMENT",
+  "date": "2026-08-16",
+  "historical_reconstruction": false,
+  "new_scientific_hypothesis": false,
+  "product": "Aurora Air Pollution",
+  "version": "NOT_FROZEN",
+  "activation_gates": {
+    "G0": "PRODUCT_IDENTITY",
+    "G1": "DATA_ACCESS_AND_PROVENANCE",
+    "G2": "STATION_ELIGIBILITY",
+    "G3": "TEMPORAL_CYCLE_VALIDITY",
+    "G4": "MINIMUM_SCIENTIFIC_COMPARISON_FUTURE_ONLY"
+  },
+  "scientific_boundaries": {
+    "aurora_question_separate_from_current_p3": true,
+    "current_p3_relation": "COMPLEMENTARY",
+    "ghost_skill_primary_objective": false,
+    "novelty_verified": false,
+    "experiment_authorized": false
+  },
+  "source_of_historical_governance": {
+    "repository": "https://github.com/fedeg-umh-es/aurora-pm-station-corrector.git",
+    "commit": "6f05ca63f1822fee210c455baa1072bfe66ccb82",
+    "registered_protocol_sha256": "9bd613aa4e79b1a21ae9378d4949c132a9e07650069c6a8c6812a4ece8177083",
+    "registered_config_sha256": "64e0a50d3bfebd02cf3bbad5556d4e635e37d294821af9dad0d72706161783f1",
+    "station_eligibility_config_sha256": "35cc9ad147c5928070220b6ecf96c3eda2052f8eb8c7b3075ba68a2c91ddcc79",
+    "single_cycle_config_sha256": "a72803b14575e1c4d5271c7b8e772c9f60213c12c6aad64b24809d348759ab76"
+  },
+  "outputs": [
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_AMENDMENT_01.md",
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_CLOSURE.md"
+  ],
+  "output_sha256": {
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_AMENDMENT_01.md": "e078028486e037b2d05c2c996abcd34ab84990e82b21a0bd957311990bb533bf",
+    "p4_v2/docs/P3_AURORA_GOVERNANCE_CLOSURE.md": "6086a59a3918977ccd565d2fe0502c7c736237e4604e7d95aa4e2568fc951751"
+  },
+  "next_minimum_action": "Review and approve this amendment; no Aurora execution before G0-G3 and a dedicated novelty kill test pass the stated conditions.",
+  "manuscript_update_authorized": false
+}

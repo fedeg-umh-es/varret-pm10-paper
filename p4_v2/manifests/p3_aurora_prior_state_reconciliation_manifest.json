@@ -1,0 +1,97 @@
+{
+  "project": "P3",
+  "task": "AURORA_PRIOR_STATE_RECONCILIATION",
+  "audit_date": "2026-08-16",
+  "active_repository": "P4_Ghost_Skill_Dynamic_Fidelity",
+  "active_branch": "codex/p4-documentary-closeout",
+  "active_head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "scientific_execution": false,
+  "forecasting_run": false,
+  "metrics_recomputed": false,
+  "manuscript_modified": false,
+  "overleaf_modified": false,
+  "exact_labels_not_recovered": [
+    "AURORA-P0",
+    "AURORA-P1",
+    "AURORA-P2",
+    "AURORA-NEXT",
+    "Aurora-specific E1"
+  ],
+  "recovered_product": {
+    "name": "Aurora Air Pollution",
+    "version": "0.4 degree",
+    "class": "gridded atmospheric-composition and PM forecast model",
+    "aurora_1_5_prior_role": "proposed deterministic NWP source for P3; no executed arm recovered",
+    "aurora_1_5_ensemble_prior_role": "proposed probabilistic meteorological source; not direct PM ensemble"
+  },
+  "recovered_state": {
+    "previous_question_source": "P5_PROJECT_CANON.md",
+    "previous_thesis": "Test whether gridded foundation-model advantages survive station-level PM10/PM2.5 evaluation against persistence and local models while preserving amplitude and events.",
+    "station_independence_required": true,
+    "station_independence_status": "NOT_TESTED",
+    "cams_previous_role": "comparator/reference system for the direct Aurora Air Pollution station-level audit",
+    "cams_cycle_stability_required": "NOT_FOUND",
+    "aurora_next_status": "DEFERRED",
+    "aurora_next_activation_condition": "Complete and approve the bounded pilot specification and confirm data access before execution.",
+    "current_p3_relationship": "COMPLEMENTARY",
+    "new_aurora_gate": "PARTIALLY_REDUNDANT"
+  },
+  "source_artifacts": [
+    {
+      "path": "../P5_Foundation_Model_Audit/P5_PROJECT_CANON.md",
+      "role": "P5 canonical governance and prior question",
+      "sha256": "05d0a867c7f049f2b3e379964877cbc52fc8b4cf77db5d03a8aa4d1cca22e606",
+      "status": "RECOVERED"
+    },
+    {
+      "path": "../P5_Foundation_Model_Audit/P5_AURORA_PILOT.md",
+      "role": "P5 pilot design and product separation",
+      "sha256": "6ffa9dac887a290deaa85f22d523e1a1e56be910170c2b1ac6b10cd107a1fcb3",
+      "status": "RECOVERED"
+    },
+    {
+      "path": "../P5_Foundation_Model_Audit/memoria_estrategica_aurora_foundation_models_atmosfericos.md",
+      "role": "strategic pilot note",
+      "sha256": "9d56b5ad3895a9c312fa6ab5ab7171ceb1fdfd5c8ff6207d78eaed4718cef7db",
+      "status": "RECOVERED"
+    },
+    {
+      "path": "docs/audit/P4_PROJECT_CANON.md",
+      "role": "P4 boundary note for Aurora; not P3 source of truth",
+      "sha256": "c6f40c05e606aabbd049fef26f91a94bc5c1bb782dad099b21e4c62625c89f5b",
+      "status": "SUPPORTING_LOCAL_AUDIT_MATERIAL"
+    },
+    {
+      "path": "../../20_Concepts/Aurora/Indice_Brechas_Aurora.md",
+      "role": "archived Obsidian gap index",
+      "sha256": "00e173535f4ad1c4dbbc57dfb02dcd7e535419108bce44e069f55fd72b2b7422",
+      "status": "ARCHIVED_SUPERSEDED"
+    },
+    {
+      "path": "p4_v2/docs/P3_MULTISTATION_PROTOCOL_FREEZE.md",
+      "role": "current P3 lags-only protocol boundary",
+      "status": "CURRENT_P3_REFERENCE"
+    }
+  ],
+  "missing_or_not_recovered": [
+    "AURORA-P0 manifest/result",
+    "AURORA-P1 manifest/result",
+    "AURORA-P2 manifest/result",
+    "Aurora-specific E1 artifact/result",
+    "AURORA-NEXT decision record",
+    "Aurora row-level predictions",
+    "Aurora station-level metrics",
+    "CAMS comparison outputs",
+    "CAMS cycle-stability analysis",
+    "station-independence evidence"
+  ],
+  "outputs_created": [
+    "p4_v2/docs/P3_AURORA_PRIOR_STATE_RECONCILIATION.md",
+    "p4_v2/manifests/p3_aurora_prior_state_reconciliation_manifest.json"
+  ],
+  "final_state": {
+    "previous_aurora_state_recovered": "PARTIAL",
+    "next_minimum_action": "Keep Aurora deferred; approve/recover the bounded P5 pilot specification and confirm data access/provenance before any Aurora experiment.",
+    "manuscript_update_authorized": false
+  }
+}

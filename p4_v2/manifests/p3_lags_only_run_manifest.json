@@ -1,0 +1,144 @@
+{
+  "manifest_type": "P3 lags-only forecasting run manifest",
+  "project": "P3",
+  "technical_namespace": "p4_v2",
+  "condition": "lags_only",
+  "run_id": "p3_lags_only_20260816T090520Z",
+  "created_at_utc": "2026-08-16T13:56:50Z",
+  "protocol_hash": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+  "panel_hash": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27",
+  "daily_data_hash": "1d4fbf031ecece900803303944d0d15e64e5bbe22260823ea57e3f6bcb2f8a34",
+  "raw_data_manifest_hash": "0e1d30ac728e04b01688c4d1b8485d1562345342e8c66bb6a0151f5713a2e555",
+  "code_commit": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "package_versions": {
+    "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "pyarrow": "21.0.0",
+    "statsmodels": "0.14.6",
+    "xgboost": "2.1.4"
+  },
+  "platform": {
+    "os": "macOS-26.6.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm"
+  },
+  "models": {
+    "xgboost_direct": {
+      "n_estimators": 300,
+      "max_depth": 4,
+      "learning_rate": 0.05,
+      "subsample": 0.9,
+      "colsample_bytree": 0.9,
+      "objective": "reg:squarederror",
+      "random_state": 42,
+      "n_jobs": 1,
+      "tree_method": "hist"
+    },
+    "sarima": {
+      "order": [
+        1,
+        0,
+        1
+      ],
+      "seasonal_order": [
+        1,
+        0,
+        0,
+        7
+      ],
+      "trend": "n",
+      "enforce_stationarity": false,
+      "enforce_invertibility": false,
+      "maxiter": 120
+    }
+  },
+  "features": {
+    "lags": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      14,
+      28
+    ],
+    "calendar": [
+      "target_dow_sin",
+      "target_dow_cos",
+      "target_doy_sin",
+      "target_doy_cos",
+      "target_month_sin",
+      "target_month_cos"
+    ],
+    "condition": "lags_only"
+  },
+  "event_threshold": {
+    "quantile": 0.75,
+    "method": "numpy.quantile method=linear",
+    "training_only": true
+  },
+  "station_count_expected": 324,
+  "station_count_completed": 324,
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "prediction_file": {
+    "path": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P4_Ghost_Skill_Dynamic_Fidelity/p4_v2/results/predictions_row_level_lags_only.parquet",
+    "sha256": "c9391485b212c48225065a7366655dd493f04eee88508cce39c48f9bc9192fc1",
+    "rows": 3782826
+  },
+  "common_support_audit": {
+    "path": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P4_Ghost_Skill_Dynamic_Fidelity/p4_v2/results/common_support_audit.csv",
+    "sha256": "0bb9ffe9e883c319acec00bfa57a2c433c9595e67534b6d2fe2e623b6c5db3aa",
+    "status": "PASS",
+    "total_expected_keys": 1891413,
+    "total_common_keys": 1891413,
+    "duplicate_keys": 0,
+    "rows": 2592
+  },
+  "failure_ledger": {
+    "path": "/Users/fede/Library/Mobile Documents/iCloud~md~obsidian/Documents/03_Investigacion/repos/P4_Ghost_Skill_Dynamic_Fidelity/p4_v2/results/model_execution_failure_ledger.csv",
+    "sha256": "24a7e061e13318c26c639c73afbf4e505a113d4d94cd0c1c3606eef3f029ec53"
+  },
+  "validation": {
+    "required_schema": true,
+    "station_count": 324,
+    "model_count": 2,
+    "models": [
+      "sarima",
+      "xgboost_direct"
+    ],
+    "horizons": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "condition_values": [
+      "lags_only"
+    ],
+    "duplicate_keys": 0,
+    "null_y_true": 0,
+    "null_y_pred": 0,
+    "null_y_persistence": 0,
+    "elapsed_horizon_logic": true,
+    "protocol_hash_values": [
+      "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516"
+    ],
+    "source_panel_hash_values": [
+      "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27"
+    ],
+    "rows": 3782826
+  },
+  "scientific_metrics_calculated": false
+}

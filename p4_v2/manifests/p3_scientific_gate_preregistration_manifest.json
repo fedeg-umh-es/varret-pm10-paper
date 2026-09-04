@@ -1,0 +1,134 @@
+{
+  "PROJECT": "P3",
+  "CONDITION": "lags_only",
+  "PRIMARY_SUPPORT": "conservative_intersection",
+  "CASE_ABCD_STATUS": "NOT_RECOVERED",
+  "CASE_ABCD_USED_IN_P3": false,
+  "TRAIN_ONLY_MEAN_BASELINE_STATUS": "DERIVED_NOT_ACTIVE",
+  "PRIMARY_BASELINE": "persistence",
+  "scientific_layers": {
+    "LAYER_1_ERROR_SKILL": "FROZEN",
+    "LAYER_2_DYNAMIC_FIDELITY": "FROZEN",
+    "LAYER_3_EVENT_REPRESENTATION": "FROZEN",
+    "LAYER_4_RANK_DISCORDANCE": "FROZEN",
+    "LAYER_5_GHOST_SKILL_ADJUDICATION": "FROZEN"
+  },
+  "primary_scientific_cell": "station_id x model x horizon",
+  "models": [
+    "xgboost_direct",
+    "SARIMA"
+  ],
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "max_cells": 4536,
+  "paired_inference": {
+    "losses": [
+      "abs(y_true-y_pred_model) - abs(y_true-y_persistence)",
+      "(y_true-y_pred_model)^2 - (y_true-y_persistence)^2"
+    ],
+    "bootstrap_type": "moving block bootstrap",
+    "primary_block_length_days": 28,
+    "sensitivity_block_lengths_days": [
+      7,
+      56
+    ],
+    "resamples": 10000,
+    "random_seed": 20260816,
+    "confidence_level": 0.95,
+    "block_length_justification": [
+      "daily origins",
+      "maximum horizon h=7",
+      "serial dependence in daily PM10 errors",
+      "28-day refit blocks"
+    ]
+  },
+  "multiplicity": {
+    "family": "GLOBAL_ALL_CELLS",
+    "family_status": "FROZEN",
+    "family_size": 4536,
+    "correction": "Benjamini-Hochberg FDR q=0.05",
+    "cells_treated_as_independent_observations": false,
+    "station_prevalence_role": "descriptive only"
+  },
+  "dynamic_fidelity": {
+    "variance_retention": "Var(y_pred)/Var(y_true), ddof=0",
+    "std_ratio": "SD(y_pred)/SD(y_true), ddof=0",
+    "correlation": "Pearson(y_pred,y_true)",
+    "amplitude_ratio": "(Q95(y_pred)-Q05(y_pred))/(Q95(y_true)-Q05(y_true))",
+    "amplitude_definition": "within-cell 5th-to-95th percentile range",
+    "universal_binary_cutoff": false,
+    "Skill_VP": "auxiliary only"
+  },
+  "event_representation": {
+    "threshold_field": "event_threshold_p75",
+    "threshold_description": "train-derived high-concentration threshold",
+    "event_operator": ">",
+    "metrics": [
+      "precision",
+      "recall/POD",
+      "FAR",
+      "CSI",
+      "event_bias"
+    ],
+    "regulatory_threshold": false
+  },
+  "rank_discordance": {
+    "PAIRWISE_RANK_REVERSAL": "opposite XGBoost/SARIMA ordering under error skill and a declared fidelity/event metric",
+    "ELIGIBILITY_DISAGREEMENT": "explicit error-skill criterion passes while explicit fidelity/event criterion fails",
+    "FULL_RANKING_CHANGE": "not primary with two models",
+    "Kendall_tau_primary": false
+  },
+  "ghost_skill": {
+    "rule": [
+      "positive error-based skill relative to persistence",
+      "material dynamic-fidelity degradation",
+      "scientific or operational interpretation changes"
+    ],
+    "universal_numerical_materiality_cutoff": false,
+    "GHOST_SKILL_EXISTENCE_GATE": "DEFINED_NOT_EXECUTED"
+  },
+  "controls": {
+    "status": "PASS",
+    "path": "p4_v2/manifests/p3_scientific_gate_control_cases.json",
+    "sha256": "39334e3961870acf1836f7616b0240a18493de22fcaca682437c5c36c91774aa"
+  },
+  "artifacts": {
+    "primary_predictions": {
+      "path": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+      "sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296"
+    },
+    "reconciliation_manifest": {
+      "path": "p4_v2/manifests/p3_support_reconciliation_manifest.json",
+      "sha256": "310735c862eef8a22fe102ca6a73ff5539270d9d0f0f11060cf0882cfe0bf93c"
+    },
+    "train_only_mean_baseline": {
+      "path": "p4_v2/results/train_only_mean_baseline_by_fold.parquet",
+      "sha256": "46231c6e9f9ac3a3d2f66422bc02c9a2cd41cc73f11380550098a0b07ef2ff15"
+    },
+    "preregistration_document": {
+      "path": "p4_v2/docs/P3_SCIENTIFIC_GATE_PREREGISTRATION.md",
+      "sha256": "eb83863ce375e4a07f03b344779a854d90de01d0bde67c9d55de122f403c9146"
+    },
+    "protocol_manifest": {
+      "path": "p4_v2/manifests/p3_multistation_protocol_manifest.json",
+      "sha256": "8c457ddf94891f410d317bcfd4361842723777e0f214e68ccae45a1d21beb328"
+    },
+    "station_panel_manifest": {
+      "path": "p4_v2/manifests/station_panel_manifest.json",
+      "sha256": "f05d78c062fbdf4f7a8d30b57815893ecb19d411f8d5b7a52eee6d6bbd1a3924"
+    }
+  },
+  "global_scientific_analysis_authorized": true,
+  "global_scientific_analysis_executed": false,
+  "new_experiments_run": false,
+  "predictions_regenerated": false,
+  "manuscript_modified": false,
+  "status": "RECONCILED_PREREGISTRATION_READY_FOR_SEPARATE_GLOBAL_ANALYSIS"
+}

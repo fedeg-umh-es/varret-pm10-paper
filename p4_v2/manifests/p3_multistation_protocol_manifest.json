@@ -1,0 +1,133 @@
+{
+  "manifest_type": "P3 multistation forecasting protocol freeze",
+  "status": "FROZEN_BEFORE_FORECASTING",
+  "created_at_utc": "2026-08-16T08:47:54Z",
+  "project": "P3",
+  "technical_namespace": "p4_v2",
+  "namespace_note": "Legacy p4_v2 technical namespace retained for provenance and governed by P3 for this benchmark.",
+  "condition": "lags_only",
+  "forecasting_results_seen_before_freeze": false,
+  "model_training_authorized": false,
+  "git_head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "source_artifacts": {
+    "canonical_daily_parquet": {
+      "path": "p4_v2/data/processed/pm10_daily_canonical.parquet",
+      "sha256": "1d4fbf031ecece900803303944d0d15e64e5bbe22260823ea57e3f6bcb2f8a34"
+    },
+    "frozen_station_panel": {
+      "path": "p4_v2/data/processed/station_panel_frozen.csv",
+      "sha256": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27"
+    },
+    "station_panel_manifest": {
+      "path": "p4_v2/manifests/station_panel_manifest.json",
+      "sha256": "f05d78c062fbdf4f7a8d30b57815893ecb19d411f8d5b7a52eee6d6bbd1a3924"
+    },
+    "inclusion_contract": {
+      "path": "p4_v2/docs/P4_V2_STATION_INCLUSION_CONTRACT.md",
+      "sha256": "813e09009131e48d7ae4a2304597c2485211583a07f19c6b66fc2f15c5ab01f0"
+    }
+  },
+  "protocol": {
+    "path": "p4_v2/docs/P3_MULTISTATION_PROTOCOL_FREEZE.md",
+    "sha256": "2f776008e8fd23b307beac405513bcf06ada1cf5006a8826304b49458bd96516",
+    "hash_definition": "SHA-256 of the protocol file bytes"
+  },
+  "panel": {
+    "station_id_field": "PUNTO_MUESTREO",
+    "station_count": 324,
+    "horizons": [1, 2, 3, 4, 5, 6, 7]
+  },
+  "validation": {
+    "type": "expanding_blocked_rolling_origin",
+    "origin_stride_days": 1,
+    "refit_block_days": 28,
+    "minimum_training_calendar_days": 365,
+    "minimum_complete_training_rows_per_horizon": 300,
+    "target_support": "usable canonical daily target; no imputation",
+    "lag_support": [1, 2, 3, 6, 7, 14, 28],
+    "calendar_support": "station-specific inclusive frozen-panel interval",
+    "support_counts_before_model_outputs": {
+      "nonempty_station_fold_blocks": 10555,
+      "eligible_origins": 251316,
+      "origin_horizon_target_keys": 1709938,
+      "theoretical_model_fits": 84440
+    }
+  },
+  "baseline": {
+    "name": "persistence",
+    "definition": "last valid PM10 value with timestamp <= forecast origin",
+    "inline_field": "y_persistence"
+  },
+  "models": {
+    "sarima": {
+      "role": "required_fixed_comparator",
+      "order": [1, 0, 1],
+      "seasonal_order": [1, 0, 0, 7],
+      "exogenous_variables": false,
+      "tuning": "none",
+      "trend": "n",
+      "enforce_stationarity": false,
+      "enforce_invertibility": false,
+      "maxiter": 120,
+      "missing_daily_values": "preserve_as_missing"
+    },
+    "xgboost_direct": {
+      "role": "primary_non_sarima_comparator",
+      "one_model_per_horizon": true,
+      "parameters": {
+        "n_estimators": 300,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "objective": "reg:squarederror",
+        "random_state": 42,
+        "n_jobs": 1,
+        "tree_method": "hist"
+      },
+      "tuning": "none",
+      "manual_station_tuning": false
+    }
+  },
+  "features": {
+    "lags": [1, 2, 3, 6, 7, 14, 28],
+    "calendar": [
+      "target_dow_sin",
+      "target_dow_cos",
+      "target_doy_sin",
+      "target_doy_cos",
+      "target_month_sin",
+      "target_month_cos"
+    ],
+    "future_meteorology": false,
+    "global_imputation": false,
+    "global_scaling": false
+  },
+  "event_definition": {
+    "threshold": "station-fold training-only p75",
+    "quantile_method": "numpy.quantile method=linear",
+    "same_threshold_across_horizons_and_models": true,
+    "stored_field": "event_threshold_training_p75",
+    "regulatory_threshold": false
+  },
+  "metrics": {
+    "error": ["MAE", "RMSE", "bias", "Skill_MAE", "Skill_RMSE"],
+    "dynamic_fidelity": ["variance_retention", "std_ratio", "pearson_r", "amplitude_ratio"],
+    "event": ["precision", "recall_POD", "FAR", "CSI", "event_bias"],
+    "aggregation": "station x model x horizon x condition before any pooling"
+  },
+  "common_support": {
+    "status": "PASS",
+    "key": ["station_id", "condition", "fold", "origin", "target_time", "horizon"],
+    "rule": "exact intersection of finite prediction keys across required comparators; model-specific failures removed for all models"
+  },
+  "future_outputs": [
+    "predictions_row_level.parquet",
+    "metrics_by_station_horizon.parquet",
+    "dynamic_fidelity_by_station_horizon.parquet",
+    "event_metrics_by_station_horizon.parquet",
+    "rank_reversal_table.parquet",
+    "run_manifest.json",
+    "figure_source_tables/"
+  ]
+}

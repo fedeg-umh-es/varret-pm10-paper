@@ -1,0 +1,79 @@
+{
+  "project": "P3",
+  "task": "OPERATIONAL_METEOROLOGY_SOURCE_SELECTION_AND_PROVENANCE_GATE",
+  "status": "PARK",
+  "audit_date": "2026-08-16",
+  "git_head": "2f1d2552c25bc6c1aab8b9cf72bf1cbe0ab29560",
+  "git_branch": "codex/p4-documentary-closeout",
+  "aurora_boundary": "Aurora Air Pollution excluded; no Aurora source or experiment used",
+  "scientific_question": "Does meteorological information provide incremental PM10/PM2.5 predictive value when restricted to information genuinely available at each forecast origin?",
+  "active_p3_support": {
+    "primary_prediction_path": "p4_v2/results/predictions_row_level_lags_only_primary_support.parquet",
+    "primary_prediction_sha256": "3ece14b77cac0262c643355ac7689d101de4728c49d565ab2616c010fcb1a296",
+    "primary_prediction_rows": 3412754,
+    "active_stations": 323,
+    "station_origin_pairs": 250190,
+    "distinct_origin_dates": 1095,
+    "origin_range": ["2020-12-31", "2023-12-30"],
+    "target_range": ["2021-01-01", "2023-12-31"],
+    "horizons": [1, 2, 3, 4, 5, 6, 7],
+    "active_madrid_stations": 32,
+    "active_ireland_stations": 0
+  },
+  "frozen_panel_path": "p4_v2/data/processed/station_panel_frozen.csv",
+  "frozen_panel_sha256": "bc2a921e610dc60976f0f9609de09a7d5733e367102f6fe14a2c11361ebb0d27",
+  "origin_availability_contract": {
+    "condition": "availability_time <= origin_time",
+    "valid_time_rule": "valid_time = target_time",
+    "origin_audit_clock": "00:00 UTC representation of canonical P3 date origins; confirm against source extraction before execution",
+    "unknown_availability": "not admissible as proven operational availability"
+  },
+  "candidates_assessed": 3,
+  "primary_operational_meteo_candidate": "NCEP GFS operational forecast, NCEI 0.5-degree Grid 004",
+  "candidate_table_path": "p4_v2/results/p3_operational_meteo_candidate_table.csv",
+  "candidate_table_sha256": "a85460a9daa383d528bec20116f489d8232e9012242d662710e852ed6587b2ee",
+  "gate_document_path": "p4_v2/docs/P3_OPERATIONAL_METEO_SOURCE_SELECTION_GATE.md",
+  "gate_document_sha256": "866b59d1f1f8402b9273dee9143d0b7987daa3a7a1ce06eeae4c4e1236e0159c",
+  "candidate_summary": [
+    {
+      "candidate_id": "GFS_NCEP_004",
+      "historical_archive_type": "ARCHIVED_AS_ISSUED",
+      "operational_meteorology_provenance": "PARTIAL",
+      "selection_status": "PRIMARY_CANDIDATE",
+      "reason_not_pass": "P3 does not yet retain exact GFS run files, hashes, complete origin inventory, or a frozen station-grid extraction manifest"
+    },
+    {
+      "candidate_id": "IFS_ECMWF_HRES",
+      "historical_archive_type": "UNKNOWN for the P3-retained historical set",
+      "operational_meteorology_provenance": "PARTIAL",
+      "selection_status": "SECONDARY_CANDIDATE",
+      "reason_not_pass": "Historical run files, implementation versions, and P3-side archive provenance are absent"
+    },
+    {
+      "candidate_id": "CAMS_GLOBAL",
+      "historical_archive_type": "UNKNOWN for the P3-retained historical set",
+      "operational_meteorology_provenance": "PARTIAL",
+      "selection_status": "SECONDARY_CANDIDATE",
+      "reason_not_pass": "Origin publication time and full seven-day support are not established; product is atmospheric composition with meteorological fields"
+    }
+  ],
+  "official_evidence_sources": [
+    "https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast",
+    "https://www.ncei.noaa.gov/thredds/catalog/model-gfs.html",
+    "https://www.nco.ncep.noaa.gov/pmb/products/gfs/",
+    "https://www.emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/gfs/implementations.php",
+    "https://www.emc.ncep.noaa.gov/users/verification/global/gfs/ops/main.php",
+    "https://www.ecmwf.int/en/forecasts/datasets/set-i",
+    "https://ads.atmosphere.copernicus.eu/datasets/cams-global-atmospheric-composition-forecasts?tab=overview",
+    "https://ads.atmosphere.copernicus.eu/datasets/cams-global-atmospheric-composition-forecasts?tab=download"
+  ],
+  "hard_pass_rule": "A candidate must have source identity, archived historical runs, init/cycle, valid lead, availability or conservative bound, deterministic spatial mapping, and verified overlap with P3 origins.",
+  "operational_meteorology_provenance": "PARTIAL",
+  "p3_status": "PARK",
+  "forecasting_experiments_run": false,
+  "pm_performance_metrics_computed": false,
+  "files_downloaded_into_p3": false,
+  "overleaf_modified": false,
+  "manuscript_modified": false,
+  "next_minimum_action": "Acquire a small hash-pinned GFS Grid 004 pilot for the exact P3 origin window and one Madrid station, retaining original GRIB metadata and a run-level manifest; verify origin-safe 18Z-to-00Z alignment before any model execution."
+}
