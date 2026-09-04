@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{booktabs, siunitx, amsmath}
+\sisetup{detect-weight=true, detect-family=true}
+\begin{document}
+\pagestyle{empty}
+\begin{table}[ht]
+\centering
+\caption{Exceedance event metrics by model and horizon.
+Threshold: training-partition 75th percentile (computed per fold).
+POD: Probability of Detection ($\mathrm{TP}/(\mathrm{TP}+\mathrm{FN})$);
+CSI: Critical Success Index ($\mathrm{TP}/(\mathrm{TP}+\mathrm{FP}+\mathrm{FN})$);
+Event bias: $(\mathrm{TP}+\mathrm{FP})/(\mathrm{TP}+\mathrm{FN})$.
+Source: \texttt{pub\_table\_3\_event\_metrics.csv}, experimental commit
+\texttt{95c9cbd}.}
+\label{tab:event_metrics}
+\begin{tabular}{llSSSSSS}
+\toprule
+Model & Horizon & TP & FP & FN & TN & {POD} & {CSI} \\
+\midrule
+LightGBM & 1  &  966 &  220 &  283 & 2712 & 0.773 & 0.658 \\
+LightGBM & 6  &  727 &  374 &  515 & 2545 & 0.585 & 0.450 \\
+LightGBM & 24 &  571 &  532 &  639 & 2329 & 0.472 & 0.328 \\
+LightGBM & 48 &  372 &  582 &  781 & 2217 & 0.323 & 0.214 \\
+\addlinespace
+SARIMA   & 1  &  981 &  272 &  268 & 2660 & 0.785 & 0.645 \\
+SARIMA   & 6  &  663 &  319 &  579 & 2600 & 0.534 & 0.425 \\
+SARIMA   & 24 &  120 &   47 & 1090 & 2814 & 0.099 & 0.095 \\
+SARIMA   & 48 &    0 &    0 & 1153 & 2799 & 0.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

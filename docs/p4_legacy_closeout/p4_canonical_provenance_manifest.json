@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "project": "P4 - Variance Retention / Ghost Skill diagnostic case study",
+  "manuscript": {
+    "source": "paper_a.tex",
+    "title": "Variance Retention as a Diagnostic Complement to Persistence-Relative Skill in Multi-Horizon PM10 Forecasting"
+  },
+  "canonical_producer_commit": "f57f076078760af8a88bd87815fdf94ab0064fa3",
+  "documentary_closeout_branch": "codex/p4-documentary-closeout",
+  "provenance_scope": "The commit identifies the immutable source, code, data, row-level predictions, metrics, tables, and figures audited for the manuscript. No empirical artifact was regenerated during documentary closeout.",
+  "commands": {
+    "recover_data": "python3 scripts/recover_madrid_pm10.py",
+    "rolling_origin": "python3 scripts/run_paper_a_empirical.py --protocol rolling_origin",
+    "holdout": "python3 scripts/run_paper_a_empirical.py --protocol holdout",
+    "render_table": "python3 scripts/render_paper_a_results.py",
+    "render_figures": "python3 src/plotting/plot_master_figure.py"
+  },
+  "data": {
+    "source": "Madrid Open Data annual hourly air-quality archive for 2023",
+    "station": "Casa de Campo (024)",
+    "pollutant": "PM10 (magnitude 10)",
+    "raw_archive": {
+      "path": "data/raw/madrid_air_hourly_2023.zip",
+      "size_bytes": 5068730,
+      "sha256": "b3ee481e0a787239dd07b33e93b2da97e31e6b5123d3c659f49e14549fb62b2e"
+    },
+    "processed_series": {
+      "path": "data/processed/casa_de_campo_pm10_2023.csv",
+      "size_bytes": 259003,
+      "sha256": "c27fcef79c33c04d3c1af8d7e5994a97f9f8f970e185641c844db33205eda738",
+      "rows": 8760,
+      "validated_observations": 8465
+    },
+    "data_manifest": {
+      "path": "data/processed/casa_de_campo_pm10_2023.manifest.json",
+      "size_bytes": 452,
+      "sha256": "9b3752b44dd12de52ec5543282cb36cb0039b48bddc7aa9a305f02327ad7233a"
+    }
+  },
+  "protocol": {
+    "horizons_hours": [1, 6, 24, 48],
+    "rolling_origin": "five expanding folds; initial training window 4380 hours (50%); five disjoint 876-hour test windows",
+    "holdout": "single chronological 80/20 split",
+    "model_update": "models are fitted at each fold start; SARIMA parameters remain fixed within a test window while state is updated at each observed origin",
+    "preprocessing": "provider-invalid targets are excluded; input gaps are forward-filled from the most recent validated observation; no scaling is used by the canonical producer",
+    "event_threshold": "P75 is estimated separately from each fold training window and is not fitted to verification outcomes",
+    "persistence": "the most recent causally available PM10 value at the forecast origin; this equals y_t when the origin observation is valid",
+    "metric_aggregation": "separate by model and horizon over model-aligned rows; persistence error is evaluated on each candidate model's exact rows"
+  },
+  "models": {
+    "lightgbm": {
+      "strategy": "one direct model per fold and horizon",
+      "n_estimators": 200,
+      "max_depth": 8,
+      "learning_rate": 0.05,
+      "num_leaves": 31,
+      "subsample": 0.9,
+      "colsample_bytree": 0.9,
+      "random_state": 42,
+      "deterministic": true,
+      "force_col_wise": true,
+      "n_jobs": 1,
+      "lags_hours": [0, 1, 6, 24, 48, 168],
+      "rolling_windows_hours": [6, 24, 48, 168],
+      "calendar_features": "known target hour, day of week, and month encoded cyclically"
+    },
+    "sarima": {
+      "order": [1, 0, 1],
+      "seasonal_order": [1, 0, 0, 24],
+      "trend": "c",
+      "enforce_stationarity": false,
+      "enforce_invertibility": false,
+      "fit_maxiter": 100,
+      "selection_provenance": "The fixed specification is executable and immutable in the canonical producer. Local evidence does not preserve an inspectable upstream configuration or a pre-results selection contract, so prior selection of this order cannot be verified. It is treated only as a fixed diagnostic-case specification, not as a selected winner."
+    }
+  },
+  "software_environment": {
+    "path": "requirements-reproduction.txt",
+    "size_bytes": 160,
+    "sha256": "82462f75445db7e5af65b06cdb26cb278367438db46ce0b902f897187b3cbd06",
+    "random_seed": 42
+  },
+  "producer_scripts": [
+    {
+      "path": "scripts/recover_madrid_pm10.py",
+      "sha256": "322455081d941947b54530bea453a2f62a81bcfdeea1fed259da9b6d3c8fd1e1"
+    },
+    {
+      "path": "src/data/madrid_hourly.py",
+      "sha256": "497bfc95b293444e7a45b8489e663c16c7bd758308b3a03bd5e09de1e63701ba"
+    },
+    {
+      "path": "scripts/run_paper_a_empirical.py",
+      "sha256": "918e0f7768e272881fbca30120ce68937b7a429853bdcb4c7c410efe6186c12b"
+    },
+    {
+      "path": "scripts/render_paper_a_results.py",
+      "sha256": "50089765833c242a07ae51c0f2071507a4ee8b2fc844197659b3ce0d503a37c4"
+    },
+    {
+      "path": "src/plotting/plot_master_figure.py",
+      "sha256": "d6ccc0f165c5067a86c032408ccc362cc6bf2fdd16a8195b4e456b792f1beed5"
+    }
+  ],
+  "empirical_artifacts": [
+    {
+      "path": "outputs/reproduction/predictions_rolling_origin.parquet",
+      "type": "row_level_predictions",
+      "size_bytes": 552348,
+      "sha256": "e7073712ba1ab9f3de29621dfa9c96eec634b86ad7bf66ae37a9c098d15b58c4"
+    },
+    {
+      "path": "outputs/reproduction/metrics_rolling_origin.csv",
+      "type": "horizon_metrics",
+      "size_bytes": 1310,
+      "sha256": "5d7022b08d762f8f5c61cb70e6c00e85eee95580684a407f62152ae5d27e0583"
+    },
+    {
+      "path": "outputs/reproduction/events_p75_rolling_origin.csv",
+      "type": "event_metrics",
+      "size_bytes": 925,
+      "sha256": "78847a7bf2895af58b9515097b7cc235dce40adfab3fbacb5896520722ce9013"
+    },
+    {
+      "path": "outputs/reproduction/run_manifest_rolling_origin.json",
+      "type": "run_manifest",
+      "size_bytes": 503,
+      "sha256": "ae77032cafe5814c771dd0925eb88f783be44b51092f8e68a346331c32b77bf8"
+    },
+    {
+      "path": "outputs/reproduction/predictions_holdout.parquet",
+      "type": "row_level_predictions",
+      "size_bytes": 200726,
+      "sha256": "e8a62e2550ba2b91e25e8bad04a283cfb19c424ef90608d8d6f2042a2d015454"
+    },
+    {
+      "path": "outputs/reproduction/metrics_holdout.csv",
+      "type": "horizon_metrics",
+      "size_bytes": 1319,
+      "sha256": "73342c638575cd6e14028fd72c23c86f981380f71999016083c333b1a1cc5a3f"
+    },
+    {
+      "path": "outputs/reproduction/events_p75_holdout.csv",
+      "type": "event_metrics",
+      "size_bytes": 913,
+      "sha256": "e7dfbd1054cc62a773b8869d88ca6599edb46c6d9e90e67cc7c80cc289ecfb8e"
+    },
+    {
+      "path": "outputs/reproduction/run_manifest_holdout.json",
+      "type": "run_manifest",
+      "size_bytes": 506,
+      "sha256": "26a690b57fef5f937b1848a9464bb6bea6b5d46309bba7474d50dce5e043f1e7"
+    },
+    {
+      "path": "outputs/tables/paper_a_rolling_results.tex",
+      "type": "manuscript_table",
+      "size_bytes": 290,
+      "sha256": "f5f6499301b011cc045b91bab7f5391916ae3f88eda47b8d43863beec1f4e010"
+    },
+    {
+      "path": "outputs/figures/figure1_skill_variance.png",
+      "type": "manuscript_figure",
+      "size_bytes": 155500,
+      "sha256": "7d136802725f052a6de340301f8db026f8b37e9a978a6358dfdc060ba893bbd8"
+    },
+    {
+      "path": "outputs/figures/figure1_skill_variance.pdf",
+      "type": "manuscript_figure",
+      "size_bytes": 18086,
+      "sha256": "15d1a4ff06234d6af824d493ac18da1defea38bb55a638440db97b68e2708323"
+    },
+    {
+      "path": "outputs/figures/figure2_skillvp_events.png",
+      "type": "manuscript_figure",
+      "size_bytes": 174687,
+      "sha256": "527a6cf6b16674cb47bda6af110c9c9631e28fa92ea04741b43ba48af6944c1d"
+    },
+    {
+      "path": "outputs/figures/figure2_skillvp_events.pdf",
+      "type": "manuscript_figure",
+      "size_bytes": 21652,
+      "sha256": "bed8007e58bcf677a6acf2210cb5d475bc7c46edcea3326cb87df013a746ea94"
+    }
+  ],
+  "p1_dependency": {
+    "reactivation": "NO",
+    "prediction_or_result_source": false,
+    "statement": "P1 is not the source of P4 data, row-level predictions, metrics, tables, or figures. The P4 empirical evidence is produced inside this repository at the canonical producer commit."
+  },
+  "legacy_materials": {
+    "status": "not canonical for the hourly P4 manuscript",
+    "examples": [
+      "daily P33/E1-RR README sections",
+      "config/config.yaml",
+      "scripts/run_p33_pipeline.py",
+      "configs/ and legacy src/training pipelines",
+      "meteorological, KGE, H*, multi-station, and model-family exploration outputs"
+    ],
+    "authoritative_pipeline": "scripts/run_paper_a_empirical.py with scripts/recover_madrid_pm10.py, scripts/render_paper_a_results.py, and src/plotting/plot_master_figure.py"
+  }
+}

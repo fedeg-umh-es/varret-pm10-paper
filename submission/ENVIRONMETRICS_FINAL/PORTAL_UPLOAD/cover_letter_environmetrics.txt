@@ -1,0 +1,20 @@
+Dear Editors of Environmetrics,
+
+We submit our Research Article titled "Model-Preference Reversal in Multi-Horizon PM10 Forecasting: When RMSE Skill and Dynamic Fidelity Diverge" for publication in Environmetrics. This study addresses a fundamental question in environmental forecast verification: whether evaluating models exclusively by baseline-relative root-mean-square error (RMSE) can select a forecasting model that fails to capture physical dynamics and threshold exceedances, while rejecting an alternative model that preserves them.
+
+We evaluate two contrasting forecasting paradigms---a direct multi-step gradient-boosted decision tree (LightGBM) and a seasonal autoregressive model (SARIMA)---across four forecast lead times (h = 1, 6, 24, 48 h) under a leakage-free rolling-origin protocol applied to an hourly PM10 series. Under identical out-of-sample predictions with common support, the evaluation documents an explicit pairwise model-preference reversal at extended horizons. At h = 48 h, SARIMA achieves positive pooled RMSE skill (+0.1325) relative to persistence, yet undergoes dynamic collapse: variance retention falls to 0.0037 (0.37% of observed variance) and event detection fails across all 1,153 observed training-defined p75 exceedance events (POD = 0.0000, CSI = 0.0000). Conversely, LightGBM yields negative RMSE skill (-0.0793) but retains dynamic variability (variance retention = 0.8659) and detects 372 exceedance events (CSI = 0.2144, POD = 0.3226).
+
+The methodological contribution of this paper is not the discovery of conditional-mean variance attenuation under squared-error loss, which is mathematically well established, but the empirical demonstration of its consequences for environmental forecast verification. Specifically, standard persistence-relative skill scores can systematically reward dynamic collapse at long lead times, inverting operational model rankings depending on whether evaluation focuses on average squared error or event representation. We formalize this specific empirical coexistence---positive error skill coexisting with dynamic collapse and altered model preference---under the secondary bounded diagnostic label "ghost skill". Multi-fold stability analysis shows that dynamic collapse persists across all 5 expanding folds, while the complete three-condition diagnostic pattern replicates in 3 of 5 folds.
+
+This manuscript aligns with the scientific scope of Environmetrics by advancing statistical forecast-verification practice through a rigorous environmental case study. The findings demonstrate that multi-criteria verification---incorporating dynamic fidelity and threshold event metrics alongside traditional skill scores---is essential when evaluating point forecasts for environmental episode management. The empirical scope is strictly bounded to the evaluated PM10 monitoring series and pairwise model contrast.
+
+Thank you for considering our manuscript for publication in Environmetrics.
+
+Sincerely,
+
+Federico García Crespi
+Corresponding Author
+Department of Computer Engineering
+Universidad Miguel Hernández de Elche
+Elche, Spain
+Email: fedeg@umh.es

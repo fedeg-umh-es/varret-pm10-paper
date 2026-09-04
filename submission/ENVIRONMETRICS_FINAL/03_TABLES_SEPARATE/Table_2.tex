@@ -1,0 +1,39 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{booktabs, siunitx, amsmath}
+\sisetup{detect-weight=true, detect-family=true}
+\begin{document}
+\pagestyle{empty}
+\begin{table}[ht]
+\centering
+\caption{Dynamic-fidelity metrics by model and horizon.
+Variance retention $= \operatorname{Var}(\hat{y}) / \operatorname{Var}(y)$;
+temporal variability $= \overline{|\Delta\hat{y}|} / \overline{|\Delta y|}$;
+amplitude ratio $= \mathrm{IQR}_{95\text{--}5}(\hat{y}) /
+\mathrm{IQR}_{95\text{--}5}(y)$;
+event amplitude retention $= \overline{\hat{y}[y>p_{75}]} /
+\overline{y[y>p_{75}]}$.
+Source: \texttt{pub\_table\_2\_dynamic\_fidelity.csv}, experimental commit
+\texttt{95c9cbd}.}
+\label{tab:dynamic_fidelity}
+\begin{tabular}{llSSSS}
+\toprule
+Model & Horizon (h) &
+  {Var.\ retention} &
+  {Temp.\ variability} &
+  {Amplitude ratio} &
+  {Event amp.\ retention} \\
+\midrule
+LightGBM & 1  & 0.689 & 0.696 & 0.824 & 0.859 \\
+LightGBM & 6  & 0.551 & 0.456 & 0.711 & 0.773 \\
+LightGBM & 24 & 0.599 & 0.495 & 0.791 & 0.720 \\
+LightGBM & 48 & 0.866 & 0.386 & 1.160 & 0.666 \\
+\addlinespace
+SARIMA   & 1  & 0.798 & 0.764 & 0.899 & 0.898 \\
+SARIMA   & 6  & 0.357 & 0.503 & 0.598 & 0.714 \\
+SARIMA   & 24 & 0.029 & 0.153 & 0.173 & 0.544 \\
+SARIMA   & 48 & 0.004 & 0.022 & 0.063 & 0.507 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

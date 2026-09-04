@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{booktabs, siunitx, amsmath}
+\sisetup{detect-weight=true, detect-family=true}
+\begin{document}
+\pagestyle{empty}
+\begin{table}[p]
+\centering
+\caption{Ghost-skill structure and fold-stability summary.
+$\mathrm{Skill}_\mathrm{RMSE}$ and variance retention are pooled
+over matching fold--horizon windows.
+Fold-wise variance retention: median [min, max] across 5 folds,
+reported only for $h \geq 24$~h where fold heterogeneity is material.
+Source: \texttt{pub\_table\_4\_ghost\_skill\_structure.csv} and
+\texttt{fold\_stability\_summary\_sarima.csv},
+experimental commit \texttt{95c9cbd}.}
+\label{tab:ghost_skill_structure}
+\small
+\begin{tabular}{%
+  l
+  l
+  S[table-format=+1.4]
+  S[table-format=1.4]
+  S[table-format=1.4]
+  S[table-format=1.4]
+  l}
+\toprule
+Model & $h$ (h) &
+  {$\mathrm{Skill}_\mathrm{RMSE}$} &
+  {Var.\ ret.\ (pooled)} &
+  {POD} &
+  {CSI} &
+  Ghost-skill status \\
+\midrule
+LightGBM & 1  & -0.0104 & 0.689 & 0.773 & 0.658 &
+  Negative skill \\
+LightGBM & 6  & +0.0729 & 0.551 & 0.585 & 0.450 &
+  Moderate degradation; events retained \\
+LightGBM & 24 & -0.0343 & 0.599 & 0.472 & 0.328 &
+  Negative skill \\
+LightGBM & 48 & -0.0793 & 0.866 & 0.323 & 0.214 &
+  Negative skill \\
+\addlinespace
+SARIMA   & 1  & +0.0314 & 0.798 & 0.785 & 0.645 &
+  No ghost skill \\
+SARIMA   & 6  & +0.0827 & 0.357 & 0.534 & 0.425 &
+  No ghost skill \\
+SARIMA   & 24 & +0.0450 & 0.029 & 0.099 & 0.095 &
+  Strong candidate; fold heterogeneity \\
+SARIMA   & 48 & +0.1325 & 0.004 & 0.000 & 0.000 &
+  \textbf{Ghost skill: 3/5 folds} \\
+\bottomrule
+\multicolumn{7}{p{\linewidth}}{%
+  \emph{Note}: At $h = 48$~h, SARIMA fold-wise variance retention:
+  median $0.0007$ [$0.07\%$], range $[0.0005,\, 0.0012]$.
+  Dynamic collapse in 5/5 folds; complete event failure in 5/5 folds;
+  positive error skill in 3/5 folds; full ghost-skill pattern in 3/5 folds.}\\
+\end{tabular}
+\end{table}
+\end{document}

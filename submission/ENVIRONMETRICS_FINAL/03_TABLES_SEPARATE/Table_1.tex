@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{booktabs, siunitx, amsmath}
+\sisetup{detect-weight=true, detect-family=true}
+\begin{document}
+\pagestyle{empty}
+\begin{table}[ht]
+\centering
+\caption{Continuous error metrics by model and horizon.
+$\mathrm{Skill}_\mathrm{RMSE} = 1 - \mathrm{RMSE}_\mathrm{model} /
+\mathrm{RMSE}_\mathrm{persistence}$; positive values indicate
+improvement over causal persistence.
+Source: \texttt{pub\_table\_1\_error\_metrics.csv}, experimental commit
+\texttt{95c9cbd}.}
+\label{tab:error_metrics}
+\begin{tabular}{llSSS}
+\toprule
+Model & Horizon (h) &
+  {RMSE ($\mu$g\,m$^{-3}$)} &
+  {Persistence RMSE ($\mu$g\,m$^{-3}$)} &
+  {$\mathrm{Skill}_\mathrm{RMSE}$} \\
+\midrule
+LightGBM & 1  & 5.667 & 5.609 & -0.0104 \\
+LightGBM & 6  & 9.147 & 9.865 & +0.0729 \\
+LightGBM & 24 & 12.802 & 12.377 & -0.0343 \\
+LightGBM & 48 & 15.228 & 14.110 & -0.0793 \\
+\addlinespace
+SARIMA   & 1  & 5.433 & 5.609 & +0.0314 \\
+SARIMA   & 6  & 9.050 & 9.865 & +0.0827 \\
+SARIMA   & 24 & 11.819 & 12.377 & +0.0450 \\
+SARIMA   & 48 & 12.241 & 14.110 & +0.1325 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{document}
